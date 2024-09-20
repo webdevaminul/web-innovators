@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
-import Footer from "./Section/Footer/Footer";
+
 import { Slide, ToastContainer } from "react-toastify";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
