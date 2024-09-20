@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 const SignUp = () => {
   const [isStudentChecked, setIsStudentChecked] = useState(false);
   const [isTeacherChecked, setIsTeacherChecked] = useState(false);
+  const [showPass, setShowPass] = useState(false);
 
   const handleCheckboxChange = (e) => {
     const { name, checked } = e.target;
@@ -20,18 +21,26 @@ const SignUp = () => {
     }
   };
 
-  const [showPass, setShowPass] = useState(false);
+  // console.log('isTeacherChecked',isTeacherChecked);
+  // console.log('isStudentChecked', isStudentChecked);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const onSubmit = (data) => {
-    const name = data?.name;
-    const email = data?.email;
-    const password = data?.password;
+    const { name, email, password } = data;
     console.log("name email pass ", name, email, password);
+
     toast.success(`Signing up with ...`);
+    if (isTeacherChecked) {
+      console.log('Role: Teacher');
+    }
+
+    if (isStudentChecked) {
+      console.log('Role: Student');
+    }
   };
 
   // Function to handle sign-up button clicks
@@ -43,12 +52,11 @@ const SignUp = () => {
       if (platform === "Google") {
         console.log("google");
         toast.success(`Signing up with ${platform}...`);
-      } else if (platform === "Facebook") {
-        console.log("facebok");
+      } else if (platform === "GitHub") {
+        console.log("GitHub");
         toast.success(`Signing up with ${platform}...`);
       } else {
-        toast.success(`Signing up with ${platform}...`);
-        // Handle Facebook or other platforms if needed
+        return toast.error(`Please sign up with...`);
       }
     }
   };
@@ -332,19 +340,19 @@ const SignUp = () => {
             </div>
             <div className="w-full lg:w-1/2 ml-0 lg:ml-2">
               <button
-                onClick={() => handleSignUp("Facebook")}
+                onClick={() => handleSignUp("GitHub")}
                 type="button"
                 className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 16 16"
-                  id="facebook"
+                  id="github"
                   className="w-4"
                 >
-                  <path d="M12.042 0H3.958A3.958 3.958 0 0 0 0 3.958v8.084A3.958 3.958 0 0 0 3.958 16h4.35v-5.531H6.735v-2.16h1.573V6.789c0-1.558.953-2.412 2.345-2.412.668 0 1.241.05 1.408.072v1.63h-.966c-.758 0-.905.36-.905.889v1.165h1.812l-.236 2.16h-1.576V16h3.084A3.958 3.958 0 0 0 16 12.042V3.958A3.958 3.958 0 0 0 12.042 0z" />
-                </svg>
-                Continue with Facebook{" "}
+                  <path d="M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z" />
+                </svg>{" "}
+                Continue with GitHub{" "}
               </button>
             </div>
           </div>
@@ -410,12 +418,19 @@ const SignUp = () => {
                 placeholder="*******"
                 className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                 {...register("password", {
-                  required: "Password is required",
+                  required: "Password is required",minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters long",
+                  },
+                  pattern: {
+                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
+                    message: "Password must contain letters and numbers",
+                  },
                 })}
                 aria-invalid={errors.password ? "true" : "false"}
               />
               {errors.password && (
-                <p className="text-red-500">{errors.password.message}</p>
+                <p className="text-red-500">{errors?.password?.message}</p>
               )}
               <span
                 onClick={() => setShowPass(!showPass)}
