@@ -1,9 +1,11 @@
 import { Outlet } from "react-router-dom";
+import Navbar from "./Section/Navbar/Navbar";
 import { Slide, ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <main>
+      <Navbar />
       {/* navbar */}
       <Outlet />
       <ToastContainer
