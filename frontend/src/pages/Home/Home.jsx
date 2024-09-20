@@ -1,9 +1,10 @@
-import Banner from "../../Section/Banner/Banner";
+import Banner from "../../components/Banner/Banner";
+
 
 export default function Home() {
   return (
-    <section>
-      <Banner></Banner>
+    <section className="w-full" >
+      <Banner />
     </section>
   );
 }
