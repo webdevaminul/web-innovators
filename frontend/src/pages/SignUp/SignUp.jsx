@@ -43,6 +43,8 @@ const SignUp = () => {
     }
   };
 
+
+  
   // Function to handle sign-up button clicks
   const handleSignUp = (platform) => {
     if (!isStudentChecked && !isTeacherChecked) {
