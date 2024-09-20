@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { FaArrowRight } from "react-icons/fa"; // Import the arrow icon
 
 const cardData = [
@@ -12,7 +12,8 @@ const cardData = [
   {
     id: 2,
     title: "HSC 26",
-    description: "Online Batch (Bangla, English, Information and Communication Technology)",
+    description:
+      "Online Batch (Bangla, English, Information and Communication Technology)",
     details: "5 live classes per week",
     img: "https://via.placeholder.com/300x150",
   },
@@ -46,7 +47,7 @@ const cardData = [
   },
 ];
 
-const BannerSection = () => {
+const Banner = () => {
   const [selectedCard, setSelectedCard] = useState(null);
 
   const openModal = (card) => {
@@ -59,7 +60,7 @@ const BannerSection = () => {
 
   return (
     <section
-      className="relative bg-cover bg-center h-screen flex flex-col items-start justify-center px-5 sm:px-10"
+      className="relative bg-cover bg-center h-screen w-full mx-0 flex flex-col items-start justify-center px-5 sm:px-10"
       style={{
         backgroundImage: "url('./banner.jpg')",
         backgroundSize: "cover",
@@ -73,7 +74,8 @@ const BannerSection = () => {
           6th-HSC Class Online Batch Admission is Ongoing!
         </h1>
         <p className="text-sm sm:text-xl md:text-xl mb-6">
-          100% preparation of complete syllabus with years of experienced teachers!
+          100% preparation of complete syllabus with years of experienced
+          teachers!
         </p>
       </div>
 
@@ -121,4 +123,4 @@ const BannerSection = () => {
   );
 };
 
-export default BannerSection;
+export default Banner;
