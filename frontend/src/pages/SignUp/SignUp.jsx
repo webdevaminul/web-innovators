@@ -64,7 +64,7 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex justify-center items-center min-h-screen font-bai">
       {/* Left Pane */}
       <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
         <div className="max-w-md text-center">
@@ -302,7 +302,7 @@ const SignUp = () => {
       <div className="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
         <div className="max-w-md w-full p-6">
           <h1 className="text-3xl font-semibold mb-6 text-black text-center">
-            Sign Up
+            Register Here
           </h1>
           <h1 className="text-sm font-semibold mb-6 text-gray-500 text-center">
             Join to Our Community with all time access and free{" "}
@@ -499,13 +499,13 @@ const SignUp = () => {
             <div>
               <button disabled={!isStudentChecked && !isTeacherChecked}
                 type="submit"
-                className={`w-full p-2 rounded-md transition-colors duration-300 ${
+                className={`w-full p-2 rounded-md transition-colors font-medium text-lg duration-300 ${
                     !isStudentChecked && !isTeacherChecked
                       ? "bg-gray-400 cursor-not-allowed"
                       : "bg-purple-600 text-white hover:bg-gray-800 focus:outline-none"
                   }`}
               >
-                Sign Up
+                Register
               </button>
             </div>
           </form>
