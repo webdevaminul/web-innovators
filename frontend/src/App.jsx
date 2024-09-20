@@ -1,10 +1,11 @@
 import { Outlet } from "react-router-dom";
 import { Slide, ToastContainer } from "react-toastify";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   return (
     <main>
-      {/* navbar */}
+      <Navbar />
       <Outlet />
       <ToastContainer
         position="top-right"
