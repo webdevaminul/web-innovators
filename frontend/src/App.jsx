@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
+
 import { Slide, ToastContainer } from "react-toastify";
+import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 
 function App() {
@@ -7,6 +9,7 @@ function App() {
     <main>
       <Navbar />
       <Outlet />
+      <Footer></Footer>
       <ToastContainer
         position="top-right"
         autoClose={5000}

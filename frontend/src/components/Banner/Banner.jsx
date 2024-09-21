@@ -60,7 +60,7 @@ const Banner = () => {
 
   return (
     <section
-      className="relative bg-cover bg-center h-screen w-full mx-0 flex flex-col items-start justify-center px-5 sm:px-10"
+      className="relative bg-cover bg-center h-screen w-full mx-0 flex flex-col items-start justify-center px-5 sm:px-10 font-bai"
       style={{
         backgroundImage: "url('./banner.jpg')",
         backgroundSize: "cover",
@@ -69,8 +69,8 @@ const Banner = () => {
       }}
     >
       {/* Left Side Text */}
-      <div className="text-white text-left mt-3 p-10 rounded-lg w-full sm:w-full md:w-3/5 lg:w-3/5 font-roboto">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4">
+      <div className="text-white text-left mt-3 md:p-10 rounded-lg w-full sm:w-full md:w-3/5 lg:w-3/5 font-roboto">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-4 md:leading-[70px]">
           6th-HSC Class Online Batch Admission is Ongoing!
         </h1>
         <p className="text-sm sm:text-xl md:text-xl mb-6">
@@ -80,8 +80,8 @@ const Banner = () => {
       </div>
 
       {/* Cards below the text */}
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 w-full max-w-6xl">
-        {cardData.map((card) => (
+      <div className="grid grid-cols-3 md:pl-10 sm:grid-cols-4 md:grid-cols-6 gap-2 md:gap-4 w-full max-w-6xl">
+        {cardData?.map((card) => (
           <div
             key={card.id}
             className="bg-gray-900 p-2 rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer"
