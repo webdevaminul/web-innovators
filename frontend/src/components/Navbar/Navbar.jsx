@@ -1,81 +1,149 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
-import "./navbar.css"
+import "./navbar.css";
+import Darkmode from "../Darkmode/Darkmode";
 
 const Navbar = () => {
-
-    const links = <>
-        <li><NavLink to="/allCourses">Courses</NavLink></li>
-        <li><NavLink to="/pricing">Pricing</NavLink></li>
-        {/* <li><NavLink to="/about">About</NavLink></li> */}
-        <li><NavLink to="/contact">Contact</NavLink></li>
-        <li><NavLink to="/register">Dashboard</NavLink></li>
+  const links = (
+    <>
+      <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/allCourses" className="text-nowrap">
+          All Courses
+        </NavLink>
+      </li>
+      <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/pricing" className="text-nowrap">
+          Pricing
+        </NavLink>
+      </li>
+      {/* <li><NavLink to="/about">About</NavLink></li> */}
+      <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/contact" className="text-nowrap">
+          Contact
+        </NavLink>
+      </li>
+      <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/register" className="text-nowrap">
+          Dashboard
+        </NavLink>
+      </li>
     </>
+  );
 
-    const [openMenu, setOpenMenu] = useState(false)
-    const [searchBarOpen, setSearchBarOpen] = useState(false)
+  const [openMenu, setOpenMenu] = useState(false);
+  const [searchBarOpen, setSearchBarOpen] = useState(false);
 
-    console.log(searchBarOpen)
+  console.log(searchBarOpen);
 
-    return (
-        <div className='fixed w-full top-0 left-0 z-20 py-5 border-b border-[#e7e7e7] font-bai bg-[#ffffff]'>
-
-            <div className='max-w-[1580px] mx-auto flex justify-between items-center gap-3 sm:gap-5 px-3 sm:px-5 relative'>
-
-                <div className='flex items-center gap-3'>
-                    <div onClick={() => setOpenMenu(!openMenu)} className='md:hidden flex items-center'>
-                        <button className='text-2xl'>{openMenu ? <RiMenuFoldLine /> : <RiMenuFold2Line />}</button>
-                    </div>
-
-                    <div>
-                        <Link to="/"><h1 className='font-bold text-3xl sm:text-4xl font-inter'>Learn<span className='text-gray-500'>UP</span></h1></Link>
-                    </div>
-                </div>
-
-                {/* search bar for large device */}
-                <div className='border py-2 px-4 border-[#e7e7e7] rounded-3xl w-full justify-between sm:flex md:hidden lg:flex hidden'>
-                    <input className='outline-none w-full placeholder:text-[#cacaca] text-[#303030] ' type="text" placeholder='Search program...' />
-                    <button className='text-2xl text-[#5e5e5e]'><IoSearchOutline /></button>
-                </div>
-
-                {/* search bar for small device */}
-                <div className={`border-b absolute z-10 py-2 px-4 border-[#e7e7e7] top-0 justify-between flex bg-white transition-all ease-in-out ${searchBarOpen ? 'w-full left-0' : 'w-0 -left-[300px]'}`}>
-
-                    <button onClick={() => setSearchBarOpen(false)} className='absolute p-2 text-[#5e5e5e] -top-5 left-1'><MdArrowBackIosNew /></button>
-
-                    <input className='outline-none w-full placeholder:text-[#cacaca] text-[#303030] ' type="text" placeholder='Search program...' />
-                    <button className='text-2xl text-[#5e5e5e]'><IoSearchOutline /></button>
-                </div>
-
-
-                {/* nav links for small device */}
-                <div className={`nav-parent md:hidden transition-all ease-in-out flex flex-col gap-5 absolute list-none top-14 border-t p-5 bg-white h-screen ${openMenu ? "left-0 w-full" : "-left-[300px] w-[300px]"} font-semibold text-lg text-[#5e5e5e]`}>
-                    {links}
-                </div>
-
-                <div className='flex items-center gap-5'>
-
-                    {/* nav links for large device */}
-                    <div className='nav-parent list-none gap-5 ml-3 hidden md:flex font-semibold text-lg text-[#5e5e5e]'>
-                        {links}
-                    </div>
-
-                    <div onClick={() => setSearchBarOpen(true)} className='sm:hidden md:flex lg:hidden flex items-center'>
-                        <button className='text-2xl text-[#5e5e5e]'><IoSearchOutline /></button>
-                    </div>
-
-                    <div className='sm:ml-2'>
-                        <button className='sm:py-[6px] py-1 px-2 sm:px-4 rounded-md bg-black font-semibold text-[#cacaca]'><Link to="/register">Register</Link></button>
-                    </div>
-                </div>
-
+  return (
+    <header className="fixed w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
+      <nav className="container mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
+        {/* Logo and Search bar */}
+        <div className="flex items-center gap-3">
+          {/* Logo and Menu button for small devices */}
+          <div className="flex items-center gap-3">
+            {/* Menu button for small devices */}
+            <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
+              <button className="text-2xl">
+                {openMenu ? <RiMenuFoldLine /> : <RiMenuFold2Line />}
+              </button>
             </div>
+
+            {/* Logo */}
+            <div>
+              <Link to="/">
+                <h1 className="font-bold text-2xl md:text-3xl font-inter">
+                  Learn<span className="text-secondary">UP</span>
+                </h1>
+              </Link>
+            </div>
+          </div>
+
+          {/* search bar for large device */}
+          <div className="border px-4 border-border rounded-3xl w-full max-w-md justify-between sm:flex md:hidden lg:flex hidden bg-inputBg">
+            <input
+              className="outline-none w-full placeholder:text-text/70 text-text py-2 bg-inputBg"
+              type="text"
+              placeholder="Search program..."
+            />
+            <button className="text-2xl">
+              <IoSearchOutline />
+            </button>
+          </div>
         </div>
-    );
+
+        {/* search bar for small device */}
+        <div
+          className={`container mx-auto border-b absolute z-10 top-0 h-[5.18rem] flex gap-3 bg-bg transition-all duration-400 ease-in-out ${
+            searchBarOpen ? "w-full left-0" : "w-0 -left-[300px]"
+          }`}
+        >
+          {/* Close button for search bar */}
+          <button
+            onClick={() => setSearchBarOpen(false)}
+            className="absolute left-4 top-1/2 transform translate-y-[-50%]  bg-bg/90 border border-border rounded-full p-2"
+          >
+            <MdArrowBackIosNew />
+          </button>
+
+          {/* Search bar and search button*/}
+          <div className="flex w-full my-auto">
+            <input
+              className="outline-none bg-inputBg w-full placeholder:text-text/70 text-text my-auto ml-12 p-2 px-4 border border-r-0 border-border rounded-l-full"
+              type="text"
+              placeholder="Search program..."
+            />
+
+            <button className="text-2xl bg-inputBg p-2 my-auto rounded-r-full border border-border">
+              <IoSearchOutline />
+            </button>
+          </div>
+        </div>
+
+        {/* nav links for small device */}
+        <div
+          className={`container mx-auto nav-parent md:hidden transition-all duration-400 ease-in-out flex flex-col gap-5 absolute list-none top-[4.8rem] border-t bg-bg h-screen ${
+            openMenu ? "left-0 w-full" : "-left-[300px] w-[300px]"
+          } font-semibold text-lg`}
+        >
+          {links}
+        </div>
+
+        {/* nav links for large device and buttons*/}
+        <div className="flex items-center gap-4">
+          {/* nav links for large device */}
+          <div className="nav-parent text-lg list-none gap-4 hidden md:flex flex-nowrap font-semibold">
+            {links}
+          </div>
+
+          {/* buttons */}
+          <div className="flex items-center gap-3">
+            {/* Registration button */}
+            <button className="sm:py-[6px] p-2 px-3 rounded-md bg-primary hover:bg-primaryHover font-semibold">
+              <Link to="/register" className="text-textReversed hover:text-textReversed">
+                Register
+              </Link>
+            </button>
+
+            {/* Search button  */}
+            <button
+              onClick={() => setSearchBarOpen(true)}
+              className="text-2xl sm:hidden md:flex lg:hidden p-2 text-text bg-accentOne hover:bg-accentOne/50 border border-border/25 rounded-full"
+            >
+              <IoSearchOutline />
+            </button>
+
+            {/* Theme Switch */}
+            <Darkmode />
+          </div>
+        </div>
+      </nav>
+    </header>
+  );
 };
 
 export default Navbar;

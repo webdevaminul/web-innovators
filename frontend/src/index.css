@@ -1,5 +1,85 @@
-@import url('https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  /* Define variables for light theme */
+  :root {
+    --bg-color: 244, 244, 249; /* Background color */
+    --accent-one: 234, 234, 239; /* Element background color */
+    --text-color: 51, 51, 51; /* General text color */
+    --text-reversed: 244, 244, 249; /* White text color */
+    --text-white: 204, 204, 209; /* White text color */
+    --primary-color: 0, 123, 255; /* Primary link color */
+    --primary-hover-color: 0, 86, 179; /* Primary link hover */
+    --secondary-color: 240, 138, 36; /* Primary button/Action/Hightlight color */
+    --secondary-hover-color: 209, 109, 18; /* Primary button/Action/Hightlight hover color */
+
+    --link-color: 0, 123, 255; /* Link color */
+    --link-hover-color: 0, 86, 179; /* Link hover color */
+
+    --border-color: 209, 209, 209; /* Border color */
+    --outline-color: 0, 123, 255; /* Outline color for focus */
+
+    --error-color: 220, 53, 69; /* Error message color */
+    --success-color: 40, 167, 69; /* Success message color */
+    --warning-color: 255, 193, 7; /* Warning message color */
+    --info-color: 23, 162, 184; /* Info message color */
+
+    --disabled-color: 204, 204, 204; /* Disabled button color */
+    --input-bg-color: 255, 255, 255; /* Input field background */
+    --placeholder-color: 108, 117, 125; /* Placeholder text color */
+  }
+
+  /* Define variables for dark theme */
+  [data-theme="dark"] {
+    --bg-color: 18, 18, 18; /* Dark theme background color */
+    --accent-one: 38, 38, 38; /* Element background color */
+    --text-color: 204, 204, 209; /* General text color for dark theme */
+    --text-reversed: 18, 18, 18; /* Black text color */
+    --primary-color: 85, 157, 216; /* Primary link color */
+    --primary-hover-color: 58, 116, 171; /* Primary link hover */
+    --secondary-color: 230, 153, 51; /* Primary button/Action/Hightlight color */
+    --secondary-hover-color: 199, 123, 26; /* Primary button/Action/Hightlight hover color */
+
+    --link-color: 85, 157, 216; /* Link color */
+    --link-hover-color: 58, 116, 171; /* Link hover color */
+
+    --border-color: 58, 58, 58; /* Border color */
+    --outline-color: 85, 157, 216; /* Outline color for focus */
+
+    --error-color: 245, 124, 131; /* Error message color */
+    --success-color: 111, 207, 151; /* Success message color */
+    --warning-color: 243, 181, 99; /* Warning message color */
+    --info-color: 93, 192, 207; /* Info message color */
+
+    --disabled-color: 85, 85, 85; /* Disabled button color */
+    --input-bg-color: 31, 31, 31; /* Input field background */
+    --placeholder-color: 169, 169, 169; /* Placeholder text color */
+  }
+
+  /* Apply styles to elements */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  button {
+    color: rgb(var(--text-color));
+  }
+
+  a {
+    color: rgb(var(--link-color));
+  }
+  a:hover {
+    color: rgb(var(--link-hover-color));
+  }
+
+  body {
+    background-color: rgba(var(--bg-color));
+  }
+}
