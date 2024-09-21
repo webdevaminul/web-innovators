@@ -9,7 +9,7 @@ import "./navbar.css"
 const Navbar = () => {
 
     const links = <>
-        <li><NavLink to="/home">Programs</NavLink></li>
+        <li><NavLink to="/allCourses">Courses</NavLink></li>
         <li><NavLink to="/pricing">Pricing</NavLink></li>
         {/* <li><NavLink to="/about">About</NavLink></li> */}
         <li><NavLink to="/contact">Contact</NavLink></li>
