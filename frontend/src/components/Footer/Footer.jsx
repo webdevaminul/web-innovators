@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { RiFacebookCircleLine } from "react-icons/ri";
 import { SlSocialLinkedin } from "react-icons/sl";
 import { BsGithub } from "react-icons/bs";
@@ -8,67 +9,70 @@ import { FaWhatsapp } from "react-icons/fa";
 const Footer = () => {
   return (
     <>
-      <footer className="bg-black mt-6 text-white gap-5 p-8 md:p-10 grid grid-cols-2 md:grid-cols-4">
-        {/* aside and Innovators Name */}
-        <div className="col-span-2 md:col-span-1 text-center md:text-left">
-          <p className="text-3xl font-medium mb-5">Innovators</p>
-          <p>
-            Simplifies course management by connecting teachers and students on
-            one platform.
-          </p>
+      <footer className="container mx-auto font-bai bg-accentOne gap-5 md:py-10 grid grid-cols-2 md:grid-cols-4">
+        {/* Innovators Name */}
+        <div className="md:mt-10 col-span-2 md:col-span-1 text-center md:text-left">
+          <div className="mb-2">
+            <Link to="/">
+              <h1 className="font-bold text-2xl md:text-3xl font-inter">
+                Learn<span className="text-secondary">UP</span>
+              </h1>
+            </Link>
+          </div>
+          <p>Simplifies course management by connecting teachers and students.</p>
         </div>
 
         {/* service div */}
-        <div className="flex flex-col col-span-1 md:col-span-1 text-center md:text-left">
-          <h6 className="footer-title">Services</h6>
-          <a className="link link-hover">Courses</a>
-          <a className="link link-hover">Enrollment</a>
-          <a className="link link-hover">Latest Courses</a>
+        <div className="md:mt-10 flex flex-col col-span-1 md:col-span-1 text-center md:text-left">
+          <h6 className="font-medium mb-2">Services</h6>
+          <Link className="link link-hover">All Courses</Link>
+          <Link className="link link-hover">Enrollment</Link>
+          <Link className="link link-hover">Latest Courses</Link>
         </div>
 
         {/* company div */}
-        <div className="flex flex-col col-span-1 md:col-span-1 text-center md:text-left">
-          <h6 className="footer-title">Company</h6>
-          <a className="link link-hover">About us</a>
-          <a className="link link-hover">Contact</a>
-          <a className="link link-hover">Educators</a>
+        <div className="md:mt-10 flex flex-col col-span-1 md:col-span-1 text-center md:text-left">
+          <h6 className="font-medium mb-2">Company</h6>
+          <Link className="link link-hover">About us</Link>
+          <Link className="link link-hover">Contact</Link>
+          <Link className="link link-hover">Educators</Link>
         </div>
 
         {/* contact div */}
-        <div className="col-span-2 md:col-span-1 text-center md:text-left">
-          <h6 className="footer-title">Our Contact Information</h6>
+        <div className="md:mt-10 col-span-2 md:col-span-1 text-center md:text-left">
+          <h6 className="font-medium mb-2">Our Contact Information</h6>
 
-          <div className="flex flex-col justify-between items-center md:items-start gap-4 text-center md:text-left">
-            <div className="flex md:flex-col justify-evenly gap-3 flex-wrap">
-              <p className="flex justify-start items-center gap-1 flex-nowrap text-nowrap">
-                <MdPhoneIphone></MdPhoneIphone> +880 1836908974
+          <div className="flex flex-col justify-between items-center md:items-start gap-3 text-center md:text-left">
+            <div className="flex md:flex-col justify-evenly flex-wrap">
+              <p className="flex justify-start items-center gap-1 md:gap-2 flex-nowrap text-nowrap">
+                <MdPhoneIphone /> +880 1836908974
               </p>
-              <p className="flex justify-start items-center gap-1 flex-nowrap text-nowrap">
-                <FaWhatsapp></FaWhatsapp> +880 1836908974
+              <p className="flex justify-start items-center gap-1 md:gap-2 flex-nowrap text-nowrap">
+                <FaWhatsapp /> +880 1836908974
               </p>
-              <p className="flex justify-start items-center gap-1 flex-nowrap text-nowrap">
-                <MdOutlineMail></MdOutlineMail>{" "}
-                <a className="link link-hover" href="">
-                  learnup@gmail.com
-                </a>
+              <p className="flex justify-start items-center gap-1 md:gap-2 flex-nowrap text-nowrap">
+                <span>
+                  <MdOutlineMail />
+                </span>
+                <span>learnup@gmail.com</span>
               </p>
             </div>
+
             <div className="flex justify-between items-center gap-5">
-              <a className="link link-hover text-xl">
-                <RiFacebookCircleLine></RiFacebookCircleLine>
-              </a>
-              <a className="link link-hover text-xl">
-                <SlSocialLinkedin></SlSocialLinkedin>
-              </a>
-              <a className="link link-hover text-xl">
-                <BsGithub></BsGithub>
-              </a>
+              <Link className="link link-hover text-2xl">
+                <RiFacebookCircleLine />
+              </Link>
+              <Link className="link link-hover text-xl">
+                <SlSocialLinkedin />
+              </Link>
+              <Link className="link link-hover text-xl pt-[2px]">
+                <BsGithub />
+              </Link>
             </div>
           </div>
         </div>
-        <p className="mt-5 col-span-2 md:col-span-4 text-center">
-          Copyright © {new Date().getFullYear()} - All right reserved by
-          LearnUp.
+        <p className="mt-3 col-span-2 md:col-span-4 text-center">
+          Copyright © {new Date().getFullYear()} - All right reserved by LearnUp.
         </p>
       </footer>
     </>
