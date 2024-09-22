@@ -34,9 +34,11 @@ const Navbar = () => {
           </div>
 
           <div>
+            <Link to="/">
             <h1 className="font-bold text-3xl sm:text-4xl ">
               Learn<span className="text-gray-500">UP</span>
             </h1>
+            </Link>
           </div>
         </div>
 
