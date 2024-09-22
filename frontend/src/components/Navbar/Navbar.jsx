@@ -62,7 +62,7 @@ const Navbar = () => {
 
           <div className="ml-5 ">
             <button className="sm:py-[6px] py-1 px-5 rounded-md bg-black text-white">
-              <Link to="/login">Login</Link>
+              <Link to="/sign-in">Login</Link>
             </button>
           </div>
         </div>
