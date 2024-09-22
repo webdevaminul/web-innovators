@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
   const [showPass, setShowPass] = useState(false);
@@ -14,7 +15,15 @@ const SignIn = () => {
     const email = data?.email;
     const password = data?.password;
     console.log("name email pass ", email, password);
+    toast.success('sign in succesfull test')
   };
+
+  const handleGoogle = () =>{
+    toast.success('sign in succesfull test')
+  }
+  const handleGithub = () =>{
+    toast.success('sign in succesfull test')
+  }
 
   return (
     <div className="flex mt-20 ">
@@ -30,7 +39,7 @@ const SignIn = () => {
           </h1>
           <div className="mt-4 flex flex-col lg:flex-row items-center justify-between">
             <div className="w-full lg:w-1/2 mb-2 lg:mb-0">
-              <button
+              <button onClick={handleGoogle}
                 type="button"
                 className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
@@ -61,7 +70,7 @@ const SignIn = () => {
               </button>
             </div>
             <div className="w-full lg:w-1/2 ml-0 lg:ml-2">
-              <button
+              <button onClick={handleGithub}
                 type="button"
                 className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
@@ -138,7 +147,7 @@ const SignIn = () => {
             <div>
               <button
                 type="submit"
-                className="w-full text-white p-2 rounded-md bg-purple-600 hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+                className="w-full text-white p-2 rounded-md bg-purple-600 hover:bg-gray-800 focus:outline-none transition-colors duration-300"
               >
                 Sign in
               </button>
@@ -148,7 +157,7 @@ const SignIn = () => {
             <p>
               New Here?{" "}
               <Link to="/sign-up" className="text-black hover:underline">
-                Sign Up
+                Register
               </Link>
             </p>
           </div>

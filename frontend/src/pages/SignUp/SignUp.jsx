@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const SignUp = () => {
   const [isStudentChecked, setIsStudentChecked] = useState(false);
@@ -33,7 +32,7 @@ const SignUp = () => {
     const { name, email, password } = data;
     console.log("name email pass ", name, email, password);
 
-    toast.success(`Signing up with ...`);
+    toast.success(`Sign in up with ...`);
     if (isTeacherChecked) {
       console.log('Role: Teacher');
     }
@@ -505,7 +504,7 @@ const SignUp = () => {
                       : "bg-purple-600 text-white hover:bg-gray-800 focus:outline-none"
                   }`}
               >
-                Sign Up
+                Register
               </button>
             </div>
           </form>
