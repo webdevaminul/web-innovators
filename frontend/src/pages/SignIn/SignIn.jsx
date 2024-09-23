@@ -31,17 +31,17 @@ const SignIn = () => {
 
       <div className="w-full bg-base-300 lg:w-1/2 flex items-center justify-center">
         <div className="max-w-md w-full p-6">
-          <h1 className="text-3xl font-semibold mb-6 text-black text-center">
+          <h1 className="text-3xl font-semibold mb-6 text-text text-center">
             Log In
           </h1>
-          <h1 className="text-sm font-semibold mb-6 text-gray-500 text-center">
+          <h1 className="text-sm font-semibold mb-6 text-text text-center">
             Join to Our Community with all time access and free{" "}
           </h1>
           <div className="mt-4 flex flex-col lg:flex-row items-center justify-between">
             <div className="w-full lg:w-1/2 mb-2 lg:mb-0">
               <button onClick={handleGoogle}
                 type="button"
-                className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
+                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md shadow-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-czolors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -72,7 +72,7 @@ const SignIn = () => {
             <div className="w-full lg:w-1/2 ml-0 lg:ml-2">
               <button onClick={handleGithub}
                 type="button"
-                className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
+                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md shadow-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-czolors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ const SignIn = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text"
               >
                 Email
               </label>
@@ -102,7 +102,8 @@ const SignIn = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
+
                 {...register("email", {
                   required: "Email Address is required",
                 })}
@@ -117,7 +118,7 @@ const SignIn = () => {
             <div className="relative">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text"
               >
                 Password
               </label>
@@ -125,7 +126,8 @@ const SignIn = () => {
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="*******"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
+                
                 {...register("password", { required: "Password is required" })}
                 aria-invalid={errors.password ? "true" : "false"}
               />
@@ -156,7 +158,7 @@ const SignIn = () => {
           <div className="mt-4 text-sm text-gray-600 text-center">
             <p>
               New Here?{" "}
-              <Link to="/sign-up" className="text-black hover:underline">
+              <Link to="/sign-up" className="text-text hover:underline">
                 Register
               </Link>
             </p>
@@ -165,7 +167,7 @@ const SignIn = () => {
       </div>
 
       {/* Right Pane */}
-      <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+      <div className="hidden lg:flex items-center justify-center flex-1 bg-bg text-text">
         <div className="max-w-md text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"

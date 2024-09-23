@@ -312,7 +312,7 @@ const SignUp = () => {
               <button
                 onClick={() => handleSignUp("Google")}
                 type="button"
-                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
+                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-czolors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -374,7 +374,7 @@ const SignUp = () => {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-[rgba(var(--input-bg-color))] dark:bg-[rgba(var(--bg-color))]"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
                 {...register("name", { required: true })}
                 aria-invalid={errors.name ? "true" : "false"}
               />
@@ -395,7 +395,7 @@ const SignUp = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-[rgba(var(--input-bg-color))] dark:bg-[rgba(var(--bg-color))]"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
                 {...register("email", {
                   required: "Email Address is required",
                 })}
@@ -418,7 +418,8 @@ const SignUp = () => {
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="*******"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-[rgba(var(--input-bg-color))] dark:bg-[rgba(var(--bg-color))]"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
+                
                 {...register("password", {
                   required: "Password is required",minLength: {
                     value: 6,
