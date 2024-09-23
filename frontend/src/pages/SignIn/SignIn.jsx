@@ -1,71 +1,172 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { toast } from "react-toastify";
 
-const SignUp = () => {
-  const [isStudentChecked, setIsStudentChecked] = useState(false);
-  const [isTeacherChecked, setIsTeacherChecked] = useState(false);
+const SignIn = () => {
   const [showPass, setShowPass] = useState(false);
-
-  const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
-    if (name === "Student") {
-      setIsStudentChecked(checked);
-      setIsTeacherChecked(false);
-    } else if (name === "Teacher") {
-      setIsTeacherChecked(checked);
-      setIsStudentChecked(false);
-    }
-  };
-
-  // console.log('isTeacherChecked',isTeacherChecked);
-  // console.log('isStudentChecked', isStudentChecked);
-
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm();
   const onSubmit = (data) => {
-    const { name, email, password } = data;
-    console.log("name email pass ", name, email, password);
-
-    toast.success(`Sign in up with ...`);
-    if (isTeacherChecked) {
-      console.log('Role: Teacher');
-    }
-
-    if (isStudentChecked) {
-      console.log('Role: Student');
-    }
+    const email = data?.email;
+    const password = data?.password;
+    console.log("name email pass ", email, password);
+    toast.success('sign in succesfull test')
   };
 
-
-  
-  // Function to handle sign-up button clicks
-  const handleSignUp = (platform) => {
-    if (!isStudentChecked && !isTeacherChecked) {
-      toast.error("Please select either Student or Teacher before signing up!");
-    } else {
-      //   toast.success(`Signing up with ${platform}...`);
-      if (platform === "Google") {
-        console.log("google");
-        toast.success(`Signing up with ${platform}...`);
-      } else if (platform === "GitHub") {
-        console.log("GitHub");
-        toast.success(`Signing up with ${platform}...`);
-      } else {
-        return toast.error(`Please sign up with...`);
-      }
-    }
-  };
+  const handleGoogle = () =>{
+    toast.success('sign in succesfull test')
+  }
+  const handleGithub = () =>{
+    toast.success('sign in succesfull test')
+  }
 
   return (
-    <div className="flex justify-center mt-20">
-    <div className="flex justify-center items-center min-h-screen font-bai">
+    <div className="flex mt-20 ">
       {/* Left Pane */}
+
+      <div className="w-full bg-base-300 lg:w-1/2 flex items-center justify-center">
+        <div className="max-w-md w-full p-6">
+          <h1 className="text-3xl font-semibold mb-6 text-text text-center">
+            Log In
+          </h1>
+          <h1 className="text-sm font-semibold mb-6 text-text text-center">
+            Join to Our Community with all time access and free{" "}
+          </h1>
+          <div className="mt-4 flex flex-col lg:flex-row items-center justify-between">
+            <div className="w-full lg:w-1/2 mb-2 lg:mb-0">
+              <button onClick={handleGoogle}
+                type="button"
+                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md shadow-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-czolors duration-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  className="w-4"
+                  id="google"
+                >
+                  <path
+                    fill="#fbbb00"
+                    d="M113.47 309.408 95.648 375.94l-65.139 1.378C11.042 341.211 0 299.9 0 256c0-42.451 10.324-82.483 28.624-117.732h.014L86.63 148.9l25.404 57.644c-5.317 15.501-8.215 32.141-8.215 49.456.002 18.792 3.406 36.797 9.651 53.408z"
+                  />
+                  <path
+                    fill="#518ef8"
+                    d="M507.527 208.176C510.467 223.662 512 239.655 512 256c0 18.328-1.927 36.206-5.598 53.451-12.462 58.683-45.025 109.925-90.134 146.187l-.014-.014-73.044-3.727-10.338-64.535c29.932-17.554 53.324-45.025 65.646-77.911h-136.89V208.176h245.899z"
+                  />
+                  <path
+                    fill="#28b446"
+                    d="m416.253 455.624.014.014C372.396 490.901 316.666 512 256 512c-97.491 0-182.252-54.491-225.491-134.681l82.961-67.91c21.619 57.698 77.278 98.771 142.53 98.771 28.047 0 54.323-7.582 76.87-20.818l83.383 68.262z"
+                  />
+                  <path
+                    fill="#f14336"
+                    d="m419.404 58.936-82.933 67.896C313.136 112.246 285.552 103.82 256 103.82c-66.729 0-123.429 42.957-143.965 102.724l-83.397-68.276h-.014C71.23 56.123 157.06 0 256 0c62.115 0 119.068 22.126 163.404 58.936z"
+                  />
+                </svg>{" "}
+                Continue with Google{" "}
+              </button>
+            </div>
+            <div className="w-full lg:w-1/2 ml-0 lg:ml-2">
+              <button onClick={handleGithub}
+                type="button"
+                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md shadow-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-czolors duration-300"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 16 16"
+                  id="github"
+                  className="w-4"
+                >
+                  <path d="M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z" />
+                </svg>{" "}
+                Continue with Github{" "}
+              </button>
+            </div>
+          </div>
+          <div className="mt-4 text-sm text-gray-600 text-center">
+            <p>or with email</p>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            {/* Email Part */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-text"
+              >
+                Email
+              </label>
+
+              <input
+                type="email"
+                placeholder="Your Email"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
+
+                {...register("email", {
+                  required: "Email Address is required",
+                })}
+                aria-invalid={errors.email ? "true" : "false"}
+              />
+              {errors.email && (
+                <p className="text-red-500">{errors.email.message}</p>
+              )}
+            </div>
+
+            {/* Password Part */}
+            <div className="relative">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-text"
+              >
+                Password
+              </label>
+
+              <input
+                type={showPass ? "text" : "password"}
+                placeholder="*******"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
+                
+                {...register("password", { required: "Password is required" })}
+                aria-invalid={errors.password ? "true" : "false"}
+              />
+              {errors.password && (
+                <p className="text-red-500">{errors.password.message}</p>
+              )}
+              <span
+                onClick={() => setShowPass(!showPass)}
+                className="cursor-pointer absolute right-3 top-8 "
+              >
+                {showPass ? (
+                  <IoEyeOutline className="text-2xl" />
+                ) : (
+                  <IoEyeOffOutline className="text-2xl" />
+                )}
+              </span>
+            </div>
+
+            <div>
+              <button
+                type="submit"
+                className="w-full text-white p-2 rounded-md bg-purple-600 hover:bg-gray-800 focus:outline-none transition-colors duration-300"
+              >
+                Sign in
+              </button>
+            </div>
+          </form>
+          <div className="mt-4 text-sm text-gray-600 text-center">
+            <p>
+              New Here?{" "}
+              <Link to="/sign-up" className="text-text hover:underline">
+                Register
+              </Link>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Pane */}
       <div className="hidden lg:flex items-center justify-center flex-1 bg-bg text-text">
         <div className="max-w-md text-center">
           <svg
@@ -297,232 +398,8 @@ const SignUp = () => {
           </svg>
         </div>
       </div>
-
-      {/* Right Pane */}
-      <div className="w-full bg-base-300 lg:w-1/2 flex items-center justify-center">
-        <div className="max-w-md w-full p-6">
-          <h1 className="text-3xl font-semibold mb-6 text-center">
-            Register Here !
-          </h1>
-          <h1 className="text-sm font-semibold mb-6 text-center text-text">
-            Join to Our Community with all time access and free{" "}
-          </h1>
-          <div className="mt-4 flex flex-col lg:flex-row items-center justify-between">
-            <div className="w-full lg:w-1/2 mb-2 lg:mb-0">
-              <button
-                onClick={() => handleSignUp("Google")}
-                type="button"
-                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-czolors duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 512 512"
-                  className="w-4"
-                  id="google"
-                >
-                  <path
-                    fill="#fbbb00"
-                    d="M113.47 309.408 95.648 375.94l-65.139 1.378C11.042 341.211 0 299.9 0 256c0-42.451 10.324-82.483 28.624-117.732h.014L86.63 148.9l25.404 57.644c-5.317 15.501-8.215 32.141-8.215 49.456.002 18.792 3.406 36.797 9.651 53.408z"
-                  />
-                  <path
-                    fill="#518ef8"
-                    d="M507.527 208.176C510.467 223.662 512 239.655 512 256c0 18.328-1.927 36.206-5.598 53.451-12.462 58.683-45.025 109.925-90.134 146.187l-.014-.014-73.044-3.727-10.338-64.535c29.932-17.554 53.324-45.025 65.646-77.911h-136.89V208.176h245.899z"
-                  />
-                  <path
-                    fill="#28b446"
-                    d="m416.253 455.624.014.014C372.396 490.901 316.666 512 256 512c-97.491 0-182.252-54.491-225.491-134.681l82.961-67.91c21.619 57.698 77.278 98.771 142.53 98.771 28.047 0 54.323-7.582 76.87-20.818l83.383 68.262z"
-                  />
-                  <path
-                    fill="#f14336"
-                    d="m419.404 58.936-82.933 67.896C313.136 112.246 285.552 103.82 256 103.82c-66.729 0-123.429 42.957-143.965 102.724l-83.397-68.276h-.014C71.23 56.123 157.06 0 256 0c62.115 0 119.068 22.126 163.404 58.936z"
-                  />
-                </svg>{" "}
-                Continue with Google{" "}
-              </button>
-            </div>
-            <div className="w-full lg:w-1/2 ml-0 lg:ml-2">
-              <button
-                onClick={() => handleSignUp("GitHub")}
-                type="button"
-                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 16 16"
-                  id="github"
-                  className="w-4"
-                >
-                  <path d="M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z" />
-                </svg>{" "}
-                Continue with GitHub{" "}
-              </button>
-            </div>
-          </div>
-          <div className="mt-4 text-sm text-text text-center">
-            <p>or with email</p>
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {/* Name Part */}
-            <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-text"
-              >
-                Your name
-              </label>
-
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
-                {...register("name", { required: true })}
-                aria-invalid={errors.name ? "true" : "false"}
-              />
-              {errors.name?.type === "required" && (
-                <p className="text-red-500">Name is required</p>
-              )}
-            </div>
-
-            {/* Email Part */}
-            <div>
-              <label
-                htmlFor="email"
-               className="block text-sm font-medium text-text"
-              >
-                Email
-              </label>
-
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
-                {...register("email", {
-                  required: "Email Address is required",
-                })}
-                aria-invalid={errors.email ? "true" : "false"}
-              />
-              {errors.email && (
-                <p className="text-red-500">{errors.email.message}</p>
-              )}
-            </div>
-
-            {/* Password Part */}
-            <div className="relative">
-              <label
-                htmlFor="password"
-                className="block text-sm font-medium text-text"
-              >
-                Password
-              </label>
-
-              <input
-                type={showPass ? "text" : "password"}
-                placeholder="*******"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-inputBg dark:bg-bg"
-                
-                {...register("password", {
-                  required: "Password is required",minLength: {
-                    value: 6,
-                    message: "Password must be at least 6 characters long",
-                  },
-                  pattern: {
-                    value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/,
-                    message: "Password must contain letters and numbers",
-                  },
-                })}
-                aria-invalid={errors.password ? "true" : "false"}
-              />
-              {errors.password && (
-                <p className="text-red-500">{errors?.password?.message}</p>
-              )}
-              <span
-                onClick={() => setShowPass(!showPass)}
-                className="cursor-pointer absolute right-3 top-8 text-text dark:text-textReversed"
-              >
-                {showPass ? (
-                  <IoEyeOutline className="text-2xl" />
-                ) : (
-                  <IoEyeOffOutline className="text-2xl" />
-                )}
-              </span>
-            </div>
-
-            {/* user role */}
-            <p>Who you are ? </p>
-
-            <div className="flex">
-              <div className="pr-2">
-                <label
-                  className={`${
-                    isTeacherChecked ? "text-gray-400 " : "text-text"
-                  }`}
-                  htmlFor="student"
-                >
-                  Student
-                </label>
-                <input
-                  type="checkbox"
-                  id="student"
-                  name="Student"
-                  {...register("Student")}
-                  checked={isStudentChecked}
-                  onChange={handleCheckboxChange}
-                  disabled={isTeacherChecked}
-                  className="mx-3"
-                />
-              </div>
-              <div disabled={isStudentChecked} className="px-2">
-                <label
-                  className={`${
-                    isStudentChecked ? "text-gray-400" : "text-text"
-                  }`}
-                  htmlFor="teacher"
-                >
-                  Teacher
-                </label>
-                <input
-                  type="checkbox"
-                  id="teacher"
-                  name="Teacher"
-                  {...register("Teacher")}
-                  checked={isTeacherChecked}
-                  onChange={handleCheckboxChange}
-                  disabled={isStudentChecked}
-                  className="mx-3"
-                />
-              </div>
-              {errors.checkboxes && (
-                <p className="text-red-500">{errors.checkboxes.message}</p>
-              )}
-            </div>
-
-            {/* submit button */}
-            <div>
-              <button disabled={!isStudentChecked && !isTeacherChecked}
-                type="submit"
-                className={`w-full p-2 rounded-md transition-colors font-medium text-lg duration-300 ${
-                    !isStudentChecked && !isTeacherChecked
-                      ? "bg-gray-400 cursor-not-allowed"
-                      : "bg-purple-600 text-white hover:bg-gray-800 focus:outline-none"
-                  }`}
-              >
-                Register
-              </button>
-            </div>
-          </form>
-          <div className="mt-4 text-sm text-gray-600 text-center">
-            <p>
-              Already have an account?{" "}
-              <Link to="/sign-in" className="text-text hover:underline">
-                Login here
-              </Link>
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;
