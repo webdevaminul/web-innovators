@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../pages/Home/Home";
 import SignUp from "../pages/SignUp/SignUp";
 import AllCourses from "../pages/AllCourses/AllCourses";
+import CourseDetails from "../pages/CourseDetails/CourseDetails";
 
 
 const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         path: "/allCourses",
         element: <AllCourses></AllCourses>
       },
+      {
+        path: '/course-details',
+        element: <CourseDetails />
+      }
 
     ],
   },
