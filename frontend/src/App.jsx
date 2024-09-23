@@ -8,8 +8,10 @@ function App() {
   return (
     <main>
       <Navbar />
-      <Outlet />
-      <Footer></Footer>
+      <main className="mt-[5rem]">
+        <Outlet />
+        <Footer></Footer>
+      </main>
       <ToastContainer
         position="top-right"
         autoClose={5000}
