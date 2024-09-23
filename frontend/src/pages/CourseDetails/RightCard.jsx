@@ -3,6 +3,9 @@ import { CgMediaLive } from "react-icons/cg";
 import { BsQuestionOctagon } from "react-icons/bs";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { LuFileQuestion } from "react-icons/lu";
+import { useEffect, useState } from "react";
+
+
 
 
 export const VideoCard = () => {
@@ -15,7 +18,7 @@ export const VideoCard = () => {
 
 export const TextCard = () => {
     return (
-        <div className="md:p-2 md:pb-3 py-7 px-4 mt-3 bg-white">
+        <div className={`md:p-2 md:pb-3 py-7 px-4 mt-3`}>
             <div className='flex items-center gap-3'>
                 <h1 className='font-bold font-bai text-2xl'>৳5850</h1>
                 <del className='font-semibold font-bai text-xl'>৳7500</del>
@@ -40,6 +43,12 @@ export const TextCard = () => {
 }
 
 const RightCard = () => {
+    // const [theme, setTheme] = useState('')
+    // const theme = localStorage.getItem('theme')
+    // console.log(theme)
+
+
+
     return (
         <div className='bg-white p-1 w-full'>
             <div>

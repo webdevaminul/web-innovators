@@ -5,10 +5,13 @@ const CourseDetails = () => {
     return (
         <div className='w-full heading '>
             <div className="max-w-[1320px] mx-auto relative md:flex gap-7 px-5">
+
+                {/* video card for small device */}
                 <div className='md:hidden block pt-5'>
                     <VideoCard />
                 </div>
 
+                {/* course heading and description here  */}
                 <div className=''>
                     <h1 className='text-white text-2xl sm:text-4xl font-bold font-inter pt-5 md:pt-14 mb-5'>HSC 26 অনলাইন ব্যাচ (বাংলা, ইংরেজি, তথ্য ও যোগাযোগ প্রযুক্তি)</h1>
 
@@ -19,12 +22,16 @@ const CourseDetails = () => {
                     </p>
                 </div>
 
+                {/* adjusting right side video card width */}
                 <div className='lg:min-w-[450px] md:min-w-[330px] h-0 border-0'></div>
 
+                {/* Right side video and short detail card for mid to large device */}
                 <div className='absolute top-14 right-0 lg:w-[450px] w-[330px] border border-[#92929236] hidden md:block'>
                     <RightCard />
                 </div>
             </div>
+
+            {/* short des text card for small device */}
             <div className='md:hidden block pt-5'>
                 <TextCard />
             </div>
