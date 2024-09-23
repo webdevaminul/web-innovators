@@ -63,10 +63,10 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex mt-20">
+    <div className="flex justify-center mt-20">
     <div className="flex justify-center items-center min-h-screen font-bai">
       {/* Left Pane */}
-      <div className="hidden lg:flex items-center justify-center flex-1 bg-white text-black">
+      <div className="hidden lg:flex items-center justify-center flex-1 bg-bg text-text">
         <div className="max-w-md text-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -301,11 +301,10 @@ const SignUp = () => {
       {/* Right Pane */}
       <div className="w-full bg-base-300 lg:w-1/2 flex items-center justify-center">
         <div className="max-w-md w-full p-6">
-          <h1 className="text-3xl font-semibold mb-6 text-black text-center">
+          <h1 className="text-3xl font-semibold mb-6 text-center">
             Register Here !
-            Register Here
           </h1>
-          <h1 className="text-sm font-semibold mb-6 text-gray-500 text-center">
+          <h1 className="text-sm font-semibold mb-6 text-center text-text">
             Join to Our Community with all time access and free{" "}
           </h1>
           <div className="mt-4 flex flex-col lg:flex-row items-center justify-between">
@@ -313,7 +312,7 @@ const SignUp = () => {
               <button
                 onClick={() => handleSignUp("Google")}
                 type="button"
-                className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
+                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -345,7 +344,7 @@ const SignUp = () => {
               <button
                 onClick={() => handleSignUp("GitHub")}
                 type="button"
-                className="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
+                className="w-full flex justify-center items-center gap-2 text-text text-sm p-2 rounded-md hover:bg-primaryHover border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -359,7 +358,7 @@ const SignUp = () => {
               </button>
             </div>
           </div>
-          <div className="mt-4 text-sm text-gray-600 text-center">
+          <div className="mt-4 text-sm text-text text-center">
             <p>or with email</p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -367,7 +366,7 @@ const SignUp = () => {
             <div>
               <label
                 htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text"
               >
                 Your name
               </label>
@@ -375,12 +374,12 @@ const SignUp = () => {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-[rgba(var(--input-bg-color))] dark:bg-[rgba(var(--bg-color))]"
                 {...register("name", { required: true })}
                 aria-invalid={errors.name ? "true" : "false"}
               />
               {errors.name?.type === "required" && (
-                <p className="text-red-500">First name is required</p>
+                <p className="text-red-500">Name is required</p>
               )}
             </div>
 
@@ -388,7 +387,7 @@ const SignUp = () => {
             <div>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-gray-700"
+               className="block text-sm font-medium text-text"
               >
                 Email
               </label>
@@ -396,7 +395,7 @@ const SignUp = () => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-[rgba(var(--input-bg-color))] dark:bg-[rgba(var(--bg-color))]"
                 {...register("email", {
                   required: "Email Address is required",
                 })}
@@ -411,7 +410,7 @@ const SignUp = () => {
             <div className="relative">
               <label
                 htmlFor="password"
-                className="block text-sm font-medium text-gray-700"
+                className="block text-sm font-medium text-text"
               >
                 Password
               </label>
@@ -419,7 +418,7 @@ const SignUp = () => {
               <input
                 type={showPass ? "text" : "password"}
                 placeholder="*******"
-                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+                className="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none transition-colors duration-300 text-text dark:text-textReversed bg-[rgba(var(--input-bg-color))] dark:bg-[rgba(var(--bg-color))]"
                 {...register("password", {
                   required: "Password is required",minLength: {
                     value: 6,
@@ -437,7 +436,7 @@ const SignUp = () => {
               )}
               <span
                 onClick={() => setShowPass(!showPass)}
-                className="cursor-pointer absolute right-3 top-8 "
+                className="cursor-pointer absolute right-3 top-8 text-text dark:text-textReversed"
               >
                 {showPass ? (
                   <IoEyeOutline className="text-2xl" />
@@ -454,7 +453,7 @@ const SignUp = () => {
               <div className="pr-2">
                 <label
                   className={`${
-                    isTeacherChecked ? "text-gray-400" : "text-black"
+                    isTeacherChecked ? "text-gray-400 " : "text-text"
                   }`}
                   htmlFor="student"
                 >
@@ -474,7 +473,7 @@ const SignUp = () => {
               <div disabled={isStudentChecked} className="px-2">
                 <label
                   className={`${
-                    isStudentChecked ? "text-gray-400" : "text-black"
+                    isStudentChecked ? "text-gray-400" : "text-text"
                   }`}
                   htmlFor="teacher"
                 >
@@ -513,7 +512,7 @@ const SignUp = () => {
           <div className="mt-4 text-sm text-gray-600 text-center">
             <p>
               Already have an account?{" "}
-              <Link to="/sign-in" className="text-black hover:underline">
+              <Link to="/sign-in" className="text-text hover:underline">
                 Login here
               </Link>
             </p>
