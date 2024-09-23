@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
+
 import { Slide, ToastContainer } from "react-toastify";
+import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -7,7 +9,10 @@ function App() {
   return (
     <main>
       <Navbar />
-      <Outlet />
+      <main className="mt-[5rem]">
+        <Outlet />
+        <Footer></Footer>
+      </main>
       <ToastContainer
         position="top-right"
         autoClose={5000}
