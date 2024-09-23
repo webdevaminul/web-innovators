@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "IELTS LIVE Batch",
-    "instructor": "Hasnain Nur Sozan +3",
+    "instructor": "Hasnain Nur",
     "price": "8500",
     "old_price": "10000",
     "image": "./card01.jpg",
@@ -38,7 +38,7 @@
   {
     "id": 5,
     "title": "Email Marketing করে Freelancing",
-    "instructor": "Itati Fatema Tia",
+    "instructor": "Itati Fatema",
     "price": "2500",
     "old_price": "N/A",
     "image": "./card05.jpg",
@@ -47,7 +47,7 @@
   {
     "id": 6,
     "title": "YouTube Marketing করে Freelancing",
-    "instructor": "Md. Sabbir Hossain",
+    "instructor": "Md. Sabbir",
     "price": "2500",
     "old_price": "N/A",
     "image": "./card01.jpg",
@@ -56,7 +56,7 @@
   {
     "id": 7,
     "title": "WordPress দিয়ে Freelancing",
-    "instructor": "Asaduzzaman Azad",
+    "instructor": "Asaduzzaman ",
     "price": "2500",
     "old_price": "N/A",
     "image": "./card02.jpg",

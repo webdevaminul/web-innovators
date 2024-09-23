@@ -5,13 +5,8 @@ const AllCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [visibleCourses, setVisibleCourses] = useState({
-    Language: false,
-    Freelancing: false,
-    Design: false,
-    Programming: false,
-  });
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [sortOrder, setSortOrder] = useState("asc"); // State to manage sorting order
 
   // Fetch courses data from JSON
   useEffect(() => {
@@ -32,90 +27,111 @@ const AllCourses = () => {
       });
   }, []);
 
-  // Filter courses based on the search term in category only
-  const filteredCourses = courses.filter((course) =>
-    course.category.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  // Function to render each category section
-  const renderCategory = (category) => {
-    const categoryCourses = filteredCourses.filter((course) => course.category === category);
-    const isVisible = visibleCourses[category];
-
-    return (
-      <div className="category-section mt-15" key={category}>
-        <h2 className="text-text">
-          {category} ({categoryCourses.length} Courses)
-        </h2>
-        <div className="course-grid">
-          {categoryCourses.slice(0, isVisible ? categoryCourses.length : 4).map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
-        {categoryCourses.length > 4 && (
-          <button
-            className="see-more-button"
-            onClick={() => setVisibleCourses((prev) => ({ ...prev, [category]: !prev[category] }))}
-          >
-            {isVisible ? "See Less" : "See More"}
-          </button>
-        )}
-      </div>
-    );
+  // Handle category checkbox selection
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    if (e.target.checked) {
+      setSelectedCategories([...selectedCategories, category]);
+    } else {
+      setSelectedCategories(selectedCategories.filter((c) => c !== category));
+    }
   };
 
+  // Filter and sort courses based on selected categories
+  const filteredCourses = selectedCategories.length > 0 
+    ? courses.filter((course) => selectedCategories.includes(course.category))
+    : courses; // Show all courses if no category is selected
+
+  // Sort the filtered courses by price
+  const sortedCourses = filteredCourses.sort((a, b) => {
+    const priceA = parseFloat(a.price);
+    const priceB = parseFloat(b.price);
+    return sortOrder === "asc" ? priceA - priceB : priceB - priceA; // Ascending or descending
+  });
+
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text-center my-10">Loading...</div>;
   }
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+    return <div className="text-center text-red-500 my-10">Error: {error.message}</div>;
   }
 
+  // Unique categories for checkbox
+  const categories = Array.from(new Set(courses.map((course) => course.category)));
+
   return (
-    <div className="container mx-auto font-bai">
-      {/* Banner Section with heading and search bar on the left, image on the right */}
-      <div className="banner-section relative h-screen w-full flex flex-col md:flex-row items-center justify-between bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
-        {/* Semi-transparent overlay for readability */}
-        <div className="banner-overlay absolute inset-0 bg-black opacity-50"></div>
-        {/* Banner content */}
-        <div className="banner-content relative z-10 mt-20 text-center md:text-left text-textWhite p-10 w-full md:w-1/2 ">
-          <h2 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight text-textWhite">
-            Master New Skills
-          </h2>
-          <p className="text-xl md:text-2xl mt-4 mb-4 font-light text-textWhite">
-            Explore a variety of courses to enhance your career.
-          </p>
-          {/* Search Bar in the Banner */}
-          <div className="search-bar mt-8 flex flex-col md:flex-row items-center w-full">
-            <input
-              type="text"
-              className="p-3 w-full md:w-96 rounded-md border-none outline-none text-text"
-              placeholder="Search by category..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <button className="bg-secondary hover:bg-secondaryHover text-black px-6 py-3 mt-4 md:mt-0 md:ml-2 rounded-md w-full md:w-auto">
-              Search
-            </button>
-          </div>
-        </div>
-        {/* Image on the right side (hidden on small screens) */}
-        <div className="banner-image hidden md:flex justify-center items-center h-full relative z-10 w-1/2">
-          <img src="./courseBanner.png" alt="Banner" className="h-96 object-contain" />
-        </div>
+    <div className="container mx-auto px-4 font-bai">
+      {/* Heading Section */}
+      <h2 className="text-4xl font-bold text-center text-gray-800 mt-10">Skill Courses</h2>
+      <p className="text-lg text-center text-gray-600 mt-2 mb-10">
+        Explore a variety of courses to enhance your career.
+      </p>
+
+      {/* Sorting Section */}
+      <div className="mb-6 text-center">
+        <label className="mr-2 font-bold">Sort by Price:</label>
+        <select 
+          value={sortOrder} 
+          onChange={(e) => setSortOrder(e.target.value)} 
+          className="border font-bold rounded-md p-2"
+        >
+          <option value="asc">Low to High</option>
+          <option value="desc">High to Low</option>
+        </select>
       </div>
 
-      {/* Courses Section */}
-      <h2 className="page-header mt-10 text-3xl font-bold text-center md:text-left">
-        Skill Courses
-      </h2>
+      {/* Main Content Section */}
+      <div className="flex flex-col md:flex-row">
+        {/* Category Filter Section - Left Side */}
+        <div className="w-full md:w-1/4 mb-8">
+          <h3 className="text-2xl font-semibold text-gray-700 mb-4">Filter by Category</h3>
+          <div className="bg-white p-4 shadow-lg rounded-lg">
+            {categories.map((category) => (
+              <label key={category} className="flex items-center space-x-2">
+                <input
+                  type="checkbox"
+                  value={category}
+                  onChange={handleCategoryChange}
+                  className="text-blue-500 focus:ring-blue-400 h-4 w-4"
+                />
+                <span className="text-lg text-gray-700">{category}</span>
+              </label>
+            ))}
+          </div>
+        </div>
 
-      {/* Render categories */}
-      {renderCategory("Language")}
-      {renderCategory("Freelancing")}
-      {renderCategory("Design")}
-      {renderCategory("Programming")}
+        {/* Course Cards Section - Right Side */}
+        <div className="w-full md:w-3/4">
+          {selectedCategories.length > 0 ? (
+            selectedCategories.map((category) => (
+              <div key={category} className="mb-10">
+                {/* Category Title */}
+                <h3 className="text-3xl font-semibold text-gray-700 mb-6">{category}</h3>
+
+                {/* Course Cards for this Category */}
+                <div className="course-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                  {sortedCourses
+                    .filter((course) => course.category === category)
+                    .map((course) => (
+                      <CourseCard key={course.id} course={course} />
+                    ))}
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className="mb-10">
+              {/* Show All Courses */}
+              <h3 className="text-3xl font-semibold text-gray-700 mb-6">All Courses</h3>
+              <div className="course-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+                {sortedCourses.map((course) => (
+                  <CourseCard key={course.id} course={course} />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
