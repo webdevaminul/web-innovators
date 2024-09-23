@@ -1,3 +1,13 @@
 .heading{
-    background-image: linear-gradient(to top, #31527D , #161414);
+    background-image: linear-gradient(to top, #070131 , #161414);
+}
+
+.details-li{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.details-li span {
+    font-size: 14px;
 }
