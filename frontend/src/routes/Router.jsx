@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
+import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 
 
 const router = createBrowserRouter([
@@ -33,5 +34,10 @@ const router = createBrowserRouter([
 
     ],
   },
+
+  {
+    path: "/userDeshbroad",
+    element: <UserDashbroad></UserDashbroad>
+  }
 ]);
 export default router;
