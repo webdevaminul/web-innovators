@@ -1,0 +1,166 @@
+/* Container for the entire dashboard */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 3fr; /* Two columns layout */
+  gap: 20px;
+  padding: 20px;
+  background-color: #f0f4f8; /* Light background for contrast */
+  overflow: hidden; /* Prevent overflow */
+}
+
+/* Profile section styling */
+.profile-section {
+  background-color: #ffffff; /* White background for profile section */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow effect */
+  max-width: 100%; /* Prevent overflow */
+  overflow: hidden; /* Prevent overflow */
+}
+
+.profile-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  border: 2px solid #007bff; /* Blue border around profile image */
+}
+
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu {
+  display: none; /* Hide menu by default */
+}
+
+.menu.show {
+  display: block; /* Show menu when active */
+}
+
+.menu li {
+  margin: 15px 0; /* Increased margin for better spacing */
+  cursor: pointer;
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+
+.menu li:hover {
+  color: #007bff; /* Change color on hover */
+}
+
+/* Toggle button styling */
+.toggle-button {
+  display: none; /* Hidden by default */
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Main content area styling */
+.main-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Banner styling */
+.banner {
+  display: flex;
+  justify-content: space-between;
+  background-color: #e0f7fa; /* Light blue background */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Prevent overflow */
+}
+
+.banner-text {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.banner-image img {
+  width: 200px;
+  height: auto;
+}
+
+/* Course section styling with two columns */
+.course-section {
+  display: flex;
+  gap: 20px;
+}
+
+/* Course column styling */
+.course-columns {
+  display: flex;
+  flex: 1;
+  gap: 20px;
+}
+
+/* Each course card */
+.course-card {
+  background-color: #ffffff; /* White background for cards */
+  padding: 10px;
+  border-radius: 8px; /* Slightly rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Soft shadow for cards */
+  text-align: center;
+}
+
+.course-card img {
+  width: 100%; /* Responsive image */
+  height: auto;
+  border-radius: 8px; /* Match card corners */
+}
+
+/* Progress chart styling */
+.progress-chart,
+.enrollment-chart {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensures two cards are displayed in the course sections */
+.popular-courses,
+.enrolled-courses {
+  flex: 1;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.course-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two cards in a row */
+  gap: 15px; /* Space between cards */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: 1fr; /* One column layout on small screens */
+  }
+
+  .toggle-button {
+    display: block; /* Show toggle button on small screens */
+  }
+
+  .course-columns {
+    flex-direction: column; /* Stack course columns on small screens */
+  }
+
+  .course-cards {
+    grid-template-columns: 1fr; /* One card in a row on small screens */
+  }
+}
