@@ -20,6 +20,7 @@ const Navbar = () => {
           Pricing
         </NavLink>
       </li>
+
       {/* <li><NavLink to="/about">About</NavLink></li> */}
       <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/contact" className="text-nowrap">
@@ -27,7 +28,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/register" className="text-nowrap">
+        <NavLink to="/" className="text-nowrap">
           Dashboard
         </NavLink>
       </li>
