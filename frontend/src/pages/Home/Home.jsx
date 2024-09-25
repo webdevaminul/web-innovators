@@ -1,12 +1,12 @@
 import Banner from "../../components/Banner/Banner";
-import LatestSection from "../../components/LatestSection/LatestSection";
+import DiscountedSection from "../../components/DiscountedSection/DiscountedSection";
 import Reviews from "../../components/Reviews/Reviews";
 
 export default function Home() {
   return (
     <>
       <Banner />
-      <LatestSection />
+      <DiscountedSection />
       <Reviews />
     </>
   );

@@ -1,6 +1,5 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import userAvatar from "../../assets/useravatar.png";
 import { ImQuotesLeft, ImQuotesRight } from "react-icons/im";
 
 // Import Swiper styles
