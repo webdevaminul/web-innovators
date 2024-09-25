@@ -1,3 +1,5 @@
+// User Dashbaord 
+
 import React, { useState } from 'react';
 import { Line, Bar } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
@@ -88,6 +90,7 @@ const UserDashboard = () => {
       </aside>
 
       {/* Second Column: Main Content */}
+
       <main className="main-content">
         {/* Row 1: Banner */}
         <section className="banner">
