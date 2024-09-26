@@ -5,7 +5,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
-
+import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 
 const router = createBrowserRouter([
   {
@@ -29,14 +29,18 @@ const router = createBrowserRouter([
 
       {
         path: "/allCourses",
-        element: <AllCourses />
+        element: <AllCourses />,
       },
       {
-        path: '/course-details',
-        element: <CourseDetails />
-      }
-
+        path: "/course-details",
+        element: <CourseDetails />,
+      },
     ],
+  },
+
+  {
+    path: "/userDeshbroad",
+    element: <UserDashbroad></UserDashbroad>,
   },
 ]);
 export default router;
