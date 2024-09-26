@@ -98,13 +98,13 @@ const AllCourses = () => {
 
         {/* Course Cards Section - Right Side */}
         <div className="w-full md:w-3/4">
-          <div className="flex justify-between items-center">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
             {/* Category Title */}
             <h3 className="text-3xl font-semibold text-gray-700">
               {selectedCategory ? selectedCategory : "All Courses"}
             </h3>
             {/* Sorting Section */}
-            <div className="mb-6 text-center">
+            <div className="text-center">
               <label className="mr-2 font-bold">Sort by Price:</label>
               <select
                 value={sortOrder}
@@ -120,7 +120,7 @@ const AllCourses = () => {
           {selectedCategory ? (
             <div className="mb-10">
               {/* Course Cards for this Category */}
-              <div className="course-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {sortedCourses.map((course) => (
                   <CourseCard key={course.id} course={course} />
                 ))}
@@ -128,7 +128,7 @@ const AllCourses = () => {
             </div>
           ) : (
             <div className="mb-10">
-              <div className="course-grid grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {sortedCourses.map((course) => (
                   <CourseCard key={course.id} course={course} />
                 ))}
