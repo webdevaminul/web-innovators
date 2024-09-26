@@ -1,8 +1,6 @@
-import React from "react";
-import Title from "../../utils/title";
+import Title from "../../utils/Title";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-import { ImQuotesLeft, ImQuotesRight } from "react-icons/im";
 
 // Import Swiper styles
 import "swiper/css";

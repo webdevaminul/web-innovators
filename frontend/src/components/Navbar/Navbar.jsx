@@ -16,7 +16,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/pricing" className="text-nowrap">
+        <NavLink to="/course-details" className="text-nowrap">
           Pricing
         </NavLink>
       </li>
