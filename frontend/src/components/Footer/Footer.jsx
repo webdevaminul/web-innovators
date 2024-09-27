@@ -8,8 +8,8 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <>
-      <footer className="container mx-auto font-bai bg-accentOne gap-5 md:py-10 grid grid-cols-2 md:grid-cols-4">
+    <footer className="bg-accentOne">
+      <div className="container mx-auto font-bai gap-5 md:py-10 grid grid-cols-2 md:grid-cols-4">
         {/* Innovators Name */}
         <div className="md:mt-10 col-span-2 md:col-span-1 text-center md:text-left">
           <div className="mb-2">
@@ -19,7 +19,9 @@ const Footer = () => {
               </h1>
             </Link>
           </div>
-          <p>Simplifies course management by connecting teachers and students.</p>
+          <p>
+            Simplifies course management by connecting teachers and students.
+          </p>
         </div>
 
         {/* service div */}
@@ -72,10 +74,11 @@ const Footer = () => {
           </div>
         </div>
         <p className="mt-3 col-span-2 md:col-span-4 text-center">
-          Copyright © {new Date().getFullYear()} - All right reserved by LearnUp.
+          Copyright © {new Date().getFullYear()} - All right reserved by
+          LearnUp.
         </p>
-      </footer>
-    </>
+      </div>
+    </footer>
   );
 };
 
