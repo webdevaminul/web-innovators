@@ -79,7 +79,7 @@ export default function Reviews() {
         className="mySwiper container mx-auto"
       >
         {reviews.map((review) => (
-          <SwiperSlide key={review.id} className="py-10">
+          <SwiperSlide key={review.id} className="py-10 px-3">
             <div className="bg-accentOne rounded-3xl">
               <div className="relative border border-border rounded-3xl p-6 h-full flex flex-col gap-4 justify-between shadow-md">
                 <div className="text-2xl text-secondary border border-secondary absolute z-10 top-3 left-10 bg-bg p-2 rounded-full">

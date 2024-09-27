@@ -41,16 +41,13 @@ const Navbar = () => {
 
   return (
     <header className="fixed h-[5rem] w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
-      <nav className="container h-full mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
+      <nav className="container px-3 h-full mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-3">
           {/* Logo and Menu button for small devices */}
           <div className="flex items-center gap-3">
             {/* Menu button for small devices */}
-            <div
-              onClick={() => setOpenMenu(!openMenu)}
-              className="md:hidden flex items-center"
-            >
+            <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
               <button className="text-2xl">
                 {openMenu ? <RiMenuFoldLine /> : <RiMenuFold2Line />}
               </button>
@@ -109,7 +106,7 @@ const Navbar = () => {
 
         {/* nav links for small device */}
         <div
-          className={`container mx-auto nav-parent md:hidden transition-all duration-400 ease-in-out flex flex-col gap-5 absolute list-none top-[4.8rem] border-t bg-bg h-screen ${
+          className={`container mx-auto px-3 nav-parent md:hidden transition-all duration-400 ease-in-out flex flex-col gap-5 absolute list-none top-[4.8rem] border-t bg-bg h-screen ${
             openMenu ? "left-0 w-full" : "-left-[300px] w-[300px]"
           } font-semibold text-lg`}
         >
@@ -127,10 +124,7 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             {/* Registration button */}
             <button className="sm:py-[6px] p-2 px-3 rounded-md bg-primary hover:bg-primaryHover font-semibold">
-              <Link
-                to="/register"
-                className="text-textReversed hover:text-textReversed"
-              >
+              <Link to="/register" className="text-textReversed hover:text-textReversed">
                 Register
               </Link>
             </button>
