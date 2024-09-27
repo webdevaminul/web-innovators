@@ -13,8 +13,7 @@ const cardData = [
   {
     id: 2,
     title: "HSC 26",
-    description:
-      "Online Batch (Bangla, English, Information and Communication Technology)",
+    description: "Online Batch (Bangla, English, Information and Communication Technology)",
     details: "5 live classes per week",
     img: "https://via.placeholder.com/300x150",
   },
@@ -62,7 +61,7 @@ const Banner = () => {
   return (
     <section
       style={{ backgroundImage: `url(${bannerImage})` }}
-      className="bg-cover bg-center bg-no-repeat"
+      className="bg-cover bg-center bg-no-repeat px-3"
     >
       <section className="relative w-full md:min-h-[calc(100vh-5rem)] container mx-auto flex flex-col justify-evenly gap-4 font-bai">
         {/* Left Side Text */}
@@ -71,8 +70,7 @@ const Banner = () => {
             Skills Development <br /> Online Batch 2024
           </h2>
           <p className="text-sm sm:text-xl md:text-xl text-textWhite">
-            100% preparation of complete syllabus with years of experienced
-            teachers!
+            100% preparation of complete syllabus with years of experienced teachers!
           </p>
         </div>
 

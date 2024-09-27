@@ -58,7 +58,7 @@ const DiscountedSection = () => {
 
   return (
     <>
-      <section className="container mx-auto">
+      <section className="container mx-auto px-3">
         <Title
           title={"Discounted Courses"}
           subTitle={"Get Expert Knowledge for Less, Enroll in Our Discounted Courses Today!"}
