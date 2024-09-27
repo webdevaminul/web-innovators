@@ -4,7 +4,6 @@ import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
-import "./navbar.css";
 import Darkmode from "../Darkmode/Darkmode";
 
 const Navbar = () => {
@@ -41,14 +40,17 @@ const Navbar = () => {
   console.log(searchBarOpen);
 
   return (
-    <header className="fixed w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
-      <nav className="container mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
+    <header className="fixed h-[5rem] w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
+      <nav className="container h-full mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-3">
           {/* Logo and Menu button for small devices */}
           <div className="flex items-center gap-3">
             {/* Menu button for small devices */}
-            <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
+            <div
+              onClick={() => setOpenMenu(!openMenu)}
+              className="md:hidden flex items-center"
+            >
               <button className="text-2xl">
                 {openMenu ? <RiMenuFoldLine /> : <RiMenuFold2Line />}
               </button>
@@ -125,7 +127,10 @@ const Navbar = () => {
           <div className="flex items-center gap-3">
             {/* Registration button */}
             <button className="sm:py-[6px] p-2 px-3 rounded-md bg-primary hover:bg-primaryHover font-semibold">
-              <Link to="/register" className="text-textReversed hover:text-textReversed">
+              <Link
+                to="/register"
+                className="text-textReversed hover:text-textReversed"
+              >
                 Register
               </Link>
             </button>
