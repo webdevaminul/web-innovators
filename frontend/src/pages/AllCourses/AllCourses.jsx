@@ -64,23 +64,13 @@ const AllCourses = () => {
 
   return (
     <div className="container mx-auto px-4 font-bai">
-      {/* Heading Section */}
-      <h2 className="text-4xl font-bold text-center text-gray-800 mt-10">
-        Skill Courses
-      </h2>
-      <p className="text-lg text-center text-gray-600 mt-2 mb-10">
-        Explore a variety of courses to enhance your career.
-      </p>
-
       {/* Main Content Section */}
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
         {/* Category Filter Section - Left Side */}
         <div className="w-full md:w-1/4">
-          <h3 className="text-2xl font-semibold text-gray-700 mb-4">
-            Filter by Category
-          </h3>
+          <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
           {/* checkbox of categories */}
-          <div className="bg-white p-4 shadow-lg rounded-lg">
+          <div className="pt-3 rounded-lg">
             {categories.map((category) => (
               <label key={category} className="flex items-center space-x-2">
                 <input
@@ -90,7 +80,7 @@ const AllCourses = () => {
                   onChange={handleCategoryChange}
                   className="text-blue-500 focus:ring-blue-400 h-4 w-4"
                 />
-                <span className="text-lg text-gray-700">{category}</span>
+                <span className="text-lg text-text">{category}</span>
               </label>
             ))}
           </div>
@@ -100,16 +90,16 @@ const AllCourses = () => {
         <div className="w-full md:w-3/4">
           <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
             {/* Category Title */}
-            <h3 className="text-3xl font-semibold text-gray-700">
+            <h3 className="text-3xl font-semibold ">
               {selectedCategory ? selectedCategory : "All Courses"}
             </h3>
             {/* Sorting Section */}
-            <div className="text-center">
-              <label className="mr-2 font-bold">Sort by Price:</label>
+            <div className="text-center mb-2">
+              <label className="mr-2 font-bold text-text">Sort by Price:</label>
               <select
                 value={sortOrder}
                 onChange={(e) => setSortOrder(e.target.value)}
-                className="border font-bold rounded-md p-2"
+                className="border outline-none border-border bg-accentOne text-text font-bold rounded-md p-2"
               >
                 <option value="asc">Low to High</option>
                 <option value="desc">High to Low</option>

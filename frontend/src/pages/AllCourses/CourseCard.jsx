@@ -4,7 +4,7 @@ import { FaBangladeshiTakaSign } from "react-icons/fa6";
 const CourseCard = ({ course }) => {
   return (
     <>
-      <div className="card card-compact bg-base-100 shadow-xl">
+      <div className="card card-compact border border-border bg-accentOne">
         <figure>
           <img src={course.image} alt="Shoes" />
         </figure>
@@ -16,7 +16,7 @@ const CourseCard = ({ course }) => {
             <p className="flex justify-start items-center text-xl text-secondary">
               <FaBangladeshiTakaSign />
               {course.price}
-              <span className="line-through text-black flex justify-start items-center ml-2 text-base">
+              <span className="line-through text-text flex justify-start items-center ml-2 text-base">
                 <FaBangladeshiTakaSign />
                 {course.old_price}
               </span>
