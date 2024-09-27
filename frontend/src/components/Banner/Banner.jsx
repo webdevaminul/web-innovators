@@ -61,58 +61,60 @@ const Banner = () => {
   return (
     <section
       style={{ backgroundImage: `url(${bannerImage})` }}
-      className="relative bg-cover bg-center bg-no-repeat w-full md:min-h-[calc(100vh-5rem)] container mx-auto flex flex-col justify-evenly gap-4 font-bai"
+      className="bg-cover bg-center bg-no-repeat px-3"
     >
-      {/* Left Side Text */}
-      <div className="rounded-lg max-w-2xl font-roboto mt-10 md:mt-0">
-        <h2 className="text-3xl sm:text-3xl md:text-5xl font-extrabold leading-relaxed md:leading-[5rem] text-textWhite">
-          Skills Development <br /> Online Batch 2024
-        </h2>
-        <p className="text-sm sm:text-xl md:text-xl text-textWhite">
-          100% preparation of complete syllabus with years of experienced teachers!
-        </p>
-      </div>
+      <section className="relative w-full md:min-h-[calc(100vh-5rem)] container mx-auto flex flex-col justify-evenly gap-4 font-bai">
+        {/* Left Side Text */}
+        <div className="rounded-lg max-w-2xl font-roboto mt-10 md:mt-0">
+          <h2 className="text-3xl sm:text-3xl md:text-5xl font-extrabold leading-relaxed md:leading-[5rem] text-textWhite">
+            Skills Development <br /> Online Batch 2024
+          </h2>
+          <p className="text-sm sm:text-xl md:text-xl text-textWhite">
+            100% preparation of complete syllabus with years of experienced teachers!
+          </p>
+        </div>
 
-      {/* Cards below the text */}
-      <div className="grid grid-cols-12 gap-3 md:gap-4 w-full max-w-6xl mb-10 md:mb-0">
-        {cardData?.map((card) => (
-          <div
-            key={card.id}
-            className="bg-[#121212] col-span-6 sm:col-span-4 md:col-span-2 p-2 rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer border border-gray-50/5"
-            onClick={() => openModal(card)}
-          >
-            <div className="pt-3 pb-3 pl-2 pr-2 font-roboto">
-              <h3 className="text-xl font-bold flex items-center justify-between mb-2 text-textWhite">
-                {card.title} Batch
-                <FaArrowRight className="ml-2 text-secondary" />
-              </h3>
+        {/* Cards below the text */}
+        <div className="grid grid-cols-12 gap-3 md:gap-4 w-full max-w-6xl mb-10 md:mb-0">
+          {cardData?.map((card) => (
+            <div
+              key={card.id}
+              className="bg-[#121212] col-span-6 sm:col-span-4 md:col-span-2 p-2 rounded-lg overflow-hidden transition-transform transform hover:scale-105 hover:shadow-xl cursor-pointer border border-gray-50/5"
+              onClick={() => openModal(card)}
+            >
+              <div className="pt-3 pb-3 pl-2 pr-2 font-roboto">
+                <h3 className="text-xl font-bold flex items-center justify-between mb-2 text-textWhite">
+                  {card.title} Batch
+                  <FaArrowRight className="ml-2 text-secondary" />
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Modal */}
+        {selectedCard && (
+          <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+            <div className="bg-white rounded-lg p-6 max-w-lg w-full relative shadow-lg">
+              <button
+                onClick={closeModal}
+                className="absolute top-2 right-2 text-black font-bold text-2xl"
+              >
+                &times;
+              </button>
+              <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
+              <p className="text-gray-700">{selectedCard.description}</p>
+              <p className="text-gray-500 mt-2">{selectedCard.details}</p>
+              <button
+                onClick={closeModal}
+                className="mt-6 px-6 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-lg"
+              >
+                View Details
+              </button>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* Modal */}
-      {selectedCard && (
-        <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-          <div className="bg-white rounded-lg p-6 max-w-lg w-full relative shadow-lg">
-            <button
-              onClick={closeModal}
-              className="absolute top-2 right-2 text-black font-bold text-2xl"
-            >
-              &times;
-            </button>
-            <h2 className="text-2xl font-bold mb-4">{selectedCard.title}</h2>
-            <p className="text-gray-700">{selectedCard.description}</p>
-            <p className="text-gray-500 mt-2">{selectedCard.details}</p>
-            <button
-              onClick={closeModal}
-              className="mt-6 px-6 py-3 bg-gradient-to-r from-green-400 to-green-600 text-white rounded-lg"
-            >
-              View Details
-            </button>
-          </div>
-        </div>
-      )}
+        )}
+      </section>
     </section>
   );
 };

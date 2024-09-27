@@ -4,7 +4,6 @@ import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
-import "./navbar.css";
 import Darkmode from "../Darkmode/Darkmode";
 
 const Navbar = () => {
@@ -41,8 +40,8 @@ const Navbar = () => {
   console.log(searchBarOpen);
 
   return (
-    <header className="fixed w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
-      <nav className="container mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
+    <header className="fixed h-[5rem] w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
+      <nav className="container px-3 h-full mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-3">
           {/* Logo and Menu button for small devices */}
@@ -107,7 +106,7 @@ const Navbar = () => {
 
         {/* nav links for small device */}
         <div
-          className={`container mx-auto nav-parent md:hidden transition-all duration-400 ease-in-out flex flex-col gap-5 absolute list-none top-[4.8rem] border-t bg-bg h-screen ${
+          className={`container mx-auto px-3 nav-parent md:hidden transition-all duration-400 ease-in-out flex flex-col gap-5 absolute list-none top-[4.8rem] border-t bg-bg h-screen ${
             openMenu ? "left-0 w-full" : "-left-[300px] w-[300px]"
           } font-semibold text-lg`}
         >
