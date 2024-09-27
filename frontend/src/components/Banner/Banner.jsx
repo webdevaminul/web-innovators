@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { FaArrowRight } from "react-icons/fa"; // Import the arrow icon
+import { FaArrowRight } from "react-icons/fa";
+import bannerImage from "../../assets/banner.jpg";
 
 const cardData = [
   {
@@ -58,7 +59,10 @@ const Banner = () => {
   };
 
   return (
-    <section className="relative bg-[url('./banner.jpg')] bg-cover bg-center bg-no-repeat w-full md:min-h-[calc(100vh-5rem)] container mx-auto flex flex-col justify-evenly gap-4 font-bai">
+    <section
+      style={{ backgroundImage: `url(${bannerImage})` }}
+      className="relative bg-cover bg-center bg-no-repeat w-full md:min-h-[calc(100vh-5rem)] container mx-auto flex flex-col justify-evenly gap-4 font-bai"
+    >
       {/* Left Side Text */}
       <div className="rounded-lg max-w-2xl font-roboto mt-10 md:mt-0">
         <h2 className="text-3xl sm:text-3xl md:text-5xl font-extrabold leading-relaxed md:leading-[5rem] text-textWhite">

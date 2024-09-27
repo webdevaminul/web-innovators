@@ -8,7 +8,7 @@ import "swiper/css/autoplay";
 
 // Import required modules
 import { Autoplay } from "swiper/modules";
-import Title from "../../utils/title";
+import Title from "../../utils/Title";
 
 // Function to cut text to 250 characters
 const cutText = (text, maxLength) => {
