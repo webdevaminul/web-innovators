@@ -6,6 +6,7 @@ import SignIn from "../pages/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
+import ContactPage from "../pages/ContactPage/ContactPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
       {
         path: "/course-details",
         element: <CourseDetails />,
+      },
+      {
+        path: "/contactUs",
+        element: <ContactPage></ContactPage>,
       },
     ],
   },
