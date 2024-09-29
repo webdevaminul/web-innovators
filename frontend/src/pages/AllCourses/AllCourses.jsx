@@ -53,12 +53,14 @@ const AllCourses = () => {
     currentPage * itemsPerPage
   );
 
+  // next page function
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
+  // previous function
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
