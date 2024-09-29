@@ -5,12 +5,13 @@ const AllCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null); // Change to store only one selected category
-  const [sortOrder, setSortOrder] = useState("asc"); // State to manage sorting order
+  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [sortOrder, setSortOrder] = useState("asc");
+  const [currentPage, setCurrentPage] = useState(1); // Track the current page
+  const itemsPerPage = 6; // Number of items to display per page
 
-  // Fetch courses data from JSON
   useEffect(() => {
-    fetch("./courses.json") // Ensure your data file is at the correct path
+    fetch("./courses.json")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -27,23 +28,42 @@ const AllCourses = () => {
       });
   }, []);
 
-  // Handle category checkbox selection (allowing only one selection at a time)
   const handleCategoryChange = (e) => {
     const category = e.target.value;
-    setSelectedCategory(category === selectedCategory ? null : category); // Unselect if clicked twice
+    setSelectedCategory(category === selectedCategory ? null : category);
+    setCurrentPage(1); // Reset to the first page when changing category
   };
 
-  // Filter and sort courses based on the selected category
   const filteredCourses = selectedCategory
     ? courses.filter((course) => course.category === selectedCategory)
-    : courses; // Show all courses if no category is selected
+    : courses;
 
-  // Sort the filtered courses by price
   const sortedCourses = filteredCourses.sort((a, b) => {
     const priceA = parseFloat(a.price);
     const priceB = parseFloat(b.price);
-    return sortOrder === "asc" ? priceA - priceB : priceB - priceA; // Ascending or descending
+    return sortOrder === "asc" ? priceA - priceB : priceB - priceA;
   });
+
+  // Calculate the number of pages
+  const totalPages = Math.ceil(sortedCourses.length / itemsPerPage);
+
+  // Slice the sortedCourses array to show only courses for the current page
+  const paginatedCourses = sortedCourses.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage((prevPage) => prevPage - 1);
+    }
+  };
 
   if (loading) {
     return <div className="text-center my-10">Loading...</div>;
@@ -57,26 +77,22 @@ const AllCourses = () => {
     );
   }
 
-  // Unique categories for checkbox
   const categories = Array.from(
     new Set(courses.map((course) => course.category))
   );
 
   return (
     <div className="container mx-auto px-4 font-bai">
-      {/* Main Content Section */}
       <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
-        {/* Category Filter Section - Left Side */}
         <div className="w-full md:w-1/4">
           <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
-          {/* checkbox of categories */}
           <div className="pt-3 rounded-lg">
             {categories.map((category) => (
               <label key={category} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
                   value={category}
-                  checked={selectedCategory === category} // Only this checkbox will be checked
+                  checked={selectedCategory === category}
                   onChange={handleCategoryChange}
                   className="text-blue-500 focus:ring-blue-400 h-4 w-4"
                 />
@@ -86,14 +102,11 @@ const AllCourses = () => {
           </div>
         </div>
 
-        {/* Course Cards Section - Right Side */}
         <div className="w-full md:w-3/4">
           <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
-            {/* Category Title */}
             <h3 className="text-3xl font-semibold ">
               {selectedCategory ? selectedCategory : "All Courses"}
             </h3>
-            {/* Sorting Section */}
             <div className="text-center mb-2">
               <label className="mr-2 font-bold text-text">Sort by Price:</label>
               <select
@@ -107,24 +120,44 @@ const AllCourses = () => {
             </div>
           </div>
 
-          {selectedCategory ? (
+          <div className="flex flex-col items-center justify-center">
             <div className="mb-10">
-              {/* Course Cards for this Category */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {sortedCourses.map((course) => (
+                {paginatedCourses.map((course) => (
                   <CourseCard key={course.id} course={course} />
                 ))}
               </div>
             </div>
-          ) : (
-            <div className="mb-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {sortedCourses.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
-              </div>
+
+            {/* Pagination Controls */}
+            <div className="join border mx-auto">
+              <button
+                className="join-item btn btn-md"
+                onClick={handlePreviousPage}
+                disabled={currentPage === 1}
+              >
+                «
+              </button>
+              {[...Array(totalPages)].map((_, index) => (
+                <button
+                  key={index}
+                  className={`join-item btn btn-md ${
+                    currentPage === index + 1 ? "bg-secondary text-black" : ""
+                  }`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                className="join-item btn btn-md"
+                onClick={handleNextPage}
+                disabled={currentPage === totalPages}
+              >
+                »
+              </button>
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>

@@ -8,7 +8,7 @@ import { FaWhatsapp } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-accentOne">
+    <footer className="bg-accentOne mt-8">
       <div className="container mx-auto font-bai gap-5 md:py-10 grid grid-cols-2 md:grid-cols-4">
         {/* Innovators Name */}
         <div className="md:mt-10 col-span-2 md:col-span-1 text-center md:text-left">
