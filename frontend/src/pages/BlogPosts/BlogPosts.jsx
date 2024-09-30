@@ -6,16 +6,18 @@ import Modal from './Modal'; // Import the Modal component
 const BlogPosts = () => {
     const [posts, setPosts] = useState([]);
     const [latestPosts, setLatestPosts] = useState([]);
-    const [selectedPost, setSelectedPost] = useState(null); // New state for selected post
-    const [isModalOpen, setIsModalOpen] = useState(false); // State to control modal visibility
-    const categories = ['All', ...new Set(postsData.map(post => post.category))]; // Include 'All' category
+    const [selectedPost, setSelectedPost] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 5;
+
+    const categories = ['All', ...new Set(postsData.map(post => post.category))];
 
     useEffect(() => {
-        // Load posts from JSON data and sort by date
         const fetchData = async () => {
-            const sortedPosts = postsData.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort posts by date descending
+            const sortedPosts = postsData.sort((a, b) => new Date(b.date) - new Date(a.date));
             setPosts(sortedPosts);
-            setLatestPosts(sortedPosts.slice(0, 5)); // Get latest 5 posts
+            setLatestPosts(sortedPosts.slice(0, 5));
         };
 
         fetchData();
@@ -23,18 +25,30 @@ const BlogPosts = () => {
 
     const filterByCategory = (category) => {
         if (category === 'All') {
-            setPosts(postsData); // Show all posts when 'All' is selected
+            setPosts(postsData);
         } else {
             const filteredPosts = postsData.filter(post => post.category === category);
-            const sortedFilteredPosts = filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort the filtered posts
+            const sortedFilteredPosts = filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
             setPosts(sortedFilteredPosts);
         }
-        setSelectedPost(null); // Reset selected post when filtering by category
+        setSelectedPost(null);
+        setCurrentPage(1);
     };
 
     const handleLatestPostClick = (post) => {
-        setSelectedPost(post); // Update selected post when clicking a latest post
-        setIsModalOpen(true); // Open modal
+        setSelectedPost(post);
+        setIsModalOpen(true);
+    };
+
+    // Calculate current posts to display
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+
+    // Pagination Logic
+    const totalPages = Math.ceil(posts.length / postsPerPage);
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
     };
 
     return (
@@ -51,7 +65,7 @@ const BlogPosts = () => {
                                     className="flex items-center px-3 py-2 mb-2 text-sm rounded-full bg-violet-400 text-gray-900 cursor-pointer transform transition duration-200 hover:bg-violet-500 hover:scale-105 shadow-md"
                                     onClick={() => filterByCategory(category)}
                                 >
-                                    <FaRegStar className="mr-2" /> {/* Icon */}
+                                    <FaRegStar className="mr-2" />
                                     {category}
                                 </span>
                             ))}
@@ -61,8 +75,7 @@ const BlogPosts = () => {
 
                 {/* Blog Posts Section */}
                 <div className="col-span-full lg:col-span-8 lg:mr-4">
-                    {/* Display the selected post if available, otherwise display filtered posts */}
-                    {(selectedPost ? [selectedPost] : posts).map((post) => (
+                    {(selectedPost ? [selectedPost] : currentPosts).map((post) => (
                         <div key={post.id} className="bg-gray-100 p-6 mb-6 rounded-lg shadow-md">
                             <div
                                 className="bg-no-repeat bg-cover h-64 rounded-lg mb-4"
@@ -99,6 +112,38 @@ const BlogPosts = () => {
                     ))}
                 </div>
 
+                {/* Pagination Controls */}
+                <div className="col-span-full flex flex-col  my-4">
+                    <div className="flex flex-wrap  justify-start mb-2">
+                        <button
+                            className="mx-1 mb-1 px-4 py-2 bg-violet-500 text-white rounded-lg"
+                            onClick={() => handlePageChange(currentPage - 1)}
+                            disabled={currentPage === 1}
+                        >
+                            Previous
+                        </button>
+                        <div className="flex items-center space-x-1 mb-1">
+                            {Array.from({ length: totalPages }, (_, index) => (
+                                <button
+                                    key={index + 1}
+                                    className={`mx-1 px-3 py-2 rounded-lg ${currentPage === index + 1 ? 'bg-violet-500 text-white' : 'bg-gray-200 text-gray-800 hover:bg-violet-400 hover:text-white'}`}
+                                    onClick={() => handlePageChange(index + 1)}
+                                >
+                                    {index + 1}
+                                </button>
+                            ))}
+                        </div>
+                        <button
+                            className="mx-1 mb-1 px-4 py-2 bg-violet-500 text-white rounded-lg"
+                            onClick={() => handlePageChange(currentPage + 1)}
+                            disabled={currentPage === totalPages}
+                        >
+                            Next
+                        </button>
+                    </div>
+                    
+                </div>
+
                 {/* Latest Posts Section (Only visible on Small and Medium Devices) */}
                 <div className="col-span-full lg:hidden">
                     <div className="bg-gray-100 p-4 rounded-lg shadow-md">
@@ -124,7 +169,7 @@ const BlogPosts = () => {
                                     className="flex items-center px-3 py-2 mb-2 text-sm rounded-full bg-violet-400 text-gray-900 cursor-pointer transform transition duration-200 hover:bg-violet-500 hover:scale-105 shadow-md"
                                     onClick={() => filterByCategory(category)}
                                 >
-                                    <FaRegStar className="mr-2" /> {/* Icon */}
+                                    <FaRegStar className="mr-2" />
                                     {category}
                                 </span>
                             ))}
