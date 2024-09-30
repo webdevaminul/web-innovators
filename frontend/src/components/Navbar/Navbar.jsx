@@ -22,7 +22,7 @@ const Navbar = () => {
 
       {/* <li><NavLink to="/about">About</NavLink></li> */}
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/contact" className="text-nowrap">
+        <NavLink to="/contactUs" className="text-nowrap">
           Contact
         </NavLink>
       </li>
