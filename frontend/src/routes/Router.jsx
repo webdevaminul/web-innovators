@@ -6,6 +6,7 @@ import SignIn from "../pages/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
+import BlogPosts from "../pages/BlogPosts/BlogPosts"
 
 const router = createBrowserRouter([
   {
@@ -32,8 +33,8 @@ const router = createBrowserRouter([
         element: <AllCourses />,
       },
       {
-        path: "/course-details",
-        element: <CourseDetails />,
+        path: "/blog",
+        element: <BlogPosts></BlogPosts>,
       },
     ],
   },
