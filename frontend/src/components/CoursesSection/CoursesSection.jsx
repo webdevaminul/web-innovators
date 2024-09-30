@@ -1,6 +1,7 @@
 import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import CoursesDiv from "./CoursesDiv";
 
 const CoursesSection = () => {
   return (
@@ -15,13 +16,13 @@ const CoursesSection = () => {
           </TabList>
 
           <TabPanel>
-            <h2>Popular Courses</h2>
+            <CoursesDiv />
           </TabPanel>
           <TabPanel>
-            <h2>Latest Courses</h2>
+            <CoursesDiv />
           </TabPanel>
           <TabPanel>
-            <h2>Free</h2>
+            <CoursesDiv />
           </TabPanel>
         </Tabs>
       </div>
