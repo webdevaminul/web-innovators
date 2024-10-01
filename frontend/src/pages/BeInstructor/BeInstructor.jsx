@@ -270,6 +270,39 @@ const BeInstructor = () => {
                 />
               </div>
             </div>
+            {/* Institue and others part */}
+            <div className="md:flex gap-4 md:my-5 ">
+              <div className="md:w-1/2">
+                <label className="block text-text font-semibold" htmlFor="instName">
+                  Institute Name
+                </label>
+                <input
+                  className="w-full shadow-inner bg-inputBg rounded-lg p-2 border-none block mt-1"
+                  id="instName"
+                  type="text"
+                  name="instName"
+                  required="required"
+                  autoFocus="autofocus"
+                  placeholder="Type Your Name"
+                />
+              </div>
+              <div className="md:w-1/2">
+                <label
+                  className="block text-text font-semibold"
+                  htmlFor="email"
+                >
+                  Another data
+                </label>
+                <input
+                  className="shadow-inner bg-inputBg rounded-lg p-2 border-none mt-1 w-full block"
+                  id="email"
+                  type="email"
+                  name="email"
+                  required="required"
+                  placeholder="Email"
+                />
+              </div>
+            </div>
 
             <div className="mt-4">
               <label
@@ -288,7 +321,7 @@ const BeInstructor = () => {
             <div className="mt-8">
               <button
                 type="submit"
-                className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 md:py-4 md:text-lg md:px-10"
+                className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-secondary hover:bg-primary md:py-3 md:text-lg md:px-10"
               >
                 Submit
               </button>
