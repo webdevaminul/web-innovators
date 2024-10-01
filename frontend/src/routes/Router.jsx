@@ -4,7 +4,7 @@ import Home from "../pages/Home/Home";
 import SignUp from "../pages/SignUp/SignUp";
 import SignIn from "../pages/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
-import BlogPosts from "../pages//BlogPosts/BlogPosts"
+import BlogPosts from "../pages//BlogPosts/BlogPosts";
 import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/register",
+        path: "/sign-up",
         element: <SignUp />,
       },
 

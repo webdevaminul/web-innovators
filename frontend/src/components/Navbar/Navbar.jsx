@@ -40,15 +40,15 @@ const Navbar = () => {
   console.log(searchBarOpen);
 
   return (
-    <header className="fixed h-[5rem] w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
-      <nav className="container px-3 h-full mx-auto flex justify-between items-center gap-3 sm:gap-5 relative">
+    <header className="fixed h-[3.8rem] w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
+      <nav className="container px-2 sm:px-0 gap-2 h-full mx-auto flex justify-between items-center relative">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-3">
           {/* Logo and Menu button for small devices */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             {/* Menu button for small devices */}
             <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
-              <button className="text-2xl">
+              <button className="text-xl">
                 {openMenu ? <RiMenuFoldLine /> : <RiMenuFold2Line />}
               </button>
             </div>
@@ -56,7 +56,7 @@ const Navbar = () => {
             {/* Logo */}
             <div>
               <Link to="/">
-                <h1 className="font-bold text-2xl md:text-3xl font-inter">
+                <h1 className="font-bold text-2xl md:text-2xl font-inter">
                   Learn<span className="text-secondary">UP</span>
                 </h1>
               </Link>
@@ -70,7 +70,7 @@ const Navbar = () => {
               type="text"
               placeholder="Search program..."
             />
-            <button className="text-2xl">
+            <button className="text-xl">
               <IoSearchOutline />
             </button>
           </div>
@@ -78,8 +78,8 @@ const Navbar = () => {
 
         {/* search bar for small device */}
         <div
-          className={`container mx-auto border-b absolute z-10 top-0 h-[5.18rem] flex gap-3 bg-bg transition-all duration-400 ease-in-out ${
-            searchBarOpen ? "w-full left-0" : "w-0 -left-[300px]"
+          className={`container mx-auto px-3 border-b absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-bg transition-all duration-400 ease-in-out ${
+            searchBarOpen ? "w-full left-0" : "w-0 left-[-300px]"
           }`}
         >
           {/* Close button for search bar */}
@@ -106,33 +106,31 @@ const Navbar = () => {
 
         {/* nav links for small device */}
         <div
-          className={`container mx-auto px-3 nav-parent md:hidden transition-all duration-400 ease-in-out flex flex-col gap-5 absolute list-none top-[4.8rem] border-t bg-bg h-screen ${
-            openMenu ? "left-0 w-full" : "-left-[300px] w-[300px]"
-          } font-semibold text-lg`}
+          className={`container mx-auto transition-all duration-400 ease-in-out md:hidden absolute top-[3.8rem] flex flex-col gap-5 list-none bg-bg h-screen ${
+            openMenu ? "left-0 right-0" : "left-[-150%] right-[100%]"
+          } font-semibold p-3`}
         >
           {links}
         </div>
 
         {/* nav links for large device and buttons*/}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-3">
           {/* nav links for large device */}
-          <div className="nav-parent text-lg list-none gap-4 hidden md:flex flex-nowrap font-semibold">
-            {links}
-          </div>
+          <div className="list-none gap-4 hidden md:flex flex-nowrap font-semibold">{links}</div>
 
           {/* buttons */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 md:gap-3">
             {/* Registration button */}
-            <button className="sm:py-[6px] p-2 px-3 rounded-md bg-primary hover:bg-primaryHover font-semibold">
-              <Link to="/register" className="text-textReversed hover:text-textReversed">
-                Register
+            <button className="sm:py-[6px] p-2 rounded-md bg-primary hover:bg-primaryHover font-semibold">
+              <Link to="/sign-in" className="text-textReversed hover:text-textReversed">
+                Sign In
               </Link>
             </button>
 
             {/* Search button  */}
             <button
               onClick={() => setSearchBarOpen(true)}
-              className="text-2xl sm:hidden md:flex lg:hidden p-2 text-text bg-accentOne hover:bg-accentOne/50 border border-border/25 rounded-full"
+              className="text-xl sm:hidden md:flex lg:hidden p-2 text-text bg-accentOne hover:bg-accentOne/50 border border-border/25 rounded-full"
             >
               <IoSearchOutline />
             </button>
