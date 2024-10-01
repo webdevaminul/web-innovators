@@ -1,14 +1,16 @@
 import Banner from "../../components/Banner/Banner";
 import CoursesSection from "../../components/CoursesSection/CoursesSection";
-import DiscountedSection from "../../components/DiscountedSection/DiscountedSection";
+import LatestBlogs from "../../components/LatestBlogs/LatestBlogs";
 import Reviews from "../../components/Reviews/Reviews";
+import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
 
 export default function Home() {
   return (
     <>
       <Banner />
       <CoursesSection />
-      <DiscountedSection />
+      <LatestBlogs />
+      <WhyChooseUs />
       <Reviews />
     </>
   );

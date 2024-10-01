@@ -25,7 +25,7 @@ const CoursesDiv = () => {
   }, []);
 
   // Limit to showing only the first 6 courses
-  const displayedCourses = courses.slice(0, 8);
+  const displayedCourses = courses.slice(0, 4);
 
   if (loading) {
     return <div className="text-center my-10">Loading...</div>;
