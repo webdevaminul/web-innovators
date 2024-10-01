@@ -27,6 +27,11 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/become-instructor" className="text-nowrap">
+          Become an Instructor
+        </NavLink>
+      </li>
+      <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/userDeshbroad" className="text-nowrap">
           Dashboard
         </NavLink>

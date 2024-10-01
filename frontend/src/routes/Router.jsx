@@ -7,6 +7,7 @@ import AllCourses from "../pages/AllCourses/AllCourses";
 import BlogPosts from "../pages//BlogPosts/BlogPosts";
 import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
+import BeInstructor from "../pages/BeInstructor/BeInstructor";
 
 const router = createBrowserRouter([
   {
@@ -34,18 +35,22 @@ const router = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: <BlogPosts></BlogPosts>,
+        element: <BlogPosts />,
       },
       {
         path: "/contactUs",
-        element: <ContactPage></ContactPage>,
+        element: <ContactPage />,
+      },
+      {
+        path: "/become-instructor",
+        element: <BeInstructor />,
       },
     ],
   },
 
   {
     path: "/userDeshbroad",
-    element: <UserDashbroad></UserDashbroad>,
+    element: <UserDashbroad />,
   },
 ]);
 export default router;
