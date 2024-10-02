@@ -8,6 +8,7 @@ import BlogPosts from "../pages//BlogPosts/BlogPosts"
 import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
+import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
   {
     path: "/userDeshbroad",
     element: <UserDashbroad />,
+  },
+  {
+    path: "/teacherDeshbroad",
+    element: <TeacherDashboard />,
   },
 ]);
 export default router;

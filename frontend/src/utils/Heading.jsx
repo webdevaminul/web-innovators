@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 const Heading = ({heading}) => {
     return (
         <Helmet>
-        <title> {heading} - Learn UP </title>
+        <title> {heading} - LearnUP </title>
       </Helmet>
     );
 };

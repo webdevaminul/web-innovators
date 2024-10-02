@@ -1,6 +1,18 @@
+import { useState } from "react";
 import Heading from "../../utils/Heading";
 
 const BeInstructor = () => {
+  const [selectedOption, setSelectedOption] = useState("");
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const data = e.target;
+    const name = data.name.value;
+    const email = data.email.value;
+    const institute = data.instName.value;
+    const message = data.message.value;
+    console.log("data", name, email, institute, message, selectedOption);
+  };
   return (
     <div>
       <Heading heading={"Become a teacher"} />
@@ -225,7 +237,7 @@ const BeInstructor = () => {
 
         {/* Form section */}
         <div className="grid-cols-1 border p-5 my-10 shadow rounded-md">
-          <form>
+          <form onSubmit={handleFormSubmit}>
             {/* Name and email part */}
             <div className="md:flex gap-4">
               <div className="md:w-1/2">
@@ -259,7 +271,7 @@ const BeInstructor = () => {
                 />
               </div>
             </div>
-            {/* Institue and others part */}
+            {/* Institue and good at part */}
             <div className="md:flex gap-4 md:my-5 ">
               <div className="md:w-1/2">
                 <label
@@ -279,14 +291,15 @@ const BeInstructor = () => {
                 />
               </div>
               <div className="md:w-1/2">
-                <label
-                  className="block text-text font-semibold"
-                  htmlFor="email"
-                >
+                <label className="block text-text font-semibold">
                   Effeciency at
                 </label>
-                <select className="select select-ghost max-w-xs shadow-inner bg-inputBg rounded-lg p-2 border-none mt-1 w-full block">
-                  <option selected>select one</option>
+                <select
+                  className="select select-ghost max-w-xs shadow-inner bg-inputBg rounded-lg p-2 border-none mt-1 w-full block"
+                  value={selectedOption}
+                  onChange={(e) => setSelectedOption(e.target.value)}
+                >
+                  <option defaultValue>select one</option>
                   <option>Freelancing</option>
                   <option>Language</option>
                   <option>Programing</option>
