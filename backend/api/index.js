@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const { connectDB } = require("./config/mongoDB");
 const testRoutes = require("./routes/test.route");
 const authRoutes = require("./routes/auth.route");
@@ -14,6 +15,7 @@ const app = express();
 
 // Middlewares
 app.use(express.json()); // To parse JSON
+app.use(cookieParser()); // To parse cookies
 app.use(
   cors({
     origin: "http://localhost:5173", // Allow requests from this origin

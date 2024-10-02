@@ -1,18 +1,18 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useMutation } from "@tanstack/react-query";
-import { MdError, MdCheckCircle, MdOutlineEmail, MdOutlineLock } from "react-icons/md";
-import { FiUser } from "react-icons/fi";
+import { MdError, MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
-import axiosInstance from "../../api/axiosInstance";
+import { useMutation } from "@tanstack/react-query";
+// import { useDispatch, useSelector } from "react-redux";
+// import { requestStart, loginFailure, emailLoginSuccess, resetError } from "../redux/authSlice";
+// import axiosInstance from "../api/axiosInstance";
+import { useEffect, useState } from "react";
 // import GoogleAuth from "../components/GoogleAuth";
 
-// TODO: Turn off auto complete
-
-export default function SignUp() {
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(null);
+export default function SignIn() {
+  // const navigate = useNavigate();
+  // const dispatch = useDispatch();
+  // const { loading, error } = useSelector((state) => state.auth);
   const [passValue, setPassValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,78 +22,52 @@ export default function SignUp() {
     formState: { errors },
   } = useForm();
 
-  // Define the mutation for the signup process
-  const signUpMutation = useMutation({
-    mutationFn: async (formData) => {
-      const res = await axiosInstance.post("/api/auth/signup", formData);
-      console.log(res.data);
-      return res.data;
-    },
-    // onSuccess: (data) => {
-    //   setError(null); // Clear any previous error message
-    //   setSuccess(null); // Clear any previous success message
-    //   if (!data.success) {
-    //     setError(data.message);
-    //   } else {
-    //     setSuccess(data.message);
-    //   }
-    // },
-    // onError: (error) => {
-    //   setError(error.response?.data?.message || "Something went wrong. Please try again.");
-    //   setSuccess(null);
-    // },
-  });
+  // Clear any error message when navigating away from this page
+  // useEffect(() => {
+  //   dispatch(resetError());
+  // }, [dispatch]);
+
+  // Define the mutation for the login process
+  // const SignInMutation = useMutation({
+  //   mutationFn: async (formData) => {
+  //     dispatch(requestStart()); // Dispatch request start action before making API call
+  //     const res = await axiosInstance.post("/api/auth/signin", formData);
+  //     return res.data;
+  //   },
+  //   onSuccess: (data) => {
+  //     console.log("Sign in API Response:", data);
+  //     if (!data.success) {
+  //       dispatch(loginFailure(data.message)); // Dispatch login failure action if login is fail
+  //     } else {
+  //       dispatch(emailLoginSuccess(data)); // Dispatch login success action if login is successful
+  //       localStorage.setItem("accessToken", data.token); // Store the access token in localStorage
+  //       navigate("/"); // Navigate to homepage
+  //     }
+  //   },
+  //   onError: (error) => {
+  //     dispatch(
+  //       loginFailure(error.response?.data?.message || "Some thing went wrong. Please try again")
+  //     ); // Dispatch login failure action on error
+  //   },
+  // });
 
   // Handle form submission
   const onSubmit = async (formData) => {
-    signUpMutation.mutate(formData);
+    // SignInMutation.mutate(formData);
     console.log(formData);
   };
 
   return (
     <main className="min-h-[90vh] max-w-xs mx-auto flex items-center justify-center">
-      <section className="flex flex-col gap-3 justify-center p-4 w-full ">
+      <section className="flex flex-col gap-4 justify-center p-4 w-full ">
         {/* Switch between signup and signin */}
         <div>
-          <p className="text-2xl sm:text-3xl my-1">Sign up</p>
-          <p className="text-sm">Fill in the form to create your account</p>
+          <p className="text-2xl sm:text-3xl">Sign In</p>
+          <p className="text-sm">Fill in the form to access your account</p>
         </div>
 
         {/* Sign up form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-          {/* User name input */}
-          <div
-            className={`flex items-center border rounded ${
-              errors.userName ? "border-red-500" : "border-border"
-            } mt-4 `}
-          >
-            <span className="p-2 text-xl text-text/75">
-              <FiUser />
-            </span>
-            <input
-              type="text"
-              placeholder="User name*"
-              className={`bg-transparent outline-none placeholder:text-text/75 p-2 w-full`}
-              {...register("userName", {
-                required: "User name is required",
-                maxLength: {
-                  value: 24,
-                  message: "User Name can't be more than 24 characters long",
-                },
-                onChange: () => {
-                  setError(null);
-                  setSuccess(null);
-                },
-              })}
-              aria-invalid={errors.userName ? "true" : "false"}
-            />
-          </div>
-          {errors.userName && (
-            <p role="alert" className="text-red-500">
-              {errors.userName.message}
-            </p>
-          )}
-
           {/* Email address input */}
           <div
             className={`flex items-center border rounded ${
@@ -113,10 +87,9 @@ export default function SignUp() {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   message: "Please enter a valid email address",
                 },
-                onChange: () => {
-                  setError(null);
-                  setSuccess(null);
-                },
+                // onChange: () => {
+                //   dispatch(resetError());
+                // },
               })}
               aria-invalid={errors.userEmail ? "true" : "false"}
             />
@@ -127,7 +100,7 @@ export default function SignUp() {
             </p>
           )}
 
-          {/* Create password input */}
+          {/* Verify password input */}
           <div
             className={`flex items-center border rounded ${
               errors.userPassword ? "border-red-500" : "border-border"
@@ -137,8 +110,8 @@ export default function SignUp() {
               <MdOutlineLock />
             </span>
             <input
-              type={`${showPassword ? "tex" : "password"}`}
-              placeholder="Create password*"
+              type={`${showPassword ? "text" : "password"}`}
+              placeholder="Password*"
               className={`bg-transparent outline-none placeholder:text-text/75 p-2 w-full`}
               {...register("userPassword", {
                 required: "Password is required",
@@ -155,9 +128,8 @@ export default function SignUp() {
                   message: "Password must contain at least one letter and one number",
                 },
                 onChange: () => {
-                  setError(null);
-                  setSuccess(null);
                   setPassValue(event.target.value);
+                  // dispatch(resetError());
                 },
               })}
               aria-invalid={errors.userPassword ? "true" : "false"}
@@ -182,41 +154,35 @@ export default function SignUp() {
           )}
 
           {/* Error message */}
-          {error && (
+          {/* {error && (
             <p className="text-primaryWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdError />
               </span>
               <span>{error}</span>
             </p>
-          )}
+          )} */}
 
-          {/* Success message */}
-          {success && (
-            <p className="text-primaryBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
-              <span className="text-xl">
-                <MdCheckCircle />
-              </span>
-              <span>{success}</span>
-            </p>
-          )}
+          <Link to="/forget-password" className="mt-4 text-sm text-blue-500 hover:underline">
+            Forget password?
+          </Link>
 
-          {/* Sign up button */}
+          {/* Sign in button */}
           <button
-            // disabled={signUpMutation.isLoading}
+            // disabled={loading}
             type="submit"
             className="p-2 mt-4 bg-primary hover:bg-primaryHover border-none rounded text-textReversed disabled:bg-disabled disabled:cursor-not-allowed select-none"
           >
-            {/* {signUpMutation.isLoading ? "Loading..." : "Sign up"} */}
-            Sign up
+            {/* {loading ? "Loading..." : "Sign in"} */}
+            Sign in
           </button>
         </form>
 
         <p className="flex  items-center gap-2">
-          <span>Already have an acoount?</span>
+          <span>Don't have an acoount?</span>
           <span>
-            <Link to="/sign-in" className="text-blue-500 hover:underline">
-              sign in here
+            <Link to="/sign-up" className="text-blue-500 hover:underline">
+              sign up here
             </Link>
           </span>
         </p>

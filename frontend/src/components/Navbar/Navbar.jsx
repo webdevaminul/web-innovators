@@ -1,12 +1,40 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Darkmode from "../Darkmode/Darkmode";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
+  const { user, isAuthenticated } = useSelector((state) => state.authUsers);
+  const [profileMenu, setProfileMenu] = useState(false);
+  const profileMenuRef = useRef(null);
+
+  console.log(user);
+
+  // Toggle Profile Menu
+  const toggleProfileMenu = () => {
+    setProfileMenu(!profileMenu);
+    // setMobileMenu(false);
+  };
+
+  // Handle Click Outside Mobile Menu
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
+        setProfileMenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleSignOut = async () => {};
+
   const links = (
     <>
       <li onClick={() => setOpenMenu(false)}>
@@ -125,12 +153,59 @@ const Navbar = () => {
 
           {/* buttons */}
           <div className="flex items-center gap-2 md:gap-3">
-            {/* Registration button */}
-            <button className="sm:py-[6px] p-2 rounded-md bg-primary hover:bg-primaryHover font-semibold">
-              <Link to="/sign-in" className="text-textReversed hover:text-textReversed">
-                Sign In
-              </Link>
-            </button>
+            {/* Profile or Sign in */}
+            {user && isAuthenticated ? (
+              <div ref={profileMenuRef} className="relative">
+                <button onClick={toggleProfileMenu}>
+                  <img
+                    src={user?.userInfo?.userPhoto}
+                    className="h-8 w-8 rounded-full object-center"
+                    loading="lazy"
+                  />
+                </button>
+
+                {profileMenu && (
+                  <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-accentOne p-4 shadow-sm border border-border rounded-xl flex flex-col gap-4">
+                    <div className="">
+                      <p className="whitespace-nowrap">Hi, {user?.userInfo?.userName}</p>
+                      <p className="text-xs ">{user?.userInfo?.userEmail}</p>
+                    </div>
+
+                    <Link
+                      onClick={() => setProfileMenu(false)}
+                      to=""
+                      className="text-sm bg-bg hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                    >
+                      <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                      <span>Dashboard</span>
+                    </Link>
+                    <Link
+                      onClick={() => setProfileMenu(false)}
+                      to=""
+                      className="text-sm bg-bg hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                    >
+                      <span className="text-2xl">{/* <IoOptions /> */}</span>
+                      <span>Manage account</span>
+                    </Link>
+                    <button
+                      onClick={handleSignOut}
+                      className="text-sm bg-secondary hover:bg-secondaryHover text-primaryWhite border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                    >
+                      <span className="text-2xl">{/* <IoExitOutline /> */}</span>
+                      <span>Sign out</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <NavLink
+                to="sign-in"
+                className="border-b-2 border-transparent hover:border-highlight py-2 font-medium w-full sm:w-fit text-highlight text-center sm:text-start flex gap-1 items-center justify-center"
+              >
+                <span className="text-2xl">{/* <IoEnterOutline /> */}</span>
+                <span>Sign In</span>
+              </NavLink>
+            )}
 
             {/* Search button  */}
             <button
