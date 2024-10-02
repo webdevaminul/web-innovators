@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { IoHomeOutline,IoSettingsOutline } from "react-icons/io5";
+import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
 import { TbInvoice } from "react-icons/tb";
-import { HiOutlineUsers,HiOutlinePencilSquare } from "react-icons/hi2";
+import { HiOutlineUsers, HiOutlinePencilSquare } from "react-icons/hi2";
 import { IoIosTrendingUp } from "react-icons/io";
 import { AiOutlineDollar } from "react-icons/ai";
 import { CiLock } from "react-icons/ci";
@@ -9,16 +9,14 @@ import { MdBlock } from "react-icons/md";
 
 const TeacherDashboard = () => {
   return (
-    <div className="antialiased bg-black w-full min-h-screen text-slate-300 relative py-4">
-      <div className="grid grid-cols-12 mx-auto gap-2 sm:gap-4 md:gap-6 lg:gap-10 xl:gap-14 max-w-7xl my-10 px-2">
+    <div className="antialiased w-full text-text relative py-4">
+      <div className="grid grid-cols-12 mx-auto gap-2 sm:gap-4 md:gap-6 lg:gap-10 xl:gap-14 max-w-7xl my-10 px-2 bg-bg">
         <div id="menu" className="bg-white/10 col-span-3 rounded-lg p-4 ">
           <h1 className="font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent">
             Dashboard<span className="text-indigo-400">.</span>
           </h1>
           <p className="text-slate-400 text-sm mb-2">Welcome back,</p>
-          <Link
-            className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2"
-          >
+          <Link className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
             <div>
               <img
                 className="rounded-full w-10 h-10 relative object-cover"
@@ -35,11 +33,9 @@ const TeacherDashboard = () => {
           </Link>
           <hr className="my-2 border-slate-700" />
           <div id="menu" className="flex flex-col space-y-2 my-5">
-            <Link
-              className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-            >
+            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
               <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
-                <div>                  
+                <div>
                   <IoHomeOutline className="w-6 h-6 group-hover:text-indigo-400" />
                 </div>
                 <div>
@@ -52,11 +48,9 @@ const TeacherDashboard = () => {
                 </div>
               </div>
             </Link>
-            <Link
-              className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-            >
+            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
               <div className="relative flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
-                <div>                 
+                <div>
                   <TbInvoice className="w-6 h-6 group-hover:text-indigo-400" />
                 </div>
                 <div>
@@ -72,9 +66,7 @@ const TeacherDashboard = () => {
                 </div>
               </div>
             </Link>
-            <Link
-              className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-            >
+            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
               <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                 <div>
                   <HiOutlineUsers className="w-6 h-6 group-hover:text-indigo-400" />
@@ -89,12 +81,10 @@ const TeacherDashboard = () => {
                 </div>
               </div>
             </Link>
-            <Link
-              className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group"
-            >
+            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
               <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
                 <div>
-                    <IoSettingsOutline className="w-6 h-6 group-hover:text-indigo-400" />                
+                  <IoSettingsOutline className="w-6 h-6 group-hover:text-indigo-400" />
                 </div>
                 <div>
                   <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
@@ -112,6 +102,18 @@ const TeacherDashboard = () => {
           </Link>
         </div>
         <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
+
+        {/* Banner section */}
+        <section className=" md:flex bg-transparent">
+          <div className="banner-text mt-10">
+            <h1 className='text-2xl font-bold text-text'>Welcome to Your Dashboard</h1>
+            <p className='text-text'>Enhance your learning experience with the best courses.</p>
+          </div>
+          <div className="banner-image">
+            <img src="./course_banner01.png" alt="Banner" />
+          </div>
+        </section>
+
           <div id="24h">
             <h1 className="font-bold py-4 uppercase">Last 24h Statistics</h1>
             <div
@@ -130,7 +132,7 @@ const TeacherDashboard = () => {
                     <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
                       <span>+28</span>
                       <span>
-                        <IoIosTrendingUp className="w-6 h-6" />                        
+                        <IoIosTrendingUp className="w-6 h-6" />
                       </span>
                     </p>
                   </div>
@@ -139,7 +141,7 @@ const TeacherDashboard = () => {
               <div className="bg-black/60 p-6 rounded-lg">
                 <div className="flex flex-row space-x-4 items-center">
                   <div id="stats-1">
-                    <AiOutlineDollar className="w-10 h-10 text-white" />                   
+                    <AiOutlineDollar className="w-10 h-10 text-white" />
                   </div>
                   <div>
                     <p className="text-teal-300 text-sm font-medium uppercase leading-4">
@@ -148,7 +150,7 @@ const TeacherDashboard = () => {
                     <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
                       <span>$2,873.88</span>
                       <span>
-                      <IoIosTrendingUp className="w-6 h-6" />  
+                        <IoIosTrendingUp className="w-6 h-6" />
                       </span>
                     </p>
                   </div>
@@ -157,7 +159,7 @@ const TeacherDashboard = () => {
               <div className="bg-black/60 p-6 rounded-lg">
                 <div className="flex flex-row space-x-4 items-center">
                   <div id="stats-1">
-                    <TbInvoice className="w-10 h-10 text-white" />                    
+                    <TbInvoice className="w-10 h-10 text-white" />
                   </div>
                   <div>
                     <p className="text-blue-300 text-sm font-medium uppercase leading-4">
@@ -166,7 +168,7 @@ const TeacherDashboard = () => {
                     <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
                       <span>+79</span>
                       <span>
-                      <IoIosTrendingUp className="w-6 h-6" />  
+                        <IoIosTrendingUp className="w-6 h-6" />
                       </span>
                     </p>
                   </div>
