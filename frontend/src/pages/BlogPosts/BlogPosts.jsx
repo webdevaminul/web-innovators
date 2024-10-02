@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import postsData from '../../../public/BlogPosts.json'; // Ensure the path is correct
 import { FaRegStar } from 'react-icons/fa'; // Example icon from react-icons
@@ -19,6 +18,7 @@ const BlogPosts = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const postsPerPage = 5;
+    const [selectedCategory, setSelectedCategory] = useState('All');
 
     const categories = ['All', ...new Set(postsData.map(post => post.category))];
 
@@ -33,6 +33,7 @@ const BlogPosts = () => {
     }, []);
 
     const filterByCategory = (category) => {
+        setSelectedCategory(category);
         if (category === 'All') {
             setPosts(postsData);
         } else {
@@ -42,6 +43,10 @@ const BlogPosts = () => {
         }
         setSelectedPost(null);
         setCurrentPage(1);
+    };
+
+    const handleCategoryChange = (event) => {
+        filterByCategory(event.target.value);
     };
 
     const handleLatestPostClick = (post) => {
@@ -61,24 +66,25 @@ const BlogPosts = () => {
     };
 
     return (
-        <div className="bg-white text-gray-800 min-h-screen">
+        <div className="bg-white text-gray-800 min-h-screen overflow-hidden">
             <div className="container mx-auto grid grid-cols-12 gap-6 p-6">
+
                 {/* Categories Section (Visible on Small and Medium Devices) */}
-                <div className="col-span-full lg:col-span-4 flex flex-col space-y-6 lg:hidden">
+                <div className="col-span-full lg:hidden relative z-10">
                     <div className="bg-gray-100 p-4 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-2">Categories</h2>
-                        <div className="grid grid-cols-2 gap-2">
+                        <select
+                            value={selectedCategory}
+                            onChange={handleCategoryChange}
+                            className="border border-gray-300 rounded-lg p-2 w-full max-w-xs appearance-none bg-white text-gray-800 focus:outline-none focus:ring focus:ring-violet-400"
+                            style={{ zIndex: 20 }} // Ensure dropdown appears above other elements
+                        >
                             {categories.map((category) => (
-                                <span
-                                    key={category}
-                                    className="flex items-center px-3 py-2 mb-2 text-sm rounded-full bg-violet-400 text-gray-900 cursor-pointer transform transition duration-200 hover:bg-violet-500 hover:scale-105 shadow-md"
-                                    onClick={() => filterByCategory(category)}
-                                >
-                                    <FaRegStar className="mr-2" />
+                                <option key={category} value={category}>
                                     {category}
-                                </span>
+                                </option>
                             ))}
-                        </div>
+                        </select>
                     </div>
                 </div>
 
@@ -134,39 +140,7 @@ const BlogPosts = () => {
                     ))}
                 </div>
 
-                {/* Pagination Controls */}
-                <div className="col-span-full flex flex-col  my-4">
-                    <div className="flex flex-wrap  justify-start mb-2">
-                        <button
-                            className="mx-1 mb-1 px-4 py-2 bg-violet-500 text-white rounded-lg"
-                            onClick={() => handlePageChange(currentPage - 1)}
-                            disabled={currentPage === 1}
-                        >
-                            Previous
-                        </button>
-                        <div className="flex items-center space-x-1 mb-1">
-                            {Array.from({ length: totalPages }, (_, index) => (
-                                <button
-                                    key={index + 1}
-                                    className={`mx-1 px-3 py-2 rounded-lg ${currentPage === index + 1 ? 'bg-violet-500 text-white' : 'bg-gray-200 text-gray-800 hover:bg-violet-400 hover:text-white'}`}
-                                    onClick={() => handlePageChange(index + 1)}
-                                >
-                                    {index + 1}
-                                </button>
-                            ))}
-                        </div>
-                        <button
-                            className="mx-1 mb-1 px-4 py-2 bg-violet-500 text-white rounded-lg"
-                            onClick={() => handlePageChange(currentPage + 1)}
-                            disabled={currentPage === totalPages}
-                        >
-                            Next
-                        </button>
-                    </div>
-                    
-                </div>
-
-                {/* Latest Posts Section (Only visible on Small and Medium Devices) */}
+                {/* Latest Posts Section (Visible on Small and Medium Devices) */}
                 <div className="col-span-full lg:hidden">
                     <div className="bg-gray-100 p-4 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-4">Latest Posts</h2>
@@ -184,40 +158,52 @@ const BlogPosts = () => {
                     {/* Categories Section */}
                     <div className="bg-gray-100 p-4 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-2">Categories</h2>
-                        <div className="grid grid-cols-2 gap-2">
+                        <select
+                            value={selectedCategory}
+                            onChange={handleCategoryChange}
+                            className="border border-gray-300 rounded-lg p-2 w-full appearance-none bg-white text-gray-800 focus:outline-none focus:ring focus:ring-violet-400"
+                        >
                             {categories.map((category) => (
-                                <span
-                                    key={category}
-                                    className="flex items-center px-3 py-2 mb-2 text-sm rounded-full bg-violet-400 text-gray-900 cursor-pointer transform transition duration-200 hover:bg-violet-500 hover:scale-105 shadow-md"
-                                    onClick={() => filterByCategory(category)}
-                                >
-                                    <FaRegStar className="mr-2" />
+                                <option key={category} value={category}>
                                     {category}
-                                </span>
+                                </option>
                             ))}
-                        </div>
+                        </select>
                     </div>
 
                     {/* Latest Posts Section */}
-                    <div className="bg-gray-100 p-4 rounded-lg shadow-md">
+                    <div className="bg-gray-100 h-screen p-4 rounded-lg shadow-md">
                         <h2 className="text-xl font-semibold mb-4">Latest Posts</h2>
                         {latestPosts.map((latestPost) => (
-                            <div key={latestPost.id} className="mb-0" onClick={() => handleLatestPostClick(latestPost)}>
+                            <div key={latestPost.id} className="mb-4" onClick={() => handleLatestPostClick(latestPost)}>
                                 <h3 className="text-lg font-semibold">{latestPost.contentTitle}</h3>
                                 <span className="text-xs text-gray-600">{latestPost.date}</span>
                             </div>
                         ))}
                     </div>
                 </div>
+
             </div>
 
-            {/* Modal for displaying the full post */}
-            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} post={selectedPost} />
+            {/* Pagination Section */}
+            <div className="flex justify-center mt-8 pb-8">
+                {Array.from({ length: totalPages }, (_, i) => (
+                    <button
+                        key={i}
+                        onClick={() => handlePageChange(i + 1)}
+                        className={`mx-1 px-4 py-2 rounded-lg ${currentPage === i + 1 ? 'bg-violet-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                    >
+                        {i + 1}
+                    </button>
+                ))}
+            </div>
+
+            {/* Modal for Selected Post */}
+            {isModalOpen && (
+                <Modal post={selectedPost} onClose={() => setIsModalOpen(false)} />
+            )}
         </div>
     );
 };
 
 export default BlogPosts;
-
-
-
