@@ -15,15 +15,20 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/course-details" className="text-nowrap">
-          Pricing
+        <NavLink to="/blog" className="text-nowrap">
+          Blog
         </NavLink>
       </li>
 
       {/* <li><NavLink to="/about">About</NavLink></li> */}
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/contact" className="text-nowrap">
+        <NavLink to="/contactUs" className="text-nowrap">
           Contact
+        </NavLink>
+      </li>
+      <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/become-instructor" className="text-nowrap">
+          Become an Instructor
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
