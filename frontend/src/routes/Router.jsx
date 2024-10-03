@@ -9,6 +9,7 @@ import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
+import Profile from "../pages/TeacherDashboard/Profile";
 
 const router = createBrowserRouter([
   {
@@ -56,6 +57,12 @@ const router = createBrowserRouter([
   {
     path: "/teacher-dashboard",
     element: <TeacherDashboard />,
+    children : [
+      {
+        path : "profile",
+        element : <Profile />
+      },
+    ]
   },
 ]);
 export default router;

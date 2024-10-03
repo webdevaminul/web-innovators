@@ -1,249 +1,441 @@
 import { Link } from "react-router-dom";
 import { IoHomeOutline, IoSettingsOutline } from "react-icons/io5";
-import { TbInvoice } from "react-icons/tb";
-import { HiOutlineUsers, HiOutlinePencilSquare } from "react-icons/hi2";
+import { MdOutlineNotificationsActive } from "react-icons/md";
+import { PiSignInThin } from "react-icons/pi";
+import { HiOutlineUsers , HiBars3 } from "react-icons/hi2";
+import { FiUserPlus } from "react-icons/fi";
 import { IoIosTrendingUp } from "react-icons/io";
 import { AiOutlineDollar } from "react-icons/ai";
-import { CiLock } from "react-icons/ci";
-import { MdBlock } from "react-icons/md";
+import { BsCheck2 ,BsThreeDotsVertical} from "react-icons/bs";
+// import { useState } from "react";
 
 const TeacherDashboard = () => {
+  // const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  // const toggleDrawer = () => {
+  //   setIsDrawerOpen(!isDrawerOpen);
+  // };
+
   return (
-    <div className="antialiased w-full text-text relative py-4">
-      <div className="grid grid-cols-12 mx-auto gap-2 sm:gap-4 md:gap-6 lg:gap-10 xl:gap-14 max-w-7xl my-10 px-2 bg-bg">
-        <div id="menu" className="bg-white/10 col-span-3 rounded-lg p-4 ">
-          <h1 className="font-bold text-lg lg:text-3xl bg-gradient-to-br from-white via-white/50 to-transparent bg-clip-text text-transparent">
-            Dashboard<span className="text-indigo-400">.</span>
-          </h1>
-          <p className="text-slate-400 text-sm mb-2">Welcome back,</p>
-          <Link className="flex flex-col space-y-2 md:space-y-0 md:flex-row mb-5 items-center md:space-x-2 hover:bg-white/10 group transition duration-150 ease-linear rounded-lg group w-full py-3 px-2">
-            <div>
-              <img
-                className="rounded-full w-10 h-10 relative object-cover"
-                src="https://img.freepik.com/free-photo/no-problem-concept-bearded-man-makes-okay-gesture-has-everything-control-all-fine-gesture-wears-spectacles-jumper-poses-against-pink-wall-says-i-got-this-guarantees-something_273609-42817.jpg?w=1800&t=st=1669749937~exp=1669750537~hmac=4c5ab249387d44d91df18065e1e33956daab805bee4638c7fdbf83c73d62f125"
-                alt
-              />
-            </div>
-            <div>
-              <p className="font-medium group-hover:text-indigo-400 leading-4">
-                Jim Smith
-              </p>
-              <span className="text-xs text-slate-400">Pantazi LLC</span>
-            </div>
+    <div className="min-h-screen bg-white">
+      <aside className="bg-bg -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
+        <div className="relative">
+          <Link className="flex items-center gap-4 py-6 px-8">
+            <h6 className="block antialiased font-bai font-semibold text-white">
+              Teacher Dashboard
+            </h6>
           </Link>
-          <hr className="my-2 border-slate-700" />
-          <div id="menu" className="flex flex-col space-y-2 my-5">
-            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
-              <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
-                <div>
-                  <IoHomeOutline className="w-6 h-6 group-hover:text-indigo-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
-                    Dashboard
-                  </p>
-                  <p className="text-slate-400 text-sm hidden md:block">
-                    Data overview
-                  </p>
-                </div>
-              </div>
-            </Link>
-            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
-              <div className="relative flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
-                <div>
-                  <TbInvoice className="w-6 h-6 group-hover:text-indigo-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
-                    Invoices
-                  </p>
-                  <p className="text-slate-400 text-sm hidden md:block">
-                    Manage invoices
-                  </p>
-                </div>
-                <div className="absolute -top-3 -right-3 md:top-0 md:right-0 px-2 py-1.5 rounded-full bg-indigo-800 text-xs font-mono font-bold">
-                  23
-                </div>
-              </div>
-            </Link>
-            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
-              <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
-                <div>
-                  <HiOutlineUsers className="w-6 h-6 group-hover:text-indigo-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
-                    Users
-                  </p>
-                  <p className="text-slate-400 text-sm hidden md:block">
-                    Manage users
-                  </p>
-                </div>
-              </div>
-            </Link>
-            <Link className="hover:bg-white/10 transition duration-150 ease-linear rounded-lg py-3 px-2 group">
-              <div className="flex flex-col space-y-2 md:flex-row md:space-y-0 space-x-2 items-center">
-                <div>
-                  <IoSettingsOutline className="w-6 h-6 group-hover:text-indigo-400" />
-                </div>
-                <div>
-                  <p className="font-bold text-base lg:text-lg text-slate-200 leading-4 group-hover:text-indigo-400">
-                    Settings
-                  </p>
-                  <p className="text-slate-400 text-sm hidden md:block">
-                    Edit settings
-                  </p>
-                </div>
-              </div>
-            </Link>
-          </div>
-          <Link to="/" className="text-sm text-center font-bai">
-            Home
-          </Link>
+          <button
+            className="middle none font-medium text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-white hover:bg-white/10 active:bg-white/30 absolute right-0 top-0 grid rounded-br-none rounded-tl-none xl:hidden"
+            type="button"
+          >
+            <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+              <HiBars3 className="h-5 w-5 text-white" />
+            </span>
+          </button>
         </div>
-        <div id="content" className="bg-white/10 col-span-9 rounded-lg p-6">
-
-        {/* Banner section */}
-        <section className=" md:flex bg-transparent">
-          <div className="banner-text mt-10">
-            <h1 className='text-2xl font-bold text-text'>Welcome to Your Dashboard</h1>
-            <p className='text-text'>Enhance your learning experience with the best courses.</p>
-          </div>
-          <div className="banner-image">
-            <img src="./course_banner01.png" alt="Banner" />
-          </div>
-        </section>
-
-          <div id="24h">
-            <h1 className="font-bold py-4 uppercase">Last 24h Statistics</h1>
-            <div
-              id="stats"
-              className="grid gird-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-            >
-              <div className="bg-black/60 to-white/5 p-6 rounded-lg">
-                <div className="flex flex-row space-x-4 items-center">
-                  <div id="stats-1">
-                    <HiOutlineUsers className="w-10 h-10 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-indigo-300 text-sm font-medium uppercase leading-4">
-                      Users
+        <div className="m-4">
+          <ul className="mb-4 flex flex-col gap-1">
+            <li>
+              <Link className="active">
+              <button
+                  className="font-bai transition-all py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md hover:shadow-lg hover:shadow-blue-500/40 w-full flex items-center gap-4 px-4"
+                  type="button"
+                >
+                  <IoHomeOutline className="w-5 h-5" />
+                  <p className="block font-bai text-base text-inherit font-medium">
+                    dashboard
+                  </p>
+                </button>
+              </Link>
+            </li>
+            <li>
+              <Link to="/teacher-dashboard/profile" >
+                <button
+                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  type="button"
+                >
+                  <HiOutlineUsers className="w-5 h-5" />                 
+                  <p className="block antialiased font-bai text-base leading-relaxed text-inherit font-medium capitalize">
+                    profile
+                  </p>
+                </button>
+              </Link>
+            </li>
+            <li>
+              <a className href="#">
+                <button
+                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  type="button"
+                >
+                  <MdOutlineNotificationsActive className="w-5 h-5" />
+                  <p className="block antialiased font-bai text-base leading-relaxed text-inherit font-medium capitalize">
+                    notifactions
+                  </p>
+                </button>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+      <div className="p-4 xl:ml-80">
+        <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
+          <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
+            <div className="capitalize">
+              <nav aria-label="breadcrumb" className="w-max">
+                <ol className="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all">
+                  <li className="flex items-center text-blue-gray-900 antialiased font-bai text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
+                    <a href="#">
+                      <p className="block antialiased font-bai text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">
+                        dashboard
+                      </p>
+                    </a>
+                    <span className="text-gray-500 text-sm antialiased font-bai font-normal leading-normal mx-2 pointer-events-none select-none">
+                      /
+                    </span>
+                  </li>
+                  <li className="flex items-center text-blue-900 antialiased font-bai text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-blue-500">
+                    <p className="block antialiased font-bai text-sm leading-normal text-blue-gray-900 font-normal">
+                      home
                     </p>
-                    <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                      <span>+28</span>
-                      <span>
-                        <IoIosTrendingUp className="w-6 h-6" />
-                      </span>
-                    </p>
-                  </div>
+                  </li>
+                </ol>
+              </nav>
+              <h6 className="block antialiased tracking-normal font-bai text-base font-semibold leading-relaxed text-gray-900">
+                home
+              </h6>
+            </div>
+            <div className="flex items-center">
+              <div className="mr-auto md:mr-4 md:w-56">
+                <div className="relative w-full min-w-[200px] h-10">
+                  <input
+                    className="peer w-full h-full bg-transparent text-gray-700 font-bai font-normal outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 border focus:border-2 border-t-transparent focus:border-t-transparent text-sm px-3 py-2.5 rounded-[7px] border-blue-gray-200 focus:border-blue-500"
+                    placeholder=" "
+                  />
+                  <label className="flex w-full h-full select-none pointer-events-none absolute left-0 font-normal peer-placeholder-shown:text-gray-500 leading-tight peer-focus:leading-tight peer-disabled:text-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500 transition-all -top-1.5 peer-placeholder-shown:text-sm text-[11px] peer-focus:text-[11px] before:content[' '] before:block before:box-border before:w-2.5 before:h-1.5 before:mt-[6.5px] before:mr-1 peer-placeholder-shown:before:border-transparent before:rounded-tl-md before:border-t peer-focus:before:border-t-2 before:border-l peer-focus:before:border-l-2 before:pointer-events-none before:transition-all peer-disabled:before:border-transparent after:content[' '] after:block after:flex-grow after:box-border after:w-2.5 after:h-1.5 after:mt-[6.5px] after:ml-1 peer-placeholder-shown:after:border-transparent after:rounded-tr-md after:border-t peer-focus:after:border-t-2 after:border-r peer-focus:after:border-r-2 after:pointer-events-none after:transition-all peer-disabled:after:border-transparent peer-placeholder-shown:leading-[3.75] text-blue-gray-400 peer-focus:text-blue-500 before:border-blue-gray-200 peer-focus:before:border-blue-500 after:border-blue-gray-200 peer-focus:after:border-blue-500">
+                    Type here
+                  </label>
                 </div>
               </div>
-              <div className="bg-black/60 p-6 rounded-lg">
-                <div className="flex flex-row space-x-4 items-center">
-                  <div id="stats-1">
-                    <AiOutlineDollar className="w-10 h-10 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-teal-300 text-sm font-medium uppercase leading-4">
-                      Income
-                    </p>
-                    <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                      <span>$2,873.88</span>
-                      <span>
-                        <IoIosTrendingUp className="w-6 h-6" />
-                      </span>
-                    </p>
-                  </div>
-                </div>
+              <button
+                className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden"
+                type="button"
+              >
+                <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                  <HiBars3 className="w-5 h-5" />
+                </span>
+              </button>
+              <a href="#">
+                <button
+                  className="middle none font-bai font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex"
+                  type="button"
+                >
+                  <HiOutlineUsers className="w-5 h-5" />
+                  Sign In{" "}
+                </button>
+                <button
+                  className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden"
+                  type="button"
+                >
+                  <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                  <IoSettingsOutline className="w-5 h-5" />
+                  </span>
+                </button>
+              </a>
+              <button
+                className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30"
+                type="button"
+              >
+                <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                  <MdOutlineNotificationsActive className="w-5 h-5" />
+                </span>
+              </button>
+            </div>
+          </div>
+        </nav>
+        <div className="mt-12">
+          <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4">
+            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
+              <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-blue-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+              <AiOutlineDollar className="w-5 h-5" />
               </div>
-              <div className="bg-black/60 p-6 rounded-lg">
-                <div className="flex flex-row space-x-4 items-center">
-                  <div id="stats-1">
-                    <TbInvoice className="w-10 h-10 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-blue-300 text-sm font-medium uppercase leading-4">
-                      Invoices
-                    </p>
-                    <p className="text-white font-bold text-2xl inline-flex items-center space-x-2">
-                      <span>+79</span>
-                      <span>
-                        <IoIosTrendingUp className="w-6 h-6" />
-                      </span>
-                    </p>
-                  </div>
-                </div>
+              <div className="p-4 text-right">
+                <p className="block antialiased font-bai text-sm leading-normal font-normal text-blue-gray-600">
+                  Today s Money
+                </p>
+                <h4 className="block antialiased tracking-normal font-bai text-2xl font-semibold leading-snug text-blue-gray-900">
+                  $53k
+                </h4>
+              </div>
+              <div className="border-t border-blue-gray-50 p-4">
+                <p className="block antialiased font-bai text-base leading-relaxed font-normal text-blue-gray-600">
+                  <strong className="text-green-500">+55%</strong>&nbsp;than
+                  last week
+                </p>
+              </div>
+            </div>
+            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
+              <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-pink-600 to-pink-400 text-white shadow-pink-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+              <HiOutlineUsers className="w-5 h-5" />
+              </div>
+              <div className="p-4 text-right">
+                <p className="block antialiased font-bai text-sm leading-normal font-normal text-blue-gray-600">
+                  Today s Users
+                </p>
+                <h4 className="block antialiased tracking-normal font-bai text-2xl font-semibold leading-snug text-blue-gray-900">
+                  2,300
+                </h4>
+              </div>
+              <div className="border-t border-blue-gray-50 p-4">
+                <p className="block antialiased font-bai text-base leading-relaxed font-normal text-blue-gray-600">
+                  <strong className="text-green-500">+3%</strong>&nbsp;than last
+                  month
+                </p>
+              </div>
+            </div>
+            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
+              <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-green-600 to-green-400 text-white shadow-green-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+              <HiOutlineUsers className="w-5 h-5" />
+              </div>
+              <div className="p-4 text-right">
+                <p className="block antialiased font-bai text-sm leading-normal font-normal text-blue-gray-600">
+                  New Clients
+                </p>
+                <h4 className="block antialiased tracking-normal font-bai text-2xl font-semibold leading-snug text-blue-gray-900">
+                  3,462
+                </h4>
+              </div>
+              <div className="border-t border-blue-gray-50 p-4">
+                <p className="block antialiased font-bai text-base leading-relaxed font-normal text-blue-gray-600">
+                  <strong className="text-red-500">-2%</strong>&nbsp;than
+                  yesterday
+                </p>
+              </div>
+            </div>
+            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
+              <div className="bg-clip-border mx-4 rounded-xl overflow-hidden bg-gradient-to-tr from-orange-600 to-orange-400 text-white shadow-orange-500/40 shadow-lg absolute -mt-4 grid h-16 w-16 place-items-center">
+              <IoIosTrendingUp className="w-5 h-5" />
+              </div>
+              <div className="p-4 text-right">
+                <p className="block antialiased font-bai text-sm leading-normal font-normal text-blue-gray-600">
+                  Sales
+                </p>
+                <h4 className="block antialiased tracking-normal font-bai text-2xl font-semibold leading-snug text-blue-gray-900">
+                  $103,430
+                </h4>
+              </div>
+              <div className="border-t border-blue-gray-50 p-4">
+                <p className="block antialiased font-bai text-base leading-relaxed font-normal text-blue-gray-600">
+                  <strong className="text-green-500">+5%</strong>&nbsp;than
+                  yesterday
+                </p>
               </div>
             </div>
           </div>
-          <div id="last-users">
-            <h1 className="font-bold py-4 uppercase">Last 24h users</h1>
-            <div className="overflow-x-scroll">
-              <table className="w-full whitespace-nowrap">
-                <thead className="bg-black/60">
-                  <tr>
-                    <th className="text-left py-3 px-2 rounded-l-lg">Name</th>
-                    <th className="text-left py-3 px-2">Email</th>
-                    <th className="text-left py-3 px-2">Group</th>
-                    <th className="text-left py-3 px-2">Status</th>
-                    <th className="text-left py-3 px-2 rounded-r-lg">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b border-gray-700">
-                    <td className="py-3 px-2 font-bold">
-                      <div className="inline-flex space-x-3 items-center">
-                        <span>
-                          <img
-                            className="rounded-full w-8 h-8"
-                            src="https://images.generated.photos/tGiLEDiAbS6NdHAXAjCfpKoW05x2nq70NGmxjxzT5aU/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTM4ODM1LmpwZw.jpg"
-                            alt
-                          />
-                        </span>
-                        <span>Thai Mei</span>
-                      </div>
-                    </td>
-                    <td className="py-3 px-2">thai.mei@abc.com</td>
-                    <td className="py-3 px-2">User</td>
-                    <td className="py-3 px-2">Approved</td>
-                    <td className="py-3 px-2">
-                      <div className="inline-flex items-center space-x-3">
-                        <HiOutlinePencilSquare className="w-5 h-5" />
-                        <CiLock className="w-5 h-5" />
-                        <MdBlock className="w-5 h-5" />
-                      </div>
-                    </td>
-                  </tr>
-                  <tr className="border-b border-gray-700">
-                    <td className="py-3 px-2 font-bold">
-                      <div className="inline-flex space-x-3 items-center">
-                        <span>
-                          <img
-                            className="rounded-full w-8 h-8"
-                            src="https://images.generated.photos/tGiLEDiAbS6NdHAXAjCfpKoW05x2nq70NGmxjxzT5aU/rs:fit:256:256/czM6Ly9pY29uczgu/Z3Bob3Rvcy1wcm9k/LnBob3Rvcy92M18w/OTM4ODM1LmpwZw.jpg"
-                            alt
-                          />
-                        </span>
-                        <span>Thai Mei</span>
-                      </div>
-                    </td>
-                    <td className="py-3 px-2">thai.mei@abc.com</td>
-                    <td className="py-3 px-2">User</td>
-                    <td className="py-3 px-2">Approved</td>
-                    <td className="py-3 px-2">
-                      <div className="inline-flex items-center space-x-3">
-                        <HiOutlinePencilSquare className="w-5 h-5" />
-                        <CiLock className="w-5 h-5" />
-                        <MdBlock className="w-5 h-5" />
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
+            <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md overflow-hidden xl:col-span-2">
+              <div className="relative bg-clip-border rounded-xl overflow-hidden bg-transparent text-gray-700 shadow-none m-0 flex items-center justify-between p-6">
+                <div>
+                  <h6 className="block antialiased tracking-normal font-bai text-base font-semibold leading-relaxed text-blue-gray-900 mb-1">
+                    Projects
+                  </h6>
+                  <p className="antialiased font-bai text-sm leading-normal flex items-center gap-1 font-normal text-blue-gray-600">
+                    <BsCheck2 className="h-5 w-5" />
+                    <strong>30 done</strong> this month
+                  </p>
+                </div>
+                <button
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  id=":r5:"
+                  className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30"
+                  type="button"
+                >
+                  <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                 <BsThreeDotsVertical className="w-5 h-5" />
+                  </span>
+                </button>
+              </div>
+              <div className="p-6 overflow-x-scroll px-0 pt-0 pb-2">
+                <table className="w-full min-w-[640px] table-auto">
+                  <thead>
+                    <tr>
+                      <th className="border-b border-blue-gray-50 py-3 px-6 text-left">
+                        <p className="block antialiased font-bai text-[11px] font-medium uppercase text-blue-gray-400">
+                          companies
+                        </p>
+                      </th>
+                      <th className="border-b border-blue-gray-50 py-3 px-6 text-left">
+                        <p className="block antialiased font-bai text-[11px] font-medium uppercase text-blue-gray-400">
+                          budget
+                        </p>
+                      </th>
+                      <th className="border-b border-blue-gray-50 py-3 px-6 text-left">
+                        <p className="block antialiased font-bai text-[11px] font-medium uppercase text-blue-gray-400">
+                          completion
+                        </p>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="flex items-center gap-4">
+                          <p className="block antialiased font-bai text-sm leading-normal text-blue-gray-900 font-bold">
+                            Material XD Version
+                          </p>
+                        </div>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <p className="block antialiased font-bai text-xs font-medium text-blue-gray-600">
+                          $14,000
+                        </p>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="w-10/12">
+                          <p className="antialiased font-bai mb-1 block text-xs font-medium text-blue-gray-600">
+                            60%
+                          </p>
+                          <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
+                            <div
+                              className="flex justify-center items-center h-full bg-gradient-to-tr from-blue-600 to-blue-400 text-white"
+                              style={{ width: "60%" }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="flex items-center gap-4">
+                          <p className="block antialiased font-bai text-sm leading-normal text-blue-gray-900 font-bold">
+                            Add Progress Track
+                          </p>
+                        </div>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <p className="block antialiased font-bai text-xs font-medium text-blue-gray-600">
+                          $3,000
+                        </p>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="w-10/12">
+                          <p className="antialiased font-bai mb-1 block text-xs font-medium text-blue-gray-600">
+                            10%
+                          </p>
+                          <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
+                            <div
+                              className="flex justify-center items-center h-full bg-gradient-to-tr from-blue-600 to-blue-400 text-white"
+                              style={{ width: "10%" }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="flex items-center gap-4">
+                          <p className="block antialiased font-bai text-sm leading-normal text-blue-gray-900 font-bold">
+                            Fix Platform Errors
+                          </p>
+                        </div>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <p className="block antialiased font-bai text-xs font-medium text-blue-gray-600">
+                          Not set
+                        </p>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="w-10/12">
+                          <p className="antialiased font-bai mb-1 block text-xs font-medium text-blue-gray-600">
+                            100%
+                          </p>
+                          <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
+                            <div
+                              className="flex justify-center items-center h-full bg-gradient-to-tr from-green-600 to-green-400 text-white"
+                              style={{ width: "100%" }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="flex items-center gap-4">
+                          <p className="block antialiased font-bai text-sm leading-normal text-blue-gray-900 font-bold">
+                            Launch our Mobile App
+                          </p>
+                        </div>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <p className="block antialiased font-bai text-xs font-medium text-blue-gray-600">
+                          $20,500
+                        </p>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="w-10/12">
+                          <p className="antialiased font-bai mb-1 block text-xs font-medium text-blue-gray-600">
+                            100%
+                          </p>
+                          <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
+                            <div
+                              className="flex justify-center items-center h-full bg-gradient-to-tr from-green-600 to-green-400 text-white"
+                              style={{ width: "100%" }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="flex items-center gap-4">
+                          <p className="block antialiased font-bai text-sm leading-normal text-blue-gray-900 font-bold">
+                            Add the New Pricing Page
+                          </p>
+                        </div>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <p className="block antialiased font-bai text-xs font-medium text-blue-gray-600">
+                          $500
+                        </p>
+                      </td>
+                      <td className="py-3 px-5 border-b border-blue-gray-50">
+                        <div className="w-10/12">
+                          <p className="antialiased font-bai mb-1 block text-xs font-medium text-blue-gray-600">
+                            25%
+                          </p>
+                          <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
+                            <div
+                              className="flex justify-center items-center h-full bg-gradient-to-tr from-blue-600 to-blue-400 text-white"
+                              style={{ width: "25%" }}
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
+        </div>
+        <div className="text-blue-gray-600">
+          <footer className="py-2">
+            <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
+              <p className="block antialiased font-bai text-sm leading-normal font-normal text-inherit">
+                © 2023, made with{" "}
+                by{" "}
+                <a
+                  href="/"
+                  target="_blank"
+                  className="transition-colors hover:text-blue-500"
+                >
+                 Learn Up
+                </a>{" "}
+                for a better web.{" "}
+              </p>
+            </div>
+          </footer>
         </div>
       </div>
     </div>
