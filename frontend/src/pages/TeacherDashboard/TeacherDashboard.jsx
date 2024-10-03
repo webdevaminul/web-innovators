@@ -1,15 +1,11 @@
 import { HiBars3, HiOutlineUsers } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegPenToSquare } from "react-icons/fa6";
 
 const TeacherDashboard = () => {
-  const location = useLocation();
-  const pathname = location?.pathname;
-  console.log(pathname);
-
   return (
     <div className="min-h-screen bg-white">
       <aside className="bg-bg -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">

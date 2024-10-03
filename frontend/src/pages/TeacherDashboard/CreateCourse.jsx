@@ -1,11 +1,15 @@
 const CreateCourse = () => {
+  const handleCreateCourse = (e) => {
+    e.preventDefault();
+    console.log("paici");
+  };
   return (
     <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg">
       <div className="mt-10 text-center font-bold">Upload Course</div>
       <div className="mt-3 text-center text-4xl font-bold">
         Share your experiene for student
       </div>
-      <div className="p-8">
+      <form onSubmit={handleCreateCourse} className="p-8">
         <div className="flex gap-4">
           <input
             type="Name"
@@ -49,11 +53,14 @@ const CreateCourse = () => {
           />
         </div>
         <div className="text-center">
-          <a className="cursor-pointer rounded-lg bg-blue-700 px-8 py-5 text-sm font-semibold text-white">
+          <button
+            type="submit"
+            className="cursor-pointer rounded-lg bg-blue-700 px-8 py-5 text-sm font-semibold text-white"
+          >
             Submit
-          </a>
+          </button>
         </div>
-      </div>
+      </form>
     </div>
   );
 };
