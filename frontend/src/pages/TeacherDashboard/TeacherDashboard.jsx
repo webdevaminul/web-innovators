@@ -1,10 +1,15 @@
 import { HiBars3, HiOutlineUsers } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
+import { FaRegPenToSquare } from "react-icons/fa6";
 
 const TeacherDashboard = () => {
+  const location = useLocation();
+  const pathname = location?.pathname;
+  console.log(pathname);
+
   return (
     <div className="min-h-screen bg-white">
       <aside className="bg-bg -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
@@ -52,17 +57,17 @@ const TeacherDashboard = () => {
               </Link>
             </li>
             <li>
-              <a className href="#">
+              <Link className to="/teacher-dashboard/create-course">
                 <button
                   className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
                 >
-                  <MdOutlineNotificationsActive className="w-5 h-5" />
+                  <FaRegPenToSquare className="w-5 h-5" />
                   <p className="block antialiased font-bai text-base leading-relaxed text-inherit font-medium capitalize">
-                    notifactions
+                    Create a course
                   </p>
                 </button>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -132,7 +137,7 @@ const TeacherDashboard = () => {
             </div>
           </div>
         </nav>
-        <Outlet/>
+        <Outlet />
         <div className="text-blue-gray-600">
           <footer className="py-2">
             <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">

@@ -11,6 +11,7 @@ import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
 import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile";
 import TeacherHome from "../pages/TeacherDashboard/TeacherHome";
+import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
       {
         path : "teacher-profile",
         element : <TeacherProfile />
+      },
+      {
+        path : "/teacher-dashboard/create-course",
+        element : <CreateCourse />
       },
     ]
   },
