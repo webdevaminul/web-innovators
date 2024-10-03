@@ -1,5 +1,5 @@
 
-const Profile = () => {
+const TeacherProfile = () => {
     return (
         <div>
             <h1>home</h1>
@@ -7,4 +7,4 @@ const Profile = () => {
     );
 };
 
-export default Profile;
+export default TeacherProfile;

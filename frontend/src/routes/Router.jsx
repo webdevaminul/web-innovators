@@ -9,7 +9,8 @@ import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
-import Profile from "../pages/TeacherDashboard/Profile";
+import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile";
+import TeacherHome from "../pages/TeacherDashboard/TeacherHome";
 
 const router = createBrowserRouter([
   {
@@ -55,12 +56,16 @@ const router = createBrowserRouter([
     element: <UserDashbroad />,
   },
   {
-    path: "/teacher-dashboard",
+    path: "teacher-dashboard",
     element: <TeacherDashboard />,
     children : [
       {
-        path : "profile",
-        element : <Profile />
+        index :true ,
+        element : <TeacherHome />
+      },
+      {
+        path : "teacher-profile",
+        element : <TeacherProfile />
       },
     ]
   },
