@@ -41,7 +41,7 @@
     --text-reversed: 18, 18, 18; /* Black text color */
     --primary-color: 85, 157, 216; /* Primary link color */
     --primary-hover-color: 58, 116, 171; /* Primary link hover */
-    --secondary-color: 230, 153, 51; /* Primary button/Action/Hightlight color */
+    --secondary-color: 240, 138, 36; /* Primary button/Action/Hightlight color */
     --secondary-hover-color: 199, 123, 26; /* Primary button/Action/Hightlight hover color */
 
     --link-color: 85, 157, 216; /* Link color */
@@ -60,6 +60,25 @@
     --placeholder-color: 169, 169, 169; /* Placeholder text color */
   }
 
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  svg,
+  button,
+  table,
+  thead,
+  th,
+  tr,
+  td {
+    @apply transition-none duration-0 !important;
+  }
+
   /* Apply styles to elements */
   h1,
   h2,
@@ -68,7 +87,8 @@
   h5,
   h6,
   p,
-  button {
+  button,
+  input {
     color: rgb(var(--text-color));
   }
 
