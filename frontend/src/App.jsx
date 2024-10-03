@@ -9,7 +9,7 @@ function App() {
   return (
     <main>
       <Navbar />
-      <main className="mt-[5rem]">
+      <main className="mt-[3.8rem]">
         <Outlet />
         <Footer></Footer>
       </main>

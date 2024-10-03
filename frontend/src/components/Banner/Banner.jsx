@@ -63,7 +63,7 @@ const Banner = () => {
       style={{ backgroundImage: `url(${bannerImage})` }}
       className="bg-cover bg-center bg-no-repeat px-3"
     >
-      <section className="relative w-full md:min-h-[calc(100vh-5rem)] container mx-auto flex flex-col justify-evenly gap-4 font-bai">
+      <section className="relative w-full md:min-h-[calc(100vh-3.8rem)] container mx-auto flex flex-col justify-evenly gap-4 font-bai">
         {/* Left Side Text */}
         <div className="rounded-lg max-w-2xl font-roboto mt-10 md:mt-0">
           <h2 className="text-3xl sm:text-3xl md:text-5xl font-extrabold leading-relaxed md:leading-[5rem] text-textWhite">

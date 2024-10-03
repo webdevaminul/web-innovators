@@ -1,12 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home/Home";
-import SignUp from "../pages/SignUp/SignUp";
-import SignIn from "../pages/SignIn/SignIn";
+import SignUp from "../pages/Authentication/SignUp/SignUp";
+import SignIn from "../pages/Authentication/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
-import BlogPosts from "../pages//BlogPosts/BlogPosts"
+import BlogPosts from "../pages//BlogPosts/BlogPosts";
 import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
+import BeInstructor from "../pages/BeInstructor/BeInstructor";
+import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 
 const router = createBrowserRouter([
   {
@@ -24,8 +26,13 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/register",
+        path: "/sign-up",
         element: <SignUp />,
+      },
+
+      {
+        path: "/email-verify",
+        element: <EmailVerify />,
       },
 
       {
@@ -34,18 +41,22 @@ const router = createBrowserRouter([
       },
       {
         path: "/blog",
-        element: <BlogPosts></BlogPosts>,
+        element: <BlogPosts />,
       },
       {
         path: "/contactUs",
-        element: <ContactPage></ContactPage>,
+        element: <ContactPage />,
+      },
+      {
+        path: "/become-instructor",
+        element: <BeInstructor />,
       },
     ],
   },
 
   {
     path: "/userDeshbroad",
-    element: <UserDashbroad></UserDashbroad>,
+    element: <UserDashbroad />,
   },
 ]);
 export default router;
