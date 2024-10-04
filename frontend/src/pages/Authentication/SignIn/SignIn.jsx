@@ -3,16 +3,21 @@ import { useForm } from "react-hook-form";
 import { MdError, MdOutlineEmail, MdOutlineLock } from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useMutation } from "@tanstack/react-query";
-// import { useDispatch, useSelector } from "react-redux";
-// import { requestStart, loginFailure, emailLoginSuccess, resetError } from "../redux/authSlice";
-// import axiosInstance from "../api/axiosInstance";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import axiosInstance from "../../../api/axiosInstance";
+import {
+  emailLoginSuccess,
+  loginFailure,
+  requestStart,
+  resetError,
+} from "../../../redux/authUsersSlice";
 // import GoogleAuth from "../components/GoogleAuth";
 
 export default function SignIn() {
-  // const navigate = useNavigate();
-  // const dispatch = useDispatch();
-  // const { loading, error } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.authUsers);
   const [passValue, setPassValue] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -23,37 +28,37 @@ export default function SignIn() {
   } = useForm();
 
   // Clear any error message when navigating away from this page
-  // useEffect(() => {
-  //   dispatch(resetError());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(resetError());
+  }, [dispatch]);
 
   // Define the mutation for the login process
-  // const SignInMutation = useMutation({
-  //   mutationFn: async (formData) => {
-  //     dispatch(requestStart()); // Dispatch request start action before making API call
-  //     const res = await axiosInstance.post("/api/auth/signin", formData);
-  //     return res.data;
-  //   },
-  //   onSuccess: (data) => {
-  //     console.log("Sign in API Response:", data);
-  //     if (!data.success) {
-  //       dispatch(loginFailure(data.message)); // Dispatch login failure action if login is fail
-  //     } else {
-  //       dispatch(emailLoginSuccess(data)); // Dispatch login success action if login is successful
-  //       localStorage.setItem("accessToken", data.token); // Store the access token in localStorage
-  //       navigate("/"); // Navigate to homepage
-  //     }
-  //   },
-  //   onError: (error) => {
-  //     dispatch(
-  //       loginFailure(error.response?.data?.message || "Some thing went wrong. Please try again")
-  //     ); // Dispatch login failure action on error
-  //   },
-  // });
+  const SignInMutation = useMutation({
+    mutationFn: async (formData) => {
+      dispatch(requestStart()); // Dispatch request start action before making API call
+      const res = await axiosInstance.post("/api/auth/signin", formData);
+      return res.data;
+    },
+    onSuccess: (data) => {
+      console.log("Sign in API Response:", data);
+      if (!data.success) {
+        dispatch(loginFailure(data.message)); // Dispatch login failure action if login is fail
+      } else {
+        dispatch(emailLoginSuccess(data)); // Dispatch login success action if login is successful
+        localStorage.setItem("accessToken", data.token); // Store the access token in localStorage
+        navigate("/"); // Navigate to homepage
+      }
+    },
+    onError: (error) => {
+      dispatch(
+        loginFailure(error.response?.data?.message || "Some thing went wrong. Please try again")
+      ); // Dispatch login failure action on error
+    },
+  });
 
   // Handle form submission
   const onSubmit = async (formData) => {
-    // SignInMutation.mutate(formData);
+    SignInMutation.mutate(formData);
     console.log(formData);
   };
 
@@ -87,9 +92,9 @@ export default function SignIn() {
                   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                   message: "Please enter a valid email address",
                 },
-                // onChange: () => {
-                //   dispatch(resetError());
-                // },
+                onChange: () => {
+                  dispatch(resetError());
+                },
               })}
               aria-invalid={errors.userEmail ? "true" : "false"}
             />
@@ -129,7 +134,7 @@ export default function SignIn() {
                 },
                 onChange: () => {
                   setPassValue(event.target.value);
-                  // dispatch(resetError());
+                  dispatch(resetError());
                 },
               })}
               aria-invalid={errors.userPassword ? "true" : "false"}
@@ -154,14 +159,14 @@ export default function SignIn() {
           )}
 
           {/* Error message */}
-          {/* {error && (
+          {error && (
             <p className="text-primaryWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdError />
               </span>
               <span>{error}</span>
             </p>
-          )} */}
+          )}
 
           <Link to="/forget-password" className="mt-4 text-sm text-blue-500 hover:underline">
             Forget password?
@@ -169,12 +174,11 @@ export default function SignIn() {
 
           {/* Sign in button */}
           <button
-            // disabled={loading}
+            disabled={loading}
             type="submit"
-            className="p-2 mt-4 bg-primary hover:bg-primaryHover border-none rounded text-textReversed disabled:bg-disabled disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-link hover:bg-linkHover border-none rounded text-textReversed disabled:bg-disabled disabled:cursor-not-allowed select-none"
           >
-            {/* {loading ? "Loading..." : "Sign in"} */}
-            Sign in
+            {loading ? "Loading..." : "Sign in"}
           </button>
         </form>
 
