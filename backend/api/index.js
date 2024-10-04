@@ -18,11 +18,13 @@ app.use(express.json()); // To parse JSON
 app.use(cookieParser()); // To parse cookies
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"], // Allow requests from this origin
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE", // Allowed HTTP methods
-    credentials: true, // Allow cookies to be sent with requests
+    origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"],
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Include OPTIONS for preflight
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    credentials: true, // Allow credentials
   })
-); // Enable CORS
+);
+app.options("*", cors()); // Allow preflight requests for all routes
 
 // Connect to MongoDB Atlas
 connectDB()
