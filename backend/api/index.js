@@ -18,7 +18,7 @@ app.use(express.json()); // To parse JSON
 app.use(cookieParser()); // To parse cookies
 app.use(
   cors({
-    origin: "http://localhost:5173", // Allow requests from this origin
+    origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"], // Allow requests from this origin
     credentials: true, // Allow cookies to be sent with requests
   })
 ); // Enable CORS
