@@ -25,8 +25,8 @@ axiosInstance.post("/api/create/course", courseData)
   };
   return (
     <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg">
-      <div className="mt-10 text-center font-bold">Upload Course</div>
-      <div className="mt-3 text-center text-4xl font-bold">
+      <div className="mt-10 text-center font-bold text-text">Upload Course</div>
+      <div className="mt-3 text-center text-4xl text-text font-bold">
         Share your experiene for student
       </div>
       <form onSubmit={handleCreateCourse} className="p-8">
@@ -34,13 +34,13 @@ axiosInstance.post("/api/create/course", courseData)
           <input
             type="Name"
             name="name"
-            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Full Name *"
           />
           <input
             type="email"
             name="email"
-            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 placeholder-slate-400 shadow-sm placeholder:font-semibold placeholder:text-gray-500 focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Email *"
           />
         </div>
@@ -49,17 +49,17 @@ axiosInstance.post("/api/create/course", courseData)
             name="select"
             id="select"
             onChange={(e)=>setCategory(e.target.value)}
-            className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-bg px-3 text-text py-4 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           >
-            <option className="font-semibold ">Please Select</option>
-            <option className="font-semibold">Freelancing</option>
-            <option className="font-semibold">Web Design</option>
+            <option className="font-semibold text-text">Please Select</option>
+            <option className="font-semibold text-text">Freelancing</option>
+            <option className="font-semibold text-text">Web Design</option>
           </select>
 
-          <label className="form-control w-full max-w-xs">
+          <label className="form-control text-text w-1/2 block">
             <input
               type="file"
-              className="file-input file-input-bordered w-full max-w-xs"
+              className="file-input file-input-bordered w-full"
             />
           </label>
         </div>
@@ -69,8 +69,8 @@ axiosInstance.post("/api/create/course", courseData)
             id="text"
             cols={30}
             rows={10}
-            className="mb-10 h-40 w-full resize-none rounded-md border border-slate-300 p-5 font-semibold text-gray-300"
-            placeholder="Details about this.."
+            className="mb-10 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-bg placeholder-placeholder "
+            placeholder="Details about this..."
           />
         </div>
         <div className="text-center">

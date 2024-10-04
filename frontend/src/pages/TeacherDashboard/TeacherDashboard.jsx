@@ -1,39 +1,71 @@
+import { useEffect, useRef, useState } from "react";
 import { HiBars3, HiOutlineUsers } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
 import { MdOutlineNotificationsActive } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegPenToSquare } from "react-icons/fa6";
+import { RxCross1 } from "react-icons/rx";
+import Darkmode from "../../components/Darkmode/Darkmode";
 
 const TeacherDashboard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isRotating, setIsRotating] = useState(false);
+  const sidebarRef = useRef(null);
+
+  const handleRotating = () => {
+    setIsRotating(true);
+    // Remove animation class after animation ends
+    setTimeout(() => setIsRotating(false), 300);
+  };
+  const handleMenuOpen = () => {
+    setIsOpen(!isOpen);
+    handleRotating();
+  };
+
+// Close sidebar when clicking outside of it
+useEffect(() => {
+  const handleClickOutside = (event) => {
+    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+      setIsOpen(false); // Close sidebar if clicked outside
+    }
+  };
+
+  if (isOpen) {
+    document.addEventListener("mousedown", handleClickOutside);
+  } else {
+    document.removeEventListener("mousedown", handleClickOutside);
+  }
+
+  // Cleanup event listener when component unmounts or isOpen changes
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [isOpen]);
   return (
-    <div className="min-h-screen bg-white">
-      <aside className="bg-bg -translate-x-80 fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0">
+    <div className="min-h-screen bg-bg">
+      <aside ref={sidebarRef}
+        className={`bg-bg border border-border fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
+          isOpen ? "translate-x-0" : "-translate-x-80"
+        } `}
+      >
         <div className="relative">
           <Link className="flex items-center gap-4 py-6 px-8">
-            <h6 className="block antialiased font-bai font-semibold text-white">
+            <h6 className="block antialiased font-bai font-semibold text-text">
               Teacher Dashboard
             </h6>
           </Link>
-          <button
-            className="middle none font-medium text-center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-8 max-w-[32px] h-8 max-h-[32px] rounded-lg text-white hover:bg-white/10 active:bg-white/30 absolute right-0 top-0 grid rounded-br-none rounded-tl-none xl:hidden"
-            type="button"
-          >
-            <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-              <HiBars3 className="h-5 w-5 text-white" />
-            </span>
-          </button>
         </div>
         <div className="m-4">
           <ul className="mb-4 flex flex-col gap-1">
             <li>
               <Link className="active">
                 <button
-                  className="font-bai transition-all py-3 rounded-lg bg-gradient-to-tr from-blue-600 to-blue-400 text-white shadow-md hover:shadow-lg hover:shadow-blue-500/40 w-full flex items-center gap-4 px-4"
+                  className="font-bai transition-all py-3 rounded-lg text-text w-full flex items-center gap-4 px-4"
                   type="button"
                 >
                   <IoHomeOutline className="w-5 h-5" />
-                  <p className="block font-bai text-base text-inherit font-medium">
+                  <p className="block font-bai text-base text-text font-medium">
                     dashboard
                   </p>
                 </button>
@@ -42,11 +74,11 @@ const TeacherDashboard = () => {
             <li>
               <Link to="/teacher-dashboard/teacher-profile">
                 <button
-                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
                 >
                   <HiOutlineUsers className="w-5 h-5" />
-                  <p className="block antialiased font-bai text-base leading-relaxed text-inherit font-medium capitalize">
+                  <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
                     profile
                   </p>
                 </button>
@@ -55,11 +87,11 @@ const TeacherDashboard = () => {
             <li>
               <Link to="/teacher-dashboard/create-course">
                 <button
-                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-white hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
-                  <p className="block antialiased font-bai text-base leading-relaxed text-inherit font-medium capitalize">
+                  <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
                     Create a course
                   </p>
                 </button>
@@ -75,14 +107,14 @@ const TeacherDashboard = () => {
               <nav aria-label="breadcrumb" className="w-max">
                 <ol className="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all">
                   <li className="flex items-center text-blue-gray-900 antialiased font-bai text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">
-                    <p className="block antialiased font-bai text-sm leading-normal text-blue-900 font-normal opacity-50 transition-all hover:text-blue-500 hover:opacity-100">
+                    <p className="block antialiased font-bai text-sm leading-normal text-text font-normal opacity-50 transition-all hover:opacity-100">
                       dashboard / home
                     </p>
                   </li>
                 </ol>
               </nav>
-              <h6 className="block antialiased tracking-normal font-bai text-base font-semibold leading-relaxed text-gray-900">
-                home
+              <h6 className="block antialiased tracking-normal font-bai text-base font-semibold leading-relaxed text-text">
+                Home
               </h6>
             </div>
             <div className="flex items-center">
@@ -98,20 +130,29 @@ const TeacherDashboard = () => {
                 </div>
               </div>
               <button
-                className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden"
+                onClick={handleMenuOpen}
+                className={` ${
+                  isRotating ? "animate-spin" : " "
+                } relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden`}
                 type="button"
               >
                 <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                  <HiBars3 className="w-5 h-5" />
+                  {isOpen ? (
+                    <RxCross1 className="w-5 h-5 " />
+                  ) : (
+                    <HiBars3 className="w-5 h-5" />
+                  )}
                 </span>
               </button>
-              <a href="#">
+
+              {/* User list */}
+              <Link>
                 <button
-                  className="middle none font-bai font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex"
+                  className="middle none font-bai font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex"
                   type="button"
                 >
                   <HiOutlineUsers className="w-5 h-5" />
-                  Sign In{" "}
+                  user name{" "}
                 </button>
                 <button
                   className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden"
@@ -121,23 +162,33 @@ const TeacherDashboard = () => {
                     <IoSettingsOutline className="w-5 h-5" />
                   </span>
                 </button>
-              </a>
+              </Link>
+
+              {/* Notification button */}
               <button
-                className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30"
+                className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-text hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30"
                 type="button"
               >
                 <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
                   <MdOutlineNotificationsActive className="w-5 h-5" />
                 </span>
               </button>
+
+              <Darkmode />
             </div>
           </div>
         </nav>
+
+        {/* Out let here */}
+
         <Outlet />
-        <div className="text-blue-gray-600">
+
+        {/* Out let here */}
+
+        <div className="text-text">
           <footer className="py-2">
             <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
-              <p className="block antialiased font-bai text-sm leading-normal font-normal text-inherit">
+              <p className="block antialiased font-bai text-sm leading-normal font-normal text-text">
                 © 2023, made with by{" "}
                 <a
                   href="/"
