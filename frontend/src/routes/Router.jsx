@@ -1,11 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home/Home";
-import SignUp from "../pages/SignUp/SignUp";
-import SignIn from "../pages/SignIn/SignIn";
+import SignUp from "../pages/Authentication/SignUp/SignUp";
+import SignIn from "../pages/Authentication/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
-import CourseDetails from "../pages/CourseDetails/CourseDetails";
-import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
+import BlogPosts from "../pages//BlogPosts/BlogPosts";
+import ContactPage from "../pages/ContactPage/ContactPage";
+import BeInstructor from "../pages/BeInstructor/BeInstructor";
+import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
+import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
 
 const router = createBrowserRouter([
   {
@@ -23,8 +26,13 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/register",
+        path: "/sign-up",
         element: <SignUp />,
+      },
+
+      {
+        path: "/email-verify",
+        element: <EmailVerify />,
       },
 
       {
@@ -32,15 +40,23 @@ const router = createBrowserRouter([
         element: <AllCourses />,
       },
       {
-        path: "/course-details",
-        element: <CourseDetails />,
+        path: "/blog",
+        element: <BlogPosts />,
+      },
+      {
+        path: "/contactUs",
+        element: <ContactPage />,
+      },
+      {
+        path: "/become-instructor",
+        element: <BeInstructor />,
       },
     ],
   },
 
   {
     path: "/userDeshbroad",
-    element: <UserDashbroad></UserDashbroad>,
+    element: <DashboardLayoutBasic></DashboardLayoutBasic>,
   },
 ]);
 export default router;
