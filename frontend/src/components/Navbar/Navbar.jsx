@@ -1,17 +1,23 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
 import Darkmode from "../Darkmode/Darkmode";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
+import axiosInstance from "../../api/axiosInstance";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
   const [profileMenu, setProfileMenu] = useState(false);
   const profileMenuRef = useRef(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
 
+  // this user role will be dynamic
+  const role = "teacher";
   console.log(user);
 
   // Toggle Profile Menu
@@ -33,7 +39,22 @@ const Navbar = () => {
     };
   }, []);
 
-  const handleSignOut = async () => {};
+  const handleSignOut = async () => {
+    try {
+      dispatch(requestStart());
+      const res = await axiosInstance.get("/api/auth/sign-out");
+      if (res.data.success) {
+        dispatch(userClearSuccess());
+        localStorage.removeItem("accessToken");
+        setProfileMenu(false);
+        navigate("/");
+      }
+    } catch (error) {
+      dispatch(
+        requestFailure(error.response?.data?.message || "Something went wrong. Please try again.")
+      );
+    }
+  };
 
   const links = (
     <>
@@ -59,10 +80,14 @@ const Navbar = () => {
           Become an Instructor
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/userDeshbroad" className="text-nowrap">
+      <li onClick={() => setOpenMenu(false)}>        
+        {
+          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
+          Dashboard
+        </NavLink> : <NavLink to="teacher-dashboard" className="text-nowrap">
           Dashboard
         </NavLink>
+        }
       </li>
     </>
   );
@@ -200,7 +225,7 @@ const Navbar = () => {
             ) : (
               <NavLink
                 to="sign-in"
-                className="border-b-2 border-transparent hover:border-highlight py-2 font-medium w-full sm:w-fit text-highlight text-center sm:text-start flex gap-1 items-center justify-center"
+                className="bg-link hover:bg-linkHover text-textReversed hover:text-textReversed p-2 rounded-md font-medium w-full sm:w-fit text-center sm:text-start flex gap-1 items-center justify-center"
               >
                 <span className="text-2xl">{/* <IoEnterOutline /> */}</span>
                 <span>Sign In</span>

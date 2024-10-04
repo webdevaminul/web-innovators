@@ -30,33 +30,33 @@ axiosInstance.post("/api/create/course", courseData)
         Share your experiene for student
       </div>
       <form onSubmit={handleCreateCourse} className="p-8">
-        <div className="flex gap-4">
+        <div className="md:flex gap-4">
           <input
             type="Name"
             name="name"
-            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Full Name *"
           />
           <input
             type="email"
             name="email"
-            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Email *"
           />
         </div>
-        <div className="my-6 flex gap-4">
+        <div className="md:my-6 md:flex gap-4">
           <select
             name="select"
             id="select"
             onChange={(e)=>setCategory(e.target.value)}
-            className="mt-1 block w-1/2 rounded-md border border-slate-300 bg-bg px-3 text-text py-4 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 text-text py-4 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           >
             <option className="font-semibold text-text">Please Select</option>
             <option className="font-semibold text-text">Freelancing</option>
             <option className="font-semibold text-text">Web Design</option>
           </select>
 
-          <label className="form-control text-text w-1/2 block">
+          <label className="form-control text-text md:w-1/2 w-full block">
             <input
               type="file"
               className="file-input file-input-bordered w-full"
@@ -69,7 +69,7 @@ axiosInstance.post("/api/create/course", courseData)
             id="text"
             cols={30}
             rows={10}
-            className="mb-10 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-bg placeholder-placeholder "
+            className="mb-10 mt-5 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-bg placeholder-placeholder "
             placeholder="Details about this..."
           />
         </div>

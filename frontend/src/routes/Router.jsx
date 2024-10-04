@@ -5,7 +5,6 @@ import SignUp from "../pages/Authentication/SignUp/SignUp";
 import SignIn from "../pages/Authentication/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
 import BlogPosts from "../pages//BlogPosts/BlogPosts";
-import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
@@ -13,6 +12,7 @@ import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile";
 import TeacherHome from "../pages/TeacherDashboard/TeacherHome";
 import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
+import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
@@ -61,8 +61,10 @@ const router = createBrowserRouter([
   },
 
   {
-    path: "/user-dashboard",
-    element: <UserDashbroad />,
+    path: "dashbroad/home",
+    element: <DashboardLayoutBasic />,
+    // path: "/user-dashboard",
+    // element: <UserDashbroad />,
   },
   {
     path: "teacher-dashboard",
@@ -73,7 +75,7 @@ const router = createBrowserRouter([
         element : <TeacherHome />
       },
       {
-        path : "teacher-profile",
+        path : "profile",
         element : <TeacherProfile />
       },
       {

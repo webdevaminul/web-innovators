@@ -72,7 +72,7 @@ useEffect(() => {
               </Link>
             </li>
             <li>
-              <Link to="/teacher-dashboard/teacher-profile">
+              <Link to="/teacher-dashboard/profile">
                 <button
                   className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
@@ -98,12 +98,27 @@ useEffect(() => {
               </Link>
             </li>
           </ul>
+          <ul className="border-t-2">
+          <li>
+              <Link to="/">
+              <button
+                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  type="button"
+                >
+                  <IoHomeOutline className="w-5 h-5" />
+                  <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
+                    Home
+                  </p>
+                </button>
+              </Link>
+            </li>
+          </ul>
         </div>
       </aside>
       <div className="p-4 xl:ml-80">
         <nav className="block w-full max-w-full bg-transparent text-white shadow-none rounded-xl transition-all px-0 py-1">
           <div className="flex flex-col-reverse justify-between gap-6 md:flex-row md:items-center">
-            <div className="capitalize">
+            <div className="capitalize hidden md:block ">
               <nav aria-label="breadcrumb" className="w-max">
                 <ol className="flex flex-wrap items-center w-full bg-opacity-60 rounded-md bg-transparent p-0 transition-all">
                   <li className="flex items-center text-blue-gray-900 antialiased font-bai text-sm font-normal leading-normal cursor-pointer transition-colors duration-300 hover:text-light-blue-500">

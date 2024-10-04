@@ -9,7 +9,7 @@ const TeacherProfile = () => {
           className="w-full xl:h-[20rem] lg:h-[18rem] md:h-[16rem] sm:h-[14rem] md:block hidden xs:h-[11rem]"
         />
         {/* Profile Image */}
-        <div className="sm:w-[80%] xs:w-[90%] mx-auto flex">
+        <div className="mx-auto md:mt-0 mt-20 flex">
           <img
             src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxwZW9wbGV8ZW58MHwwfHx8MTcxMTExMTM4N3ww&ixlib=rb-4.0.3&q=80&w=1080"
             alt="User Profile"
@@ -20,7 +20,7 @@ const TeacherProfile = () => {
             Samuel Abera
           </h1>
         </div>
-        <div className="xl:w-[80%] lg:w-[90%] md:w-[90%] sm:w-[92%] xs:w-[90%] mx-auto flex flex-col gap-4 items-center relative lg:-top-8 md:-top-6 sm:-top-4 xs:-top-4">
+        <div className="mx-auto flex flex-col gap-4 items-center relative lg:-top-8 md:-top-6 sm:-top-4 xs:-top-4">
           {/* Description */}
           <p className="w-fit text-text text-md">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam
@@ -106,7 +106,7 @@ const TeacherProfile = () => {
                         src="https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
                         alt="blog"
                       />
-                      <div className="p-6">
+                      <div className="py-6">
                         <h2 className="tracking-widest text-xs title-font font-medium text-text mb-1">
                           CATEGORY-1
                         </h2>
@@ -132,7 +132,7 @@ const TeacherProfile = () => {
                         src="https://images.unsplash.com/photo-1624628639856-100bf817fd35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8M2QlMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
                         alt="blog"
                       />
-                      <div className="p-6">
+                      <div className="py-6">
                         <h2 className="tracking-widest text-xs title-font font-medium text-text mb-1">
                           CATEGORY-1
                         </h2>
@@ -152,13 +152,13 @@ const TeacherProfile = () => {
                     </div>
                   </div>
                   <div className="p-4 md:w-1/3">
-                    <div className="h-full rounded-xl bg-bg  overflow-hidden">
+                    <div className="h-full rounded-xl bg-bg overflow-hidden">
                       <img
                         className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
                         src="https://images.unsplash.com/photo-1631700611307-37dbcb89ef7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
                         alt="blog"
                       />
-                      <div className="p-6">
+                      <div className="py-6">
                         <h2 className="tracking-widest text-xs title-font font-medium text-text mb-1">
                           CATEGORY-1
                         </h2>
@@ -218,7 +218,7 @@ const TeacherProfile = () => {
                 </svg>
               </div>
             </a>
-            <a href>
+            <a>
               <div className="p-2 hover:text-blue-500 hover:dark:text-blue-500">
                 <svg
                   className="lg:w-6 lg:h-6 xs:w-4 xs:h-4 text-blue-700"

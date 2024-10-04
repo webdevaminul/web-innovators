@@ -1,6 +1,8 @@
 import Banner from "../../components/Banner/Banner";
-import DiscountedSection from "../../components/DiscountedSection/DiscountedSection";
+import CoursesSection from "../../components/CoursesSection/CoursesSection";
+import LatestBlogs from "../../components/LatestBlogs/LatestBlogs";
 import Reviews from "../../components/Reviews/Reviews";
+import WhyChooseUs from "../../components/WhyChooseUs/WhyChooseUs";
 import Heading from "../../utils/Heading";
 
 export default function Home() {
@@ -8,7 +10,9 @@ export default function Home() {
     <>
     <Heading heading={"Home"} />
       <Banner />
-      <DiscountedSection />
+      <CoursesSection />
+      <LatestBlogs />
+      <WhyChooseUs />
       <Reviews />
     </>
   );
