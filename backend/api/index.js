@@ -16,15 +16,31 @@ const app = express();
 // Middlewares
 app.use(express.json()); // To parse JSON
 app.use(cookieParser()); // To parse cookies
+
+// CORS middleware
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"],
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Include OPTIONS for preflight
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-    credentials: true, // Allow credentials
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "http://localhost:5173", // Localhost for development
+        "https://web-innovators-learnup.vercel.app", // Production frontend
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true); // Allow the request
+      } else {
+        callback(new Error("Not allowed by CORS")); // Deny the request
+      }
+    },
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS", // Allow preflight
+    credentials: true, // Enable credentials
+    allowedHeaders: ["Content-Type", "Authorization"], // Allow specific headers
+    preflightContinue: false, // Respond to preflight automatically
+    optionsSuccessStatus: 204, // Response status for successful OPTIONS
   })
 );
-app.options("*", cors()); // Allow preflight requests for all routes
+
+// Handle preflight OPTIONS requests
+app.options("*", cors());
 
 // Connect to MongoDB Atlas
 connectDB()
@@ -44,6 +60,11 @@ connectDB()
     // Listen to server
     const PORT = process.env.PORT || 5000;
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+    app.use((req, res, next) => {
+      console.log(`Incoming request: ${req.method} ${req.url} from origin: ${req.get("Origin")}`);
+      next();
+    });
   })
   .catch((err) => {
     console.error("Failed to connect to the database:", err);
