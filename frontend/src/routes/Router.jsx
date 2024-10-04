@@ -5,10 +5,10 @@ import SignUp from "../pages/Authentication/SignUp/SignUp";
 import SignIn from "../pages/Authentication/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
 import BlogPosts from "../pages//BlogPosts/BlogPosts";
-import UserDashbroad from "../pages/UserDashBroad/UserDashbroad";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
+import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
 
 const router = createBrowserRouter([
   {
@@ -56,7 +56,7 @@ const router = createBrowserRouter([
 
   {
     path: "/userDeshbroad",
-    element: <UserDashbroad />,
+    element: <DashboardLayoutBasic></DashboardLayoutBasic>,
   },
 ]);
 export default router;
