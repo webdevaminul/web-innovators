@@ -3,14 +3,18 @@ const { errorHandler } = require("../utilities/errorHandler");
 const database = client.db("LearnUp");
 const userCollection = database.collection("users");
 const jwt = require("jsonwebtoken");
-const { sendSignupVerification } = require("../utilities/sendSignupVerification");
 const bcryptjs = require("bcryptjs");
+
+const {
+  sendSignupVerification,
+} = require("../utilities/sendSignupVerification");
 
 // create api with export.api_function
 exports.signup = async (req, res, next) => {
   try {
     // Extract the user's username, email, and password from the request body
     const { userName, userEmail, userPassword } = req.body;
+    console.log("email", req.body);
 
     // // Check if the username or email already exists in the database
     const existingUser = await userCollection.findOne({
@@ -20,9 +24,13 @@ exports.signup = async (req, res, next) => {
     // // If a user with the same username or email already exists, return an error message
     if (existingUser) {
       if (existingUser.userName === userName) {
-        return next(errorHandler(409, `Username "${userName}" is already taken`));
+        return next(
+          errorHandler(409, `Username "${userName}" is already taken`)
+        );
       } else if (existingUser.userEmail === userEmail) {
-        return next(errorHandler(409, `Email "${userEmail}" is already registered`));
+        return next(
+          errorHandler(409, `Email "${userEmail}" is already registered`)
+        );
       }
     }
 
@@ -37,9 +45,10 @@ exports.signup = async (req, res, next) => {
     sendSignupVerification(userEmail, verificationLink);
 
     // // Send a success response
-    return res
-      .status(200)
-      .json({ success: true, message: `Please check "${userEmail}" to verify your account.` });
+    return res.status(200).json({
+      success: true,
+      message: `Please check "${userEmail}" to verify your account.`,
+    });
   } catch (error) {
     // Pass any other errors to the error-handling middleware
     next(error);
@@ -80,6 +89,7 @@ exports.emailVerify = async (req, res, next) => {
         userPassword: hashedPassword,
         userPhoto:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVlszH7tmKiwhO2EhbnXeR5iQg8ct-k5_MYw&s",
+        userRole: "student",
         isVerified: true,
         isGoogle: false,
       };
@@ -91,9 +101,13 @@ exports.emailVerify = async (req, res, next) => {
     console.log("user", user);
 
     // Generate a JWT access token for login the user
-    const accessToken = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
-      expiresIn: "15m",
-    });
+    const accessToken = jwt.sign(
+      { id: user._id },
+      process.env.JWT_ACCESS_TOKEN_SECRET,
+      {
+        expiresIn: "15m",
+      }
+    );
 
     // Generate a JWT refresh token for login the user
     const refreshToken = jwt.sign(

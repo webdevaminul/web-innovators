@@ -13,11 +13,13 @@ import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile";
 import TeacherHome from "../pages/TeacherDashboard/TeacherHome";
 import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement : <ErrorPage />,
     children: [
       {
         path: "/",

@@ -1,7 +1,27 @@
+import { useState } from "react";
+import axiosInstance from "../../api/axiosInstance";
+
 const CreateCourse = () => {
+const [category,setCategory] = useState('');
+
   const handleCreateCourse = (e) => {
     e.preventDefault();
-    console.log("paici");
+    const value = e.target;
+    const name = value.name.value;
+    const email = value.email.value;
+    const detailsCourse = value.textarea.value;
+    console.log("paici",name, email,detailsCourse, category);
+    const courseData = {name, email, detailsCourse, category}
+
+// Sending POST request with Axios
+axiosInstance.post("/api/create/course", courseData)
+  .then(response => {
+    console.log("Course Created Successfully:", response.data);
+  })
+  .catch(error => {
+    console.error("Error Creating Course:", error);
+  });
+
   };
   return (
     <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg">
@@ -28,6 +48,7 @@ const CreateCourse = () => {
           <select
             name="select"
             id="select"
+            onChange={(e)=>setCategory(e.target.value)}
             className="block w-1/2 rounded-md border border-slate-300 bg-white px-3 py-4 font-semibold text-gray-500 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           >
             <option className="font-semibold ">Please Select</option>
@@ -49,7 +70,7 @@ const CreateCourse = () => {
             cols={30}
             rows={10}
             className="mb-10 h-40 w-full resize-none rounded-md border border-slate-300 p-5 font-semibold text-gray-300"
-            defaultValue={"Message"}
+            placeholder="Details about this.."
           />
         </div>
         <div className="text-center">
