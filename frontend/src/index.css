@@ -9,11 +9,15 @@
   :root {
     --bg-color: 244, 244, 249; /* Background color */
     --accent-one: 234, 234, 239; /* Element background color */
+    --accent-two: 224, 224, 229; /* Element background color */
+
+    --text-link: 0, 123, 255; /* Primary link color */
+    --text-link-hover: 0, 80, 180; /* Primary link hover */
+
     --text-color: 51, 51, 51; /* General text color */
     --text-reversed: 244, 244, 249; /* White text color */
     --text-white: 204, 204, 209; /* White text color */
-    --primary-color: 0, 123, 255; /* Primary link color */
-    --primary-hover-color: 0, 86, 179; /* Primary link hover */
+
     --secondary-color: 240, 138, 36; /* Primary button/Action/Hightlight color */
     --secondary-hover-color: 209, 109, 18; /* Primary button/Action/Hightlight hover color */
 
@@ -36,11 +40,13 @@
   /* Define variables for dark theme */
   [data-theme="dark"] {
     --bg-color: 18, 18, 18; /* Dark theme background color */
-    --accent-one: 38, 38, 38; /* Element background color */
+    --accent-one: 28, 28, 28; /* Dark theme element background color */
+    --accent-two: 38, 38, 38; /* Dark theme element background color */
+
     --text-color: 204, 204, 209; /* General text color for dark theme */
     --text-reversed: 18, 18, 18; /* Black text color */
-    --primary-color: 85, 157, 216; /* Primary link color */
-    --primary-hover-color: 58, 116, 171; /* Primary link hover */
+    --text-link: 85, 157, 216; /* Primary link color */
+    --text-link-hover: 58, 116, 171; /* Primary link hover */
     --secondary-color: 240, 138, 36; /* Primary button/Action/Hightlight color */
     --secondary-hover-color: 199, 123, 26; /* Primary button/Action/Hightlight hover color */
 
@@ -93,10 +99,10 @@
   }
 
   a {
-    color: rgb(var(--link-color));
+    color: rgb(var(--text-link));
   }
   a:hover {
-    color: rgb(var(--link-hover-color));
+    color: rgb(var(--text-link-hover));
   }
 
   body {
