@@ -24,20 +24,24 @@ app.use(
 ); // Enable CORS
 
 // Connect to MongoDB Atlas
-connectDB();
+connectDB()
+  .then(() => {
+    // Routes
+    app.use("/api/test", testRoutes);
+    app.use("/api/auth", authRoutes);
 
-// Routes
-app.use("/api/test", testRoutes);
-app.use("/api/auth", authRoutes);
+    // Custom error handling middleware
+    app.use(errorMiddleware);
 
-// Custom error handling middleware
-app.use(errorMiddleware);
+    // Test route
+    app.get("/", (req, res) => {
+      res.send("LearnUP server is running fine");
+    });
 
-// Test route
-app.get("/", (req, res) => {
-  res.send("LearnUP server is running fine");
-});
-
-// Listen to server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    // Listen to server
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => {
+    console.error("Failed to connect to the database:", err);
+  });
