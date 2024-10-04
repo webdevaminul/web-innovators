@@ -34,10 +34,22 @@ const authUsersSlice = createSlice({
     resetError: (state) => {
       state.error = null;
     },
+    userClearSuccess: (state) => {
+      state.loading = false;
+      state.user = null;
+      state.isAuthenticated = false;
+      state.isGoogle = false;
+    },
   },
 });
 
-export const { requestStart, emailLoginSuccess, loginFailure, requestFailure, resetError } =
-  authUsersSlice.actions;
+export const {
+  requestStart,
+  emailLoginSuccess,
+  loginFailure,
+  requestFailure,
+  resetError,
+  userClearSuccess,
+} = authUsersSlice.actions;
 
 export default authUsersSlice.reducer;
