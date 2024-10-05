@@ -19,10 +19,14 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"],
-    credentials: true,
+    origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"], // Frontend origin
+    credentials: true, // Allow cookies to be sent
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Explicitly allow methods
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"], // Explicitly allow headers
+    optionsSuccessStatus: 200, // For legacy browsers (Safari, IE)
   })
 );
+app.options("/api/*", cors());
 
 // Connect to MongoDB
 connectDB()
