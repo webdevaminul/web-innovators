@@ -2,10 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const { connectDB } = require("./config/mongoDB"); // Import connection function
-const testRoutes = require("./routes/test.route");
-const authRoutes = require("./routes/auth.route");
-const errorMiddleware = require("./middleware/errorMiddleware");
+const { connectDB } = require("./api/config/mongoDB"); // Import connection function
+const testRoutes = require("./api/routes/test.route");
+const authRoutes = require("./api/routes/auth.route");
+const errorMiddleware = require("./api/middleware/errorMiddleware");
 
 // Load environment variables
 dotenv.config();
@@ -26,7 +26,6 @@ app.use(
     optionsSuccessStatus: 200, // For legacy browsers (Safari, IE)
   })
 );
-app.options("/api/*", cors());
 
 // Connect to MongoDB
 connectDB()
