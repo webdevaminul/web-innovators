@@ -24,6 +24,7 @@ async function connectDB() {
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err);
     throw err; // Rethrow the error to handle it upstream
+  } finally {
   }
 }
 

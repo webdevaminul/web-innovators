@@ -26,11 +26,7 @@ app.use(
 );
 
 // Connect to MongoDB
-connectDB()
-  .then(() => {})
-  .catch((err) => {
-    console.error("Failed to connect to MongoDB:", err);
-  });
+connectDB();
 
 // Routes
 app.use("/test", testRoutes);
