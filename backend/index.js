@@ -2,7 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const { connectDB } = require("./api/config/mongoDB"); // Import connection function
+const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
@@ -27,8 +27,8 @@ app.use(
   cors({
     origin: allowedOrigins,
     credentials: true, // Allow cookies
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Explicitly allow methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -43,7 +43,7 @@ app.options(
   })
 );
 
-// Custom middleware to manually set CORS headers (optional, for extra safety)
+// Custom middleware to manually set CORS headers
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", allowedOrigins);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
