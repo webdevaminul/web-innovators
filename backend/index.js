@@ -17,13 +17,40 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
+// CORS Middleware
+const allowedOrigins =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5173"
+    : "https://web-innovators-learnup.vercel.app";
+
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"], // Frontend origin
-    credentials: true, // Allow cookies to be sent
+    origin: allowedOrigins,
+    credentials: true, // Allow cookies
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Explicitly allow methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   })
 );
+
+// Handle preflight `OPTIONS` requests
+app.options(
+  "*",
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Custom middleware to manually set CORS headers (optional, for extra safety)
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", allowedOrigins);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 // Connect to MongoDB
 connectDB();
