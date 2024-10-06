@@ -26,18 +26,14 @@ app.use(
 );
 
 // Connect to MongoDB
-connectDB()
-  .then(() => {
-    // Routes
-    app.use("/test", testRoutes);
-    app.use("/auth", authRoutes);
+connectDB();
 
-    // Custom error handling middleware
-    app.use(errorMiddleware);
-  })
-  .catch((err) => {
-    console.error("Failed to connect to MongoDB:", err);
-  });
+// Routes
+app.use("/test", testRoutes);
+app.use("/auth", authRoutes);
+
+// Custom error handling middleware
+app.use(errorMiddleware);
 
 // Root route
 app.get("/", (req, res) => {
