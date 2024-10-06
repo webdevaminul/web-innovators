@@ -34,18 +34,18 @@ connectDB()
 
     // Custom error handling middleware
     app.use(errorMiddleware);
-
-    // Root route
-    app.get("/", (req, res) => {
-      res.send("LearnUP server is running fine");
-    });
-
-    // Start the server
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => {
     console.error("Failed to connect to MongoDB:", err);
   });
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("LearnUP server is running fine");
+});
+
+// Start the server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 module.exports = app;
