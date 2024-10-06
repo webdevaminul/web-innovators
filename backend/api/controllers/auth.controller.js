@@ -12,12 +12,12 @@ exports.signup = async (req, res, next) => {
     // Extract the user's username, email, and password from the request body
     const { userName, userEmail, userPassword } = req.body;
 
-    // // Check if the username or email already exists in the database
+    // Check if the username or email already exists in the database
     const existingUser = await userCollection.findOne({
       $or: [{ userName: userName }, { userEmail: userEmail }],
     });
 
-    // // If a user with the same username or email already exists, return an error message
+    // If a user with the same username or email already exists, return an error message
     if (existingUser) {
       if (existingUser.userName === userName) {
         return next(errorHandler(409, `Username "${userName}" is already taken`));
@@ -26,17 +26,21 @@ exports.signup = async (req, res, next) => {
       }
     }
 
-    // // Generate a token for email varification
+    // Generate a token for email varification
     const verificationToken = jwt.sign(
       { userName, userEmail, userPassword },
       process.env.JWT_ACCESS_TOKEN_SECRET
     );
 
-    // // Send a verification email with the verification token
-    const verificationLink = `http://localhost:5173/email-verify?token=${verificationToken}`;
+    // Send a verification email with the verification token
+    const baseUrl =
+      process.env.NODE_ENV === "development"
+        ? "http://localhost:5173"
+        : "https://web-innovators-learnup.vercel.app";
+    const verificationLink = `${baseUrl}/email-verify?token=${verificationToken}`;
     sendSignupVerification(userEmail, verificationLink);
 
-    // // Send a success response
+    // Send a success response
     return res
       .status(200)
       .json({ success: true, message: `Please check "${userEmail}" to verify your account.` });
