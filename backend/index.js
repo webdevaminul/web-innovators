@@ -2,10 +2,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const { connectDB } = require("./config/mongoDB"); // Import connection function
-const testRoutes = require("./routes/test.route");
-const authRoutes = require("./routes/auth.route");
-const errorMiddleware = require("./middleware/errorMiddleware");
+const { connectDB } = require("./api/config/mongoDB"); // Import connection function
+const testRoutes = require("./api/routes/test.route");
+const authRoutes = require("./api/routes/auth.route");
+const errorMiddleware = require("./api/middleware/errorMiddleware");
 
 // Load environment variables
 dotenv.config();
@@ -22,8 +22,6 @@ app.use(
     origin: ["http://localhost:5173", "https://web-innovators-learnup.vercel.app"], // Frontend origin
     credentials: true, // Allow cookies to be sent
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Explicitly allow methods
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"], // Explicitly allow headers
-    optionsSuccessStatus: 200, // For legacy browsers (Safari, IE)
   })
 );
 
@@ -31,8 +29,8 @@ app.use(
 connectDB()
   .then(() => {
     // Routes
-    app.use("/api/test", testRoutes);
-    app.use("/api/auth", authRoutes);
+    app.use("/test", testRoutes);
+    app.use("/auth", authRoutes);
 
     // Custom error handling middleware
     app.use(errorMiddleware);

@@ -36,7 +36,7 @@ export default function SignIn() {
   const SignInMutation = useMutation({
     mutationFn: async (formData) => {
       dispatch(requestStart()); // Dispatch request start action before making API call
-      const res = await axiosInstance.post("/api/auth/signin", formData);
+      const res = await axiosInstance.post("/auth/signin", formData);
       return res.data;
     },
     onSuccess: (data) => {

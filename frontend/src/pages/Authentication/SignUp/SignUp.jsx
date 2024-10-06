@@ -24,7 +24,7 @@ export default function SignUp() {
   // Define the mutation for the signup process
   const signUpMutation = useMutation({
     mutationFn: async (formData) => {
-      const res = await axiosInstance.post("/api/auth/signup", formData);
+      const res = await axiosInstance.post("/auth/signup", formData);
       console.log(res.data);
       return res.data;
     },

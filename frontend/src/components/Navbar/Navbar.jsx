@@ -39,7 +39,7 @@ const Navbar = () => {
   const handleSignOut = async () => {
     try {
       dispatch(requestStart());
-      const res = await axiosInstance.get("/api/auth/sign-out");
+      const res = await axiosInstance.get("/auth/sign-out");
       if (res.data.success) {
         dispatch(userClearSuccess());
         localStorage.removeItem("accessToken");
