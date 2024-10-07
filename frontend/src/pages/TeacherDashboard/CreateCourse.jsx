@@ -2,7 +2,7 @@ import { useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 
 const CreateCourse = () => {
-const [category,setCategory] = useState('');
+  const [category, setCategory] = useState("");
 
   const handleCreateCourse = (e) => {
     e.preventDefault();
@@ -10,18 +10,18 @@ const [category,setCategory] = useState('');
     const name = value.name.value;
     const email = value.email.value;
     const detailsCourse = value.textarea.value;
-    console.log("paici",name, email,detailsCourse, category);
-    const courseData = {name, email, detailsCourse, category}
+    console.log("paici", name, email, detailsCourse, category);
+    const courseData = { name, email, detailsCourse, category };
 
-// Sending POST request with Axios
-axiosInstance.post("/api/create/course", courseData)
-  .then(response => {
-    console.log("Course Created Successfully:", response.data);
-  })
-  .catch(error => {
-    console.error("Error Creating Course:", error);
-  });
-
+    // Sending POST request with Axios
+    axiosInstance
+      .post("/api/create/course", courseData)
+      .then((response) => {
+        console.log("Course Created Successfully:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error Creating Course:", error);
+      });
   };
   return (
     <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg">
@@ -48,7 +48,7 @@ axiosInstance.post("/api/create/course", courseData)
           <select
             name="select"
             id="select"
-            onChange={(e)=>setCategory(e.target.value)}
+            onChange={(e) => setCategory(e.target.value)}
             className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 text-text py-4 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           >
             <option className="font-semibold text-text">Please Select</option>

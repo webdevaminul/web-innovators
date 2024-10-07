@@ -1,3 +1,38 @@
+import { RiLinkedinFill } from "react-icons/ri";
+import { FaXTwitter } from "react-icons/fa6";
+import { FiFacebook } from "react-icons/fi";
+import { IoLogoYoutube } from "react-icons/io";
+
+const data = [
+  {
+    id: 1,
+    category: "CATEGORY-1",
+    title: "The Catalyzer",
+    description:
+      "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
+    image:
+      "https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80",
+  },
+  {
+    id: 2,
+    category: "CATEGORY-2",
+    title: "The Catalyzer",
+    description:
+      "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
+    image:
+      "https://images.unsplash.com/photo-1624628639856-100bf817fd35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8M2QlMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",
+  },
+  {
+    id: 3,
+    category: "CATEGORY-3",
+    title: "The Catalyzer",
+    description:
+      "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
+    image:
+      "https://images.unsplash.com/photo-1631700611307-37dbcb89ef7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60",
+  },
+];
+
 const TeacherProfile = () => {
   return (
     <section className="w-full overflow-hidden">
@@ -30,230 +65,95 @@ const TeacherProfile = () => {
             Odit, consequatur. Ratione voluptate exercitationem hic eligendi
             vitae animi nam in, est earum culpa illum aliquam.
           </p>
-          {/* Detail */}
+          {/* Details */}
           <div className="w-full my-auto py-6 flex flex-col justify-center gap-2">
             <div className="w-full flex sm:flex-row xs:flex-col gap-2 justify-center">
               <div className="w-full">
                 <dl className="text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                   <div className="flex flex-col pb-3">
-                    <dt className="mb-1 text-text md:text-lg">
-                      First Name
-                    </dt>
-                    <dd className="text-lg text-text font-semibold">Samuel</dd>
+                    <dt className="mb-1 text-text md:text-lg">Name</dt>
+                    <dd className="text-lg text-text font-semibold">
+                      Samuel thom{" "}
+                    </dd>
                   </div>
-                  <div className="flex flex-col py-3">
-                    <dt className="mb-1 text-text md:text-lg ">
-                      Last Name
-                    </dt>
-                    <dd className="text-lg text-text font-semibold">Abera</dd>
-                  </div>
-                  <div className="flex flex-col py-3">
-                    <dt className="mb-1 text-text md:text-lg ">
-                      Date Of Birth
-                    </dt>
-                    <dd className="text-lg text-text font-semibold">21/02/1997</dd>
-                  </div>
-                  <div className="flex flex-col py-3">
-                    <dt className="mb-1 text-text md:text-lg ">
-                      Gender
-                    </dt>
-                    <dd className="text-lg text-text font-semibold">Male</dd>
+
+                  <div className="flex flex-col pt-3">
+                    <dt className="mb-1 text-text md:text-lg ">Email</dt>
+                    <dd className="text-lg text-text font-semibold">
+                      samuelabera87@gmail.com
+                    </dd>
                   </div>
                 </dl>
               </div>
               <div className="w-full">
                 <dl className="text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                   <div className="flex flex-col pb-3">
-                    <dt className="mb-1 text-text md:text-lg ">
-                      Location
-                    </dt>
+                    <dt className="mb-1 text-text md:text-lg ">Location</dt>
                     <dd className="text-lg text-text font-semibold">
                       Ethiopia, Addis Ababa
                     </dd>
                   </div>
                   <div className="flex flex-col pt-3">
-                    <dt className="mb-1 text-text md:text-lg ">
-                      Phone Number
-                    </dt>
-                    <dd className="text-lg text-text font-semibold">+251913****30</dd>
-                  </div>
-                  <div className="flex flex-col pt-3">
-                    <dt className="mb-1 text-text md:text-lg ">
-                      Email
-                    </dt>
+                    <dt className="mb-1 text-text md:text-lg ">Phone Number</dt>
                     <dd className="text-lg text-text font-semibold">
-                      samuelabera87@gmail.com
-                    </dd>
-                  </div>
-                  <div className="flex flex-col pt-3">
-                    <dt className="mb-1 text-text md:text-lg ">
-                      Website
-                    </dt>
-                    <dd className="text-lg font-semibold">
-                      <a href="https://techakim.com">https://www.teclick.com</a>
+                      +251913****30
                     </dd>
                   </div>
                 </dl>
               </div>
             </div>
-            <div className="text-text body-font">
-              <div className="container px-5 py-24 mx-auto">
-                <div className="flex flex-wrap -m-4">
-                  <div className="p-4 md:w-1/3">
-                    <div className="h-full rounded-xl shadow-cla-blue bg-bg overflow-hidden">
-                      <img
-                        className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
-                        src="https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80"
-                        alt="blog"
-                      />
-                      <div className="py-6">
-                        <h2 className="tracking-widest text-xs title-font font-medium text-text mb-1">
-                          CATEGORY-1
-                        </h2>
-                        <h1 className="title-font text-lg font-medium text-text mb-3">
-                          The Catalyzer
-                        </h1>
-                        <p className="leading-relaxed mb-3">
-                          Photo booth fam kinfolk cold-pressed sriracha leggings
-                          jianbing microdosing tousled waistcoat.
-                        </p>
-                        <div className="flex items-center flex-wrap ">
-                          <button className="bg-bg shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
-                            Learn more
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-4 md:w-1/3">
-                    <div className="h-full rounded-xl overflow-hidden">
-                      <img
-                        className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
-                        src="https://images.unsplash.com/photo-1624628639856-100bf817fd35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8M2QlMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60"
-                        alt="blog"
-                      />
-                      <div className="py-6">
-                        <h2 className="tracking-widest text-xs title-font font-medium text-text mb-1">
-                          CATEGORY-1
-                        </h2>
-                        <h1 className="title-font text-lg font-medium text-text mb-3">
-                          The Catalyzer
-                        </h1>
-                        <p className="leading-relaxed mb-3">
-                          Photo booth fam kinfolk cold-pressed sriracha leggings
-                          jianbing microdosing tousled waistcoat.
-                        </p>
-                        <div className="flex items-center flex-wrap ">
-                          <button className="bg-bg shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
-                            Learn more
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-4 md:w-1/3">
-                    <div className="h-full rounded-xl bg-bg overflow-hidden">
-                      <img
-                        className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
-                        src="https://images.unsplash.com/photo-1631700611307-37dbcb89ef7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60"
-                        alt="blog"
-                      />
-                      <div className="py-6">
-                        <h2 className="tracking-widest text-xs title-font font-medium text-text mb-1">
-                          CATEGORY-1
-                        </h2>
-                        <h1 className="title-font text-lg font-medium text-text mb-3">
-                          The Catalyzer
-                        </h1>
-                        <p className="leading-relaxed mb-3">
-                          Photo booth fam kinfolk cold-pressed sriracha leggings
-                          jianbing microdosing tousled waistcoat.
-                        </p>
-                        <div className="flex items-center flex-wrap ">
-                          <button className="bg-bg shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
-                            Learn more
-                          </button>
-                        </div>
+          </div>
+
+          <div className="md:grid grid-cols-3 gap-3">
+            {data?.map((card) => (
+              <div key={card.id} className="text-text body-font">
+                <div className="container px-5 py-4 mx-auto">
+                  <div className="h-full rounded-xl shadow-cla-blue bg-bg overflow-hidden">
+                    <img
+                      className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
+                      src={card.image}
+                      alt="blog"
+                    />
+                    <div className="py-6">
+                      <h2 className="tracking-widest text-xs title-font font-medium text-text mb-1">
+                        {card.category}
+                      </h2>
+                      <h1 className="title-font text-lg font-medium text-text mb-3">
+                        {card.title}
+                      </h1>
+                      <p className="leading-relaxed mb-3">{card.description}</p>
+                      <div className="flex items-center flex-wrap ">
+                        <button className="bg-bg shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
+                          Learn more
+                        </button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
+
           {/* Social Links */}
           <div className="fixed right-2 bottom-20 flex flex-col rounded-sm bg-gray-200 text-text dark:bg-gray-200/80 dark:text-gray-700 hover:text-text hover:">
             <a href="https://www.linkedin.com/in/samuel-abera-6593a2209/">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
-                <svg
-                  className="lg:w-6 lg:h-6 xs:w-4 xs:h-4 text-blue-500"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M12.51 8.796v1.697a3.738 3.738 0 0 1 3.288-1.684c3.455 0 4.202 2.16 4.202 4.97V19.5h-3.2v-5.072c0-1.21-.244-2.766-2.128-2.766-1.827 0-2.139 1.317-2.139 2.676V19.5h-3.19V8.796h3.168ZM7.2 6.106a1.61 1.61 0 0 1-.988 1.483 1.595 1.595 0 0 1-1.743-.348A1.607 1.607 0 0 1 5.6 4.5a1.601 1.601 0 0 1 1.6 1.606Z"
-                    clipRule="evenodd"
-                  />
-                  <path d="M7.2 8.809H4V19.5h3.2V8.809Z" />
-                </svg>
+                <RiLinkedinFill className="w-6 h-6" />
               </div>
             </a>
             <a href="https://twitter.com/Samuel7Abera7">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
-                <svg
-                  className="lg:w-6 lg:h-6 xs:w-4 xs:h-4 text-gray-900"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z" />
-                </svg>
+                <FaXTwitter className="w-6 h-6 text-text" />
               </div>
             </a>
             <a>
               <div className="p-2 hover:text-blue-500 hover:dark:text-blue-500">
-                <svg
-                  className="lg:w-6 lg:h-6 xs:w-4 xs:h-4 text-blue-700"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M13.135 6H15V3h-1.865a4.147 4.147 0 0 0-4.142 4.142V9H7v3h2v9.938h3V12h2.021l.592-3H12V6.591A.6.6 0 0 1 12.592 6h.543Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <FiFacebook className="w-6 h-6" />
               </div>
             </a>
             <a href="https://www.youtube.com/@silentcoder7">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
-                <svg
-                  className="lg:w-6 lg:h-6 xs:w-4 xs:h-4 text-red-600"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <IoLogoYoutube className="w-6 h-6 text-red-600" />
               </div>
             </a>
           </div>
