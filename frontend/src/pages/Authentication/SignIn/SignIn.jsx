@@ -36,7 +36,7 @@ export default function SignIn() {
   const SignInMutation = useMutation({
     mutationFn: async (formData) => {
       dispatch(requestStart()); // Dispatch request start action before making API call
-      const res = await axiosInstance.post("/api/auth/signin", formData);
+      const res = await axiosInstance.post("/auth/signin", formData);
       return res.data;
     },
     onSuccess: (data) => {
@@ -183,7 +183,7 @@ export default function SignIn() {
         </form>
 
         <p className="flex  items-center gap-2">
-          <span>Don't have an acoount?</span>
+          <span>Don&apos;t have an acoount?</span>
           <span>
             <Link to="/sign-up" className="text-blue-500 hover:underline">
               sign up here

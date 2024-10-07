@@ -19,7 +19,7 @@ export default function EmailVerify() {
     const verifyEmail = async () => {
       try {
         dispatch(requestStart()); // Dispatch request start action before making API call
-        const res = await axiosInstance.get(`/api/auth/email-verify?token=${token}`);
+        const res = await axiosInstance.get(`/auth/email-verify?token=${token}`);
         dispatch(emailLoginSuccess(res.data)); // Dispatch login success action if login is successful
         localStorage.setItem("accessToken", res.data.token); // Store the access token in localStorage
         console.log("Sign up API Response:", res.data);
@@ -28,11 +28,12 @@ export default function EmailVerify() {
           navigate("/"); // Navigate to homepage
         }, 1000);
       } catch (error) {
+        console.log(error)
         dispatch(loginFailure("Email verification failed")); // Dispatch login failure action on error
       }
     };
     verifyEmail();
-  }, [location]);
+  }, [location,navigate,dispatch]);
 
   return (
     <main className="min-h-[calc(100vh-44px)] sm:min-h-[calc(100vh-58px)] flex flex-col items-center justify-center bg-primaryBg">
