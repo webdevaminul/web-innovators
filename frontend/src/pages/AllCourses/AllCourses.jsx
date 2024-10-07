@@ -60,11 +60,112 @@ const AllCourses = () => {
     }
   };
 
-  // previous function
+  // previous page function
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
+  };
+
+  // Function to render Google-style pagination
+  const renderPagination = () => {
+    const paginationItems = [];
+    const visiblePages = 5; // Number of visible pages
+    let startPage = currentPage - Math.floor(visiblePages / 2);
+    let endPage = currentPage + Math.floor(visiblePages / 2);
+
+    // Adjust startPage and endPage if they are out of bounds
+    if (startPage < 1) {
+      endPage += 1 - startPage;
+      startPage = 1;
+    }
+    if (endPage > totalPages) {
+      startPage -= endPage - totalPages;
+      endPage = totalPages;
+    }
+
+    if (startPage < 1) startPage = 1;
+
+    // Add "Previous" button
+    if (currentPage > 1) {
+      paginationItems.push(
+        <button
+          key="prev"
+          className="join-item btn btn-md"
+          onClick={handlePreviousPage}
+        >
+          «
+        </button>
+      );
+    }
+
+    // Add "First" page with ellipsis if necessary
+    if (startPage > 1) {
+      paginationItems.push(
+        <button
+          key={1}
+          className="join-item btn btn-md"
+          onClick={() => setCurrentPage(1)}
+        >
+          1
+        </button>
+      );
+      if (startPage > 2) {
+        paginationItems.push(
+          <span key="dots-prev" className="join-item">
+            ...
+          </span>
+        );
+      }
+    }
+
+    // Add visible page numbers
+    for (let i = startPage; i <= endPage; i++) {
+      paginationItems.push(
+        <button
+          key={i}
+          className={`join-item btn btn-md ${currentPage === i ? "bg-secondary text-black" : ""}`}
+          onClick={() => setCurrentPage(i)}
+        >
+          {i}
+        </button>
+      );
+    }
+
+    // Add "Last" page with ellipsis if necessary
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) {
+        paginationItems.push(
+          <span key="dots-next" className="join-item">
+            ...
+          </span>
+        );
+      }
+      paginationItems.push(
+        <button
+          key={totalPages}
+          className="join-item btn btn-md"
+          onClick={() => setCurrentPage(totalPages)}
+        >
+          {totalPages}
+        </button>
+      );
+    }
+
+    // Add "Next" button
+    if (currentPage < totalPages) {
+      paginationItems.push(
+        <button
+          key="next"
+          className="join-item btn btn-md"
+          onClick={handleNextPage}
+        >
+          »
+        </button>
+      );
+    }
+
+    return paginationItems;
   };
 
   if (loading) {
@@ -84,7 +185,7 @@ const AllCourses = () => {
   );
 
   return (
-    <div className="container mx-auto px-4 font-bai">
+    <div className="container mx-auto px-4 font-bai py-8">
       <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
         <div className="w-full md:w-1/4">
           <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
@@ -106,7 +207,7 @@ const AllCourses = () => {
 
         <div className="w-full md:w-3/4">
           <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
-            <h3 className="text-3xl font-semibold ">
+            <h3 className="text-3xl font-semibold">
               {selectedCategory ? selectedCategory : "All Courses"}
             </h3>
             <div className="text-center mb-2">
@@ -132,33 +233,7 @@ const AllCourses = () => {
             </div>
 
             {/* Pagination Controls */}
-            <div className="join border mx-auto">
-              <button
-                className="join-item btn btn-md"
-                onClick={handlePreviousPage}
-                disabled={currentPage === 1}
-              >
-                «
-              </button>
-              {[...Array(totalPages)].map((_, index) => (
-                <button
-                  key={index}
-                  className={`join-item btn btn-md ${
-                    currentPage === index + 1 ? "bg-secondary text-black" : ""
-                  }`}
-                  onClick={() => setCurrentPage(index + 1)}
-                >
-                  {index + 1}
-                </button>
-              ))}
-              <button
-                className="join-item btn btn-md"
-                onClick={handleNextPage}
-                disabled={currentPage === totalPages}
-              >
-                »
-              </button>
-            </div>
+            <div className="join border mx-auto">{renderPagination()}</div>
           </div>
         </div>
       </div>
