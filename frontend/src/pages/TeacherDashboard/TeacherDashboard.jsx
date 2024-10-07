@@ -7,11 +7,15 @@ import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
 import Darkmode from "../../components/Darkmode/Darkmode";
+import { useSelector } from "react-redux";
 
 const TeacherDashboard = () => {
+  const { user } = useSelector((state) => state.authUsers);
   const [isOpen, setIsOpen] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
   const sidebarRef = useRef(null);
+  const loginUser = user?.userInfo.userName;
+  console.log('user', loginUser)
 
   const handleRotating = () => {
     setIsRotating(true);
@@ -161,13 +165,13 @@ useEffect(() => {
               </button>
 
               {/* User list */}
-              <Link>
+              <Link to="profile" >
                 <button
                   className="middle none font-bai font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex"
                   type="button"
                 >
                   <HiOutlineUsers className="w-5 h-5" />
-                  user name{" "}
+                 {loginUser}
                 </button>
                 <button
                   className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden"
