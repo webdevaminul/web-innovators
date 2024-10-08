@@ -89,6 +89,19 @@ useEffect(() => {
               </Link>
             </li>
             <li>
+              <Link to="/teacher-dashboard/manage-course">
+                <button
+                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  type="button"
+                >
+                  <FaRegPenToSquare className="w-5 h-5" />
+                  <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
+                    Manage course
+                  </p>
+                </button>
+              </Link>
+            </li>
+            <li>
               <Link to="/teacher-dashboard/create-course">
                 <button
                   className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"

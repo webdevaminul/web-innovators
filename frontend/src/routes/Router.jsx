@@ -11,6 +11,7 @@ import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
 import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile";
 import TeacherHome from "../pages/TeacherDashboard/TeacherHome";
 import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
+import ManageCourse from "../pages/TeacherDashboard/ManageCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
@@ -77,6 +78,10 @@ const router = createBrowserRouter([
       {
         path : "profile",
         element : <TeacherProfile />
+      },
+      {
+        path : "manage-course",
+        element : <ManageCourse />
       },
       {
         path : "create-course",

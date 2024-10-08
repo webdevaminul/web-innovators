@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const multer = require("multer");
 const cookieParser = require("cookie-parser");
 const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
@@ -55,9 +56,33 @@ app.use((req, res, next) => {
 // Connect to MongoDB
 connectDB();
 
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // Where to store the files
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname); // Unique filename
+  },
+});
+
+const upload = multer({ storage: storage });
+
+
+
+
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
+
+app.post("/create/course", upload.single('coverPicture'), async (req, res) => {
+  const courseDetails = req.body;
+  const coverPicture = req.file; // File info
+
+  console.log('data', courseDetails, coverPicture);
+  res.status(200).json({ message: "Course created successfully!" });
+});
 
 // Custom error handling middleware
 app.use(errorMiddleware);
@@ -66,6 +91,7 @@ app.use(errorMiddleware);
 app.get("/", (req, res) => {
   res.send("LearnUP server is running fine");
 });
+app.post()
 
 // Start the server
 const PORT = process.env.PORT || 5000;
