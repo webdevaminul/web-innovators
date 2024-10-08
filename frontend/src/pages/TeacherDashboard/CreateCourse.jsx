@@ -11,29 +11,20 @@ const CreateCourse = () => {
 
 
   
-  const handleCreateCourse = (e) => {
+  const handleCreateCourse = async (e) => {
     e.preventDefault();
-    
     // FormData object to handle file and other data
-    const formData = new FormData();
+    // const formData = new FormData();
     
     const form = e.target;
     const title = form.title.value;
     const file = form.coverPicture.files[0]; // File input
     const detailsCourse = form.textarea.value;
-    const category = form.category.value; // Assuming you have a category field
-    
-    // Append all data to FormData object
-    formData.append('title', title);
-    formData.append('coverPicture', file); // Appending file
-    formData.append('detailsCourse', detailsCourse);
-    formData.append('name', name);
-    formData.append('email', email);
-    formData.append('category', category);
-    
-    // Sending POST request with Axios
+
+    try {
+        // Sending POST request with Axios
     axiosInstance
-      .post("/create/course", formData, {
+      .post("/create/course",  {
         headers: {
           'Content-Type': 'multipart/form-data', // Important for file upload
         },
@@ -44,6 +35,17 @@ const CreateCourse = () => {
       .catch((error) => {
         console.error("Error Creating Course:", error);
       });
+
+    } catch (error) {
+      console.log(error)
+    }
+
+    // // Append all data to FormData object
+    // formData.append('coverPicture', file); // Appending file
+    
+    
+    
+    console.log("paici",title,category,detailsCourse)
   };
   
 
@@ -89,9 +91,9 @@ const CreateCourse = () => {
           />
           <input
             type="text"
-            name="title"
+            name="extra"
             className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-            placeholder="Your course title"
+            placeholder="Your course title extra"
           />
         </div>
 
