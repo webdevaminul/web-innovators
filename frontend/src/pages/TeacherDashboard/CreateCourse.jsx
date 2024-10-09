@@ -21,16 +21,19 @@ const CreateCourse = () => {
     const file = form.coverPicture.files[0]; // File input
     const detailsCourse = form.textarea.value;
 
+    const formData = new FormData();
+      formData.append("coverPicture", file);
+
     try {
         // Sending POST request with Axios
     axiosInstance
-      .post("/create/course",  {
+      .post("/create/course",formData,  {
         headers: {
           'Content-Type': 'multipart/form-data', // Important for file upload
         },
       })
       .then((response) => {
-        console.log("Course Created Successfully:", response.data);
+        console.log(response.data.message);
       })
       .catch((error) => {
         console.error("Error Creating Course:", error);
@@ -45,7 +48,7 @@ const CreateCourse = () => {
     
     
     
-    console.log("paici",title,category,detailsCourse)
+    console.log("paici",file,title,category,detailsCourse)
   };
   
 

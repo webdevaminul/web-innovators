@@ -1,8 +1,8 @@
+import { Link, Outlet } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { HiBars3, HiOutlineUsers } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
-import { MdOutlineNotificationsActive } from "react-icons/md";
-import { Link, Outlet } from "react-router-dom";
+import { MdOutlineNotificationsActive,MdManageAccounts } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
@@ -94,7 +94,7 @@ useEffect(() => {
                   className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
                 >
-                  <FaRegPenToSquare className="w-5 h-5" />
+                  <MdManageAccounts className="w-5 h-5" />
                   <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
                     Manage course
                   </p>

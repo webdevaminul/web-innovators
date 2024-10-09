@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const multer = require("multer");
+const path = require("path");
 const cookieParser = require("cookie-parser");
 const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
@@ -56,32 +57,64 @@ app.use((req, res, next) => {
 // Connect to MongoDB
 connectDB();
 
-
+// multer using for file upload
+const folder = "./public/images/";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Where to store the files
+    cb(null, folder); // Where to store the files
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + "-" + file.originalname); // Unique filename
+    console.log('file 68', file)
+    // control file name like -> important file.png => important-file-time(forUni).png
+    const fileExt = path.extname(file?.originalname);
+    const fileName =
+      (file.originalname
+        ? file.originalname
+            .replace(fileExt, "") // here your file name will be -> important file
+            .toLowerCase()
+            .split(" ") // split by spaces, split return array -> ['important', 'file']
+            .join("-") // join with hyphen -> important-file
+        : "unknown-file") + // if file name is nothing
+      "-" +
+      Date.now(); // Add timestamp nano-second -> important-file-123456
+    cb(null, fileName + fileExt); // here filename and fileExt -> important-file-123456.png
   },
 });
 
-const upload = multer({ storage: storage });
-
-
-
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1000000, // 1 mb = 1000kb = 1000000 byte
+  },
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg" ||
+      file.mimetype === "image/png"
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only .jpg, .png, or .jpeg formats are allowed!"));
+    }
+  },
+});
 
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
 
-app.post("/create/course", upload.single('coverPicture'), async (req, res) => {
-  const courseDetails = req.body;
-  const coverPicture = req.file; // File info
+app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
+  if (!req.file) {
+    return res.status(400).send("No file uploaded.");
+  }
+  const imgUrl = `./public/images/${req.file.filename}`;
 
-  console.log('data', courseDetails, coverPicture);
-  res.status(200).json({ message: "Course created successfully!" });
+  // Optionally, handle or rename/move the file here
+  res.status(200).send({
+    message: "File uploaded successfully!",
+    fileUrl: imgUrl,
+  });
 });
 
 // Custom error handling middleware
@@ -91,7 +124,6 @@ app.use(errorMiddleware);
 app.get("/", (req, res) => {
   res.send("LearnUP server is running fine");
 });
-app.post()
 
 // Start the server
 const PORT = process.env.PORT || 5000;
