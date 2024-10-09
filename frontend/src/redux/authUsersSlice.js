@@ -40,6 +40,10 @@ const authUsersSlice = createSlice({
       state.isAuthenticated = false;
       state.isGoogle = false;
     },
+    profileUpdateSuccess: (state, action) => {
+      state.loading = false;
+      state.user = action.payload;
+    },
   },
 });
 
@@ -50,6 +54,7 @@ export const {
   requestFailure,
   resetError,
   userClearSuccess,
+  profileUpdateSuccess,
 } = authUsersSlice.actions;
 
 export default authUsersSlice.reducer;
