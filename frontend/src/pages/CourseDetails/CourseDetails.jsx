@@ -1,6 +1,8 @@
 import { useLoaderData, useParams } from "react-router-dom";
-import { VideoCard } from "./VideoCard";
+
 import FirstSection from "./FirstSection";
+import SecondSection from "./SecondSection";
+import VideoCard from "./VideoCard";
 
 const CourseDetails = () => {
   const coursesDetails = useLoaderData();
@@ -18,6 +20,9 @@ const CourseDetails = () => {
         </div>
         {/* first section for details page */}
         <FirstSection singleCourse={singleCourse} />
+
+        {/* second section for detail page */}
+        <SecondSection />
       </div>
     </div>
   );
