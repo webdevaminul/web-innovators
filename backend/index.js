@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
+const userRoutes = require("./api/routes/user.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
 
 // Load environment variables
@@ -58,6 +59,7 @@ connectDB();
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 
 // Custom error handling middleware
 app.use(errorMiddleware);
