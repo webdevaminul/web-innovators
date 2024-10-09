@@ -1,6 +1,7 @@
 import { useState } from "react";
-import axiosInstance from "../../api/axiosInstance";
 import { useSelector } from "react-redux";
+import { toast, ToastContainer } from 'react-toastify';
+import axiosInstance from "../../api/axiosInstance";
 
 const CreateCourse = () => {
   const [category, setCategory] = useState("");
@@ -19,9 +20,9 @@ const CreateCourse = () => {
     const detailsCourse = form.textarea.value;
 
     const formData = new FormData();
-    const courseData = {name, email, title,category, detailsCourse,}
+    const courseData = {name, email, title,category, detailsCourse}
     formData.append("coverPicture", file);
-    
+
     // Append the serialized course data (as a string)
   formData.append("courseData", JSON.stringify(courseData));
 
@@ -34,7 +35,10 @@ const CreateCourse = () => {
           },
         })
         .then((response) => {
-          console.log(response.data.message);
+          console.log(response.data);
+          if(response.data.courseId){
+            toast.success(response.data.message)
+          }
         })
         .catch((error) => {
           console.error("Error Creating Course:", error);
@@ -42,7 +46,6 @@ const CreateCourse = () => {
     } catch (error) {
       console.log(error);
     }
-    console.log("paici", file, courseData);
   };
 
   // Handle image file selection and generate preview URL
@@ -77,13 +80,13 @@ const CreateCourse = () => {
 
         {/* title and video */}
         <div className="md:flex gap-4 my-4">
-          <input
+          <input required
             type="text"
             name="title"
             className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Your course title"
           />
-          <input
+          <input          
             type="text"
             name="extra"
             className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
@@ -106,6 +109,7 @@ const CreateCourse = () => {
           <label className="form-control text-text">
             Course cover picture
             <input
+            required
               onChange={handleFileChange}
               type="file"
               accept="image/*"
@@ -147,6 +151,7 @@ const CreateCourse = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

@@ -4,7 +4,7 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const { connectDB } = require("./api/config/mongoDB");
+const { connectDB, client } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
@@ -56,6 +56,8 @@ app.use((req, res, next) => {
 
 // Connect to MongoDB
 connectDB();
+const database = client.db("LearnUp");
+const courseCollection = database.collection("courses");
 
 // multer using for file upload
 const folder = "./public/images/";
@@ -104,21 +106,30 @@ app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
 
 app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
-
   // Parse the course data (it was sent as a string)
   const courseData = JSON.parse(req.body.courseData); // Converting back to an object
-  const { title, detailsCourse } = courseData; // Destructure the object fields
-  console.log('data',courseData)
-
+  const { name, email, title, category, detailsCourse } = courseData; // Destructure the object fields
+  
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
   }
-  const imgUrl = `./public/images/${req.file.filename}`;
+  const imgUrl = `/images/${req.file.filename}`;
+
+  // save data to database
+  const data = {
+    name,
+    email,
+    title,
+    category,
+    detailsCourse,
+    imageUrl: imgUrl,
+  };
+  const result = await courseCollection.insertOne(data);
 
   // Optionally, handle or rename/move the file here
   res.status(200).send({
-    message: "File uploaded successfully!",
-    fileUrl: imgUrl,
+    message: "Course created and file uploaded successfully!",
+    courseId: result.insertedId,
   });
 });
 
