@@ -5,11 +5,12 @@ const AllCourses = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState(null); // Initially null to show all data
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 6; // Number of items to display per page
 
+  // Load all courses when the component mounts
   useEffect(() => {
     fetch("./courses.json")
       .then((response) => {
@@ -28,16 +29,19 @@ const AllCourses = () => {
       });
   }, []);
 
+  // Handle category change and filter data
   const handleCategoryChange = (e) => {
     const category = e.target.value;
-    setSelectedCategory(category === selectedCategory ? null : category);
+    setSelectedCategory(category === "All" ? null : category);
     setCurrentPage(1); // Reset to the first page when changing category
   };
 
+  // Filter courses based on the selected category
   const filteredCourses = selectedCategory
     ? courses.filter((course) => course.category === selectedCategory)
     : courses;
 
+  // Sort the filtered courses
   const sortedCourses = filteredCourses.sort((a, b) => {
     const priceA = parseFloat(a.price);
     const priceB = parseFloat(b.price);
@@ -67,7 +71,7 @@ const AllCourses = () => {
     }
   };
 
-  // Function to render Google-style pagination
+  // Function to render pagination
   const renderPagination = () => {
     const paginationItems = [];
     const visiblePages = 5; // Number of visible pages
@@ -124,7 +128,9 @@ const AllCourses = () => {
       paginationItems.push(
         <button
           key={i}
-          className={`join-item btn btn-md ${currentPage === i ? "bg-secondary text-black" : ""}`}
+          className={`join-item btn btn-md ${
+            currentPage === i ? "bg-secondary text-black" : ""
+          }`}
           onClick={() => setCurrentPage(i)}
         >
           {i}
@@ -180,9 +186,11 @@ const AllCourses = () => {
     );
   }
 
-  const categories = Array.from(
-    new Set(courses.map((course) => course.category))
-  );
+  // Get all categories including an "All" option
+  const categories = [
+    "All",
+    ...new Set(courses.map((course) => course.category)),
+  ];
 
   return (
     <div className="container mx-auto px-4 font-bai py-8">
@@ -190,18 +198,17 @@ const AllCourses = () => {
         <div className="w-full md:w-1/4">
           <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
           <div className="pt-3 rounded-lg">
-            {categories.map((category) => (
-              <label key={category} className="flex items-center space-x-2">
-                <input
-                  type="checkbox"
-                  value={category}
-                  checked={selectedCategory === category}
-                  onChange={handleCategoryChange}
-                  className="text-blue-500 focus:ring-blue-400 h-4 w-4"
-                />
-                <span className="text-lg text-text">{category}</span>
-              </label>
-            ))}
+            <select
+              value={selectedCategory || "All"}
+              onChange={handleCategoryChange}
+              className="w-full p-2 border rounded-md"
+            >
+              {categories.map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
