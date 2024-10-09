@@ -16,11 +16,13 @@ const CreateCourse = () => {
     // FormData object to handle file and other data
     const form = e.target;
     const title = form.title.value;
+    const price = form.price.value;
     const file = form.coverPicture.files[0]; // File input
     const detailsCourse = form.textarea.value;
+    const status = "pending"
 
     const formData = new FormData();
-    const courseData = {name, email, title,category, detailsCourse}
+    const courseData = {name, email, title,price, status ,category, detailsCourse}
     formData.append("coverPicture", file);
 
     // Append the serialized course data (as a string)
@@ -87,10 +89,10 @@ const CreateCourse = () => {
             placeholder="Your course title"
           />
           <input          
-            type="text"
-            name="extra"
+            type="number"
+            name="price"
             className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-            placeholder="Your course title extra"
+            placeholder="Your course price"
           />
         </div>
 

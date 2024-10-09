@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 const { connectDB, client } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
+const courseRoutes = require("./api/routes/course.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
 
 // Load environment variables
@@ -56,11 +57,12 @@ app.use((req, res, next) => {
 
 // Connect to MongoDB
 connectDB();
+
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
 
 // multer using for file upload
-const folder = "./public/images/";
+const folder = "./public/images";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -104,36 +106,61 @@ const upload = multer({
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
+// Course routes
+app.use("/create",upload.single("coverPicture"), courseRoutes);
 
-app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
-  // Parse the course data (it was sent as a string)
-  const courseData = JSON.parse(req.body.courseData); // Converting back to an object
-  const { name, email, title, category, detailsCourse } = courseData; // Destructure the object fields
 
-  if (!req.file) {
-    return res.status(400).send("No file uploaded.");
-  }
-  const imgUrl = `/images/${req.file.filename}`;
 
-  // Save the course data along with the image URL in the database
-  const newCourse = {
-    ...courseData, // Spread course data
-    imageUrl: imgUrl, 
-  };
-  
-  const result = await courseCollection.insertOne(newCourse);
 
-  // Optionally, handle or rename/move the file here
-  res.status(200).send({
-    message: "Course created and file uploaded successfully!",
-    courseId: result.insertedId,
-  });
+
+
+
+
+
+
+
+
+
+
+
+// app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
+//   // Parse the course data (it was sent as a string)
+//   const courseData = JSON.parse(req.body.courseData); // Converting back to an object
+//   // const { name, email, title, category, detailsCourse } = courseData; // Destructure the object fields
+// console.log('116 courseData',courseData)
+//   if (!req.file) {
+//     return res.status(400).send("No file uploaded.");
+//   }
+//   const imgUrl = `/images/${req.file.filename}`;
+
+//   // Save the course data along with the image URL in the database
+//   const newCourse = {
+//     ...courseData, // Spread course data
+//     imageUrl: imgUrl,
+//   };
+
+//   const result = await courseCollection.insertOne(newCourse);
+
+//   // Optionally, handle or rename/move the file here
+//   res.status(200).send({
+//     message: "Course created and file uploaded successfully!",
+//     courseId: result.insertedId,
+//   });
+// });
+
+
+
+
+
+
+
+
+
+
+app.get("/courses", async (req, res) => {
+  const result = await courseCollection.find().toArray();
+  res.send(result);
 });
-
-app.get("/courses", async(req, res)=>{
-  const result = await courseCollection.find().toArray()
-  res.send(result)
-})
 
 // Custom error handling middleware
 app.use(errorMiddleware);
