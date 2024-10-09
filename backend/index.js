@@ -109,22 +109,19 @@ app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
   // Parse the course data (it was sent as a string)
   const courseData = JSON.parse(req.body.courseData); // Converting back to an object
   const { name, email, title, category, detailsCourse } = courseData; // Destructure the object fields
-  
+
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
   }
   const imgUrl = `/images/${req.file.filename}`;
 
-  // save data to database
-  const data = {
-    name,
-    email,
-    title,
-    category,
-    detailsCourse,
-    imageUrl: imgUrl,
+  // Save the course data along with the image URL in the database
+  const newCourse = {
+    ...courseData, // Spread course data
+    imageUrl: imgUrl, 
   };
-  const result = await courseCollection.insertOne(data);
+  
+  const result = await courseCollection.insertOne(newCourse);
 
   // Optionally, handle or rename/move the file here
   res.status(200).send({
@@ -132,6 +129,11 @@ app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
     courseId: result.insertedId,
   });
 });
+
+app.get("/courses", async(req, res)=>{
+  const result = await courseCollection.find().toArray()
+  res.send(result)
+})
 
 // Custom error handling middleware
 app.use(errorMiddleware);
