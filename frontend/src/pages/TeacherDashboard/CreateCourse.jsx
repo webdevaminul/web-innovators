@@ -9,50 +9,41 @@ const CreateCourse = () => {
   const name = user.userInfo.userName;
   const email = user.userInfo.userEmail;
 
-
-  
   const handleCreateCourse = async (e) => {
     e.preventDefault();
+
     // FormData object to handle file and other data
-    // const formData = new FormData();
-    
     const form = e.target;
     const title = form.title.value;
     const file = form.coverPicture.files[0]; // File input
     const detailsCourse = form.textarea.value;
 
     const formData = new FormData();
-      formData.append("coverPicture", file);
+    const courseData = {name, email, title,category, detailsCourse,}
+    formData.append("coverPicture", file);
+    
+    // Append the serialized course data (as a string)
+  formData.append("courseData", JSON.stringify(courseData));
 
     try {
-        // Sending POST request with Axios
-    axiosInstance
-      .post("/create/course",formData,  {
-        headers: {
-          'Content-Type': 'multipart/form-data', // Important for file upload
-        },
-      })
-      .then((response) => {
-        console.log(response.data.message);
-      })
-      .catch((error) => {
-        console.error("Error Creating Course:", error);
-      });
-
+      // Sending POST request with Axios
+      axiosInstance
+        .post("/create/course", formData, {
+          headers: {
+            "Content-Type": "multipart/form-data", // Important for file upload
+          },
+        })
+        .then((response) => {
+          console.log(response.data.message);
+        })
+        .catch((error) => {
+          console.error("Error Creating Course:", error);
+        });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
-    // // Append all data to FormData object
-    // formData.append('coverPicture', file); // Appending file
-    
-    
-    
-    console.log("paici",file,title,category,detailsCourse)
+    console.log("paici", file, courseData);
   };
-  
-
-
 
   // Handle image file selection and generate preview URL
   const handleFileChange = (e) => {
@@ -125,11 +116,15 @@ const CreateCourse = () => {
 
           <div className="absolute bottom-0 right-0 ">
             <div className="text-left">
-            {previewUrl === "" ? (
-              "image preview"
-            ) : (
-              <img className="w-20 border rounded-sm" src={previewUrl} alt="" />
-            )}
+              {previewUrl === "" ? (
+                "image preview"
+              ) : (
+                <img
+                  className="w-20 border rounded-sm"
+                  src={previewUrl}
+                  alt=""
+                />
+              )}
             </div>
           </div>
         </div>

@@ -65,7 +65,6 @@ const storage = multer.diskStorage({
     cb(null, folder); // Where to store the files
   },
   filename: (req, file, cb) => {
-    console.log('file 68', file)
     // control file name like -> important file.png => important-file-time(forUni).png
     const fileExt = path.extname(file?.originalname);
     const fileName =
@@ -105,6 +104,12 @@ app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
 
 app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
+
+  // Parse the course data (it was sent as a string)
+  const courseData = JSON.parse(req.body.courseData); // Converting back to an object
+  const { title, detailsCourse } = courseData; // Destructure the object fields
+  console.log('data',courseData)
+
   if (!req.file) {
     return res.status(400).send("No file uploaded.");
   }
