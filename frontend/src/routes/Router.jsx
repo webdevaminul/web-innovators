@@ -9,7 +9,7 @@ import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
-import CourseDetails from "../pages/AllCourses/CourseDetails";
+import CourseDetails from "../pages/CourseDetails/CourseDetails";
 
 const router = createBrowserRouter([
   {

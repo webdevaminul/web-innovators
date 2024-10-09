@@ -9,7 +9,7 @@ const CourseCard = ({ course }) => {
       className="card card-compact border border-border bg-accentOne"
     >
       <figure>
-        <img src={course.image} alt="Shoes" />
+        <img src={course.image} alt="Course Image" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{course.title}</h2>
