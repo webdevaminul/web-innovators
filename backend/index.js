@@ -4,7 +4,7 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const cookieParser = require("cookie-parser");
-const { connectDB, client } = require("./api/config/mongoDB");
+const { connectDB, client, ObjectId } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const courseRoutes = require("./api/routes/course.route");
@@ -60,6 +60,7 @@ connectDB();
 
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
+const usersCollection = database.collection("users");
 
 // multer using for file upload
 const folder = "./public/images";
@@ -107,21 +108,7 @@ const upload = multer({
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
 // Course routes
-app.use("/create",upload.single("coverPicture"), courseRoutes);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.use("/create", upload.single("coverPicture"), courseRoutes);
 
 // app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
 //   // Parse the course data (it was sent as a string)
@@ -148,18 +135,62 @@ app.use("/create",upload.single("coverPicture"), courseRoutes);
 //   });
 // });
 
-
-
-
-
-
-
-
-
+app.get("/all-user", async (req, res) => {
+  const result = await usersCollection.find().toArray();
+  res.send(result);
+});
 
 app.get("/courses", async (req, res) => {
   const result = await courseCollection.find().toArray();
   res.send(result);
+});
+
+app.put("/be/instructor/:id", async (req, res) => {
+  const instructorId = req.params.id; // Get the instructor ID from the URL
+  const { status, institute, message, selectedOption } = req.body;
+  const instructorData = req.body;
+  const query = { _id: new ObjectId(instructorId) };
+
+  try {
+    const option = { upsert: true };
+    const updateDoc = {
+      $set: {
+        status: instructorData.status,
+        institute: instructorData.institute,
+        message: instructorData.message,
+        category: instructorData.selectedOption,
+      },
+    };
+    // Update the instructor using native MongoDB methods
+    const result = await usersCollection.updateOne(query, updateDoc, option);
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Instructor not found" });
+    }
+
+    res.status(200).json({ message: "Instructor updated successfully" });
+  } catch (error) {
+    console.log(error);
+  }
+
+  // try {
+  //   // Update the instructor using native MongoDB methods
+  //   const result = await usersCollection.updateOne(
+  //     { _id: new ObjectId(instructorId) },  // Query to find instructor by ID
+  //     {
+  //       $set: { institute, message, selectedOption },  // Fields to update
+  //     }
+  //   );
+
+  //   if (result.matchedCount === 0) {
+  //     return res.status(404).json({ message: 'Instructor not found' });
+  //   }
+
+  //   res.status(200).json({ message: 'Instructor updated successfully' });
+  // } catch (error) {
+  //   console.error('Error updating instructor:', error);
+  //   res.status(500).json({ message: 'Error updating instructor', error: error.message });
+  // }
 });
 
 // Custom error handling middleware

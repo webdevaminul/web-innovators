@@ -18,7 +18,6 @@ const Navbar = () => {
 
   // this user role will be dynamic
   const role = "teacher";
-  console.log(user);
 
   // Toggle Profile Menu
   const toggleProfileMenu = () => {

@@ -15,12 +15,15 @@ import ManageCourse from "../pages/TeacherDashboard/ManageCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
+import AdminHome from "../pages/AdminDashboard/AdminHome";
+import UserManage from "../pages/AdminDashboard/UserManage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement : <ErrorPage />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -64,30 +67,43 @@ const router = createBrowserRouter([
   {
     path: "dashbroad/home",
     element: <DashboardLayoutBasic />,
-    // path: "/user-dashboard",
-    // element: <UserDashbroad />,
   },
   {
     path: "teacher-dashboard",
     element: <TeacherDashboard />,
-    children : [
+    children: [
       {
-        index :true ,
-        element : <TeacherHome />
+        index: true,
+        element: <TeacherHome />,
       },
       {
-        path : "profile",
-        element : <TeacherProfile />
+        path: "profile",
+        element: <TeacherProfile />,
       },
       {
-        path : "manage-course",
-        element : <ManageCourse />
+        path: "manage-course",
+        element: <ManageCourse />,
       },
       {
-        path : "create-course",
-        element : <CreateCourse />
+        path: "create-course",
+        element: <CreateCourse />,
       },
-    ]
+    ],
+  },
+  {
+    path: "admin-dashboard",
+    element: <AdminDashboard />,
+    children: [
+      {
+       
+        path:"admin-home",
+        element: <AdminHome />,
+      },
+      {
+        path: "user-manage",
+        element: <UserManage />,
+      },
+    ],
   },
 ]);
 export default router;

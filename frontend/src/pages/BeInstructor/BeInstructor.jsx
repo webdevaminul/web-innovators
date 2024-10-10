@@ -1,18 +1,39 @@
 import { useState } from "react";
 import Heading from "../../utils/Heading";
+import { useSelector } from "react-redux";
+import axiosInstance from "../../api/axiosInstance";
+import { toast } from "react-toastify";
 
 const BeInstructor = () => {
+  const { user } = useSelector((state) => state.authUsers);
   const [selectedOption, setSelectedOption] = useState("");
+  const email = user.userInfo.userEmail;
+  const name = user.userInfo.userName;
+  const id = user.userInfo._id;
+  console.log("user", id);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const data = e.target;
-    const name = data.name.value;
-    const email = data.email.value;
     const institute = data.instName.value;
     const message = data.message.value;
-    console.log("data", name, email, institute, message, selectedOption);
+    const status = "Pending" ;
+    // console.log("data", name, email, institute, message, selectedOption);
+    const updateData = {status ,institute, message, selectedOption}
+
+    axiosInstance.put(`/be/instructor/${id}`,updateData)
+    .then(res=>{
+      console.log(res)
+      if(res.data.status === 200 ){
+        toast.success(res.data.message)
+      }
+    })
+    .catch(err=>{
+      console.log(err)
+    })
   };
+
+
   return (
     <div>
       <Heading heading={"Become a teacher"} />
@@ -249,9 +270,9 @@ const BeInstructor = () => {
                   id="name"
                   type="text"
                   name="name"
-                  required="required"
+                  readOnly
                   autoFocus="autofocus"
-                  placeholder="Type Your Name"
+                  placeholder={name}
                 />
               </div>
               <div className="md:w-1/2">
@@ -266,8 +287,8 @@ const BeInstructor = () => {
                   id="email"
                   type="email"
                   name="email"
-                  required="required"
-                  placeholder="Email"
+                  readOnly
+                  placeholder={email}
                 />
               </div>
             </div>
@@ -325,7 +346,7 @@ const BeInstructor = () => {
             <div className="mt-8">
               <button
                 type="submit"
-                className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-secondary hover:bg-primary md:py-3 md:text-lg md:px-10"
+                className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-text hover:text-white bg-secondary hover:bg-slate-700 md:py-3 md:text-lg md:px-10"
               >
                 Submit
               </button>
