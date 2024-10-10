@@ -50,6 +50,7 @@ export default function UpdateProfile() {
           setFilePercent(Math.round(process)); // Update the upload progress
         },
         (error) => {
+          console.log(error)
           setFileUploadError(true); // Handle any errors during upload
         },
         () => {
