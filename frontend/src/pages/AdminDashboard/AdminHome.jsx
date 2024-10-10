@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import Heading from "../../utils/Heading";
 
 const AdminHome = () => {
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 p-2">
+          <Heading heading={"Admin Home"} />
             {/* Sección 1 - Gráfica de Usuarios */}
             <div className="bg-bg p-4 rounded-md">
               <h2 className="text-text text-lg font-semibold pb-1">
