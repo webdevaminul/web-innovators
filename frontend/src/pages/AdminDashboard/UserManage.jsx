@@ -5,8 +5,6 @@ import useAllUser from "../../api/useAllUser";
 const UserManage = () => {
   const { users, isLoading, refetch } = useAllUser();
 
-  console.log("users", users);
-
   const handleUpdateRole = (id) => {
     const status = "Aproved";
     const updateData = { status };

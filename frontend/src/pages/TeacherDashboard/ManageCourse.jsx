@@ -9,14 +9,15 @@ const ManageCourse = () => {
     axiosInstance
       .get("/all/courses")
       .then((res) => {
-        // console.log(res.data);
-        setMyCourse(res.data);
+        console.log(res);
+        setMyCourse(res?.data.data);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
-  console.log("course", myCourse);
+
+
   return (
     <div className="overflow-x-auto w-full px-2 py-5">
       <div className="overflow-hidden">
@@ -65,7 +66,7 @@ const ManageCourse = () => {
                 <td className="border-b"> price </td>
                 <td className="border-b"> studens </td>
                 <td className="border-b">
-                  <select className="select select-bordered w-full p-1 focus:border-none">
+                  <select className="select w-full p-1 min-h-0 h-8 focus:border-0">
                     <option defaultValue>Pending</option>
                     <option>Aproved</option>
                   </select>

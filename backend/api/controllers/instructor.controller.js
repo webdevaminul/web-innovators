@@ -46,9 +46,25 @@ exports.approvedInstructor = async (req, res, next) => {
 
 exports.getAllUser = async (req, res, next) => {
   try {
-    const result = await usersCollection.find().toArray();
-    res.send(result);
+    const users = await usersCollection.find().toArray();
+    if (!users.length) {
+        return res.status(404).json({
+          success: false,
+          message: 'No users found'
+        });
+      }
+    // res.status(200).send(users);
+    res.status(200).json({
+        success: true,
+        data: users
+      });
+
   } catch (error) {
+    res.status(500).json({
+        success: false,
+        message: 'Server error while fetching users',
+        error: error.message
+      });
     next(error);
   }
 };

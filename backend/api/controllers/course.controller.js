@@ -39,9 +39,26 @@ exports.createCourse = async (req, res, next) => {
 
 exports.allCourse = async (req, res, next) => {
   try {
-    const result = await courseCollection.find().toArray();
-    res.send(result);
+    const courses = await courseCollection.find().toArray();
+
+    if (!courses.length) {
+      return res.status(404).json({
+        success: false,
+        message: 'No courses found'
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: courses
+    });
+
+
   } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'An error occurred while fetching courses. Please try again later.'
+    });
     next(error);
   }
 };

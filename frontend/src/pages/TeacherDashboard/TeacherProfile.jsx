@@ -2,6 +2,7 @@ import { RiLinkedinFill } from "react-icons/ri";
 import { FaXTwitter } from "react-icons/fa6";
 import { FiFacebook } from "react-icons/fi";
 import { IoLogoYoutube } from "react-icons/io";
+import { useSelector } from "react-redux";
 
 const data = [
   {
@@ -34,6 +35,9 @@ const data = [
 ];
 
 const TeacherProfile = () => {
+  
+  const { user } = useSelector((state) => state.authUsers);
+  console.log('user',user.userInfo)
   return (
     <section className="w-full overflow-hidden">
       <div className="flex flex-col ">
@@ -46,13 +50,13 @@ const TeacherProfile = () => {
         {/* Profile Image */}
         <div className="mx-auto md:mt-0 mt-20 flex">
           <img
-            src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw3fHxwZW9wbGV8ZW58MHwwfHx8MTcxMTExMTM4N3ww&ixlib=rb-4.0.3&q=80&w=1080"
+            src={user.userInfo.userPhoto}
             alt="User Profile"
             className="rounded-md lg:w-[12rem] lg:h-[12rem] md:w-[10rem] md:h-[10rem] sm:w-[8rem] sm:h-[8rem] xs:w-[7rem] xs:h-[7rem] outline outline-2 outline-offset-2 outline-blue-500 relative lg:bottom-[5rem] sm:bottom-[4rem] xs:bottom-[3rem]"
           />
           {/* FullName */}
           <h1 className="w-full text-left my-4 sm:mx-4 xs:pl-4 text-text lg:text-4xl md:text-3xl sm:text-3xl xs:text-xl font-serif">
-            Samuel Abera
+            {user.userInfo.userName}
           </h1>
         </div>
         <div className="mx-auto flex flex-col gap-4 items-center relative lg:-top-8 md:-top-6 sm:-top-4 xs:-top-4">
@@ -73,14 +77,14 @@ const TeacherProfile = () => {
                   <div className="flex flex-col pb-3">
                     <dt className="mb-1 text-text md:text-lg">Name</dt>
                     <dd className="text-lg text-text font-semibold">
-                      Samuel thom{" "}
+                    {user.userInfo.userName}
                     </dd>
                   </div>
 
                   <div className="flex flex-col pt-3">
                     <dt className="mb-1 text-text md:text-lg ">Email</dt>
                     <dd className="text-lg text-text font-semibold">
-                      samuelabera87@gmail.com
+                      {user.userInfo.userEmail}
                     </dd>
                   </div>
                 </dl>

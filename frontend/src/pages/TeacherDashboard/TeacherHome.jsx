@@ -1,6 +1,7 @@
 import { HiOutlineUsers } from "react-icons/hi2";
 import { IoIosTrendingUp } from "react-icons/io";
 import TeacherOwnCourse from "../../components/TeacherOwnCourse/TeacherOwnCourse";
+import Calendar from "../../components/Calender/Calendar";
 // import { useState } from "react";
 
 const TeacherHome = () => {
@@ -156,7 +157,7 @@ const TeacherHome = () => {
           </div>
         </div>
         <div>
-          <h1>here calendar</h1>
+          <Calendar />
         </div>
       </div>
     </div>
