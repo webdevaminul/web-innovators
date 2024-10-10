@@ -9,6 +9,7 @@ import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
+import CourseDetails from "../pages/CourseDetails/CourseDetails";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,11 @@ const router = createBrowserRouter([
       {
         path: "/allCourses",
         element: <AllCourses />,
+      },
+      {
+        path: "/course-details/:id",
+        element: <CourseDetails />,
+        loader: () => fetch("./courses.json"),
       },
       {
         path: "/blog",
