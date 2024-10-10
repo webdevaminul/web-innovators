@@ -1,15 +1,14 @@
-
 const { client } = require("../config/mongoDB");
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
 
 // Create a course
-exports.createCourse = async (req, res,next) => {
-  console.log('8 api hit hoice')
+exports.createCourse = async (req, res, next) => {
+  console.log("8 api hit hoice");
   try {
     // Parse the course data sent as a string
     const courseData = JSON.parse(req.body.courseData); // Convert back to object
-    console.log('11 controler course', courseData)
+    console.log("11 controler course", courseData);
 
     if (!req.file) {
       return res.status(400).send("No file uploaded.");
@@ -34,6 +33,15 @@ exports.createCourse = async (req, res,next) => {
     });
   } catch (error) {
     res.status(500).send({ message: "Server error", error: error.message });
-    next(error)
+    next(error);
+  }
+};
+
+exports.allCourse = async (req, res, next) => {
+  try {
+    const result = await courseCollection.find().toArray();
+    res.send(result);
+  } catch (error) {
+    next(error);
   }
 };

@@ -3,9 +3,9 @@ import axiosInstance from "./axiosInstance";
 
 const useAllUser = () => {
     const { data: users = [], isLoading ,refetch} = useQuery({
-        queryKey: ["newMobile"],
+        queryKey: ["user"],
         queryFn: async () => {
-          const res = await axiosInstance.get("/all-user");
+          const res = await axiosInstance.get("/get/users");
           return res?.data ;
         },
       });

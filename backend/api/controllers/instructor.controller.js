@@ -43,3 +43,12 @@ exports.approvedInstructor = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.getAllUser = async (req, res, next) => {
+  try {
+    const result = await usersCollection.find().toArray();
+    res.send(result);
+  } catch (error) {
+    next(error);
+  }
+};

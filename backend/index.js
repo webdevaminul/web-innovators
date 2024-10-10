@@ -4,13 +4,16 @@ const cors = require("cors");
 const multer = require("multer");
 const path = require("path");
 const cookieParser = require("cookie-parser");
+
 const { connectDB, client } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const courseRoutes = require("./api/routes/course.route");
+const coursesRoutes = require("./api/routes/course.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
-
 const instructorRoutes = require("./api/routes/instructor.route");
+const allUser = require("./api/routes/instructor.route")
+
 // Load environment variables
 dotenv.config();
 
@@ -60,7 +63,6 @@ app.use((req, res, next) => {
 connectDB();
 
 const database = client.db("LearnUp");
-const courseCollection = database.collection("courses");
 const usersCollection = database.collection("users");
 
 // multer using for file upload
@@ -110,7 +112,8 @@ app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
 app.use("/be", instructorRoutes);
 app.use("/aproved", instructorRoutes);
-// app.use("/all",)
+app.use("/all", coursesRoutes)  // all courses get
+app.use("/get", allUser)  // all user get
 app.use("/create", upload.single("coverPicture"), courseRoutes);
 
 // app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
@@ -137,16 +140,6 @@ app.use("/create", upload.single("coverPicture"), courseRoutes);
 //     courseId: result.insertedId,
 //   });
 // });
-
-app.get("/all-user", async (req, res) => {
-  const result = await usersCollection.find().toArray();
-  res.send(result);
-});
-
-app.get("/courses", async (req, res) => {
-  const result = await courseCollection.find().toArray();
-  res.send(result);
-});
 
 // Custom error handling middleware
 app.use(errorMiddleware);

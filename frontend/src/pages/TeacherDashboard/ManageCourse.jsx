@@ -7,7 +7,7 @@ const ManageCourse = () => {
   const [myCourse, setMyCourse] = useState([]);
   useEffect(() => {
     axiosInstance
-      .get("/courses")
+      .get("/all/courses")
       .then((res) => {
         // console.log(res.data);
         setMyCourse(res.data);

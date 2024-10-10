@@ -2,7 +2,7 @@ const express = require("express");
 const multer = require("multer")
 const router = express.Router();
 const upload = require("../utilities/imageUp")
-const { createCourse } = require("../controllers/course.controller");
+const { createCourse, allCourse } = require("../controllers/course.controller");
 
 // POST request to create a new course courseRoutes
 
@@ -20,5 +20,7 @@ router.post("/course", (req, res, next) => {
       next(); // Proceed to the controller if no errors
     });
   }, createCourse);
+
+router.get("/courses",allCourse)
 
 module.exports = router;

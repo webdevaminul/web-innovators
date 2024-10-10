@@ -23,6 +23,11 @@ const UserManage = () => {
         console.log(err);
       });
   };
+
+  const handleDeclineRole =() =>{
+    toast.warn("Not yet done")
+  }
+
   if (isLoading) {
     return <p>Loading...</p>;
   }
@@ -115,7 +120,7 @@ const UserManage = () => {
                 <span className="text-gray-400 cursor-not-allowed" >update</span>
               )}
               <button
-                onClick={handleUpdateRole}
+                onClick={handleDeclineRole}
                 className="ml-2 text-red-600 hover:text-red-900"
               >
                 Decline
