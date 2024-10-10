@@ -94,7 +94,7 @@
   h6,
   p,
   button,
-  input {
+  input,svg {
     color: rgb(var(--text-color));
   }
 

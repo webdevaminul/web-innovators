@@ -10,6 +10,7 @@ const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const courseRoutes = require("./api/routes/course.route");
 const coursesRoutes = require("./api/routes/course.route");
+const userRoutes = require("./api/routes/user.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
 const instructorRoutes = require("./api/routes/instructor.route");
 const allUser = require("./api/routes/instructor.route")
@@ -110,36 +111,12 @@ const upload = multer({
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
 app.use("/be", instructorRoutes);
 app.use("/aproved", instructorRoutes);
 app.use("/all", coursesRoutes)  // all courses get
 app.use("/get", allUser)  // all user get
 app.use("/create", upload.single("coverPicture"), courseRoutes);
-
-// app.post("/create/course", upload.single("coverPicture"), async (req, res) => {
-//   // Parse the course data (it was sent as a string)
-//   const courseData = JSON.parse(req.body.courseData); // Converting back to an object
-//   // const { name, email, title, category, detailsCourse } = courseData; // Destructure the object fields
-// console.log('116 courseData',courseData)
-//   if (!req.file) {
-//     return res.status(400).send("No file uploaded.");
-//   }
-//   const imgUrl = `/images/${req.file.filename}`;
-
-//   // Save the course data along with the image URL in the database
-//   const newCourse = {
-//     ...courseData, // Spread course data
-//     imageUrl: imgUrl,
-//   };
-
-//   const result = await courseCollection.insertOne(newCourse);
-
-//   // Optionally, handle or rename/move the file here
-//   res.status(200).send({
-//     message: "Course created and file uploaded successfully!",
-//     courseId: result.insertedId,
-//   });
-// });
 
 // Custom error handling middleware
 app.use(errorMiddleware);
