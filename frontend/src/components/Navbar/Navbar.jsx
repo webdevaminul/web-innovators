@@ -99,10 +99,8 @@ console.log('role',role)
   const [openMenu, setOpenMenu] = useState(false);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
 
-  console.log(searchBarOpen);
-
   return (
-    <header className="fixed h-[3.8rem] w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
+    <header className="fixed h-[3.8rem] w-full top-0 left-0 z-50 border-b border-border/70 font-bai bg-bg">
       <nav className="container px-2 sm:px-0 gap-2 h-full mx-auto flex justify-between items-center relative">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-3">
@@ -210,7 +208,7 @@ console.log('role',role)
                     </Link>
                     <Link
                       onClick={() => setProfileMenu(false)}
-                      to=""
+                      to="/manage-account/overview"
                       className="text-sm bg-bg hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
                       <span className="text-2xl">{/* <IoOptions /> */}</span>

@@ -20,6 +20,11 @@ import PrivateRouter from "./PrivateRouter";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import AdminHome from "../pages/AdminDashboard/AdminHome";
 import UserManage from "../pages/AdminDashboard/UserManage";
+import ManageAccount from "../pages/AccountManagement/ManageAccount";
+import Overview from "../pages/AccountManagement/Overview";
+import UpdateProfile from "../pages/AccountManagement/UpdateProfile";
+import ChangePassword from "../pages/AccountManagement/ChangePassword";
+import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
 
 const router = createBrowserRouter([
   {
@@ -46,7 +51,28 @@ const router = createBrowserRouter([
         path: "/email-verify",
         element: <EmailVerify />,
       },
-
+      {
+        path: "/manage-account",
+        element: <ManageAccount />,
+        children: [
+          {
+            path: "/manage-account/overview",
+            element: <Overview />,
+          },
+          {
+            path: "/manage-account/manage-profile",
+            element: <UpdateProfile />,
+          },
+          {
+            path: "/manage-account/change-password",
+            element: <ChangePassword />,
+          },
+          {
+            path: "/manage-account/delete-account",
+            element: <DeleteAccount />,
+          },
+        ],
+      },
       {
         path: "/allCourses",
         element: <AllCourses />,
