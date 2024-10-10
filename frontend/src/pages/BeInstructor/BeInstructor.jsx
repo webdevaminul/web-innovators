@@ -3,6 +3,7 @@ import Heading from "../../utils/Heading";
 import { useSelector } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const BeInstructor = () => {
   const { user } = useSelector((state) => state.authUsers);
@@ -10,7 +11,7 @@ const BeInstructor = () => {
   const email = user.userInfo.userEmail;
   const name = user.userInfo.userName;
   const id = user.userInfo._id;
-  console.log("user", id);
+  const navigate = useNavigate()
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -18,14 +19,15 @@ const BeInstructor = () => {
     const institute = data.instName.value;
     const message = data.message.value;
     const status = "Pending" ;
-    // console.log("data", name, email, institute, message, selectedOption);
     const updateData = {status ,institute, message, selectedOption}
 
     axiosInstance.put(`/be/instructor/${id}`,updateData)
     .then(res=>{
-      console.log(res)
-      if(res.data.status === 200 ){
+      console.log(res.data)
+      console.log(res.status)
+      if(res.status === 200 ){
         toast.success(res.data.message)
+        navigate("/")
       }
     })
     .catch(err=>{

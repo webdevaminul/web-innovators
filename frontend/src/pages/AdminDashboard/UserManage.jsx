@@ -1,36 +1,31 @@
-import { useEffect, useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import { toast, ToastContainer } from "react-toastify";
+import useAllUser from "../../api/useAllUser";
 
 const UserManage = () => {
-  const [alluser, setAlluser] = useState([]);
-  useEffect(() => {
+  const { users, isLoading, refetch } = useAllUser();
+
+  console.log("users", users);
+
+  const handleUpdateRole = (id) => {
+    const status = "Aproved";
+    const updateData = { status };
     axiosInstance
-      .get("/all-user")
+      .put(`/aproved/teaccher/${id}`, updateData)
       .then((res) => {
-        // console.log(res.data);
-        setAlluser(res.data);
+        console.log(res.data);
+        if (res?.data.modifiedCount > 0) {
+          toast.success(res.data.message);
+          refetch();
+        }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-
-  const handleUpdateRole = () => {
-    toast.warn("There has noting bro");    
-    const status = "Pending" ;
-    const updateData ={status}
-    axiosInstance.put(`/be/instructor/id`,updateData)
-    .then(res=>{
-      console.log(res)
-      if(res.data.status === 200 ){
-        toast.success(res.data.message)
-      }
-    })
-    .catch(err=>{
-      console.log(err)
-    })
   };
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
@@ -75,9 +70,9 @@ const UserManage = () => {
         </tr>
       </thead>
       <tbody className="bg-bg divide-y divide-gray-200">
-        {alluser?.map((user) => (
+        {users?.map((user) => (
           <tr key={user._id}>
-            <td className="px-6 py-4 whitespace-nowrap">                             
+            <td className="px-6 py-4 whitespace-nowrap">
               <span className="flex items-center">
                 <span className="flex-shrink-0 h-10 w-10">
                   <img
@@ -98,7 +93,7 @@ const UserManage = () => {
             </td>
             <td className="px-6 py-4 whitespace-nowrap">
               <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-               {user.status ? user.status : "student yet" } 
+                {user.status ? user.status : "student yet"}
               </span>
             </td>
             <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
@@ -108,12 +103,17 @@ const UserManage = () => {
               {user.userEmail}
             </td>
             <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
-              <button
-                onClick={handleUpdateRole}
-                className="text-indigo-600 hover:text-indigo-900"
-              >
-                Update
-              </button>
+              {user.status && user.status === "Pending" ? (
+                <button
+                  className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 hover:bg-green-400 text-green-800"
+                  onClick={() => handleUpdateRole(user._id)}
+                >
+                  {" "}
+                  update{" "}
+                </button>
+              ) : (
+                <span className="text-gray-400 cursor-not-allowed" >update</span>
+              )}
               <button
                 onClick={handleUpdateRole}
                 className="ml-2 text-red-600 hover:text-red-900"
