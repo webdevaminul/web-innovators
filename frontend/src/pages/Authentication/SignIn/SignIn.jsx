@@ -12,6 +12,7 @@ import {
   requestStart,
   resetError,
 } from "../../../redux/authUsersSlice";
+import Heading from "../../../utils/Heading";
 // import GoogleAuth from "../components/GoogleAuth";
 
 export default function SignIn() {
@@ -64,6 +65,7 @@ export default function SignIn() {
 
   return (
     <main className="min-h-[90vh] max-w-xs mx-auto flex items-center justify-center">
+      <Heading heading={"Sign In"} />
       <section className="flex flex-col gap-4 justify-center p-4 w-full ">
         {/* Switch between signup and signin */}
         <div>
@@ -183,7 +185,7 @@ export default function SignIn() {
         </form>
 
         <p className="flex  items-center gap-2">
-          <span>Don't have an acoount?</span>
+          <span>Don&apos;t have an acoount?</span>
           <span>
             <Link to="/sign-up" className="text-blue-500 hover:underline">
               sign up here

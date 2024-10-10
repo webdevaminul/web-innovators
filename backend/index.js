@@ -1,11 +1,19 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
+const multer = require("multer");
+const path = require("path");
 const cookieParser = require("cookie-parser");
-const { connectDB } = require("./api/config/mongoDB");
+
+const { connectDB, client } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
+const courseRoutes = require("./api/routes/course.route");
+const coursesRoutes = require("./api/routes/course.route");
+const userRoutes = require("./api/routes/user.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
+const instructorRoutes = require("./api/routes/instructor.route");
+const allUser = require("./api/routes/instructor.route")
 
 // Load environment variables
 dotenv.config();
@@ -55,9 +63,60 @@ app.use((req, res, next) => {
 // Connect to MongoDB
 connectDB();
 
+const database = client.db("LearnUp");
+const usersCollection = database.collection("users");
+
+// multer using for file upload
+const folder = "./public/images";
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, folder); // Where to store the files
+  },
+  filename: (req, file, cb) => {
+    // control file name like -> important file.png => important-file-time(forUni).png
+    const fileExt = path.extname(file?.originalname);
+    const fileName =
+      (file.originalname
+        ? file.originalname
+            .replace(fileExt, "") // here your file name will be -> important file
+            .toLowerCase()
+            .split(" ") // split by spaces, split return array -> ['important', 'file']
+            .join("-") // join with hyphen -> important-file
+        : "unknown-file") + // if file name is nothing
+      "-" +
+      Date.now(); // Add timestamp nano-second -> important-file-123456
+    cb(null, fileName + fileExt); // here filename and fileExt -> important-file-123456.png
+  },
+});
+
+const upload = multer({
+  storage: storage,
+  limits: {
+    fileSize: 1000000, // 1 mb = 1000kb = 1000000 byte
+  },
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype === "image/jpg" ||
+      file.mimetype === "image/jpeg" ||
+      file.mimetype === "image/png"
+    ) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only .jpg, .png, or .jpeg formats are allowed!"));
+    }
+  },
+});
+
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/be", instructorRoutes);
+app.use("/aproved", instructorRoutes);
+app.use("/all", coursesRoutes)  // all courses get
+app.use("/get", allUser)  // all user get
+app.use("/create", upload.single("coverPicture"), courseRoutes);
 
 // Custom error handling middleware
 app.use(errorMiddleware);

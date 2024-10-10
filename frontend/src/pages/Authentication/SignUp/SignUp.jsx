@@ -6,6 +6,7 @@ import { MdError, MdCheckCircle, MdOutlineEmail, MdOutlineLock } from "react-ico
 import { FiUser } from "react-icons/fi";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import axiosInstance from "../../../api/axiosInstance";
+import Heading from "../../../utils/Heading";
 
 // TODO: Turn off auto complete
 
@@ -51,6 +52,7 @@ export default function SignUp() {
 
   return (
     <main className="min-h-[90vh] max-w-xs mx-auto flex items-center justify-center">
+      <Heading heading={"Sign Up"} />
       <section className="flex flex-col gap-3 justify-center p-4 w-full ">
         {/* Switch between signup and signin */}
         <div>

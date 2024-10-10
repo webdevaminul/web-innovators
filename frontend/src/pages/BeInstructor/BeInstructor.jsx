@@ -1,27 +1,55 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import Heading from "../../utils/Heading";
+import { useSelector } from "react-redux";
+import axiosInstance from "../../api/axiosInstance";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const BeInstructor = () => {
+  const { user } = useSelector((state) => state.authUsers);
+  const [selectedOption, setSelectedOption] = useState("");
+  const email = user.userInfo.userEmail;
+  const name = user.userInfo.userName;
+  const id = user.userInfo._id;
+  const navigate = useNavigate()
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const data = e.target;
+    const institute = data.instName.value;
+    const message = data.message.value;
+    const status = "Pending" ;
+    const updateData = {status ,institute, message, selectedOption}
+
+    axiosInstance.put(`/be/instructor/${id}`,updateData)
+    .then(res=>{
+      console.log(res.data)
+      console.log(res.status)
+      if(res.status === 200 ){
+        toast.success(res.data.message)
+        navigate("/")
+      }
+    })
+    .catch(err=>{
+      console.log(err)
+    })
+  };
+
+
   return (
     <div>
+      <Heading heading={"Become a teacher"} />
       {/* Breadcumb in here */}
       <div className="bg-black py-14">
         <h1 className="text-white md:text-5xl text-3xl md:mx-12 mx-5 px-4 font-bai font-semibold border-l-[3px] border-secondary ">
           Become a Teacher{" "}
         </h1>
       </div>
-      <div className="breadcrumbs font-bai border-b border-gray-300 py-4 md:mx-12 mx-5 px-4">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>Become a teacher</li>
-        </ul>
-      </div>
 
       {/* Main section in here */}
       <div>
-        <div className="md:w-3/5 px-8 md:my-10 my-5 mx-auto">
-          <h1 className="text-center font-semibold font-bai md:text-4xl text-2xl md:my-10">
+        <div className="px-8 md:my-10 my-5 mx-auto">
+          <h1 className="font-semibold font-bai md:text-4xl text-2xl md:my-10">
             Apply as an Instructor in Learn Up{" "}
           </h1>
           <p>
@@ -39,7 +67,7 @@ const BeInstructor = () => {
 
       {/* Process and guide line */}
       <div className="md:px-8 px-3 md:my-10 my-5">
-        <h1 className="text-center font-semibold font-bai md:text-4xl text-2xl md:my-10 my-5 py-5">
+        <h1 className="font-semibold font-bai md:text-4xl text-2xl md:mt-10 md:mb-4 my-5 py-5">
           Process and Submission Guidelines{" "}
         </h1>
 
@@ -50,10 +78,6 @@ const BeInstructor = () => {
           </h1>
 
           <ol className="ml-5 list-decimal">
-            <li className="font-bai text-text">
-              {" "}
-              Watch the video above to get an overall idea of the requirements{" "}
-            </li>
             <li className="font-bai text-text">
               {" "}
               Prepare your course contents as per the requirements{" "}
@@ -235,8 +259,8 @@ const BeInstructor = () => {
         </div>
 
         {/* Form section */}
-        <div className="grid-cols-1 border p-5 shadow rounded-md">
-          <form>
+        <div className="grid-cols-1 border p-5 my-10 shadow rounded-md">
+          <form onSubmit={handleFormSubmit}>
             {/* Name and email part */}
             <div className="md:flex gap-4">
               <div className="md:w-1/2">
@@ -248,9 +272,9 @@ const BeInstructor = () => {
                   id="name"
                   type="text"
                   name="name"
-                  required="required"
+                  readOnly
                   autoFocus="autofocus"
-                  placeholder="Type Your Name"
+                  placeholder={name}
                 />
               </div>
               <div className="md:w-1/2">
@@ -265,15 +289,18 @@ const BeInstructor = () => {
                   id="email"
                   type="email"
                   name="email"
-                  required="required"
-                  placeholder="Email"
+                  readOnly
+                  placeholder={email}
                 />
               </div>
             </div>
-            {/* Institue and others part */}
+            {/* Institue and good at part */}
             <div className="md:flex gap-4 md:my-5 ">
               <div className="md:w-1/2">
-                <label className="block text-text font-semibold" htmlFor="instName">
+                <label
+                  className="block text-text font-semibold"
+                  htmlFor="instName"
+                >
                   Institute Name
                 </label>
                 <input
@@ -287,20 +314,20 @@ const BeInstructor = () => {
                 />
               </div>
               <div className="md:w-1/2">
-                <label
-                  className="block text-text font-semibold"
-                  htmlFor="email"
-                >
-                  Another data
+                <label className="block text-text font-semibold">
+                  Effeciency at
                 </label>
-                <input
-                  className="shadow-inner bg-inputBg rounded-lg p-2 border-none mt-1 w-full block"
-                  id="email"
-                  type="email"
-                  name="email"
-                  required="required"
-                  placeholder="Email"
-                />
+                <select
+                  className="select select-ghost max-w-xs shadow-inner bg-inputBg rounded-lg p-2 border-none mt-1 w-full block"
+                  value={selectedOption}
+                  onChange={(e) => setSelectedOption(e.target.value)}
+                >
+                  <option defaultValue>select one</option>
+                  <option>Freelancing</option>
+                  <option>Language</option>
+                  <option>Programing</option>
+                  <option>Design</option>
+                </select>
               </div>
             </div>
 
@@ -315,13 +342,13 @@ const BeInstructor = () => {
                 className="w-full rounded-lg h-20 bg-inputBg"
                 name="message"
                 id="message"
-                placeholder="Enter your message here..."
+                placeholder="write here about you ..."
               ></textarea>
             </div>
             <div className="mt-8">
               <button
                 type="submit"
-                className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-secondary hover:bg-primary md:py-3 md:text-lg md:px-10"
+                className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-text hover:text-white bg-secondary hover:bg-slate-700 md:py-3 md:text-lg md:px-10"
               >
                 Submit
               </button>
