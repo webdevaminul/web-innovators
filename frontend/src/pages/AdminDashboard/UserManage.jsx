@@ -7,9 +7,10 @@ const UserManage = () => {
 
   const handleUpdateRole = (id) => {
     const status = "Aproved";
-    const updateData = { status };
+    const userNewRole = "Teacher";
+    const updateData = { status, userNewRole};
     axiosInstance
-      .put(`/aproved/teaccher/${id}`, updateData)
+      .put(`/aproved/teacher/${id}`, updateData)
       .then((res) => {
         console.log(res.data);
         if (res?.data.modifiedCount > 0) {

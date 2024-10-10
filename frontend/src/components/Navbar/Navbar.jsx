@@ -4,20 +4,25 @@ import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
-import Darkmode from "../Darkmode/Darkmode";
 import { useDispatch, useSelector } from "react-redux";
+import Darkmode from "../Darkmode/Darkmode";
 import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
 import axiosInstance from "../../api/axiosInstance";
+import useAllUser from "../../api/useAllUser";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
+  const {users} = useAllUser() ;
   const [profileMenu, setProfileMenu] = useState(false);
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
+  const foundUser = users?.find((u) => u.userEmail === user?.userInfo?.userEmail);
+
   // this user role will be dynamic
-  const role = "teacher";
+
+  const role = foundUser?.userRole ;
 
   // Toggle Profile Menu
   const toggleProfileMenu = () => {

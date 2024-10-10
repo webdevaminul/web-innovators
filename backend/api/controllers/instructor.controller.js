@@ -35,7 +35,10 @@ exports.approvedInstructor = async (req, res, next) => {
     const query = { _id: new ObjectId(id) };
     const aprovedStatus = req.body;
     const updateDoc = {
-      $set: { status: aprovedStatus.status },
+      $set: {
+        status: aprovedStatus.status,
+        userRole: aprovedStatus.userNewRole,
+      },
     };
     const result = await usersCollection.updateOne(query, updateDoc);
     res.send(result);
@@ -48,23 +51,22 @@ exports.getAllUser = async (req, res, next) => {
   try {
     const users = await usersCollection.find().toArray();
     if (!users.length) {
-        return res.status(404).json({
-          success: false,
-          message: 'No users found'
-        });
-      }
+      return res.status(404).json({
+        success: false,
+        message: "No users found",
+      });
+    }
     // res.status(200).send(users);
     res.status(200).json({
-        success: true,
-        data: users
-      });
-
+      success: true,
+      data: users,
+    });
   } catch (error) {
     res.status(500).json({
-        success: false,
-        message: 'Server error while fetching users',
-        error: error.message
-      });
+      success: false,
+      message: "Server error while fetching users",
+      error: error.message,
+    });
     next(error);
   }
 };

@@ -6,7 +6,6 @@ const useAllUser = () => {
         queryKey: ["user"],
         queryFn: async () => {
           const res = await axiosInstance.get("/get/users");
-          console.log(res)
           return res?.data.data ;
         },
       });

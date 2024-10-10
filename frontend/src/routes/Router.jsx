@@ -18,6 +18,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import AdminHome from "../pages/AdminDashboard/AdminHome";
 import UserManage from "../pages/AdminDashboard/UserManage";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -59,18 +60,30 @@ const router = createBrowserRouter([
       },
       {
         path: "/become-instructor",
-        element: <BeInstructor />,
+        element: (
+          <PrivateRouter>
+            <BeInstructor />
+          </PrivateRouter>
+        ),
       },
     ],
   },
 
   {
     path: "dashbroad/home",
-    element: <DashboardLayoutBasic />,
+    element: (
+      <PrivateRouter>
+        <DashboardLayoutBasic />
+      </PrivateRouter>
+    ),
   },
   {
     path: "teacher-dashboard",
-    element: <TeacherDashboard />,
+    element: (
+      <PrivateRouter>
+        <TeacherDashboard />
+      </PrivateRouter>
+    ),
     children: [
       {
         index: true,
@@ -92,11 +105,15 @@ const router = createBrowserRouter([
   },
   {
     path: "admin-dashboard",
-    element: <AdminDashboard />,
+    element: (
+      <PrivateRouter>
+        {" "}
+        <AdminDashboard />{" "}
+      </PrivateRouter>
+    ),
     children: [
       {
-       
-        path:"admin-home",
+        path: "admin-home",
         element: <AdminHome />,
       },
       {
