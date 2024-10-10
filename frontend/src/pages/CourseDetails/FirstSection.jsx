@@ -10,18 +10,19 @@ const FirstSection = ({ singleCourse }) => {
           {singleCourse.title}
         </h1>
         <p className="text-sm">
-          তোমরা যারা এইচএসসি ২০২৬ পরীক্ষায় বিজ্ঞান, ব্যবসায় শিক্ষা কিংবা
-          মানবিক বিভাগ থেকে অংশ নিচ্ছো, তোমাদের নিশ্চয়ই বিভাগীয় বিষয়ের বাইরের
-          পাঁচটি বিষয়ের একটি পূর্ণাঙ্গ প্রস্তুতি প্রয়োজন? কেননা বিভাগীয়
-          বিষয়গুলোতে জোর দিতে দিতে আমরা অনেক সময় এসব গুরুত্বপুর্ণ বিষয়ের কথা
-          ভুলে বসে থাকি। তাই, তোমাদের কথা চিন্তা করেই টেন মিনিট স্কুল নিয়ে
-          এসেছে এইচএসসি পরীক্ষার বাংলা ও ইংরেজি উভয় পত্রের এবং আইসিটিসহ মোট
-          পাঁচটি বিষয়ের উপর একটি পূর্ণাঙ্গ কোর্স “HSC 2026 Online Batch (BEI)”।
+          For those of you participating in the HSC 2026 exams from the Science,
+          Commerce, or Humanities streams, you surely need comprehensive
+          preparation in five subjects outside of your main stream subjects,
+          right? Often, while focusing on the core subjects, we tend to overlook
+          these important subjects. So, keeping your needs in mind, Ten Minute
+          School has brought a complete course for five subjects, including both
+          Bangla and English papers, as well as ICT, in the “HSC 2026 Online
+          Batch (BEI).”
         </p>
         <div className="mt-2">
           <div className="flex items-center gap-3">
             <h1 className="font-bold font-bai text-xl text-secondary">৳5850</h1>
-            <del className="font-medium font-bai text-xl">৳7500</del>
+            <del className="font-medium text-text font-bai text-xl">৳7500</del>
           </div>
           <button className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 md:hidden">
             Enroll Now
