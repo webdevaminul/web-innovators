@@ -1,22 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
-import Darkmode from "../Darkmode/Darkmode";
 import { useDispatch, useSelector } from "react-redux";
+import Darkmode from "../Darkmode/Darkmode";
 import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
 import axiosInstance from "../../api/axiosInstance";
+import useAllUser from "../../api/useAllUser";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
+  const {users} = useAllUser() ;
   const [profileMenu, setProfileMenu] = useState(false);
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  console.log(user);
+  const foundUser = users?.find((u) => u.userEmail === user?.userInfo?.userEmail);
 
+  // this user role will be dynamic
+
+  const role = foundUser?.userRole ;
+console.log('role',role)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -77,10 +84,14 @@ const Navbar = () => {
           Become an Instructor
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/userDeshbroad" className="text-nowrap">
+      <li onClick={() => setOpenMenu(false)}>        
+        {
+          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
+          Dashboard
+        </NavLink> : <NavLink to="teacher-dashboard" className="text-nowrap">
           Dashboard
         </NavLink>
+        }
       </li>
     </>
   );

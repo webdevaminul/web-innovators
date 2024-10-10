@@ -1,6 +1,3 @@
-
-
-import React from "react";
 import { Typography, Grid, Card, CardContent, CardMedia } from "@mui/material";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'; // For charts
 import PropTypes from "prop-types";

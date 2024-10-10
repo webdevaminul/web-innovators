@@ -21,8 +21,6 @@ export default {
         linkHover: "rgba(var(--text-link-hover))",
         secondary: "rgba(var(--secondary-color))",
         secondaryHover: "rgba(var(--secondary-hover-color))",
-        link: "rgba(var(--link-color))",
-        linkHover: "rgba(var(--link-hover-color))",
         border: "rgba(var(--border-color))",
         outline: "rgba(var(--outline-color))",
         error: "rgba(var(--error-color))",

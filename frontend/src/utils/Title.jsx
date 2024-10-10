@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 const Title = ({ title, subTitle }) => {
   return (
     <div className="py-4 md:py-6">
@@ -6,4 +7,8 @@ const Title = ({ title, subTitle }) => {
     </div>
   );
 };
+Title.propTypes = {
+  title : PropTypes.string,
+  subTitle : PropTypes.string,
+}
 export default Title;

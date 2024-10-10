@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion ,ObjectId} = require("mongodb");
 const dotenv = require("dotenv");
 
 // Load environment variables
@@ -29,4 +29,4 @@ async function connectDB() {
 }
 
 // Export the connection client and function
-module.exports = { connectDB, client };
+module.exports = { connectDB, client ,ObjectId};

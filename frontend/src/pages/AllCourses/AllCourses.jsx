@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard"; // Import your CourseCard component
+import Heading from "../../utils/Heading";
 
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -193,6 +194,8 @@ const AllCourses = () => {
   ];
 
   return (
+    <div className="container mx-auto px-4 font-bai">
+      <Heading heading={"All Courses"} />
     <div className="container mx-auto px-4 font-bai py-8">
       <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
         <div className="w-full md:w-1/4">
@@ -244,6 +247,7 @@ const AllCourses = () => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
