@@ -23,7 +23,7 @@ const Navbar = () => {
   // this user role will be dynamic
 
   const role = foundUser?.userRole ;
-
+console.log('role',role)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);

@@ -52,7 +52,7 @@ const AdminDashboard = () => {
       <div className="flex-1 flex">
         {/* Barra lateral de navegación (oculta en dispositivos pequeños) */}
         <div
-          className="p-2 bg-bg w-60 flex flex-col hidden md:flex"
+          className="p-2 bg-bg w-60 md:flex-col hidden md:flex"
           id="sideNav"
         >
           <nav>

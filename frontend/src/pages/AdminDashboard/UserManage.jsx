@@ -8,12 +8,12 @@ const UserManage = () => {
   const handleUpdateRole = (id) => {
     const status = "Aproved";
     const userNewRole = "Teacher";
-    const updateData = { status, userNewRole};
+    const updateData = { status, userNewRole };
     axiosInstance
       .put(`/aproved/teacher/${id}`, updateData)
       .then((res) => {
         console.log(res.data);
-        if (res?.data.modifiedCount > 0) {
+        if (res?.data?.result?.acknowledged) {
           toast.success(res.data.message);
           refetch();
         }
@@ -23,9 +23,9 @@ const UserManage = () => {
       });
   };
 
-  const handleDeclineRole =() =>{
-    toast.warn("Not yet done")
-  }
+  const handleDeclineRole = () => {
+    toast.warn("Not yet done");
+  };
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -108,26 +108,30 @@ const UserManage = () => {
             </td>
             <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
               {user.status && user.status === "Pending" ? (
-                <button
-                  className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 hover:bg-green-400 text-green-800"
-                  onClick={() => handleUpdateRole(user._id)}
-                >
-                  {" "}
-                  update{" "}
-                </button>
+                <>
+                  <button
+                    className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 hover:bg-green-400 text-green-800"
+                    onClick={() => handleUpdateRole(user._id)}
+                  >
+                    {" "}
+                    Accept{" "}
+                  </button>
+
+                  <button
+                   className="ml-2 text-red-600 hover:text-red-900"
+                   onClick={handleDeclineRole}
+                  >
+                    {" "}
+                    Reject{" "}
+                  </button>
+                </>
               ) : (
-                <span className="text-gray-400 cursor-not-allowed" >update</span>
+                user.status === "Aproved" ? "Aproved" : "Pending"              
               )}
-              <button
-                onClick={handleDeclineRole}
-                className="ml-2 text-red-600 hover:text-red-900"
-              >
-                Decline
-              </button>
             </td>
           </tr>
         ))}
-        {/* More rows... */}
+        
       </tbody>
       <ToastContainer />
     </table>

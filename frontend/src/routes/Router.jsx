@@ -14,11 +14,12 @@ import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
 import ManageCourse from "../pages/TeacherDashboard/ManageCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
+import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import PrivateRouter from "./PrivateRouter";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import AdminHome from "../pages/AdminDashboard/AdminHome";
 import UserManage from "../pages/AdminDashboard/UserManage";
-import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
@@ -49,6 +50,11 @@ const router = createBrowserRouter([
       {
         path: "/allCourses",
         element: <AllCourses />,
+      },
+      {
+        path: "/course-details/:id",
+        element: <CourseDetails />,
+        loader: () => fetch("./courses.json"),
       },
       {
         path: "/blog",

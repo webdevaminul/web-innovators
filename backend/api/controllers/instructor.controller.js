@@ -41,7 +41,10 @@ exports.approvedInstructor = async (req, res, next) => {
       },
     };
     const result = await usersCollection.updateOne(query, updateDoc);
-    res.send(result);
+    res.status(200).json({
+      message: "Congratulations, You are Teacher now !!",
+      result
+    });
   } catch (error) {
     next(error);
   }
