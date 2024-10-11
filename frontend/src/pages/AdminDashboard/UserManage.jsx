@@ -1,6 +1,7 @@
 import axiosInstance from "../../api/axiosInstance";
 import { toast, ToastContainer } from "react-toastify";
 import useAllUser from "../../api/useAllUser";
+import Loader from "../../utils/Loader/Loader";
 
 const UserManage = () => {
   const { users, isLoading, refetch } = useAllUser();
@@ -28,7 +29,7 @@ const UserManage = () => {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loader /> ;
   }
 
   return (

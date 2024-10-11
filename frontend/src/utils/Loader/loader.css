@@ -1,0 +1,30 @@
+.clip-diamond {
+    clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  }
+  
+  @keyframes bounce-left {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(-10px);
+    }
+  }
+  
+  @keyframes bounce-right {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    50% {
+      transform: translateX(10px);
+    }
+  }
+  
+  .animate-bounce-left {
+    animation: bounce-left 1s infinite alternate;
+  }
+  
+  .animate-bounce-right {
+    animation: bounce-right 1s infinite alternate;
+  }
+  

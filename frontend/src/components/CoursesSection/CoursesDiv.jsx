@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CourseCard from "../../pages/AllCourses/CourseCard";
+import Loader from "../../utils/Loader/Loader";
 
 const CoursesDiv = () => {
   const [courses, setCourses] = useState([]);
@@ -28,7 +29,7 @@ const CoursesDiv = () => {
   const displayedCourses = courses.slice(0, 4);
 
   if (loading) {
-    return <div className="text-center my-10">Loading...</div>;
+    return  <Loader /> ;
   }
 
   if (error) {
