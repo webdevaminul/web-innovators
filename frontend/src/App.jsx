@@ -5,6 +5,7 @@ import Footer from "./components/Footer/Footer";
 import Navbar from "./components/Navbar/Navbar";
 import "react-toastify/dist/ReactToastify.css";
 import Preloader from "./utils/Preloader";
+import BottomToTop from "./utils/BottomToTop";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <main className="mt-[3.8rem]">
         <Outlet />
         <Footer />
+        <BottomToTop />
       </main>
       <ToastContainer
         position="top-right"
