@@ -54,7 +54,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Connect to MongoDB
+// Connect to MongoDBcd 
 // connectDB();
 
 const database = client.db("LearnUp");
