@@ -82,6 +82,12 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
+
+      <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/create-post" className="text-nowrap">
+        blogCreation
+        </NavLink>
+      </li>
     </>
   );
 
