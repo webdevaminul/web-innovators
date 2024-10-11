@@ -236,6 +236,7 @@ import {
     TwitterIcon,
     LinkedinIcon
 } from 'react-share';
+import Heading from '../../utils/Heading';
 
 const BlogPosts = () => {
     const [posts, setPosts] = useState([]);
@@ -314,6 +315,8 @@ const BlogPosts = () => {
     return (
         <div className="bg-white text-gray-800 min-h-screen overflow-hidden">
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-4">
+            <Heading heading={"Blog"} />
+            <div className="container mx-auto grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-4"> {/* Updated grid layout */ }
                 {/* Categories Section (Visible on Small and Medium Devices) */}
                 <div className="col-span-full lg:hidden relative z-10">
                     <div className="bg-gray-100 p-3 rounded-lg shadow-md">
@@ -443,6 +446,7 @@ const BlogPosts = () => {
                     </button>
                 ))}
             </div>
+        </div>
         </div>
     );
 };

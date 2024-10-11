@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
-import postsData from "../../../public/BlogPosts.json";
+import postsBlogs from "../../../public/BlogPosts.json";
 import Title from "../../utils/Title";
 
 const LatestBlogs = () => {
-  const [posts, setPosts] = useState([]);
-  const [latestPosts, setLatestPosts] = useState([]);
+  const [blogs, setBlogs] = useState([]);
+  const [latestBlogs, setLatestBlogs] = useState([]);
 
   //   getting 4 data for latest blogs sections
   useEffect(() => {
     const fetchData = async () => {
-      const sortedPosts = postsData.sort(
+      const sortedBlogs = postsBlogs.sort(
         (a, b) => new Date(b.date) - new Date(a.date)
       );
-      setPosts(sortedPosts);
-      setLatestPosts(sortedPosts.slice(0, 4));
+      setBlogs(sortedBlogs);
+      setLatestBlogs(sortedBlogs.slice(0, 4)); // Use sortedBlogs here
     };
 
     fetchData();
@@ -27,6 +27,9 @@ const LatestBlogs = () => {
           "Grateful for the Trust of Teachers and Students, Empowering Every Step of Their Learning Journey."
         }
       />
+      <div>
+        <h1>{latestBlogs.length}</h1>
+      </div>
     </div>
   );
 };

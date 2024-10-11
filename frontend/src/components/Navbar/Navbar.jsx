@@ -1,22 +1,29 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { RiMenuFold2Line } from "react-icons/ri";
 import { RiMenuFoldLine } from "react-icons/ri";
 import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
-import Darkmode from "../Darkmode/Darkmode";
 import { useDispatch, useSelector } from "react-redux";
+import Darkmode from "../Darkmode/Darkmode";
 import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
 import axiosInstance from "../../api/axiosInstance";
+import useAllUser from "../../api/useAllUser";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
+  const {users} = useAllUser() ;
   const [profileMenu, setProfileMenu] = useState(false);
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
-  console.log(user);
+  const foundUser = users?.find((u) => u.userEmail === user?.userInfo?.userEmail);
 
+  // this user role will be dynamic
+
+  const role = foundUser?.userRole ;
+console.log('role',role)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -77,10 +84,14 @@ const Navbar = () => {
           Become an Instructor
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/userDeshbroad" className="text-nowrap">
+      <li onClick={() => setOpenMenu(false)}>        
+        {
+          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
+          Dashboard
+        </NavLink> : <NavLink to="teacher-dashboard" className="text-nowrap">
           Dashboard
         </NavLink>
+        }
       </li>
 
       <li onClick={() => setOpenMenu(false)}>
@@ -94,10 +105,8 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
 
-  console.log(searchBarOpen);
-
   return (
-    <header className="fixed h-[3.8rem] w-full top-0 left-0 z-20 border-b border-border/70 font-bai bg-bg">
+    <header className="fixed h-[3.8rem] w-full top-0 left-0 z-50 border-b border-border/70 font-bai bg-bg">
       <nav className="container px-2 sm:px-0 gap-2 h-full mx-auto flex justify-between items-center relative">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-3">
@@ -205,7 +214,7 @@ const Navbar = () => {
                     </Link>
                     <Link
                       onClick={() => setProfileMenu(false)}
-                      to=""
+                      to="/manage-account/overview"
                       className="text-sm bg-bg hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
                       <span className="text-2xl">{/* <IoOptions /> */}</span>

@@ -4,6 +4,7 @@ import { MdVerified, MdError } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import axiosInstance from "../../../api/axiosInstance";
 import { emailLoginSuccess, loginFailure, requestStart } from "../../../redux/authUsersSlice";
+import Heading from "../../../utils/Heading";
 
 export default function EmailVerify() {
   const location = useLocation();
@@ -28,14 +29,16 @@ export default function EmailVerify() {
           navigate("/"); // Navigate to homepage
         }, 1000);
       } catch (error) {
+        console.log(error)
         dispatch(loginFailure("Email verification failed")); // Dispatch login failure action on error
       }
     };
     verifyEmail();
-  }, [location]);
+  }, [location,navigate,dispatch]);
 
   return (
     <main className="min-h-[calc(100vh-44px)] sm:min-h-[calc(100vh-58px)] flex flex-col items-center justify-center bg-primaryBg">
+      <Heading heading={"Email Verify"} />
       {loading ? (
         <>
           <h2 className="text-2xl">Verifying your email</h2>

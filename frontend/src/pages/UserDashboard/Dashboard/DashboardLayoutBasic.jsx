@@ -75,7 +75,7 @@ function DashboardLayoutBasic() {
         }))} 
         theme={demoTheme}
         branding={{
-          logo: <img src="favicon.png" alt="LearnUp" />,
+          logo: <img src="/favicon.png" alt="LearnUp" />,
           title: 'LearnUp',
         }}
       >
