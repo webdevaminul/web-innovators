@@ -108,6 +108,8 @@ const router = createBrowserRouter([
         <DashboardLayoutBasic />
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
+    // children:
   },
   {
     path: "teacher-dashboard",
@@ -116,6 +118,7 @@ const router = createBrowserRouter([
         <TeacherDashboard />
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -135,6 +138,8 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  // Admin dashboard here
   {
     path: "admin-dashboard",
     element: (
@@ -143,6 +148,7 @@ const router = createBrowserRouter([
         <AdminDashboard />{" "}
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "admin-home",
@@ -153,6 +159,10 @@ const router = createBrowserRouter([
         element: <UserManage />,
       },
     ],
+  },
+  {
+    path: "*", // Catch all for any undefined routes
+    element: <ErrorPage />,
   },
 ]);
 export default router;
