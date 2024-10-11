@@ -11,7 +11,7 @@ function App() {
       <Navbar />
       <main className="mt-[3.8rem]">
         <Outlet />
-        <Footer></Footer>
+        <Footer />
       </main>
       <ToastContainer
         position="top-right"
