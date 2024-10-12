@@ -6,11 +6,11 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 const BeInstructor = () => {
-  const { user } = useSelector((state) => state.authUsers);
+  // const { user } = useSelector((state) => state.authUsers);
   const [selectedOption, setSelectedOption] = useState("");
-  const email = user.userInfo.userEmail;
-  const name = user.userInfo.userName;
-  const id = user.userInfo._id;
+  // const email = user.userInfo.userEmail;
+  // const name = user.userInfo.userName;
+  // const id = user.userInfo._id;
   const navigate = useNavigate()
 
   const handleFormSubmit = (e) => {
@@ -21,12 +21,12 @@ const BeInstructor = () => {
     const status = "Pending" ;
     const updateData = {status ,institute, message, selectedOption}
 
-    axiosInstance.put(`/be/instructor/${id}`,updateData)
+    axiosInstance.put(`/be/instructor/id`,updateData)
     .then(res=>{
       console.log(res.data)
       console.log(res.status)
       if(res.status === 200 ){
-        toast.success(res.data.message)
+        toast.success(res?.data?.message)
         navigate("/")
       }
     })
@@ -272,9 +272,8 @@ const BeInstructor = () => {
                   id="name"
                   type="text"
                   name="name"
-                  readOnly
                   autoFocus="autofocus"
-                  placeholder={name}
+                  placeholder="Your Name"
                 />
               </div>
               <div className="md:w-1/2">
@@ -289,8 +288,7 @@ const BeInstructor = () => {
                   id="email"
                   type="email"
                   name="email"
-                  readOnly
-                  placeholder={email}
+                  placeholder="Your Email"
                 />
               </div>
             </div>
@@ -310,7 +308,7 @@ const BeInstructor = () => {
                   name="instName"
                   required="required"
                   autoFocus="autofocus"
-                  placeholder="Type Your Name"
+                  placeholder="Type Institute Name"
                 />
               </div>
               <div className="md:w-1/2">

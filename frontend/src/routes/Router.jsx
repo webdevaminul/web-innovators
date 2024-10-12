@@ -92,17 +92,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/become-instructor",
-        element: (
-          <PrivateRouter>
-            <BeInstructor />
-          </PrivateRouter>
-        ),
+        element: <BeInstructor />,
       },
     ],
   },
 
   {
-    path: "dashbroad/home",
+    path: "dashboard/home",
     element: (
       <PrivateRouter>
         <DashboardLayoutBasic />
@@ -112,7 +108,7 @@ const router = createBrowserRouter([
     // children:
   },
   {
-    path: "teacher-dashboard",
+    path: "teacher-dashboard/home",
     element: (
       <PrivateRouter>
         <TeacherDashboard />
@@ -141,7 +137,7 @@ const router = createBrowserRouter([
 
   // Admin dashboard here
   {
-    path: "admin-dashboard",
+    path: "admin-dashboard/home",
     element: (
       <PrivateRouter>
         {" "}

@@ -1,7 +1,7 @@
 import axiosInstance from "../../api/axiosInstance";
 import { toast, ToastContainer } from "react-toastify";
 import useAllUser from "../../api/useAllUser";
-import Loader from "../../utils/Loader/Loader";
+import Loader from "../../utils/Loader";
 
 const UserManage = () => {
   const { users, isLoading, refetch } = useAllUser();

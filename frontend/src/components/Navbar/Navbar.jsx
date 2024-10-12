@@ -23,7 +23,7 @@ const Navbar = () => {
   // this user role will be dynamic
 
   const role = foundUser?.userRole ;
-console.log('role',role)
+  console.log(role)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -83,15 +83,6 @@ console.log('role',role)
         <NavLink to="/become-instructor" className="text-nowrap">
           Become an Instructor
         </NavLink>
-      </li>
-      <li onClick={() => setOpenMenu(false)}>        
-        {
-          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
-          Dashboard
-        </NavLink> : <NavLink to="teacher-dashboard" className="text-nowrap">
-          Dashboard
-        </NavLink>
-        }
       </li>
     </>
   );
@@ -200,7 +191,13 @@ console.log('role',role)
 
                     <Link
                       onClick={() => setProfileMenu(false)}
-                      to=""
+                      to={
+                        role === "Admin" 
+                          ? "/admin-dashboard/home"
+                          : role === "Teacher"
+                          ? "/teacher-dashboard/home"
+                          : "/dashboard/home"
+                      }
                       className="text-sm bg-bg hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
                       <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>

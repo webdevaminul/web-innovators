@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard"; // Import your CourseCard component
 import Heading from "../../utils/Heading";
-import Loader from "../../utils/Loader/Loader";
+import Loader from "../../utils/Loader";
 
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);

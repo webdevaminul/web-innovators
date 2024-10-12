@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CourseCard from "../../pages/AllCourses/CourseCard";
-import Loader from "../../utils/Loader/Loader";
+import Loader from "../../utils/Loader";
 
 const CoursesDiv = () => {
   const [courses, setCourses] = useState([]);
