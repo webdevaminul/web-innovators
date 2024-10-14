@@ -74,7 +74,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/allCourses",
+        path: "/all-courses",
         element: <AllCourses />,
       },
       {

@@ -10,21 +10,21 @@ import {
   FaSignOutAlt,
   FaSearch,
 } from "react-icons/fa";
-import Darkmode from "../../components/Darkmode/Darkmode"
+import Darkmode from "../../components/Darkmode/Darkmode";
 import { Link, Outlet } from "react-router-dom";
 
 const AdminDashboard = () => {
   return (
     <div className="flex flex-col md:px-10 px-5">
       {/* Barra de navegación superior */}
-      <div className="bg-bg text-text shadow w-full p-2 flex items-center justify-between">
+      <div className="bg-backgroundPrimary text-text shadow w-full p-2 flex items-center justify-between">
         <div className="flex items-center">
           <div className="hidden md:flex items-center">
-          <Link to="/">
-                <h1 className="font-bold text-2xl md:text-2xl font-inter">
-                  Learn<span className="text-secondary">UP</span>
-                </h1>
-              </Link>
+            <Link to="/">
+              <h1 className="font-bold text-2xl md:text-2xl font-ubuntu">
+                Learn<span className="text-secondary">UP</span>
+              </h1>
+            </Link>
           </div>
           <div className="md:hidden flex items-center">
             {" "}
@@ -37,7 +37,7 @@ const AdminDashboard = () => {
 
         {/* Ícono de Notificación y Perfil */}
         <div className="space-x-5">
-        <Darkmode />
+          <Darkmode />
           <button>
             <FaBell className="text-text text-lg" />
           </button>
@@ -51,17 +51,15 @@ const AdminDashboard = () => {
       {/* Contenido principal */}
       <div className="flex-1 flex">
         {/* Barra lateral de navegación (oculta en dispositivos pequeños) */}
-        <div
-          className="p-2 bg-bg w-60 md:flex-col hidden md:flex"
-          id="sideNav"
-        >
+        <div className="p-2 bg-backgroundPrimary w-60 md:flex-col hidden md:flex" id="sideNav">
           <nav>
-            <Link to="admin-home"
+            <Link
+              to="admin-home"
               className="block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text"
             >
               <FaHome className="mr-2" />
               Home
-              </Link>
+            </Link>
             <Link
               className="block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text"
               to="user-manage"
@@ -105,9 +103,7 @@ const AdminDashboard = () => {
           <div className="bg-gradient-to-r from-cyan-300 to-cyan-500 h-px mt-2"></div>
 
           {/* Copyright al final de la navegación lateral */}
-          <p className="mb-1 px-5 py-3 text-left text-xs text-text">
-            Copyright WCSLAT@2023
-          </p>
+          <p className="mb-1 px-5 py-3 text-left text-xs text-text">Copyright WCSLAT@2023</p>
         </div>
 
         {/* Área de contenido principal */}
@@ -118,7 +114,7 @@ const AdminDashboard = () => {
               <FaSearch className="text-gray-400" />
             </div>
             <input
-              className="w-full h-10 pl-10 pr-4 py-1 bg-bg text-base placeholder-placeholder border rounded-full focus:shadow-outline"
+              className="w-full h-10 pl-10 pr-4 py-1 bg-backgroundPrimary text-base placeholder-placeholder border rounded-full focus:shadow-outline"
               type="search"
               placeholder="Buscar..."
             />

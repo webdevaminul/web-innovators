@@ -17,34 +17,21 @@ const ManageCourse = () => {
       });
   }, []);
 
-
   return (
     <div className="overflow-x-auto w-full px-2 py-5">
       <div className="overflow-hidden">
         <table className="w-full">
           <thead>
-            <tr className="bg-bg/10">
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
-                Name
-              </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
-                Category
-              </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
-                Price
-              </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
-                Students
-              </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
-                Status
-              </th>
-              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">
-                Action
-              </th>
+            <tr className="bg-backgroundPrimary/10">
+              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">Name</th>
+              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">Category</th>
+              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">Price</th>
+              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">Students</th>
+              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">Status</th>
+              <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">Action</th>
             </tr>
           </thead>
-          <tbody className="bg-bg">
+          <tbody className="bg-backgroundPrimary">
             {myCourse?.map((course) => (
               <tr key={course._id}>
                 <td>

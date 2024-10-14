@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSelector } from "react-redux";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import axiosInstance from "../../api/axiosInstance";
 
 const CreateCourse = () => {
@@ -19,14 +19,14 @@ const CreateCourse = () => {
     const price = form.price.value;
     const file = form.coverPicture.files[0]; // File input
     const detailsCourse = form.textarea.value;
-    const status = "pending"
+    const status = "pending";
 
     const formData = new FormData();
-    const courseData = {name, email, title,price, status ,category, detailsCourse}
+    const courseData = { name, email, title, price, status, category, detailsCourse };
     formData.append("coverPicture", file);
 
     // Append the serialized course data (as a string)
-  formData.append("courseData", JSON.stringify(courseData));
+    formData.append("courseData", JSON.stringify(courseData));
 
     try {
       // Sending POST request with Axios
@@ -38,8 +38,8 @@ const CreateCourse = () => {
         })
         .then((response) => {
           console.log(response.data);
-          if(response.data.courseId){
-            toast.success(response.data.message)
+          if (response.data.courseId) {
+            toast.success(response.data.message);
           }
         })
         .catch((error) => {
@@ -70,28 +70,29 @@ const CreateCourse = () => {
         <div className="md:flex gap-4">
           <input
             readOnly
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder={name}
           />
           <input
             readOnly
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder={email}
           />
         </div>
 
         {/* title and video */}
         <div className="md:flex gap-4 my-4">
-          <input required
+          <input
+            required
             type="text"
             name="title"
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Your course title"
           />
-          <input          
+          <input
             type="number"
             name="price"
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Your course price"
           />
         </div>
@@ -101,7 +102,7 @@ const CreateCourse = () => {
             name="select"
             id="select"
             onChange={(e) => setCategory(e.target.value)}
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 text-text py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 text-text py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           >
             <option className="font-semibold text-text">Please Select</option>
             <option className="font-semibold text-text">Freelancing</option>
@@ -111,7 +112,7 @@ const CreateCourse = () => {
           <label className="form-control text-text">
             Course cover picture
             <input
-            required
+              required
               onChange={handleFileChange}
               type="file"
               accept="image/*"
@@ -125,11 +126,7 @@ const CreateCourse = () => {
               {previewUrl === "" ? (
                 "image preview"
               ) : (
-                <img
-                  className="w-20 border rounded-sm"
-                  src={previewUrl}
-                  alt=""
-                />
+                <img className="w-20 border rounded-sm" src={previewUrl} alt="" />
               )}
             </div>
           </div>
@@ -140,7 +137,7 @@ const CreateCourse = () => {
             id="text"
             cols={30}
             rows={10}
-            className="mb-10 mt-5 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-bg placeholder-placeholder "
+            className="mb-10 mt-5 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-backgroundPrimary placeholder-placeholder "
             placeholder="Details about this..."
           />
         </div>
