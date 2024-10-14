@@ -5,17 +5,34 @@ export default {
     extend: {
       fontFamily: {
         bai: ["Bai Jamjuree", " sans-serif"],
-        raleway: ["Raleway", "system-ui"],
-        lato: ["Lato", "system-ui"],
-        inter: ["Inter", "system-ui"],
+        poppins: ["Poppins", "sans-serif"],
+        ubuntu: ["Ubuntu", "sans-serif"],
+      },
+      fontWeight: {
+        thin: 100,
+        light: 300,
+        normal: 400,
+        medium: 500,
+        bold: 700,
+        black: 900,
       },
 
       colors: {
-        bg: "rgba(var(--bg-color))",
+        textPrimary: "rgba(var(--text-primary))",
+        textSecondary: "rgba(var(--text-secondary))",
+        textHighlight: "rgba(var(--text-highlight))",
+        textWhite: "rgba(var(--text-white))",
+        textBlack: "rgba(var(--text-black))",
+        textReverse: "rgba(var(--text-reverse))",
+
+        backgroundPrimary: "rgba(var(--background-primary))",
+        backgroundHighlight: "rgba(var(--background-highlight))",
+
+        borderPrimary: "rgba(var(--border-primary))",
+
         accentOne: "rgba(var(--accent-one))",
         accentTwo: "rgba(var(--accent-two))",
         text: "rgba(var(--text-color))",
-        textReversed: "rgba(var(--text-reversed))",
         textWhite: "rgba(var(--text-white))",
         link: "rgba(var(--text-link))",
         linkHover: "rgba(var(--text-link-hover))",
@@ -37,9 +54,14 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        "spin-infinite": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         rotate: "rotate 0.4s ease-in-out",
+        "spin-infinite": "spin-infinite 10s linear infinite",
       },
     },
   },

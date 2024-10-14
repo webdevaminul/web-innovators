@@ -24,8 +24,7 @@ const TeacherHome = () => {
           </div>
           <div className="border-t border-blue-gray-50 p-4">
             <p className="block antialiased font-bai text-base leading-relaxed font-normal text-text">
-              <strong className="text-green-500">+55%</strong>&nbsp;than last
-              week
+              <strong className="text-green-500">+55%</strong>&nbsp;than last week
             </p>
           </div>
         </div>
@@ -43,8 +42,7 @@ const TeacherHome = () => {
           </div>
           <div className="border-t border-blue-gray-50 p-4">
             <p className="block antialiased font-bai text-base leading-relaxed font-normal text-text">
-              <strong className="text-green-500">+3%</strong>&nbsp;than last
-              month
+              <strong className="text-green-500">+3%</strong>&nbsp;than last month
             </p>
           </div>
         </div>
@@ -80,8 +78,7 @@ const TeacherHome = () => {
           </div>
           <div className="border-t border-blue-gray-50 p-4">
             <p className="block antialiased font-bai text-base leading-relaxed font-normal text-text">
-              <strong className="text-green-500">+5%</strong>&nbsp;than
-              yesterday
+              <strong className="text-green-500">+5%</strong>&nbsp;than yesterday
             </p>
           </div>
         </div>
@@ -146,9 +143,9 @@ const TeacherHome = () => {
                         </p>
                         <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
                           <div
-                            className="flex justify-center items-center h-full bg-bg from-blue-600 to-blue-400 text-white"
+                            className="flex justify-center items-center h-full bg-backgroundPrimary from-blue-600 to-blue-400 text-white"
                             style={{ width: "60%" }}
-                          /> 
+                          />
                         </div>
                       </div>
                     </td>

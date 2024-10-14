@@ -178,7 +178,7 @@ export default function SignIn() {
           <button
             disabled={loading}
             type="submit"
-            className="p-2 mt-4 bg-link hover:bg-linkHover border-none rounded text-textReversed disabled:bg-disabled disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-link hover:bg-linkHover border-none rounded text-textReverse disabled:bg-disabled disabled:cursor-not-allowed select-none"
           >
             {loading ? "Loading..." : "Sign in"}
           </button>

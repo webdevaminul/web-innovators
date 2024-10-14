@@ -14,14 +14,12 @@ const Footer = () => {
         <div className="md:mt-10 col-span-2 md:col-span-1 text-center md:text-left">
           <div className="mb-2">
             <Link to="/">
-              <h1 className="font-bold text-2xl md:text-3xl font-inter">
+              <h1 className="font-bold text-2xl md:text-3xl font-ubuntu">
                 Learn<span className="text-secondary">UP</span>
               </h1>
             </Link>
           </div>
-          <p>
-            Simplifies course management by connecting teachers and students.
-          </p>
+          <p>Simplifies course management by connecting teachers and students.</p>
         </div>
 
         {/* service div */}
@@ -74,8 +72,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="mt-3 col-span-2 md:col-span-4 text-center">
-          Copyright © {new Date().getFullYear()} - All right reserved by
-          LearnUp.
+          Copyright © {new Date().getFullYear()} - All right reserved by LearnUp.
         </p>
       </div>
     </footer>
