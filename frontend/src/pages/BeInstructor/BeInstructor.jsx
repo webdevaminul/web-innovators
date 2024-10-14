@@ -4,13 +4,16 @@ import { useSelector } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CustomModal from "../../utils/CustomModal";
 
 const BeInstructor = () => {
-  // const { user } = useSelector((state) => state.authUsers);
+  const { user } = useSelector((state) => state.authUsers);
   const [selectedOption, setSelectedOption] = useState("");
-  // const email = user.userInfo.userEmail;
-  // const name = user.userInfo.userName;
-  // const id = user.userInfo._id;
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const email = user?.userInfo.userEmail || "";
+  const name = user?.userInfo.userName || "";
+  const id = user?.userInfo._id || "";
   const navigate = useNavigate()
 
   const handleFormSubmit = (e) => {
@@ -19,12 +22,13 @@ const BeInstructor = () => {
     const institute = data.instName.value;
     const message = data.message.value;
     const status = "Pending" ;
-    const updateData = {status ,institute, message, selectedOption}
+    const updateData = {name, email,status,institute, message, selectedOption}
 
-    axiosInstance.put(`/be/instructor/id`,updateData)
+    if(user){
+      axiosInstance.put(`/be/instructor/${id}`,updateData)
     .then(res=>{
-      console.log(res.data)
-      console.log(res.status)
+      console.log(res?.data)
+      console.log(res?.status)
       if(res.status === 200 ){
         toast.success(res?.data?.message)
         navigate("/")
@@ -33,6 +37,10 @@ const BeInstructor = () => {
     .catch(err=>{
       console.log(err)
     })
+    }else{
+      setModalMessage("You are not logged in.");
+      setModalOpen(true); // Open warning modal
+    }
   };
 
 
@@ -349,9 +357,10 @@ const BeInstructor = () => {
                 className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-text hover:text-white bg-secondary hover:bg-slate-700 md:py-3 md:text-lg md:px-10"
               >
                 Submit
-              </button>
+              </button>              
             </div>
           </form>
+          {modalOpen && <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} message={modalMessage} /> }
         </div>
       </div>
     </div>

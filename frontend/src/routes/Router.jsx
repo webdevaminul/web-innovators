@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home/Home";
 import SignUp from "../pages/Authentication/SignUp/SignUp";
@@ -108,7 +108,7 @@ const router = createBrowserRouter([
     // children:
   },
   {
-    path: "teacher-dashboard/home",
+    path: "teacher-dashboard",
     element: (
       <PrivateRouter>
         <TeacherDashboard />
@@ -117,7 +117,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: "",
+        element: <Navigate to="home" />,
+      },
+      {
+        path: "home",
         element: <TeacherHome />,
       },
       {

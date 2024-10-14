@@ -22,7 +22,7 @@ const Navbar = () => {
 
   // this user role will be dynamic
 
-  const role = foundUser?.userRole ;
+  const role = foundUser?.userRole || null ;
   console.log(role)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
@@ -195,7 +195,7 @@ const Navbar = () => {
                         role === "Admin" 
                           ? "/admin-dashboard/home"
                           : role === "Teacher"
-                          ? "/teacher-dashboard/home"
+                          ? "/teacher-dashboard"
                           : "/dashboard/home"
                       }
                       className="text-sm bg-bg hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
