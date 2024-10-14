@@ -345,7 +345,7 @@ const BeInstructor = () => {
                 Message
               </label>
               <textarea
-                className="w-full rounded-lg h-20 bg-inputBg"
+                className="w-full rounded-lg h-20 p-2 bg-inputBg"
                 name="message"
                 id="message"
                 placeholder="write here about you ..."

@@ -3,7 +3,6 @@ import { IoIosTrendingUp } from "react-icons/io";
 import TeacherOwnCourse from "../../components/TeacherOwnCourse/TeacherOwnCourse";
 import Calendar from "../../components/Calender/Calendar";
 import Heading from "../../utils/Heading";
-// import { useState } from "react";
 
 const TeacherHome = () => {
   return (
@@ -11,7 +10,10 @@ const TeacherHome = () => {
       <Heading heading={"Teacher Home"} />
       <div className="mb-12 grid gap-y-10 gap-x-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
         <div className="relative flex flex-col rounded-xl shadow-md border py-3">
-          <div className="bg-clip-border mx-4 rounded-xl bg-black text-white absolute grid h-16 w-16 place-items-center">
+          <div
+            className="bg-clip-border mx-4 rounded-xl bg-black text-
+           absolute grid h-16 w-16 place-items-center"
+          >
             <HiOutlineUsers className="w-5 h-5" />
           </div>
           <div className="p-4 text-right">
@@ -148,7 +150,7 @@ const TeacherHome = () => {
                           <div
                             className="flex justify-center items-center h-full bg-bg from-blue-600 to-blue-400 text-white"
                             style={{ width: "60%" }}
-                          /> 
+                          />
                         </div>
                       </div>
                     </td>

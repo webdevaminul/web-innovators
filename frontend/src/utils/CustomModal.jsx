@@ -12,7 +12,7 @@ const CustomModal = ({ modalOpen, setModalOpen, message }) => {
     <>
       <div
         className={`${
-          modalOpen ? " scale-[1] opacity-100" : " scale-[0] opacity-0"
+          modalOpen ? " scale-[1] opacity-100 zoom-in transition-all" : " scale-[0] opacity-0"
         } w-full h-screen fixed top-0 left-0 z-50 bg-[#0000002a] flex items-center justify-center transition-all duration-300 `}
       >
         <div className="w-[90%] lg:w-[40%] bg-[#ffffff] rounded-lg p-4 ">
