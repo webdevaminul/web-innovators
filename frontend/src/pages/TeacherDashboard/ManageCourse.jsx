@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 
 const ManageCourse = () => {
   const [myCourse, setMyCourse] = useState([]);
+  const baseUrl = axiosInstance.defaults.baseURL; ;
+  console.log(baseUrl , "base user")
   useEffect(() => {
     axiosInstance
       .get("/all/courses")
       .then((res) => {
-        console.log(res);
+        console.log(res?.data);
         setMyCourse(res?.data.data);
       })
       .catch((err) => {
@@ -52,8 +54,8 @@ const ManageCourse = () => {
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
                         <img
-                          src="https://img.daisyui.com/images/profile/demo/2@94.webp"
-                          alt="Avatar Tailwind CSS Component"
+                          src={`${baseUrl}${course?.coverPicture}`}
+                          alt={course.title}
                         />
                       </div>
                     </div>
@@ -63,7 +65,7 @@ const ManageCourse = () => {
                   </div>
                 </td>
                 <td className="border-b truncate">{course.category}</td>
-                <td className="border-b"> price </td>
+                <td className="border-b"> {course.price} </td>
                 <td className="border-b"> studens </td>
                 <td className="border-b">
                   <select className="select w-full p-1 min-h-0 h-8 focus:border-0">

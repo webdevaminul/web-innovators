@@ -1,9 +1,9 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const multer = require("multer");
-const path = require("path");
 const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const path = require("path")
 
 const { connectDB, client } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
@@ -13,7 +13,8 @@ const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
 const instructorRoutes = require("./api/routes/instructor.route");
-const allUser = require("./api/routes/instructor.route")
+const allUser = require("./api/routes/instructor.route");
+const { createCourse } = require("./api/controllers/course.controller");
 
 // Load environment variables
 dotenv.config();
@@ -62,9 +63,9 @@ app.use((req, res, next) => {
 
 // Connect to MongoDB
 connectDB();
-
 const database = client.db("LearnUp");
-const usersCollection = database.collection("users");
+// Serve the "public/images" directory for uploaded images
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // multer using for file upload
 const folder = "./public/images";
@@ -107,7 +108,12 @@ const upload = multer({
     }
   },
 });
-app.use("/create", upload.single("coverPicture"), courseRoutes);
+
+
+// POST route to upload file and save data in MongoDB
+app.post("/create/course", upload.single("coverPicture"), createCourse);
+
+
 
 // Routes
 app.use("/test", testRoutes);
@@ -117,6 +123,8 @@ app.use("/be", instructorRoutes);
 app.use("/aproved", instructorRoutes);
 app.use("/all", coursesRoutes)  // all courses get
 app.use("/get", allUser)  // all user get
+// app.use("/create", courseRoutes);
+
 
 // Custom error handling middleware
 app.use(errorMiddleware);
