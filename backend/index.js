@@ -107,6 +107,7 @@ const upload = multer({
     }
   },
 });
+app.use("/create", upload.single("coverPicture"), courseRoutes);
 
 // Routes
 app.use("/test", testRoutes);
@@ -116,7 +117,6 @@ app.use("/be", instructorRoutes);
 app.use("/aproved", instructorRoutes);
 app.use("/all", coursesRoutes)  // all courses get
 app.use("/get", allUser)  // all user get
-app.use("/create", upload.single("coverPicture"), courseRoutes);
 
 // Custom error handling middleware
 app.use(errorMiddleware);

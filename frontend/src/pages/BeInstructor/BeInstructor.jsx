@@ -14,35 +14,47 @@ const BeInstructor = () => {
   const email = user?.userInfo.userEmail || "";
   const name = user?.userInfo.userName || "";
   const id = user?.userInfo._id || "";
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  console.log("admin", user?.userInfo?.userRole);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     const data = e.target;
     const institute = data.instName.value;
     const message = data.message.value;
-    const status = "Pending" ;
-    const updateData = {name, email,status,institute, message, selectedOption}
+    const status = "Pending";
+    const updateData = {
+      name,
+      email,
+      status,
+      institute,
+      message,
+      selectedOption,
+    };
 
-    if(user){
-      axiosInstance.put(`/be/instructor/${id}`,updateData)
-    .then(res=>{
-      console.log(res?.data)
-      console.log(res?.status)
-      if(res.status === 200 ){
-        toast.success(res?.data?.message)
-        navigate("/")
+    if (user) {
+      if (user?.userInfo?.userRole === "Admin") {
+        setModalMessage("You are is an admin.");
+        return setModalOpen(true); // Open warning modal
       }
-    })
-    .catch(err=>{
-      console.log(err)
-    })
-    }else{
+      axiosInstance
+        .put(`/be/instructor/${id}`, updateData)
+        .then((res) => {
+          console.log(res?.data);
+          console.log(res?.status);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
       setModalMessage("You are not logged in.");
       setModalOpen(true); // Open warning modal
     }
   };
-
 
   return (
     <div>
@@ -281,7 +293,8 @@ const BeInstructor = () => {
                   type="text"
                   name="name"
                   autoFocus="autofocus"
-                  placeholder="Your Name"
+                  placeholder={name === "" ? "Your name" : name}
+                  // placeholder="Your Name"
                 />
               </div>
               <div className="md:w-1/2">
@@ -296,7 +309,7 @@ const BeInstructor = () => {
                   id="email"
                   type="email"
                   name="email"
-                  placeholder="Your Email"
+                  placeholder={email === "" ? "Your Email" : email}
                 />
               </div>
             </div>
@@ -357,10 +370,16 @@ const BeInstructor = () => {
                 className="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-text hover:text-white bg-secondary hover:bg-slate-700 md:py-3 md:text-lg md:px-10"
               >
                 Submit
-              </button>              
+              </button>
             </div>
           </form>
-          {modalOpen && <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} message={modalMessage} /> }
+          {modalOpen && (
+            <CustomModal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              message={modalMessage}
+            />
+          )}
         </div>
       </div>
     </div>
