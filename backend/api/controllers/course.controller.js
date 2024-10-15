@@ -4,7 +4,6 @@ const courseCollection = database.collection("courses");
 
 // Create a course
 exports.createCourse = async (req, res, next) => {
-  console.log("8 api hit hoice");
   try {
     const courseData = JSON.parse(req.body.courseData);
     // File uploaded by multer

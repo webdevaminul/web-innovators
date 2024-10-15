@@ -15,7 +15,8 @@ const BeInstructor = () => {
   const name = user?.userInfo.userName || "";
   const id = user?.userInfo._id || "";
   const navigate = useNavigate();
-  console.log("admin", user?.userInfo?.userRole);
+
+  const role = user?.userInfo?.userRole;
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -33,14 +34,14 @@ const BeInstructor = () => {
     };
 
     if (user) {
-      if (user?.userInfo?.userRole === "Admin") {
+      if (role === "Admin") {
         setModalMessage("You are is an admin.");
         return setModalOpen(true); // Open warning modal
       }
       axiosInstance
         .put(`/be/instructor/${id}`, updateData)
         .then((res) => {
-          console.log(res?.data);
+          // console.log(res?.data);
           console.log(res?.status);
           if (res.status === 200) {
             toast.success(res?.data?.message);
@@ -292,7 +293,7 @@ const BeInstructor = () => {
                   id="name"
                   type="text"
                   name="name"
-                  autoFocus="autofocus"
+                  readOnly={user ? true : false}
                   placeholder={name === "" ? "Your name" : name}
                   // placeholder="Your Name"
                 />
@@ -309,6 +310,7 @@ const BeInstructor = () => {
                   id="email"
                   type="email"
                   name="email"
+                  readOnly={user ? true : false}
                   placeholder={email === "" ? "Your Email" : email}
                 />
               </div>

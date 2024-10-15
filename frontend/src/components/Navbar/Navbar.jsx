@@ -6,24 +6,30 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import Darkmode from "../Darkmode/Darkmode";
-import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
+import {
+  requestFailure,
+  requestStart,
+  userClearSuccess,
+} from "../../redux/authUsersSlice";
 import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
-  const {users} = useAllUser() ;
+  const { users } = useAllUser();
   const [profileMenu, setProfileMenu] = useState(false);
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const foundUser = users?.find((u) => u.userEmail === user?.userInfo?.userEmail);
-
+  const foundUser = users?.find(
+    (u) => u?.userEmail === user?.userInfo?.userEmail
+  );
+  
   // this user role will be dynamic
+  const role = foundUser?.userRole || null;
+  console.log("role nav", role);
 
-  const role = foundUser?.userRole || null ;
-  console.log(foundUser)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -33,7 +39,10 @@ const Navbar = () => {
   // Handle Click Outside Mobile Menu
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(e.target)
+      ) {
         setProfileMenu(false);
       }
     };
@@ -55,7 +64,10 @@ const Navbar = () => {
       }
     } catch (error) {
       dispatch(
-        requestFailure(error.response?.data?.message || "Something went wrong. Please try again.")
+        requestFailure(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again."
+        )
       );
     }
   };
@@ -98,7 +110,10 @@ const Navbar = () => {
           {/* Logo and Menu button for small devices */}
           <div className="flex items-center gap-1">
             {/* Menu button for small devices */}
-            <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
+            <div
+              onClick={() => setOpenMenu(!openMenu)}
+              className="md:hidden flex items-center"
+            >
               <button className="text-xl">
                 {openMenu ? <RiMenuFoldLine /> : <RiMenuFold2Line />}
               </button>
@@ -167,7 +182,9 @@ const Navbar = () => {
         {/* nav links for large device and buttons*/}
         <div className="flex items-center gap-2 md:gap-3">
           {/* nav links for large device */}
-          <div className="list-none gap-4 hidden md:flex flex-nowrap font-semibold">{links}</div>
+          <div className="list-none gap-4 hidden md:flex flex-nowrap font-semibold">
+            {links}
+          </div>
 
           {/* buttons */}
           <div className="flex items-center gap-2 md:gap-3">
@@ -185,22 +202,26 @@ const Navbar = () => {
                 {profileMenu && (
                   <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-accentOne p-4 shadow-sm border border-border rounded-xl flex flex-col gap-4">
                     <div className="">
-                      <p className="whitespace-nowrap">Hi, {user?.userInfo?.userName}</p>
+                      <p className="whitespace-nowrap">
+                        Hi, {user?.userInfo?.userName}
+                      </p>
                       <p className="text-xs ">{user?.userInfo?.userEmail}</p>
                     </div>
 
                     <Link
                       onClick={() => setProfileMenu(false)}
                       to={
-                        role === "Admin" 
+                        role === "Admin"
                           ? "/admin-dashboard/home"
                           : role === "Teacher"
-                          ? "/teacher-dashboard"
-                          : "/dashboard/home"
+                            ? "/teacher-dashboard"
+                            : "/dashboard/home"
                       }
                       className="text-sm bg-bg hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
-                      <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                      <span className="text-2xl">
+                        {/* <BiCreditCardFront /> */}
+                      </span>
                       <span>Dashboard</span>
                     </Link>
                     <Link
@@ -215,7 +236,9 @@ const Navbar = () => {
                       onClick={handleSignOut}
                       className="text-sm bg-secondary hover:bg-secondaryHover text-primaryWhite border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
-                      <span className="text-2xl">{/* <IoExitOutline /> */}</span>
+                      <span className="text-2xl">
+                        {/* <IoExitOutline /> */}
+                      </span>
                       <span>Sign out</span>
                     </button>
                   </div>

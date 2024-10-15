@@ -52,7 +52,7 @@ const CustomModal = ({ modalOpen, setModalOpen, message }) => {
 };
 
 CustomModal.propTypes = {
-  modalOpen : PropTypes.func,
+  modalOpen : PropTypes.boolean,
   setModalOpen : PropTypes.func,
   message: PropTypes.string,
 }

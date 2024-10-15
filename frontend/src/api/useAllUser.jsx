@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "./axiosInstance";
 
-const useAllUser = () => {
+const useAllUser = (params = "") => {
     const { data: users = [], isLoading ,refetch} = useQuery({
-        queryKey: ["user"],
+        queryKey: ["user", params],
         queryFn: async () => {
-          const res = await axiosInstance.get("/get/users");
+          const res = await axiosInstance.get(`/get/teacher?status=${params}`);
           return res?.data.data ;
         },
       });

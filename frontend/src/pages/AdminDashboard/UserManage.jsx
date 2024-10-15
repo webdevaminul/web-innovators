@@ -1,10 +1,13 @@
-import axiosInstance from "../../api/axiosInstance";
+import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
+import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 import Loader from "../../utils/Loader";
 
 const UserManage = () => {
-  const { users, isLoading, refetch } = useAllUser();
+  const [activeTab, setActiveTab] = useState(1);
+  const [status, setStatus] = useState("Pending");
+  const { users, isLoading, refetch } = useAllUser(status);
 
   const handleUpdateRole = (id) => {
     const status = "Aproved";
@@ -13,9 +16,8 @@ const UserManage = () => {
     axiosInstance
       .put(`/aproved/teacher/${id}`, updateData)
       .then((res) => {
-        console.log(res.data);
         if (res?.data?.result?.acknowledged) {
-          toast.success(res.data.message);
+          toast.success(res?.data?.message);
           refetch();
         }
       })
@@ -23,16 +25,50 @@ const UserManage = () => {
         console.log(err);
       });
   };
-
+  const teacherState = (index) =>{
+    setActiveTab(index)
+    if (index === 1) {
+      setStatus("Pending");
+    } else if (index === 2) {
+      setStatus("Aproved");
+    }
+  }
+  
   const handleDeclineRole = () => {
     toast.warn("Not yet done");
   };
-
+// console.log("status",status)
   if (isLoading) {
-    return <Loader /> ;
+    return <Loader />;
   }
 
   return (
+    <>
+    <div className="p-8 mb-4 flex items-center gap-5 justify-start ">
+        <ul className="flex items-center ">
+          <li
+            className={`${
+              activeTab === 1 &&
+              " !border-border !border-t !border-l !border-r !border-b-transparent rounded-tr rounded-tl"
+            } px-6 py-2 !border-[#d1d1d1] border-b text-xl text-text transition duration-300 border-transparent cursor-pointer`}
+            onClick={() => teacherState(1)}
+          >
+            Pending Request
+          </li>
+          <li
+            className={`${
+              activeTab === 2 &&
+              " !border-border !border-t !border-l !border-r !border-b-transparent rounded-tr rounded-tl"
+            } px-6 py-2 !border-border border-b text-xl text-text transition duration-300 cursor-pointer`}
+            onClick={() => teacherState(2)}
+          >
+            Already Teacher
+          </li>
+        </ul>
+      </div>
+      
+      {/* Teacher list here */}
+
     <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
       <thead className="bg-bg">
         <tr>
@@ -119,23 +155,25 @@ const UserManage = () => {
                   </button>
 
                   <button
-                   className="ml-2 text-red-600 hover:text-red-900"
-                   onClick={handleDeclineRole}
+                    className="ml-2 text-red-600 hover:text-red-900"
+                    onClick={handleDeclineRole}
                   >
                     {" "}
                     Reject{" "}
                   </button>
                 </>
+              ) : user.status === "Aproved" ? (
+                "Aproved"
               ) : (
-                user.status === "Aproved" ? "Aproved" : "Pending"              
+                "Pending"
               )}
             </td>
           </tr>
         ))}
-        
       </tbody>
       <ToastContainer />
     </table>
+      </>
   );
 };
 

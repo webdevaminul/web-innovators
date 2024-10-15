@@ -43,16 +43,19 @@ exports.approvedInstructor = async (req, res, next) => {
     const result = await usersCollection.updateOne(query, updateDoc);
     res.status(200).json({
       message: "Congratulations, You are Teacher now !!",
-      result
+      result,
     });
   } catch (error) {
     next(error);
   }
 };
 
-exports.getAllUser = async (req, res, next) => {
+exports.getAllTeacher = async (req, res, next) => {
   try {
-    const users = await usersCollection.find().toArray();
+    const status = req?.query?.status || { $exists: true };
+    const query = { status: status };
+    const users = await usersCollection.find(query).toArray();
+
     if (!users.length) {
       return res.status(404).json({
         success: false,

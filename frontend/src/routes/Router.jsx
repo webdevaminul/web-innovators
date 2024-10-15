@@ -151,6 +151,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "",
+        element: <Navigate to="admin-home" />,
+      },
+      {
         path: "admin-home",
         element: <AdminHome />,
       },

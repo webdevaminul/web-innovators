@@ -1,12 +1,11 @@
-import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
 import { MdBlock } from "react-icons/md";
-import axiosInstance from "../../api/axiosInstance";
 import { useEffect, useState } from "react";
+import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
+import axiosInstance from "../../api/axiosInstance";
 
 const ManageCourse = () => {
   const [myCourse, setMyCourse] = useState([]);
-  const baseUrl = axiosInstance.defaults.baseURL; ;
-  console.log(baseUrl , "base user")
+  const baseUrl = axiosInstance.defaults.baseURL; 
   useEffect(() => {
     axiosInstance
       .get("/all/courses")
