@@ -6,7 +6,6 @@ const useAllCourse = () => {
     queryKey: ["course"],
     queryFn: async () => {
       const res = await axiosInstance.get("/all/courses");
-      console.log(res?.data)
       const data = res?.data?.data
       return data; 
     },

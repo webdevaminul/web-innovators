@@ -20,7 +20,7 @@ const ManageCourse = () => {
 
   return (
     <div className="overflow-x-auto w-full px-2 py-5">
-      <div className="overflow-hidden">
+      <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="bg-backgroundPrimary/10">
@@ -32,7 +32,7 @@ const ManageCourse = () => {
               <th className="w-1/4 py-4 px-6 text-left text-text font-bold uppercase">Action</th>
             </tr>
           </thead>
-          <tbody className="bg-backgroundPrimary">
+          <tbody className="bg-backgroundPrimary overflow-x-auto">
             {myCourse?.map((course) => (
               <tr key={course._id}>
                 <td>

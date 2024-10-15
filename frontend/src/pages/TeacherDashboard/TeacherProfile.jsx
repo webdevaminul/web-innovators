@@ -79,7 +79,7 @@ const TeacherProfile = () => {
 
                   <div className="flex flex-col pt-3">
                     <dt className="mb-1 text-text md:text-lg ">Email</dt>
-                    <dd className="text-lg text-text font-semibold">{user.userInfo.userEmail}</dd>
+                    <dd className="md:text-lg text-text">{user.userInfo.userEmail}</dd>
                   </div>
                 </dl>
               </div>
@@ -87,11 +87,11 @@ const TeacherProfile = () => {
                 <dl className="text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                   <div className="flex flex-col pb-3">
                     <dt className="mb-1 text-text md:text-lg ">Location</dt>
-                    <dd className="text-lg text-text font-semibold">Ethiopia, Addis Ababa</dd>
+                    <dd className="md:text-lg text-text">Ethiopia, Addis Ababa</dd>
                   </div>
                   <div className="flex flex-col pt-3">
                     <dt className="mb-1 text-text md:text-lg ">Phone Number</dt>
-                    <dd className="text-lg text-text font-semibold">+251913****30</dd>
+                    <dd className="md:text-lg text-text">+251913****30</dd>
                   </div>
                 </dl>
               </div>
