@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import CourseCard from "./CourseCard"; // Import your CourseCard component
+import CourseCard from "./CourseCard";
 import Heading from "../../utils/Heading";
 import Loader from "../../utils/Loader";
 

@@ -30,6 +30,7 @@ const Navbar = () => {
   
   // this user role will be dynamic
 
+  // const role = "Teacher";
   const role = foundUser?.userRole;
   console.log("role", role);
   // Toggle Profile Menu
@@ -221,14 +222,24 @@ const Navbar = () => {
                         <span>Dashboard</span>
                       </Link>
                     ) : (
-                      <Link
+                      <>
+                      {role === "Teacher" ? <Link
                         onClick={() => setProfileMenu(false)}
                         to="/teacher-dashboard"
                         className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                       >
                         <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                         <span>Dashboard</span>
-                      </Link>
+                      </Link> : <Link
+                        onClick={() => setProfileMenu(false)}
+                        to="/admin-dashboard"
+                        className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                      >
+                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                        <span>Dashboard</span>
+                      </Link>}
+                      
+                      </>
                     )}
 
                     <Link
