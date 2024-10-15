@@ -27,6 +27,7 @@ import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
 import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
 import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
+import CourseManage from "../pages/AdminDashboard/CourseManage";
 
 const router = createBrowserRouter([
   {
@@ -171,6 +172,10 @@ const router = createBrowserRouter([
       {
         path: "user-manage",
         element: <UserManage />,
+      },
+      {
+        path: "course-manage",
+        element: <CourseManage />,
       },
     ],
   },
