@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import VideoCard from "./VideoCard";
+import EnrollModal from "./EnrollModal";
 
 const FirstSection = ({ singleCourse }) => {
+  const [showModal, setShowModal] = useState(false);
+
+  const modalHandler = (val) => {
+    setShowModal(val);
+  };
   return (
     <div className="md:flex md:items-center justify-between gap-7">
       {/* course heading and description here  */}
@@ -24,20 +30,32 @@ const FirstSection = ({ singleCourse }) => {
             <h1 className="font-bold font-bai text-xl text-secondary">৳5850</h1>
             <del className="font-medium text-text font-bai text-xl">৳7500</del>
           </div>
-          <button className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 md:hidden">
+          {/* enroll button for sm device */}
+          <button
+            className="btn bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 md:hidden"
+            onClick={() => modalHandler(true)}
+          >
             Enroll Now
           </button>
+
+          {/* modal div */}
+          <EnrollModal showModal={showModal} modalHandler={modalHandler} />
         </div>
       </div>
 
-      {/* Right side video and short details card for mid to large device */}
+      {/* Right side video and enroll button card for mid to large device */}
       <div className="lg:w-2/5 w-[330px] hidden md:block">
         <div className="w-full">
           <VideoCard />
         </div>
-        <button className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 w-full">
+        <button
+          className="btn bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 w-full"
+          onClick={() => modalHandler(true)}
+        >
           Enroll Now
         </button>
+        {/* modal div */}
+        <EnrollModal showModal={showModal} modalHandler={modalHandler} />
       </div>
     </div>
   );

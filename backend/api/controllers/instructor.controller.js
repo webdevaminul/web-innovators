@@ -43,7 +43,7 @@ exports.approvedInstructor = async (req, res, next) => {
     const result = await usersCollection.updateOne(query, updateDoc);
     res.status(200).json({
       message: "Congratulations, You are Teacher now !!",
-      result
+      result,
     });
   } catch (error) {
     next(error);
@@ -60,16 +60,11 @@ exports.getAllUser = async (req, res, next) => {
       });
     }
     // res.status(200).send(users);
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: users,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Server error while fetching users",
-      error: error.message,
-    });
     next(error);
   }
 };

@@ -13,7 +13,7 @@ const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
 const instructorRoutes = require("./api/routes/instructor.route");
-const allUser = require("./api/routes/instructor.route")
+const allUser = require("./api/routes/instructor.route");
 
 // Load environment variables
 dotenv.config();
@@ -114,8 +114,8 @@ app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/be", instructorRoutes);
 app.use("/aproved", instructorRoutes);
-app.use("/all", coursesRoutes)  // all courses get
-app.use("/get", allUser)  // all user get
+app.use("/all", coursesRoutes); // all courses get
+app.use("/get", allUser); // all user get
 app.use("/create", upload.single("coverPicture"), courseRoutes);
 
 // Custom error handling middleware
