@@ -3,16 +3,21 @@ import Title from "../../utils/Title";
 import { IoLanguage } from "react-icons/io5";
 
 export default function Categories() {
+  const handleCategory = (cat) => {
+    console.log(cat);
+  };
   return (
     <section className="p-5">
       <Title
         title={"Explore Our Courses"}
         subTitle={"Welcome to our diverse and dynamic course catalog"}
       />
-
       <div className="grid grid-cols-4 gap-5">
         {/* cat 1 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link
+          onClick={() => handleCategory("Language")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-pink-100 rounded-full p-4 ">
             <IoLanguage className="text-5xl text-pink-400" />
           </div>
@@ -22,7 +27,10 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 2 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link
+          onClick={() => handleCategory("Design")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-green-100 rounded-full p-4 ">
             <IoLanguage className="text-5xl text-green-400" />
           </div>
@@ -32,7 +40,10 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 3 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link
+          onClick={() => handleCategory("Development")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -42,7 +53,10 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 4 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link
+          onClick={() => handleCategory("Marketing")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -52,7 +66,10 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 5 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link
+          onClick={() => handleCategory("Photography")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -62,7 +79,10 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 6 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link
+          onClick={() => handleCategory("Business")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -71,7 +91,11 @@ export default function Categories() {
             <p>10 Courses</p>
           </div>
         </Link>
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        {/* cat 7 */}
+        <Link
+          onClick={() => handleCategory("Fitness")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -80,7 +104,11 @@ export default function Categories() {
             <p>10 Courses</p>
           </div>
         </Link>
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        {/* cat 8 */}
+        <Link
+          onClick={() => handleCategory("Videography")}
+          className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+        >
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>

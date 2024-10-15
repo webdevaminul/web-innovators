@@ -32,7 +32,7 @@ const FirstSection = ({ singleCourse }) => {
           </div>
           {/* enroll button for sm device */}
           <button
-            className="btn bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 md:hidden"
+            className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 outline-none md:hidden"
             onClick={() => modalHandler(true)}
           >
             Enroll Now
@@ -49,7 +49,7 @@ const FirstSection = ({ singleCourse }) => {
           <VideoCard />
         </div>
         <button
-          className="btn bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 w-full"
+          className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-3 px-3 w-full outline-none"
           onClick={() => modalHandler(true)}
         >
           Enroll Now
