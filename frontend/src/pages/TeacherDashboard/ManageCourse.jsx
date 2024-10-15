@@ -10,7 +10,7 @@ const ManageCourse = () => {
     axiosInstance
       .get("/all/courses")
       .then((res) => {
-        console.log(res?.data);
+        // console.log(res?.data);
         setMyCourse(res?.data.data);
       })
       .catch((err) => {
