@@ -70,7 +70,7 @@ const UserManage = () => {
       {/* Teacher list here */}
 
     <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
-      <thead className="bg-bg">
+      <thead className="bg-backgroundPrimary">
         <tr>
           <th
             scope="col"
@@ -110,16 +110,13 @@ const UserManage = () => {
           </th>
         </tr>
       </thead>
-      <tbody className="bg-bg divide-y divide-gray-200">
+      <tbody className="bg-backgroundPrimary divide-y divide-gray-200">
         {users?.map((user) => (
           <tr key={user._id}>
             <td className="px-6 py-4 whitespace-nowrap">
               <span className="flex items-center">
                 <span className="flex-shrink-0 h-10 w-10">
-                  <img
-                    className="h-10 w-10 rounded-full"
-                    src={user.userPhoto}
-                  />
+                  <img className="h-10 w-10 rounded-full" src={user.userPhoto} />
                 </span>
                 <span className="ml-4">
                   <span className="text-sm flex flex-col font-medium text-gray-900">
@@ -129,20 +126,14 @@ const UserManage = () => {
                 </span>
               </span>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-text">
-              Regional Paradigm Technician
-            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-text">Regional Paradigm Technician</td>
             <td className="px-6 py-4 whitespace-nowrap">
               <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                 {user.status ? user.status : "student yet"}
               </span>
             </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
-              {user.userRole}
-            </td>
-            <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
-              {user.userEmail}
-            </td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-text">{user.userRole}</td>
+            <td className="px-6 py-4 whitespace-nowrap text-sm text-text">{user.userEmail}</td>
             <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
               {user.status && user.status === "Pending" ? (
                 <>

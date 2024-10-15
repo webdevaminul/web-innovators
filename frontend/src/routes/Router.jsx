@@ -25,6 +25,8 @@ import Overview from "../pages/AccountManagement/Overview";
 import UpdateProfile from "../pages/AccountManagement/UpdateProfile";
 import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
+import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
+import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +54,14 @@ const router = createBrowserRouter([
         element: <EmailVerify />,
       },
       {
+        path: "/forget-password",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "/password-recovery",
+        element: <PasswordRecovery />,
+      },
+      {
         path: "/manage-account",
         element: <ManageAccount />,
         children: [
@@ -74,7 +84,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/allCourses",
+        path: "/all-courses",
         element: <AllCourses />,
       },
       {

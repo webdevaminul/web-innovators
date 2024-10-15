@@ -15,6 +15,7 @@ const TeacherDashboard = () => {
   const [isRotating, setIsRotating] = useState(false);
   const sidebarRef = useRef(null);
   const loginUser = user?.userInfo.userName;
+  console.log("user", loginUser);
 
   const handleRotating = () => {
     setIsRotating(true);
@@ -46,10 +47,10 @@ const TeacherDashboard = () => {
     };
   }, [isOpen]);
   return (
-    <div className="min-h-screen bg-bg">
+    <div className="min-h-screen bg-backgroundPrimary">
       <aside
         ref={sidebarRef}
-        className={`bg-bg border border-border fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
+        className={`bg-backgroundPrimary border border-border fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-80"
         } `}
       >
@@ -67,9 +68,7 @@ const TeacherDashboard = () => {
                   type="button"
                 >
                   <IoHomeOutline className="w-5 h-5" />
-                  <p className="block font-bai text-base text-text font-medium">
-                    dashboard
-                  </p>
+                  <p className="block font-bai text-base text-text font-medium">dashboard</p>
                 </button>
               </Link>
             </li>
@@ -167,11 +166,7 @@ const TeacherDashboard = () => {
                 type="button"
               >
                 <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                  {isOpen ? (
-                    <RxCross1 className="w-5 h-5 " />
-                  ) : (
-                    <HiBars3 className="w-5 h-5" />
-                  )}
+                  {isOpen ? <RxCross1 className="w-5 h-5 " /> : <HiBars3 className="w-5 h-5" />}
                 </span>
               </button>
 
@@ -220,11 +215,7 @@ const TeacherDashboard = () => {
             <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
               <p className="block antialiased font-bai text-sm leading-normal font-normal text-text">
                 © 2023, made with by{" "}
-                <a
-                  href="/"
-                  target="_blank"
-                  className="transition-colors hover:text-blue-500"
-                >
+                <a href="/" target="_blank" className="transition-colors hover:text-blue-500">
                   Learn Up
                 </a>{" "}
                 for a better web.{" "}

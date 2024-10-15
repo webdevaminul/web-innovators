@@ -45,8 +45,9 @@ const CreateCourse = () => {
           },
         })
         .then((response) => {
-          if (response?.data?.courseId) {
-            toast.success(response?.data?.message);
+          console.log(response.data);
+          if (response.data.courseId) {
+            toast.success(response.data.message);
           }
         })
         .catch((error) => {
@@ -77,12 +78,12 @@ const CreateCourse = () => {
         <div className="md:flex gap-4">
           <input
             readOnly
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder={name}
           />
           <input
             readOnly
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-4 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder={email}
           />
         </div>
@@ -93,13 +94,13 @@ const CreateCourse = () => {
             required
             type="text"
             name="title"
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Your course title"
           />
           <input
             type="number"
             name="price"
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Your course price"
           />
         </div>
@@ -109,7 +110,7 @@ const CreateCourse = () => {
             name="select"
             id="select"
             onChange={(e) => setCategory(e.target.value)}
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-bg px-3 text-text py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 text-text py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           >
             <option className="font-semibold text-text">Please Select</option>
             <option className="font-semibold text-text">Freelancing</option>
@@ -133,11 +134,7 @@ const CreateCourse = () => {
               {previewUrl === "" ? (
                 "image preview"
               ) : (
-                <img
-                  className="w-20 border rounded-sm"
-                  src={previewUrl}
-                  alt=""
-                />
+                <img className="w-20 border rounded-sm" src={previewUrl} alt="" />
               )}
             </div>
           </div>
@@ -148,7 +145,7 @@ const CreateCourse = () => {
             id="text"
             cols={30}
             rows={10}
-            className="mb-10 mt-5 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-bg placeholder-placeholder "
+            className="mb-10 mt-5 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-backgroundPrimary placeholder-placeholder "
             placeholder="Details about this..."
           />
         </div>

@@ -28,7 +28,7 @@ connectDB();
 
 // Routes
 app.use("/api/test", testRoutes);
-app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
 // app.use("/api/create", courseRoutes);
 
 // Custom error handling middleware
