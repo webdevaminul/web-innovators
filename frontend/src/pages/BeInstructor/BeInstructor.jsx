@@ -14,6 +14,8 @@ const BeInstructor = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [text, setText] = useState("")
+
   const email = user?.userInfo.userEmail || "";
   const name = user?.userInfo.userName || "";
   const id = user?.userInfo._id || "";
@@ -39,6 +41,7 @@ const BeInstructor = () => {
     if (user) {
       if (role === "Admin") {
         setModalMessage("You are is an admin.");
+        setText("Do you want to log in ?")
         return setModalOpen(true); // Open warning modal
       }
       axiosInstance
@@ -330,6 +333,7 @@ const BeInstructor = () => {
               modalOpen={modalOpen}
               setModalOpen={setModalOpen}
               message={modalMessage}
+              text={text}
             />
           )}
         </div>
