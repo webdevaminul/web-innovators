@@ -3,7 +3,7 @@ import axiosInstance from "./axiosInstance";
 
 const useAvailableCourse = (sortOrder, page = 1, limit = 6) => {
   console.log('5', page, limit)
-  const { data: courses = [], isLoading } = useQuery({
+  const { data = { data: [], totalPages: 0 }, isLoading } = useQuery({
     queryKey: ["course", sortOrder, page, limit],
     queryFn: async () => {
       // Pass sortOrder as a query parameter
@@ -15,11 +15,13 @@ const useAvailableCourse = (sortOrder, page = 1, limit = 6) => {
         },
       });
       const data = res?.data?.data;
+      const totalPages = res?.data?.totalPages;
       console.log("avai", res.data);
-      return data;
+      return {data, totalPages};
     },
   });
-  return { courses, isLoading };
+  const { data: courses, totalPages } = data;
+  return { courses, isLoading,totalPages};
 };
 
 export default useAvailableCourse;

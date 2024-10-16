@@ -7,13 +7,13 @@ import useAvailableCourse from "../../api/useAvailableCourse";
 
 const AllCourses = () => {
   const { categoryName } = useParams(); // home page category founder
-  const [selectedCategory, setSelectedCategory] = useState(
-    categoryName || null
-  ); // Initially null to show all data
+  const [selectedCategory, setSelectedCategory] = useState(categoryName || null); // Initially null to show all data
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 6; // Number of items to display per page
-  const { courses, isLoading } = useAvailableCourse(
+
+  // Fetch courses from API including totalPages
+  const { courses, isLoading, totalPages} = useAvailableCourse(
     sortOrder,
     currentPage,
     itemsPerPage
@@ -21,56 +21,32 @@ const AllCourses = () => {
 
   console.log("avbai courses", courses);
 
-  // Handle category change and filter data
-  const handleCategoryChange = (e) => {
-    const category = e.target.value;
-    setSelectedCategory(category === "All" ? null : category);
-    setCurrentPage(1); // Reset to the first page when changing category
-  };
+  
+// Handle category change and filter data
+const handleCategoryChange = (e) => {
+  const category = e.target.value;
+  setSelectedCategory(category === "All" ? null : category);
+  setCurrentPage(1); // Reset to the first page when changing category
+};
 
-  // Filter courses based on the selected category
-  const filteredCourses = selectedCategory
-    ? courses.filter((course) => course?.category === selectedCategory)
-    : courses;
-
-  // Sort the filtered courses
-  const sortedCourses = filteredCourses.sort((a, b) => {
-    const priceA = parseFloat(a.price);
-    const priceB = parseFloat(b.price);
-    return sortOrder === "asc" ? priceA - priceB : priceB - priceA;
-  });
-
-  // Calculate the number of pages
-  const totalPages = Math.ceil(sortedCourses.length / itemsPerPage);
-
-  // Slice the sortedCourses array to show only courses for the current page
-  const paginatedCourses = sortedCourses.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
-  // next page function
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage((prevPage) => prevPage + 1);
     }
   };
 
-  // previous page function
   const handlePreviousPage = () => {
     if (currentPage > 1) {
       setCurrentPage((prevPage) => prevPage - 1);
     }
   };
 
-  // Function to render pagination
   const renderPagination = () => {
     const paginationItems = [];
-    const visiblePages = 5; // Number of visible pages
+    const visiblePages = 5;
     let startPage = currentPage - Math.floor(visiblePages / 2);
     let endPage = currentPage + Math.floor(visiblePages / 2);
 
-    // Adjust startPage and endPage if they are out of bounds
     if (startPage < 1) {
       endPage += 1 - startPage;
       startPage = 1;
@@ -79,10 +55,8 @@ const AllCourses = () => {
       startPage -= endPage - totalPages;
       endPage = totalPages;
     }
-
     if (startPage < 1) startPage = 1;
 
-    // Add "Previous" button
     if (currentPage > 1) {
       paginationItems.push(
         <button
@@ -95,7 +69,6 @@ const AllCourses = () => {
       );
     }
 
-    // Add "First" page with ellipsis if necessary
     if (startPage > 1) {
       paginationItems.push(
         <button
@@ -108,21 +81,16 @@ const AllCourses = () => {
       );
       if (startPage > 2) {
         paginationItems.push(
-          <span key="dots-prev" className="join-item">
-            ...
-          </span>
+          <span key="dots-prev" className="join-item">...</span>
         );
       }
     }
 
-    // Add visible page numbers
     for (let i = startPage; i <= endPage; i++) {
       paginationItems.push(
         <button
           key={i}
-          className={`join-item btn btn-md ${
-            currentPage === i ? "bg-secondary text-black" : ""
-          }`}
+          className={`join-item btn btn-md ${currentPage === i ? "bg-secondary text-black" : ""}`}
           onClick={() => setCurrentPage(i)}
         >
           {i}
@@ -130,13 +98,10 @@ const AllCourses = () => {
       );
     }
 
-    // Add "Last" page with ellipsis if necessary
     if (endPage < totalPages) {
       if (endPage < totalPages - 1) {
         paginationItems.push(
-          <span key="dots-next" className="join-item">
-            ...
-          </span>
+          <span key="dots-next" className="join-item">...</span>
         );
       }
       paginationItems.push(
@@ -150,7 +115,6 @@ const AllCourses = () => {
       );
     }
 
-    // Add "Next" button
     if (currentPage < totalPages) {
       paginationItems.push(
         <button
@@ -220,14 +184,14 @@ const AllCourses = () => {
 
             <div className="flex flex-col items-center justify-center">
               <div className="mb-10">
-                {paginatedCourses.length === 0 ? (
+                {courses?.length === 0 ? (
                   <div className="text-2xl font-bold text-gray-500 mt-10">
                     No courses available for this category
                   </div>
                 ) : (
                   <div className="mb-10">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                      {paginatedCourses.map((course) => (
+                      {courses?.map((course) => (
                         <CourseCard key={course._id} course={course} />
                       ))}
                     </div>
@@ -236,7 +200,7 @@ const AllCourses = () => {
               </div>
 
               {/* Pagination Controls */}
-              {paginatedCourses.length > 0 && (
+              {courses?.length > 0 && (
                 <div className="join border mx-auto">{renderPagination()}</div>
               )}
             </div>
