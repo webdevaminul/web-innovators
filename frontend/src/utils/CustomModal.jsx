@@ -36,7 +36,7 @@ const CustomModal = ({ modalOpen, setModalOpen, message,text }) => {
               {role === "Admin" ? "You are not eligible to become an intructor" : text }
             </p>
           </div>
-          {!role === "Admin" && (
+          {role !== "Admin" && (
             <div className="flex items-center gap-3 lg:gap-5 w-full justify-end mt-6">
               <button
                 className="px-4 py-2 border border-[#a8a8a8] rounded-lg text-[#585858]"
