@@ -6,7 +6,8 @@
     "price": "8500",
     "old_price": "10000",
     "image": "./card01.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "popular"
   },
   {
     "id": 2,
@@ -15,7 +16,8 @@
     "price": "1950",
     "old_price": "3000",
     "image": "./card02.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "latest"
   },
   {
     "id": 3,
@@ -24,7 +26,8 @@
     "price": "1950",
     "old_price": "3500",
     "image": "./card03.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "popular"
   },
   {
     "id": 4,
@@ -33,7 +36,8 @@
     "price": "3850",
     "old_price": "4000",
     "image": "./card04.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "popular"
   },
   {
     "id": 5,
@@ -42,7 +46,8 @@
     "price": "2500",
     "old_price": "N/A",
     "image": "./card05.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "latest"
   },
   {
     "id": 6,
@@ -51,16 +56,18 @@
     "price": "2500",
     "old_price": "N/A",
     "image": "./card01.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "popular"
   },
   {
     "id": 7,
     "title": "WordPress দিয়ে Freelancing",
-    "instructor": "Asaduzzaman ",
+    "instructor": "Asaduzzaman",
     "price": "2500",
     "old_price": "N/A",
     "image": "./card02.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "popular"
   },
   {
     "id": 8,
@@ -69,7 +76,8 @@
     "price": "1500",
     "old_price": "N/A",
     "image": "./card03.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "free"
   },
   {
     "id": 9,
@@ -78,7 +86,8 @@
     "price": "3000",
     "old_price": "N/A",
     "image": "./card04.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "latest"
   },
   {
     "id": 10,
@@ -87,7 +96,8 @@
     "price": "4000",
     "old_price": "N/A",
     "image": "./card05.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "popular"
   },
   {
     "id": 11,
@@ -96,7 +106,8 @@
     "price": "3500",
     "old_price": "N/A",
     "image": "./card01.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "latest"
   },
   {
     "id": 12,
@@ -105,7 +116,8 @@
     "price": "4500",
     "old_price": "N/A",
     "image": "./card02.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "popular"
   },
   {
     "id": 13,
@@ -114,7 +126,8 @@
     "price": "5000",
     "old_price": "N/A",
     "image": "./card03.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "latest"
   },
   {
     "id": 14,
@@ -123,7 +136,8 @@
     "price": "5500",
     "old_price": "N/A",
     "image": "./card04.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "popular"
   },
   {
     "id": 15,
@@ -132,7 +146,8 @@
     "price": "6000",
     "old_price": "N/A",
     "image": "./card05.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "popular"
   },
   {
     "id": 16,
@@ -141,7 +156,8 @@
     "price": "6500",
     "old_price": "N/A",
     "image": "./card01.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "latest"
   },
   {
     "id": 17,
@@ -150,7 +166,8 @@
     "price": "8500",
     "old_price": "10000",
     "image": "./card01.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "popular"
   },
   {
     "id": 18,
@@ -159,7 +176,8 @@
     "price": "1950",
     "old_price": "3000",
     "image": "./card02.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "latest"
   },
   {
     "id": 19,
@@ -168,7 +186,8 @@
     "price": "1950",
     "old_price": "3500",
     "image": "./card03.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "popular"
   },
   {
     "id": 20,
@@ -177,7 +196,8 @@
     "price": "3850",
     "old_price": "4000",
     "image": "./card04.jpg",
-    "category": "Language"
+    "category": "Language",
+    "type": "popular"
   },
   {
     "id": 21,
@@ -186,7 +206,8 @@
     "price": "2500",
     "old_price": "N/A",
     "image": "./card05.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "latest"
   },
   {
     "id": 22,
@@ -195,16 +216,18 @@
     "price": "2500",
     "old_price": "N/A",
     "image": "./card01.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "popular"
   },
   {
     "id": 23,
     "title": "WordPress দিয়ে Freelancing",
-    "instructor": "Asaduzzaman ",
+    "instructor": "Asaduzzaman",
     "price": "2500",
     "old_price": "N/A",
     "image": "./card02.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "popular"
   },
   {
     "id": 24,
@@ -213,7 +236,8 @@
     "price": "1500",
     "old_price": "N/A",
     "image": "./card03.jpg",
-    "category": "Freelancing"
+    "category": "Freelancing",
+    "type": "free"
   },
   {
     "id": 25,
@@ -222,7 +246,8 @@
     "price": "3000",
     "old_price": "N/A",
     "image": "./card04.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "latest"
   },
   {
     "id": 26,
@@ -231,7 +256,8 @@
     "price": "4000",
     "old_price": "N/A",
     "image": "./card05.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "popular"
   },
   {
     "id": 27,
@@ -240,7 +266,8 @@
     "price": "3500",
     "old_price": "N/A",
     "image": "./card01.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "latest"
   },
   {
     "id": 28,
@@ -249,7 +276,8 @@
     "price": "4500",
     "old_price": "N/A",
     "image": "./card02.jpg",
-    "category": "Design"
+    "category": "Design",
+    "type": "popular"
   },
   {
     "id": 29,
@@ -258,7 +286,8 @@
     "price": "5000",
     "old_price": "N/A",
     "image": "./card03.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "free"
   },
   {
     "id": 30,
@@ -267,7 +296,8 @@
     "price": "5500",
     "old_price": "N/A",
     "image": "./card04.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "free"
   },
   {
     "id": 31,
@@ -276,7 +306,8 @@
     "price": "6000",
     "old_price": "N/A",
     "image": "./card05.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "free"
   },
   {
     "id": 32,
@@ -285,6 +316,7 @@
     "price": "6500",
     "old_price": "N/A",
     "image": "./card01.jpg",
-    "category": "Programming"
+    "category": "Programming",
+    "type": "free"
   }
 ]

@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import CourseCard from "./CourseCard"; // Import your CourseCard component
 import Heading from "../../utils/Heading";
+import { useLocation } from "react-router-dom";
 
 const AllCourses = () => {
+  const location = useLocation();
+  console.log(location);
+  const { category } = location.state?.category || {};
+  console.log(category);
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -196,58 +201,60 @@ const AllCourses = () => {
   return (
     <div className="container mx-auto px-4 font-bai">
       <Heading heading={"All Courses"} />
-    <div className="container mx-auto px-4 font-bai py-8">
-      <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
-        <div className="w-full md:w-1/4">
-          <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
-          <div className="pt-3 rounded-lg">
-            <select
-              value={selectedCategory || "All"}
-              onChange={handleCategoryChange}
-              className="w-full p-2 border rounded-md"
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="w-full md:w-3/4">
-          <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
-            <h3 className="text-3xl font-semibold">
-              {selectedCategory ? selectedCategory : "All Courses"}
-            </h3>
-            <div className="text-center mb-2">
-              <label className="mr-2 font-bold text-text">Sort by Price:</label>
+      <div className="container mx-auto px-4 font-bai py-8">
+        <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
+          <div className="w-full md:w-1/4">
+            <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
+            <div className="pt-3 rounded-lg">
               <select
-                value={sortOrder}
-                onChange={(e) => setSortOrder(e.target.value)}
-                className="border outline-none border-border bg-accentOne text-text font-bold rounded-md p-2"
+                value={selectedCategory || "All"}
+                onChange={handleCategoryChange}
+                className="w-full p-2 border rounded-md"
               >
-                <option value="asc">Low to High</option>
-                <option value="desc">High to Low</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center">
-            <div className="mb-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {paginatedCourses.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
+          <div className="w-full md:w-3/4">
+            <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
+              <h3 className="text-3xl font-semibold">
+                {selectedCategory ? selectedCategory : "All Courses"}
+              </h3>
+              <div className="text-center mb-2">
+                <label className="mr-2 font-bold text-text">
+                  Sort by Price:
+                </label>
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                  className="border outline-none border-border bg-accentOne text-text font-bold rounded-md p-2"
+                >
+                  <option value="asc">Low to High</option>
+                  <option value="desc">High to Low</option>
+                </select>
               </div>
             </div>
 
-            {/* Pagination Controls */}
-            <div className="join border mx-auto">{renderPagination()}</div>
+            <div className="flex flex-col items-center justify-center">
+              <div className="mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {paginatedCourses.map((course) => (
+                    <CourseCard key={course.id} course={course} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Pagination Controls */}
+              <div className="join border mx-auto">{renderPagination()}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
   );
 };

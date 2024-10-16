@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Title from "../../utils/Title";
 import { IoLanguage } from "react-icons/io5";
 
 export default function Categories() {
+  const navigate = useNavigate();
   const handleCategory = (cat) => {
     console.log(cat);
+    navigate("/all-courses", { state: { category: cat } });
   };
   return (
     <section className="p-5">
