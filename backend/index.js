@@ -16,7 +16,7 @@ const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
 const instructorRoutes = require("./api/routes/instructor.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
-const instructorRoutes = require("./api/routes/instructor.route");
+// const instructorRoutes = require("./api/routes/instructor.route");
 const allTeacher = require("./api/routes/instructor.route");
 const allUser = require("./api/routes/instructor.route");
 const { createCourse } = require("./api/controllers/course.controller");
@@ -66,7 +66,7 @@ app.use((req, res, next) => {
 });
 
 // Connect to MongoDB
-connectDB();
+// connectDB();
 
 // Serve the "public/images" directory for uploaded images
 app.use("/images", express.static(path.join(__dirname, "public/images")));
