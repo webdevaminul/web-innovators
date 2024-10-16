@@ -1,10 +1,10 @@
-const { client } = require("../config/mongoDB");
-const { errorHandler } = require("../utilities/errorHandler");
-const database = client.db("LearnUp");
-const userCollection = database.collection("users");
 const jwt = require("jsonwebtoken");
+const { client } = require("../config/mongoDB");
 const bcryptjs = require("bcryptjs");
+const database = client.db("LearnUp");
 const nodemailer = require("nodemailer");
+const userCollection = database.collection("users");
+const { errorHandler } = require("../utilities/errorHandler");
 
 // const { sendSignupVerification } = require("../utilities/sendSignupVerification");
 // const { sendRecoveryMail } = require("../utilities/sendRecoveryMail");

@@ -12,7 +12,7 @@ const Preloader = () => {
       }, 1000); // Duration for fade-out
 
       return () => clearTimeout(removePreloaderTimeout); // Clear timeout on component unmount
-    }, 1500); // Preloader duration
+    }, 300); // Preloader duration
 
     return () => clearTimeout(fadeTimeout); // Clear the timeout on component unmount
   }, []);

@@ -1,19 +1,24 @@
-import { MdBlock } from "react-icons/md";
-import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
+
 import axiosInstance from "../../api/axiosInstance";
 import useAllCourse from "../../api/useAllCourse";
 import Loader from "../../utils/Loader";
-
-const ManageCourse = () => {
-  const baseUrl = axiosInstance.defaults.baseURL;
-  const { courses, isLoading } = useAllCourse();
-  console.log("course", courses);
-
-  if (isLoading) return <Loader />;
-  if (!courses?.length) return <p>No Data available</p>;
-
-  return (
-    <div className="overflow-x-auto w-full px-2 py-5">
+import { FaCheckCircle } from "react-icons/fa";
+import { MdBlock } from "react-icons/md";
+const CourseManage = () => {
+    const baseUrl = axiosInstance.defaults.baseURL;
+    const { courses, isLoading } = useAllCourse();
+    const handleApproved = (id) =>{
+        console.log('hello',id)
+    }
+const handleRejected = (id) =>{
+    console.log('hello',id)
+}
+  
+    if (isLoading) return <Loader />;
+    if (!courses?.length) return <p>No Data available</p>;
+  
+    return (
+        <div className="overflow-x-auto w-full px-2 py-5">
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
@@ -24,10 +29,7 @@ const ManageCourse = () => {
               <th className="py-4 pr-6 text-left text-text font-bold uppercase">
                 Category
               </th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Price</th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
-                Students
-              </th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Price</th>              
               <th className="py-4 pr-6 text-left text-text font-bold uppercase">
                 Status
               </th>
@@ -52,18 +54,14 @@ const ManageCourse = () => {
                 </td>
                 <td className="border-b truncate">{course.category}</td>
                 <td className="border-b"> {course.price} </td>
-                <td className="border-b"> studens </td>
                 <td className="border-b">                  
                   {course.status}
                 </td>
                 <td className="py-4 px-6 border-b border-gray-200 flex gap-2">
-                  <span className="text-text rounded-full text-xs">
-                    <FaRegEye className="w-5 h-5" />
+                  <span onClick={()=>handleApproved(course._id)} className="text-text cursor-pointer rounded-full text-xs">
+                    <FaCheckCircle className="w-5 h-5" />
                   </span>
-                  <span className="text-text rounded-full text-xs">
-                    <FaRegPenToSquare className="w-5 h-5" />
-                  </span>
-                  <span className="text-text rounded-full text-xs">
+                  <span onClick={()=>handleRejected(course._id)} className="text-text cursor-pointer rounded-full text-xs">
                     <MdBlock className="w-5 h-5" />
                   </span>
                 </td>
@@ -73,7 +71,7 @@ const ManageCourse = () => {
         </table>
       </div>
     </div>
-  );
+    );
 };
 
-export default ManageCourse;
+export default CourseManage;

@@ -43,16 +43,44 @@ exports.approvedInstructor = async (req, res, next) => {
     const result = await usersCollection.updateOne(query, updateDoc);
     res.status(200).json({
       message: "Congratulations, You are Teacher now !!",
-      result
+      result,
     });
   } catch (error) {
     next(error);
   }
 };
 
+exports.getAllTeacher = async (req, res, next) => {
+  try {
+    const status = req?.query?.status || { $exists: true };
+    const query = { status: status };
+    const users = await usersCollection.find(query).toArray();
+
+    if (!users.length) {
+      return res.status(404).json({
+        success: false,
+        message: "No users found",
+      });
+    }
+    // res.status(200).send(users);
+    res.status(200).json({
+      success: true,
+      data: users,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Server error while fetching users",
+      error: error.message,
+    });
+    next(error);
+  }
+};
+
 exports.getAllUser = async (req, res, next) => {
   try {
-    const users = await usersCollection.find().toArray();
+    const query = { status: { $exists: false } }
+    const users = await usersCollection.find(query).toArray();
     if (!users.length) {
       return res.status(404).json({
         success: false,

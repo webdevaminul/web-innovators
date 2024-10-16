@@ -22,7 +22,15 @@ const CreateCourse = () => {
     const status = "pending";
 
     const formData = new FormData();
-    const courseData = { name, email, title, price, status, category, detailsCourse };
+    const courseData = {
+      name,
+      email,
+      title,
+      price,
+      status,
+      category,
+      detailsCourse,
+    };
     formData.append("coverPicture", file);
 
     // Append the serialized course data (as a string)

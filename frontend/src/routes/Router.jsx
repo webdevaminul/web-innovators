@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home/Home";
 import SignUp from "../pages/Authentication/SignUp/SignUp";
@@ -27,6 +27,7 @@ import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
 import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
 import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
+import CourseManage from "../pages/AdminDashboard/CourseManage";
 
 const router = createBrowserRouter([
   {
@@ -102,17 +103,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/become-instructor",
-        element: (
-          <PrivateRouter>
-            <BeInstructor />
-          </PrivateRouter>
-        ),
+        element: <BeInstructor />,
       },
     ],
   },
 
   {
-    path: "dashbroad/home",
+    path: "dashboard/home",
     element: (
       <PrivateRouter>
         <DashboardLayoutBasic />
@@ -131,7 +128,11 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: "",
+        element: <Navigate to="home" />,
+      },
+      {
+        path: "home",
         element: <TeacherHome />,
       },
       {
@@ -161,12 +162,20 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "",
+        element: <Navigate to="admin-home" />,
+      },
+      {
         path: "admin-home",
         element: <AdminHome />,
       },
       {
         path: "user-manage",
         element: <UserManage />,
+      },
+      {
+        path: "course-manage",
+        element: <CourseManage />,
       },
     ],
   },

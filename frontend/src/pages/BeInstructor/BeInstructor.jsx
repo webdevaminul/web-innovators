@@ -4,17 +4,24 @@ import { useSelector } from "react-redux";
 import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import CustomModal from "../../utils/CustomModal";
 import PrimaryButton from "../../utils/PrimaryButton";
-import { MdVerified, MdError } from "react-icons/md";
+import { MdError } from "react-icons/md";
 import LinkButton from "../../utils/LinkButton";
 
 const BeInstructor = () => {
   const { user } = useSelector((state) => state.authUsers);
   const [selectedOption, setSelectedOption] = useState("");
-  const email = user.userInfo.userEmail;
-  const name = user.userInfo.userName;
-  const id = user.userInfo._id;
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [text, setText] = useState("")
+
+  const email = user?.userInfo.userEmail || "";
+  const name = user?.userInfo.userName || "";
+  const id = user?.userInfo._id || "";
   const navigate = useNavigate();
+
+  const role = user?.userInfo?.userRole;
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -22,21 +29,38 @@ const BeInstructor = () => {
     const institute = data.instName.value;
     const message = data.message.value;
     const status = "Pending";
-    const updateData = { status, institute, message, selectedOption };
+    const updateData = {
+      name,
+      email,
+      status,
+      institute,
+      message,
+      selectedOption,
+    };
 
-    axiosInstance
-      .put(`/be/instructor/${id}`, updateData)
-      .then((res) => {
-        console.log(res.data);
-        console.log(res.status);
-        if (res.status === 200) {
-          toast.success(res.data.message);
-          navigate("/");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (user) {
+      if (role === "Admin") {
+        setModalMessage("You are is an admin.");
+        setText("Do you want to log in ?")
+        return setModalOpen(true); // Open warning modal
+      }
+      axiosInstance
+        .put(`/be/instructor/${id}`, updateData)
+        .then((res) => {
+          // console.log(res?.data);
+          console.log(res?.status);
+          if (res.status === 200) {
+            toast.success(res?.data?.message);
+            navigate("/");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      setModalMessage("You are not logged in.");
+      setModalOpen(true); // Open warning modal
+    }
   };
 
   return (
@@ -233,9 +257,9 @@ const BeInstructor = () => {
                   id="name"
                   type="text"
                   name="name"
-                  readOnly
-                  autoFocus="autofocus"
-                  placeholder={name}
+                  readOnly={user ? true : false}
+                  placeholder={name === "" ? "Your name" : name}
+                  // placeholder="Your Name"
                 />
               </div>
               <div className="md:w-1/2">
@@ -247,8 +271,8 @@ const BeInstructor = () => {
                   id="email"
                   type="email"
                   name="email"
-                  readOnly
-                  placeholder={email}
+                  readOnly={user ? true : false}
+                  placeholder={email === "" ? "Your Email" : email}
                 />
               </div>
             </div>
@@ -265,7 +289,7 @@ const BeInstructor = () => {
                   name="instName"
                   required="required"
                   autoFocus="autofocus"
-                  placeholder="Type Your Name"
+                  placeholder="Type Institute Name"
                 />
               </div>
               <div className="md:w-1/2">
@@ -289,7 +313,7 @@ const BeInstructor = () => {
                 Message
               </label>
               <textarea
-                className="w-full rounded-lg h-20 bg-inputBg"
+                className="w-full rounded-lg h-20 p-2 bg-inputBg"
                 name="message"
                 id="message"
                 placeholder="write here about you ..."
@@ -304,6 +328,14 @@ const BeInstructor = () => {
               </button>
             </div>
           </form>
+          {modalOpen && (
+            <CustomModal
+              modalOpen={modalOpen}
+              setModalOpen={setModalOpen}
+              message={modalMessage}
+              text={text}
+            />
+          )}
         </div>
       </div>
     </div>

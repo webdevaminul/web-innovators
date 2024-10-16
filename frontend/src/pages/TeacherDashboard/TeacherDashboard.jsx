@@ -54,17 +54,15 @@ const TeacherDashboard = () => {
           isOpen ? "translate-x-0" : "-translate-x-80"
         } `}
       >
-        <div className="relative">
-          <Link className="flex items-center gap-4 py-6 px-8">
-            <h6 className="block antialiased font-bai font-semibold text-text">
-              Teacher Dashboard
-            </h6>
-          </Link>
+        <div className="relative flex items-center gap-4 py-6 px-8">
+          <h6 className="block antialiased font-bai font-semibold text-text">
+            Teacher Dashboard
+          </h6>
         </div>
         <div className="m-4">
           <ul className="mb-4 flex flex-col gap-1">
             <li>
-              <Link className="active">
+              <Link to="home" className="active">
                 <button
                   className="font-bai transition-all py-3 rounded-lg text-text w-full flex items-center gap-4 px-4"
                   type="button"
@@ -75,7 +73,7 @@ const TeacherDashboard = () => {
               </Link>
             </li>
             <li>
-              <Link to="/teacher-dashboard/profile">
+              <Link to="profile">
                 <button
                   className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
