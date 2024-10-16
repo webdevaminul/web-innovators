@@ -68,6 +68,7 @@ export default function Categories() {
     navigate(`/all-course/${category}`)
     // console.log(category);
   };
+  
   return (
     <section className="p-5">
       <Title
@@ -76,7 +77,7 @@ export default function Categories() {
       />
 
       <div className="grid grid-cols-4 gap-5">
-        {categories.map((category, index) => (
+        {categories?.map((category, index) => (
           <Link
             onClick={() => handleCategory(category.name)}
             key={index}

@@ -1,21 +1,25 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import CourseCard from "./CourseCard";
 import Heading from "../../utils/Heading";
 import Loader from "../../utils/Loader";
-import { useParams } from "react-router-dom";
-import useAllCourse from "../../api/useAllCourse";
+import useAvailableCourse from "../../api/useAvailableCourse";
 
 const AllCourses = () => {
   const { categoryName } = useParams(); // home page category founder
-
-  const [selectedCategory, setSelectedCategory] = useState( categoryName || null); // Initially null to show all data
+  const [selectedCategory, setSelectedCategory] = useState(
+    categoryName || null
+  ); // Initially null to show all data
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 6; // Number of items to display per page
+  const { courses, isLoading } = useAvailableCourse(
+    sortOrder,
+    currentPage,
+    itemsPerPage
+  ); // all course get by hook from database
 
-  const { courses, isLoading } = useAllCourse(); // all course get by hook from database
-  // console.log("course", courses);
-  console.log("course", categoryName);
+  console.log("avbai courses", courses);
 
   // Handle category change and filter data
   const handleCategoryChange = (e) => {
@@ -216,15 +220,25 @@ const AllCourses = () => {
 
             <div className="flex flex-col items-center justify-center">
               <div className="mb-10">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                  {paginatedCourses.map((course) => (
-                    <CourseCard key={course._id} course={course} />
-                  ))}
-                </div>
+                {paginatedCourses.length === 0 ? (
+                  <div className="text-2xl font-bold text-gray-500 mt-10">
+                    No courses available for this category
+                  </div>
+                ) : (
+                  <div className="mb-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                      {paginatedCourses.map((course) => (
+                        <CourseCard key={course._id} course={course} />
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Pagination Controls */}
-              <div className="join border mx-auto">{renderPagination()}</div>
+              {paginatedCourses.length > 0 && (
+                <div className="join border mx-auto">{renderPagination()}</div>
+              )}
             </div>
           </div>
         </div>

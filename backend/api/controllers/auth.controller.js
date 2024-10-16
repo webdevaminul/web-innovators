@@ -14,7 +14,6 @@ exports.signup = async (req, res, next) => {
   try {
     // Extract the user's username, email, and password from the request body
     const { userName, userEmail, userPassword } = req.body;
-    console.log("email", req.body);
 
     // Check if the username or email already exists in the database
     const existingUser = await userCollection.findOne({
@@ -83,8 +82,6 @@ exports.emailVerify = async (req, res, next) => {
     // Extract the verification token from the request query parameters
     const { token } = req.query;
 
-    console.log("token in backend", token);
-
     // Return error if the token is not valid
     if (!token) {
       return next(errorHandler(401, "Invalid email verification token"));
@@ -94,12 +91,8 @@ exports.emailVerify = async (req, res, next) => {
     const decoded = jwt.verify(token, process.env.JWT_ACCESS_TOKEN_SECRET);
     const { userName, userEmail, userPassword } = decoded;
 
-    console.log("in backend", userName, userEmail, userPassword);
-
     // Hash the password
     const hashedPassword = bcryptjs.hashSync(userPassword, 10);
-
-    console.log("hashedPassword", hashedPassword);
 
     // Check if the user already exists
     let user = await userCollection.findOne({ userEmail: userEmail });
@@ -120,8 +113,6 @@ exports.emailVerify = async (req, res, next) => {
       // Insert the new user into the database
       await userCollection.insertOne(user);
     }
-
-    console.log("user", user);
 
     // Generate a JWT access token for login the user
     const accessToken = jwt.sign({ id: user._id }, process.env.JWT_ACCESS_TOKEN_SECRET, {

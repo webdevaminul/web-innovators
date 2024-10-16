@@ -4,10 +4,10 @@ import FirstSection from "./FirstSection";
 import SecondSection from "./SecondSection";
 import VideoCard from "./VideoCard";
 import Instructor from "./Instructor";
-import useAllCourse from "../../api/useAllCourse";
+import useAvailableCourse from "../../api/useAvailableCourse";
 
 const CourseDetails = () => {
-  const { courses } = useAllCourse();
+  const {courses} = useAvailableCourse()
   console.log(courses);
 
   const { id } = useParams();
