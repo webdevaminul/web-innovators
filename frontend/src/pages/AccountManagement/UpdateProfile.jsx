@@ -50,7 +50,7 @@ export default function UpdateProfile() {
           setFilePercent(Math.round(process)); // Update the upload progress
         },
         (error) => {
-          console.log(error)
+          console.log(error);
           setFileUploadError(true); // Handle any errors during upload
         },
         () => {
@@ -240,7 +240,7 @@ export default function UpdateProfile() {
             </span>
             <select
               defaultValue={user?.userInfo?.userGender || ""}
-              className="w-full bg-bg outline-none placeholder:text-text text-text"
+              className="w-full bg-backgroundPrimary outline-none placeholder:text-text text-text"
               {...register("userGender", {
                 onChange: () => {
                   dispatch(resetError());
@@ -274,7 +274,7 @@ export default function UpdateProfile() {
                   ? new Date(user.userInfo.userBirth).toISOString().split("T")[0]
                   : ""
               }
-              className="w-full bg-bg outline-none placeholder:text-text text-text"
+              className="w-full bg-backgroundPrimary outline-none placeholder:text-text text-text"
               {...register("userBirth", {
                 validate: (value) => {
                   return value <= today || "Date of birth cannot be in the future";
@@ -301,7 +301,7 @@ export default function UpdateProfile() {
             <textarea
               placeholder="Add your address"
               defaultValue={user?.userInfo?.userAddress || ""}
-              className="w-full bg-bg outline-none placeholder:text-text text-text pt-2"
+              className="w-full bg-backgroundPrimary outline-none placeholder:text-text text-text pt-2"
               {...register("userAddress", {
                 onChange: () => {
                   dispatch(resetError());

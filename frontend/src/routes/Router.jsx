@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home/Home";
 import SignUp from "../pages/Authentication/SignUp/SignUp";
@@ -25,6 +25,9 @@ import Overview from "../pages/AccountManagement/Overview";
 import UpdateProfile from "../pages/AccountManagement/UpdateProfile";
 import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
+import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
+import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
+import CourseManage from "../pages/AdminDashboard/CourseManage";
 
 const router = createBrowserRouter([
   {
@@ -52,6 +55,14 @@ const router = createBrowserRouter([
         element: <EmailVerify />,
       },
       {
+        path: "/forget-password",
+        element: <ForgetPassword />,
+      },
+      {
+        path: "/password-recovery",
+        element: <PasswordRecovery />,
+      },
+      {
         path: "/manage-account",
         element: <ManageAccount />,
         children: [
@@ -74,7 +85,7 @@ const router = createBrowserRouter([
         ],
       },
       {
-        path: "/allCourses",
+        path: "/all-courses",
         element: <AllCourses />,
       },
       {
@@ -92,22 +103,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/become-instructor",
-        element: (
-          <PrivateRouter>
-            <BeInstructor />
-          </PrivateRouter>
-        ),
+        element: <BeInstructor />,
       },
     ],
   },
 
   {
-    path: "dashbroad/home",
+    path: "dashboard/home",
     element: (
       <PrivateRouter>
         <DashboardLayoutBasic />
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
+    // children:
   },
   {
     path: "teacher-dashboard",
@@ -116,9 +125,14 @@ const router = createBrowserRouter([
         <TeacherDashboard />
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: "",
+        element: <Navigate to="home" />,
+      },
+      {
+        path: "home",
         element: <TeacherHome />,
       },
       {
@@ -135,6 +149,8 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  // Admin dashboard here
   {
     path: "admin-dashboard",
     element: (
@@ -143,7 +159,12 @@ const router = createBrowserRouter([
         <AdminDashboard />{" "}
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
     children: [
+      {
+        path: "",
+        element: <Navigate to="admin-home" />,
+      },
       {
         path: "admin-home",
         element: <AdminHome />,
@@ -152,7 +173,15 @@ const router = createBrowserRouter([
         path: "user-manage",
         element: <UserManage />,
       },
+      {
+        path: "course-manage",
+        element: <CourseManage />,
+      },
     ],
+  },
+  {
+    path: "*", // Catch all for any undefined routes
+    element: <ErrorPage />,
   },
 ]);
 export default router;

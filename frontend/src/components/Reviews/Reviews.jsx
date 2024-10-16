@@ -82,7 +82,7 @@ export default function Reviews() {
           <SwiperSlide key={review.id} className="py-10 px-3">
             <div className="bg-accentOne rounded-3xl">
               <div className="relative border border-border rounded-3xl p-6 h-full flex flex-col gap-4 justify-between shadow-md">
-                <div className="text-2xl text-secondary border border-secondary absolute z-10 top-3 left-10 bg-bg p-2 rounded-full">
+                <div className="text-2xl text-secondary border border-secondary absolute z-10 top-3 left-10 bg-backgroundPrimary p-2 rounded-full">
                   <ImQuotesLeft />
                 </div>
 
@@ -94,7 +94,7 @@ export default function Reviews() {
                   {cutText(review.message, 250)}
                 </p>
 
-                <div className="flex justify-end text-secondary border border-secondary absolute bottom-[4.5rem] right-10 bg-bg p-2 rounded-full">
+                <div className="flex justify-end text-secondary border border-secondary absolute bottom-[4.5rem] right-10 bg-backgroundPrimary p-2 rounded-full">
                   <ImQuotesRight className="text-2xl" />
                 </div>
 

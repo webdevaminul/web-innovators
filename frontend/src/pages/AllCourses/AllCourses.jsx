@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import CourseCard from "./CourseCard"; // Import your CourseCard component
+import CourseCard from "./CourseCard";
 import Heading from "../../utils/Heading";
+import Loader from "../../utils/Loader";
 
 const AllCourses = () => {
   const [courses, setCourses] = useState([]);
@@ -176,7 +177,7 @@ const AllCourses = () => {
   };
 
   if (loading) {
-    return <div className="text-center my-10">Loading...</div>;
+    return <Loader /> ;
   }
 
   if (error) {

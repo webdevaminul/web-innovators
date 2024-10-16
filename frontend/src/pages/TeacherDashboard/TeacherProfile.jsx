@@ -35,9 +35,8 @@ const data = [
 ];
 
 const TeacherProfile = () => {
-  
   const { user } = useSelector((state) => state.authUsers);
-  console.log('user',user.userInfo)
+  console.log("user", user.userInfo);
   return (
     <section className="w-full overflow-hidden">
       <div className="flex flex-col ">
@@ -62,11 +61,10 @@ const TeacherProfile = () => {
         <div className="mx-auto flex flex-col gap-4 items-center relative lg:-top-8 md:-top-6 sm:-top-4 xs:-top-4">
           {/* Description */}
           <p className="w-fit text-text text-md">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            debitis labore consectetur voluptatibus mollitia dolorem veniam
-            omnis ut quibusdam minima sapiente repellendus asperiores explicabo,
-            eligendi odit, dolore similique fugiat dolor, doloremque eveniet.
-            Odit, consequatur. Ratione voluptate exercitationem hic eligendi
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quisquam debitis labore
+            consectetur voluptatibus mollitia dolorem veniam omnis ut quibusdam minima sapiente
+            repellendus asperiores explicabo, eligendi odit, dolore similique fugiat dolor,
+            doloremque eveniet. Odit, consequatur. Ratione voluptate exercitationem hic eligendi
             vitae animi nam in, est earum culpa illum aliquam.
           </p>
           {/* Details */}
@@ -76,16 +74,12 @@ const TeacherProfile = () => {
                 <dl className="text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                   <div className="flex flex-col pb-3">
                     <dt className="mb-1 text-text md:text-lg">Name</dt>
-                    <dd className="text-lg text-text font-semibold">
-                    {user.userInfo.userName}
-                    </dd>
+                    <dd className="text-lg text-text font-semibold">{user.userInfo.userName}</dd>
                   </div>
 
                   <div className="flex flex-col pt-3">
                     <dt className="mb-1 text-text md:text-lg ">Email</dt>
-                    <dd className="text-lg text-text font-semibold">
-                      {user.userInfo.userEmail}
-                    </dd>
+                    <dd className="md:text-lg text-text">{user.userInfo.userEmail}</dd>
                   </div>
                 </dl>
               </div>
@@ -93,15 +87,11 @@ const TeacherProfile = () => {
                 <dl className="text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
                   <div className="flex flex-col pb-3">
                     <dt className="mb-1 text-text md:text-lg ">Location</dt>
-                    <dd className="text-lg text-text font-semibold">
-                      Ethiopia, Addis Ababa
-                    </dd>
+                    <dd className="md:text-lg text-text">Ethiopia, Addis Ababa</dd>
                   </div>
                   <div className="flex flex-col pt-3">
                     <dt className="mb-1 text-text md:text-lg ">Phone Number</dt>
-                    <dd className="text-lg text-text font-semibold">
-                      +251913****30
-                    </dd>
+                    <dd className="md:text-lg text-text">+251913****30</dd>
                   </div>
                 </dl>
               </div>
@@ -112,7 +102,7 @@ const TeacherProfile = () => {
             {data?.map((card) => (
               <div key={card.id} className="text-text body-font">
                 <div className="container px-5 py-4 mx-auto">
-                  <div className="h-full rounded-xl shadow-cla-blue bg-bg overflow-hidden">
+                  <div className="h-full rounded-xl shadow-cla-blue bg-backgroundPrimary overflow-hidden">
                     <img
                       className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
                       src={card.image}
@@ -127,7 +117,7 @@ const TeacherProfile = () => {
                       </h1>
                       <p className="leading-relaxed mb-3">{card.description}</p>
                       <div className="flex items-center flex-wrap ">
-                        <button className="bg-bg shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
+                        <button className="bg-backgroundPrimary shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
                           Learn more
                         </button>
                       </div>

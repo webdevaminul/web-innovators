@@ -1,17 +1,20 @@
 import { HiOutlineUsers } from "react-icons/hi2";
 import { IoIosTrendingUp } from "react-icons/io";
-import TeacherOwnCourse from "../../components/TeacherOwnCourse/TeacherOwnCourse";
-import Calendar from "../../components/Calender/Calendar";
 import Heading from "../../utils/Heading";
-// import { useState } from "react";
+import Calendar from "../../components/Calender/Calendar";
+import TeacherOwnCourse from "../../components/TeacherOwnCourse/TeacherOwnCourse";
 
 const TeacherHome = () => {
+
   return (
     <div className="mt-12">
       <Heading heading={"Teacher Home"} />
       <div className="mb-12 grid gap-y-10 gap-x-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
         <div className="relative flex flex-col rounded-xl shadow-md border py-3">
-          <div className="bg-clip-border mx-4 rounded-xl bg-black text-white absolute grid h-16 w-16 place-items-center">
+          <div
+            className="bg-clip-border mx-4 rounded-xl light:bg-gray-300 dark:bg-bg text-
+           absolute grid h-16 w-16 place-items-center"
+          >
             <HiOutlineUsers className="w-5 h-5" />
           </div>
           <div className="p-4 text-right">
@@ -24,13 +27,12 @@ const TeacherHome = () => {
           </div>
           <div className="border-t border-blue-gray-50 p-4">
             <p className="block antialiased font-bai text-base leading-relaxed font-normal text-text">
-              <strong className="text-green-500">+55%</strong>&nbsp;than last
-              week
+              <strong className="text-green-500">+55%</strong>&nbsp;than last week
             </p>
           </div>
         </div>
         <div className="relative flex flex-col rounded-xl shadow-md border py-3">
-          <div className="bg-clip-border mx-4 rounded-xl bg-black text-white absolute grid h-16 w-16 place-items-center">
+          <div className="bg-clip-border mx-4 rounded-xl light:bg-gray-300 text-white absolute grid h-16 w-16 place-items-center">
             <HiOutlineUsers className="w-5 h-5" />
           </div>
           <div className="p-4 text-right">
@@ -43,13 +45,12 @@ const TeacherHome = () => {
           </div>
           <div className="border-t border-blue-gray-50 p-4">
             <p className="block antialiased font-bai text-base leading-relaxed font-normal text-text">
-              <strong className="text-green-500">+3%</strong>&nbsp;than last
-              month
+              <strong className="text-green-500">+3%</strong>&nbsp;than last month
             </p>
           </div>
         </div>
         <div className="relative flex flex-col rounded-xl shadow-md border py-3">
-          <div className="bg-clip-border mx-4 rounded-xl bg-black text-white absolute  grid h-16 w-16 place-items-center">
+          <div className="bg-clip-border mx-4 rounded-xl light:bg-gray-300 dark:bg-bg text-white absolute  grid h-16 w-16 place-items-center">
             <HiOutlineUsers className="w-5 h-5" />
           </div>
           <div className="p-4 text-right">
@@ -67,7 +68,7 @@ const TeacherHome = () => {
           </div>
         </div>
         <div className="relative flex flex-col rounded-xl shadow-md border py-3">
-          <div className="bg-clip-border mx-4 rounded-xl bg-black text-white absolute  grid h-16 w-16 place-items-center">
+          <div className="bg-clip-border mx-4 rounded-xl light:bg-gray-300 dark:bg-bg text-white absolute  grid h-16 w-16 place-items-center">
             <IoIosTrendingUp className="w-5 h-5" />
           </div>
           <div className="p-4 text-right">
@@ -80,8 +81,7 @@ const TeacherHome = () => {
           </div>
           <div className="border-t border-blue-gray-50 p-4">
             <p className="block antialiased font-bai text-base leading-relaxed font-normal text-text">
-              <strong className="text-green-500">+5%</strong>&nbsp;than
-              yesterday
+              <strong className="text-green-500">+5%</strong>&nbsp;than yesterday
             </p>
           </div>
         </div>
@@ -146,9 +146,9 @@ const TeacherHome = () => {
                         </p>
                         <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
                           <div
-                            className="flex justify-center items-center h-full bg-bg from-blue-600 to-blue-400 text-white"
+                            className="flex justify-center items-center h-full bg-backgroundPrimary from-blue-600 to-blue-400 text-white"
                             style={{ width: "60%" }}
-                          /> 
+                          />
                         </div>
                       </div>
                     </td>
