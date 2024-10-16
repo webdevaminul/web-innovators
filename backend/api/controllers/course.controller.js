@@ -53,17 +53,20 @@ exports.createCourse = async (req, res, next) => {
 // available course for user, student and teacher 
 exports.availableCourse = async (req, res, next) => {
   try {
-    const { sortOrder = "asc", page = 1, limit = 6 } = req.query;
-
+    const { selectedCategory, sortOrder = "asc", page = 1, limit = 6 } = req.query;
+console.log('category 57',selectedCategory)
     const currentPage = parseInt(page, 10) || 1; // 10 for decimal
     const itemsPerPage = parseInt(limit, 10) || 6; // 10 for decimal
     const skip = (currentPage - 1) * itemsPerPage;
     
     // Initialize an empty object for sorting
     let sortOption = {};
-
+    const query = {};
     // If sortOrder is provided, sort based on the price field
     sortOption.price = sortOrder === "asc" ? 1 : -1; // 1 for ascending, -1 for descending
+    if (selectedCategory && selectedCategory !== 'All') {
+      query.selectedCategory = selectedCategory;
+    }
 
     // Fetch total number of courses for pagination calculation
     const totalCourses = await courseCollection.estimatedDocumentCount();
@@ -71,11 +74,11 @@ exports.availableCourse = async (req, res, next) => {
     // Fetching the courses from the collection with sorting
     // const courses = await courseCollection.find().sort(sortOption).toArray();
     const courses = await courseCollection
-      .find()
+      .find(query)
       .sort(sortOption)
       .skip(skip)
       .limit(itemsPerPage)
-      .toArray();
+      .toArray()
 
     if (!courses.length) {
       return res.status(404).json({

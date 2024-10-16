@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CourseCard from "./CourseCard";
 import Heading from "../../utils/Heading";
@@ -16,9 +16,12 @@ const AllCourses = () => {
   const { courses, isLoading, totalPages} = useAvailableCourse(
     sortOrder,
     currentPage,
-    itemsPerPage
+    itemsPerPage,
+    selectedCategory
   ); // all course get by hook from database
-
+  useEffect(() => {
+    setSelectedCategory(categoryName || null);
+  }, [categoryName]);
   console.log("avbai courses", courses);
 
   
