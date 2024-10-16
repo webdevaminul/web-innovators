@@ -15,8 +15,6 @@ import ManageCourse from "../pages/TeacherDashboard/ManageCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
 import ErrorBoundary from "../pages/UserDashboard/ErrorBoundary/ErrorBoundary";
-import BlogPostCreation from "../pages/BlogPosts/BlogPostForm";
-
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateRouter from "./PrivateRouter";
@@ -28,69 +26,37 @@ import Overview from "../pages/AccountManagement/Overview";
 import UpdateProfile from "../pages/AccountManagement/UpdateProfile";
 import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
+import BlogCreation from "../pages/TeacherDashboard/BlogCreation";
+import BlogManagement from "../pages/TeacherDashboard/BlogManagement";
+import BlogDetails from "../pages/TeacherDashboard/BlogDetails";
+import AdminBlogManage from "../pages/AdminDashboard/AdminBlogManage";
+import AdminBlogCreation from "../pages/AdminDashboard/AdminBlogCreation";
+
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorBoundary />, // Add ErrorBoundary here
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorBoundary />,
     children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-      {
-        path: "/sign-up",
-        element: <SignUp />,
-      },
-      {
-        path: "/email-verify",
-        element: <EmailVerify />,
-      },
+      { path: "/", element: <Home /> },
+      { path: "/sign-in", element: <SignIn /> },
+      { path: "/sign-up", element: <SignUp /> },
+      { path: "/email-verify", element: <EmailVerify /> },
       {
         path: "/manage-account",
         element: <ManageAccount />,
         children: [
-          {
-            path: "/manage-account/overview",
-            element: <Overview />,
-          },
-          {
-            path: "/manage-account/manage-profile",
-            element: <UpdateProfile />,
-          },
-          {
-            path: "/manage-account/change-password",
-            element: <ChangePassword />,
-          },
-          {
-            path: "/manage-account/delete-account",
-            element: <DeleteAccount />,
-          },
+          { path: "overview", element: <Overview /> },
+          { path: "manage-profile", element: <UpdateProfile /> },
+          { path: "change-password", element: <ChangePassword /> },
+          { path: "delete-account", element: <DeleteAccount /> },
         ],
       },
-      {
-        path: "/allCourses",
-        element: <AllCourses />,
-      },
-      {
-        path: "/course-details/:id",
-        element: <CourseDetails />,
-        loader: () => fetch("./courses.json"),
-      },
-      {
-        path: "/blog",
-        element: <BlogPosts />,
-      },
-      {
-        path: "/contactUs",
-        element: <ContactPage />,
-      },
+      { path: "/all-courses", element: <AllCourses /> },
+      { path: "/course-details/:id", element: <CourseDetails />, loader: () => fetch("./courses.json") },
+      { path: "/blog", element: <BlogPosts /> },
+      { path: "/contact-us", element: <ContactPage /> },
       {
         path: "/become-instructor",
         element: (
@@ -99,67 +65,53 @@ const router = createBrowserRouter([
           </PrivateRouter>
         ),
       },
-      {
-        path:"/create-post",
-        element:<BlogPostCreation></BlogPostCreation>,
-       
-      }
     ],
   },
   {
-    path: "/userDeshbroad",
+    path: "/user-dashboard",
     element: <DashboardLayoutBasic />,
-    errorElement: <ErrorBoundary />, // Add ErrorBoundary here as well
-    path: "dashbroad/home",
-    element: (
-      <PrivateRouter>
-        <DashboardLayoutBasic />
-      </PrivateRouter>
-    ),
+    errorElement: <ErrorBoundary />,
+    children: [
+      {
+        path: "home",
+        element: (
+          <PrivateRouter>
+            <DashboardLayoutBasic />
+          </PrivateRouter>
+        ),
+      },
+    ],
   },
   {
-    path: "teacher-dashboard",
+    path: "/teacher-dashboard",
     element: (
       <PrivateRouter>
         <TeacherDashboard />
       </PrivateRouter>
     ),
     children: [
-      {
-        index: true,
-        element: <TeacherHome />,
-      },
-      {
-        path: "profile",
-        element: <TeacherProfile />,
-      },
-      {
-        path: "manage-course",
-        element: <ManageCourse />,
-      },
-      {
-        path: "create-course",
-        element: <CreateCourse />,
-      },
+      { index: true, element: <TeacherHome /> },
+      { path: "profile", element: <TeacherProfile /> },
+      { path: "manage-course", element: <ManageCourse /> },
+      { path: "create-course", element: <CreateCourse /> },
+      { path: "create-post", element: <PrivateRouter><BlogCreation /></PrivateRouter> },
+      { path: "blog-management", element: <BlogManagement /> },
+      { path: "blog/:id", element: <BlogDetails /> },
     ],
   },
   {
-    path: "admin-dashboard",
+    path: "/admin-dashboard",
     element: (
       <PrivateRouter>
-        {" "}
-        <AdminDashboard />{" "}
+        <AdminDashboard />
       </PrivateRouter>
     ),
     children: [
-      {
-        path: "admin-home",
-        element: <AdminHome />,
-      },
-      {
-        path: "user-manage",
-        element: <UserManage />,
-      },
+      { path: "admin-home", element: <AdminHome /> },
+      { path: "user-manage", element: <UserManage /> },
+      { path: "adminBlog-management", element: <AdminBlogManage /> },
+      { path: "blog-creation", element: <AdminBlogCreation /> },
+      
     ],
   },
 ]);
