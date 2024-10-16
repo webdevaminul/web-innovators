@@ -4,13 +4,15 @@ import FirstSection from "./FirstSection";
 import SecondSection from "./SecondSection";
 import VideoCard from "./VideoCard";
 import Instructor from "./Instructor";
+import useAllCourse from "../../api/useAllCourse";
 
 const CourseDetails = () => {
   const coursesDetails = useLoaderData();
+  const { courses } = useAllCourse();
+  console.log(courses);
 
   const { id } = useParams();
-  const courseId = parseInt(id);
-  const singleCourse = coursesDetails.find((data) => data.id === courseId);
+  const singleCourse = courses?.find((data) => data._id === id);
   console.log(singleCourse);
   return (
     <div className="heading py-4 md:py-8 px-5">

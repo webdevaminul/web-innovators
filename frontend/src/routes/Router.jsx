@@ -89,6 +89,10 @@ const router = createBrowserRouter([
         element: <AllCourses />,
       },
       {
+        path: "/all-course/:categoryName",
+        element: <AllCourses />,
+      },
+      {
         path: "/course-details/:id",
         element: <CourseDetails />,
         loader: () => fetch("./courses.json"),

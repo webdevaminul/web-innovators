@@ -1,35 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import CourseCard from "./CourseCard";
 import Heading from "../../utils/Heading";
 import Loader from "../../utils/Loader";
+import { useParams } from "react-router-dom";
+import useAllCourse from "../../api/useAllCourse";
 
 const AllCourses = () => {
-  const [courses, setCourses] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { categoryName } = useParams(); // home page category founder
+  
   const [selectedCategory, setSelectedCategory] = useState(null); // Initially null to show all data
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 6; // Number of items to display per page
 
-  // Load all courses when the component mounts
-  useEffect(() => {
-    fetch("./courses.json")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCourses(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        setError(error);
-        setLoading(false);
-      });
-  }, []);
+  const { courses, isLoading } = useAllCourse(); // all course get by hook from database
+  console.log("course", courses);
+  console.log("course", categoryName);
+
 
   // Handle category change and filter data
   const handleCategoryChange = (e) => {
@@ -40,7 +27,7 @@ const AllCourses = () => {
 
   // Filter courses based on the selected category
   const filteredCourses = selectedCategory
-    ? courses.filter((course) => course.category === selectedCategory)
+    ? courses.filter((course) => course?.category === selectedCategory)
     : courses;
 
   // Sort the filtered courses
@@ -176,16 +163,8 @@ const AllCourses = () => {
     return paginationItems;
   };
 
-  if (loading) {
-    return <Loader /> ;
-  }
-
-  if (error) {
-    return (
-      <div className="text-center text-red-500 my-10">
-        Error: {error.message}
-      </div>
-    );
+  if (isLoading) {
+    return <Loader />;
   }
 
   // Get all categories including an "All" option
@@ -197,58 +176,63 @@ const AllCourses = () => {
   return (
     <div className="container mx-auto px-4 font-bai">
       <Heading heading={"All Courses"} />
-    <div className="container mx-auto px-4 font-bai py-8">
-      <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
-        <div className="w-full md:w-1/4">
-          <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
-          <div className="pt-3 rounded-lg">
-            <select
-              value={selectedCategory || "All"}
-              onChange={handleCategoryChange}
-              className="w-full p-2 border rounded-md"
-            >
-              {categories.map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
-        <div className="w-full md:w-3/4">
-          <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
-            <h3 className="text-3xl font-semibold">
-              {selectedCategory ? selectedCategory : "All Courses"}
-            </h3>
-            <div className="text-center mb-2">
-              <label className="mr-2 font-bold text-text">Sort by Price:</label>
+      <div className="container mx-auto px-4 font-bai py-8">
+        <div className="flex flex-col md:flex-row gap-3 lg:gap-8">
+          <div className="w-full md:w-1/4">
+            <h3 className="text-2xl font-semibold mb-3">Filter by Category</h3>
+            <div className="pt-3 rounded-lg">
               <select
-                value={sortOrder}
-                onChange={(e) => setSortOrder(e.target.value)}
-                className="border outline-none border-border bg-accentOne text-text font-bold rounded-md p-2"
+                value={selectedCategory || "All"}
+                onChange={handleCategoryChange}
+                className="w-full p-2 border rounded-md"
               >
-                <option value="asc">Low to High</option>
-                <option value="desc">High to Low</option>
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
 
-          <div className="flex flex-col items-center justify-center">
-            <div className="mb-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {paginatedCourses.map((course) => (
-                  <CourseCard key={course.id} course={course} />
-                ))}
+          <div className="w-full md:w-3/4">
+            <div className="flex flex-col-reverse md:flex-row justify-between items-center mb-3">
+              <h3 className="text-3xl font-semibold">
+                {selectedCategory ? selectedCategory : "All Courses"}
+              </h3>
+              <div className="text-center mb-2">
+                <label className="mr-2 font-bold text-text">
+                  Sort by Price:
+                </label>
+                <select
+                  value={sortOrder}
+                  onChange={(e) => setSortOrder(e.target.value)}
+                  className="border outline-none border-border bg-accentOne text-text font-bold rounded-md p-2"
+                >
+                  <option value="asc">Low to High</option>
+                  <option value="desc">High to Low</option>
+                </select>
               </div>
             </div>
 
-            {/* Pagination Controls */}
-            <div className="join border mx-auto">{renderPagination()}</div>
+            <div className="flex flex-col items-center justify-center">
+              <div className="mb-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {paginatedCourses.map((course) => (
+                    <CourseCard key={course._id} course={course} />
+                  ))}
+                </div>
+              </div>
+
+              {/* Pagination Controls */}
+              <div className="join border mx-auto">{renderPagination()}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+
+
+
     </div>
   );
 };

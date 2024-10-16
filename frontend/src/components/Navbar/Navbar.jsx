@@ -83,6 +83,11 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/all-course/:categoryName" className="text-nowrap p-2 hover:text-textSecondary">
+          Our Course
+        </NavLink>
+      </li>
+      <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/blog" className="text-nowrap p-2 hover:text-textSecondary">
           Blogs
         </NavLink>
