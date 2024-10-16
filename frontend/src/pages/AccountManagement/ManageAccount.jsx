@@ -10,7 +10,7 @@ export default function ManageAccount() {
 
   return (
     <main className="flex relative min-h-[calc(100vh-3.8rem)]">
-      <aside className="bg-bg absolute w-full md:w-52 h-fit sm:h-full top-0 left-0 bottom-0 z-30 shadow md:border-r border-highlightGray/10 overflow-y-auto scroll no-scrollbar">
+      <aside className="bg-backgroundPrimary absolute w-full md:w-52 h-fit sm:h-full top-0 left-0 bottom-0 z-30 shadow md:border-r border-highlightGray/10 overflow-y-auto scroll no-scrollbar">
         <ul className="flex flex-row sm:flex-col gap-2 sm:py-5 sm:pr-4">
           <NavLink
             to="/manage-account/overview"

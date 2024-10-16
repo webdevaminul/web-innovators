@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { HiBars3, HiOutlineUsers } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
-import { MdOutlineNotificationsActive,MdManageAccounts } from "react-icons/md";
+import { MdOutlineNotificationsActive, MdManageAccounts } from "react-icons/md";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
@@ -15,7 +15,7 @@ const TeacherDashboard = () => {
   const [isRotating, setIsRotating] = useState(false);
   const sidebarRef = useRef(null);
   const loginUser = user?.userInfo.userName;
-  console.log('user', loginUser)
+  console.log("user", loginUser);
 
   const handleRotating = () => {
     setIsRotating(true);
@@ -27,56 +27,53 @@ const TeacherDashboard = () => {
     handleRotating();
   };
 
-// Close sidebar when clicking outside of it
-useEffect(() => {
-  const handleClickOutside = (event) => {
-    if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
-      setIsOpen(false); // Close sidebar if clicked outside
+  // Close sidebar when clicking outside of it
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsOpen(false); // Close sidebar if clicked outside
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
     }
-  };
 
-  if (isOpen) {
-    document.addEventListener("mousedown", handleClickOutside);
-  } else {
-    document.removeEventListener("mousedown", handleClickOutside);
-  }
-
-  // Cleanup event listener when component unmounts or isOpen changes
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, [isOpen]);
+    // Cleanup event listener when component unmounts or isOpen changes
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
   return (
-    <div className="min-h-screen bg-bg">
-      <aside ref={sidebarRef}
-        className={`bg-bg border border-border fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
+    <div className="min-h-screen bg-backgroundPrimary">
+      <aside
+        ref={sidebarRef}
+        className={`bg-backgroundPrimary border border-border fixed inset-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-80"
         } `}
       >
-        <div className="relative">
-          <Link className="flex items-center gap-4 py-6 px-8">
-            <h6 className="block antialiased font-bai font-semibold text-text">
-              Teacher Dashboard
-            </h6>
-          </Link>
+        <div className="relative flex items-center gap-4 py-6 px-8">
+          <h6 className="block antialiased font-bai font-semibold text-text">
+            Teacher Dashboard
+          </h6>
         </div>
         <div className="m-4">
           <ul className="mb-4 flex flex-col gap-1">
             <li>
-              <Link className="active">
+              <Link to="home" className="active">
                 <button
                   className="font-bai transition-all py-3 rounded-lg text-text w-full flex items-center gap-4 px-4"
                   type="button"
                 >
                   <IoHomeOutline className="w-5 h-5" />
-                  <p className="block font-bai text-base text-text font-medium">
-                    dashboard
-                  </p>
+                  <p className="block font-bai text-base text-text font-medium">dashboard</p>
                 </button>
               </Link>
             </li>
             <li>
-              <Link to="/teacher-dashboard/profile">
+              <Link to="profile">
                 <button
                   className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
@@ -144,9 +141,9 @@ useEffect(() => {
             </li>
           </ul>
           <ul className="border-t-2">
-          <li>
+            <li>
               <Link to="/">
-              <button
+                <button
                   className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
                   type="button"
                 >
@@ -197,22 +194,18 @@ useEffect(() => {
                 type="button"
               >
                 <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                  {isOpen ? (
-                    <RxCross1 className="w-5 h-5 " />
-                  ) : (
-                    <HiBars3 className="w-5 h-5" />
-                  )}
+                  {isOpen ? <RxCross1 className="w-5 h-5 " /> : <HiBars3 className="w-5 h-5" />}
                 </span>
               </button>
 
               {/* User list */}
-              <Link to="profile" >
+              <Link to="profile">
                 <button
                   className="middle none font-bai font-bold center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 hidden items-center gap-1 px-4 xl:flex"
                   type="button"
                 >
                   <HiOutlineUsers className="w-5 h-5" />
-                 {loginUser}
+                  {loginUser}
                 </button>
                 <button
                   className="relative middle none font-bai font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30 grid xl:hidden"
@@ -250,11 +243,7 @@ useEffect(() => {
             <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
               <p className="block antialiased font-bai text-sm leading-normal font-normal text-text">
                 © 2023, made with by{" "}
-                <a
-                  href="/"
-                  target="_blank"
-                  className="transition-colors hover:text-blue-500"
-                >
+                <a href="/" target="_blank" className="transition-colors hover:text-blue-500">
                   Learn Up
                 </a>{" "}
                 for a better web.{" "}

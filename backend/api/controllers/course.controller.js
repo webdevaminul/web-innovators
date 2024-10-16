@@ -4,36 +4,49 @@ const courseCollection = database.collection("courses");
 
 // Create a course
 exports.createCourse = async (req, res, next) => {
-  console.log("8 api hit hoice");
   try {
-    // Parse the course data sent as a string
-    const courseData = JSON.parse(req.body.courseData); // Convert back to object
-    console.log("11 controler course", courseData);
+    const courseData = JSON.parse(req.body.courseData);
+    // File uploaded by multer
+    const coverPicture = req.file; // This will contain the uploaded file information
 
-    if (!req.file) {
-      return res.status(400).send("No file uploaded.");
+    if (!coverPicture) {
+      return res.status(400).json({ message: "Cover picture is required!" });
     }
 
-    // Get the image URL for storage or retrieval
-    const imgUrl = `/images/${req.file.filename}`;
+    // Other form fields from req.body
+    const {name,
+      email,
+      title,
+      price,
+      status,
+      category,
+      detailsCourse, } = courseData;
 
-    // Create a new course object with the image URL
-    const newCourse = {
-      ...courseData,
-      imageUrl: imgUrl, // include the image URL in the course data
+    // Prepare the course data
+    const newCourse = {      
+      name,
+      email,
+      title,
+      price,
+      status,
+      category,
+      detailsCourse,
+      coverPicture: `/images/${coverPicture?.filename}`, // Store the uploaded filename in the database
     };
 
-    // Insert the new course into the database
+    // Insert the course data into the MongoDB collection
     const result = await courseCollection.insertOne(newCourse);
 
-    // Send a success response
-    res.status(200).send({
-      message: "Course created and file uploaded successfully!",
+    // Success response
+    res.status(201).json({
+      message: "Course created successfully!",
       courseId: result.insertedId,
+      course: newCourse,
     });
   } catch (error) {
-    res.status(500).send({ message: "Server error", error: error.message });
-    next(error);
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+    next(error)
   }
 };
 
