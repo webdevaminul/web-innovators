@@ -7,16 +7,15 @@ import useAllCourse from "../../api/useAllCourse";
 
 const AllCourses = () => {
   const { categoryName } = useParams(); // home page category founder
-  
-  const [selectedCategory, setSelectedCategory] = useState(null); // Initially null to show all data
+
+  const [selectedCategory, setSelectedCategory] = useState( categoryName || null); // Initially null to show all data
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 6; // Number of items to display per page
 
   const { courses, isLoading } = useAllCourse(); // all course get by hook from database
-  console.log("course", courses);
+  // console.log("course", courses);
   console.log("course", categoryName);
-
 
   // Handle category change and filter data
   const handleCategoryChange = (e) => {
@@ -230,9 +229,6 @@ const AllCourses = () => {
           </div>
         </div>
       </div>
-
-
-
     </div>
   );
 };

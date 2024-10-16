@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import FirstSection from "./FirstSection";
 import SecondSection from "./SecondSection";
@@ -7,7 +7,6 @@ import Instructor from "./Instructor";
 import useAllCourse from "../../api/useAllCourse";
 
 const CourseDetails = () => {
-  const coursesDetails = useLoaderData();
   const { courses } = useAllCourse();
   console.log(courses);
 
