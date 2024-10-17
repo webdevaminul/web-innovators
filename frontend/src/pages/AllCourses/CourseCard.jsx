@@ -15,6 +15,7 @@ const CourseCard = ({ course }) => {
   } = course;
 
   const baseUrl = axiosInstance.defaults.baseURL;
+
   return (
     <Link
       to={`/course-details/${_id}`}
@@ -25,9 +26,8 @@ const CourseCard = ({ course }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
-        <span className="text-sm"> Category : {category}</span>
+        <span className="text-sm">Category: {category}</span>
         <p>{name}</p>
-
         <div>
           <p className="flex justify-start items-center text-xl text-secondary">
             <FaBangladeshiTakaSign />
@@ -42,7 +42,9 @@ const CourseCard = ({ course }) => {
     </Link>
   );
 };
+
 CourseCard.propTypes = {
   course: PropTypes.object,
 };
+
 export default CourseCard;

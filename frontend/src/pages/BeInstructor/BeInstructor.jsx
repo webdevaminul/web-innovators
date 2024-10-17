@@ -14,7 +14,7 @@ const BeInstructor = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [text, setText] = useState("")
+  const [text, setText] = useState("");
 
   const email = user?.userInfo.userEmail || "";
   const name = user?.userInfo.userName || "";
@@ -29,6 +29,7 @@ const BeInstructor = () => {
     const institute = data.instName.value;
     const message = data.message.value;
     const status = "Pending";
+
     const updateData = {
       name,
       email,
@@ -41,14 +42,13 @@ const BeInstructor = () => {
     if (user) {
       if (role === "Admin") {
         setModalMessage("You are is an admin.");
-        setText("Do you want to log in ?")
+        setText("Do you want to log in?");
         return setModalOpen(true); // Open warning modal
       }
+
       axiosInstance
         .put(`/be/instructor/${id}`, updateData)
         .then((res) => {
-          // console.log(res?.data);
-          console.log(res?.status);
           if (res.status === 200) {
             toast.success(res?.data?.message);
             navigate("/");

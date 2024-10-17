@@ -1,18 +1,21 @@
 import { Outlet } from "react-router-dom";
-
 import { Slide, ToastContainer } from "react-toastify";
-import Footer from "./components/Footer/Footer";
+import Loader from "./utils/Loader";
 import Navbar from "./components/Navbar/Navbar";
-import "react-toastify/dist/ReactToastify.css";
+import Footer from "./components/Footer/Footer";
 import BottomToTop from "./utils/BottomToTop";
 import useAllCourse from "./api/useAllCourse";
 import useAllUser from "./api/useAllUser";
-import Loader from "./utils/Loader";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const { isLoading } = useAllCourse();
-  const { isLoading: loading } = useAllUser();
-  if (isLoading || loading) return <Loader />;
+  // Fetch loading states
+  const { isLoading: coursesLoading } = useAllCourse();
+  const { isLoading: usersLoading } = useAllUser();
+
+  // Show loader if any data is loading
+  if (coursesLoading || usersLoading) return <Loader />;
+
   return (
     <>
       <Navbar />

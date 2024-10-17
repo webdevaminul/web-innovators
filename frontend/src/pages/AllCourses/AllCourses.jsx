@@ -6,32 +6,43 @@ import Loader from "../../utils/Loader";
 import useAvailableCourse from "../../api/useAvailableCourse";
 
 const AllCourses = () => {
-  const { categoryName } = useParams(); // home page category founder
+  const { categoryName } = useParams(); // Home page category finder
   const [selectedCategory, setSelectedCategory] = useState(categoryName || null); // Initially null to show all data
   const [sortOrder, setSortOrder] = useState("asc");
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 6; // Number of items to display per page
 
   // Fetch courses from API including totalPages
-  const { courses, isLoading, totalPages} = useAvailableCourse(
+  const { courses, isLoading, totalPages } = useAvailableCourse(
     sortOrder,
     currentPage,
     itemsPerPage,
     selectedCategory
-  ); // all course get by hook from database
+  ); // All course data from the hook
+
   useEffect(() => {
     setSelectedCategory(categoryName || null);
   }, [categoryName]);
 
-   // Get all categories including an "All" option
-   const allCategory = ["All","Language","Marketing","Photography","Videography","Development","Design","Business","Fitness"]
-  
-// Handle category change and filter data
-const handleCategoryChange = (e) => {
-  const category = e.target.value;
-  setSelectedCategory(category === "All" ? null : category);
-  setCurrentPage(1); // Reset to the first page when changing category
-};
+  // Get all categories including an "All" option
+  const allCategory = [
+    "All",
+    "Language",
+    "Marketing",
+    "Photography",
+    "Videography",
+    "Development",
+    "Design",
+    "Business",
+    "Fitness",
+  ];
+
+  // Handle category change and filter data
+  const handleCategoryChange = (e) => {
+    const category = e.target.value;
+    setSelectedCategory(category === "All" ? null : category);
+    setCurrentPage(1); // Reset to the first page when changing category
+  };
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -137,7 +148,7 @@ const handleCategoryChange = (e) => {
   if (isLoading) {
     return <Loader />;
   }
- 
+
   return (
     <div className="container mx-auto px-4 font-bai">
       <Heading heading={"All Courses"} />
@@ -166,9 +177,7 @@ const handleCategoryChange = (e) => {
                 {selectedCategory ? selectedCategory : "All Courses"}
               </h3>
               <div className="text-center mb-2">
-                <label className="mr-2 font-bold text-text">
-                  Sort by Price:
-                </label>
+                <label className="mr-2 font-bold text-text">Sort by Price:</label>
                 <select
                   value={sortOrder}
                   onChange={(e) => setSortOrder(e.target.value)}

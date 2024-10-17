@@ -102,7 +102,7 @@ const router = createBrowserRouter([
         element: <BlogPosts />,
       },
       {
-        path: "/contactUs",
+        path: "/contact-us",
         element: <ContactPage />,
       },
       {

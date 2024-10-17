@@ -1,7 +1,5 @@
-
-
-import React, { useEffect, useState } from 'react';
-import postsData from '../../../public/BlogPosts.json'; // Ensure the path is correct
+import { useEffect, useState } from 'react';
+import postsData from '../../../public/BlogPosts.json';
 import {
     FacebookShareButton,
     TwitterShareButton,
