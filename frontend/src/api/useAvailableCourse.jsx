@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "./axiosInstance";
 
 const useAvailableCourse = (sortOrder, page = 1, limit = 6,selectedCategory = null) => {
-  console.log('5', page, limit)
+  console.log('5',selectedCategory)
   const { data = { data: [], totalPages: 0 }, isLoading } = useQuery({
     queryKey: ["course", sortOrder, page, limit,selectedCategory],
     queryFn: async () => {
@@ -12,11 +12,11 @@ const useAvailableCourse = (sortOrder, page = 1, limit = 6,selectedCategory = nu
           sortOrder,
           page,
           limit,
+          selectedCategory
         },
       });
       const data = res?.data?.data;
       const totalPages = res?.data?.totalPages;
-      console.log("avai", res.data);
       return {data, totalPages};
     },
   });

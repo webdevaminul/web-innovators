@@ -22,8 +22,10 @@ const AllCourses = () => {
   useEffect(() => {
     setSelectedCategory(categoryName || null);
   }, [categoryName]);
-  console.log("avbai courses", courses);
+  console.log("avbai courses", courses?.length);
 
+   // Get all categories including an "All" option
+   const allCategory = ["All","Language","Marketing","Photography","Videography","Development","Design","Business","Fitness"]
   
 // Handle category change and filter data
 const handleCategoryChange = (e) => {
@@ -136,13 +138,7 @@ const handleCategoryChange = (e) => {
   if (isLoading) {
     return <Loader />;
   }
-
-  // Get all categories including an "All" option
-  const categories = [
-    "All",
-    ...new Set(courses.map((course) => course.category)),
-  ];
-
+ 
   return (
     <div className="container mx-auto px-4 font-bai">
       <Heading heading={"All Courses"} />
@@ -156,7 +152,7 @@ const handleCategoryChange = (e) => {
                 onChange={handleCategoryChange}
                 className="w-full p-2 border rounded-md"
               >
-                {categories.map((category) => (
+                {allCategory?.map((category) => (
                   <option key={category} value={category}>
                     {category}
                   </option>
@@ -203,7 +199,7 @@ const handleCategoryChange = (e) => {
               </div>
 
               {/* Pagination Controls */}
-              {courses?.length > 0 && (
+              {courses?.length >= itemsPerPage && (
                 <div className="join border mx-auto">{renderPagination()}</div>
               )}
             </div>
