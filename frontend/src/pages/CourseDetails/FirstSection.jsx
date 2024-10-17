@@ -1,15 +1,21 @@
-import React from "react";
+import useAvailableCourse from "../../api/useAvailableCourse";
+import Loader from "../../utils/Loader";
 import VideoCard from "./VideoCard";
+import PropTypes from "prop-types";
 
-const FirstSection = ({ singleCourse }) => {
+const FirstSection = ({ singleCourse ={} }) => {
+  const {isLoading} = useAvailableCourse() ;
+  if(isLoading) return <Loader />
+  
+  const { detailsCourse, price, oldPrice, title } = singleCourse;
+  
   return (
     <div className="md:flex md:items-center justify-between gap-7">
       {/* course heading and description here  */}
       <div className="lg:w-3/5">
-        <h1 className="text-2xl md:text-4xl font-bold mb-3">
-          {singleCourse.title}
-        </h1>
+        <h1 className="text-2xl md:text-4xl font-bold mb-3">{title}</h1>
         <p className="text-sm">
+          {detailsCourse} <br /> The up text is dynamic <br />
           For those of you participating in the HSC 2026 exams from the Science,
           Commerce, or Humanities streams, you surely need comprehensive
           preparation in five subjects outside of your main stream subjects,
@@ -21,8 +27,12 @@ const FirstSection = ({ singleCourse }) => {
         </p>
         <div className="mt-2">
           <div className="flex items-center gap-3">
-            <h1 className="font-bold font-bai text-xl text-secondary">৳5850</h1>
-            <del className="font-medium text-text font-bai text-xl">৳7500</del>
+            <h1 className="font-bold font-bai text-xl text-secondary">
+              ৳{price}
+            </h1>
+            <del className="font-medium text-text font-bai text-xl">
+              ৳{oldPrice}
+            </del>
           </div>
           <button className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 md:hidden">
             Enroll Now
@@ -42,5 +52,7 @@ const FirstSection = ({ singleCourse }) => {
     </div>
   );
 };
-
+FirstSection.propTypes = {
+  singleCourse: PropTypes.object,
+};
 export default FirstSection;

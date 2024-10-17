@@ -42,20 +42,21 @@ export default function ForgetPassword() {
     // Trigger the mutation to send the forget password email
     forgetPasswordMutation.mutate(formData);
   };
+
   return (
     <main className="min-h-[90vh] max-w-xs mx-auto flex items-center justify-center">
-      <section className="flex flex-col justify-center p-4 w-full ">
+      <section className="flex flex-col justify-center p-4 w-full">
         <p className="text-center text-primary mb-4 font-medium">
           Enter your email address to get a recovery link.
         </p>
 
-        {/* Foreget password form */}
+        {/* Forget password form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           {/* Email address input */}
           <div
             className={`flex items-center border rounded ${
               errors.userEmail ? "border-red-500" : "border-highlightGray/25"
-            } mt-4 `}
+            } mt-4`}
           >
             <span className="p-2 text-xl text-highlightGray/75">
               <MdOutlineEmail />
