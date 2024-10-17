@@ -1,6 +1,7 @@
+import React from 'react'; 
 import PropTypes from 'prop-types';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import BarChartIcon from '@mui/icons-material/BarChart';
@@ -12,8 +13,8 @@ import DashBroadInfo from './DashBroadInfo';
 
 const NAVIGATION = [
   { kind: 'header', title: 'Main items' },
-  { segment: 'userDeshbroad', title: 'Dashboard', icon: <DashboardIcon /> },  
-  { segment: 'userDeshbroad/profile', title: 'Profile', icon: <ShoppingCartIcon /> },
+  { segment: '/userDashboard', title: 'Dashboard', icon: <DashboardIcon /> },  
+  { segment: 'blogPost', title: 'BlogPostForm', icon: <ShoppingCartIcon /> },
   { segment: 'orders', title: 'Orders', icon: <ShoppingCartIcon /> },
   { kind: 'divider' },
   { kind: 'header', title: 'Analytics' },
@@ -58,10 +59,11 @@ const demoTheme = createTheme({
 });
 
 function DashboardLayoutBasic() {
-  const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
 
   const handleNavigation = (segment) => {
-    navigate(segment); // Navigate to the segment path
+    const fullPath = segment.startsWith("/") ? segment : `/userDashboard/${segment}`; // Corrected path here
+    navigate(fullPath);
   };
 
   return (
@@ -69,7 +71,7 @@ function DashboardLayoutBasic() {
       <AppProvider 
         navigation={NAVIGATION.map(item => ({
           ...item,
-          onClick: () => handleNavigation(item.segment), // Handle click event
+          onClick: () => handleNavigation(item.segment),
         }))} 
         theme={demoTheme}
         branding={{

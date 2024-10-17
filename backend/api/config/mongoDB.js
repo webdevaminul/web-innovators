@@ -1,3 +1,4 @@
+// api/config/mongoDB.js
 const { MongoClient, ServerApiVersion ,ObjectId} = require("mongodb");
 const dotenv = require("dotenv");
 
@@ -23,10 +24,10 @@ async function connectDB() {
     console.log("MongoDB Atlas connected successfully!");
   } catch (err) {
     console.error("Failed to connect to MongoDB:", err);
-    throw err; // Rethrow the error to handle it upstream
-  } finally {
+    throw err;
   }
 }
 
+module.exports = { connectDB, client };
 // Export the connection client and function
 module.exports = { connectDB, client ,ObjectId};
