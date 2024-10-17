@@ -108,14 +108,16 @@ exports.availableCourse = async (req, res, next) => {
 // all course for admin maintain
 exports.allCourse = async (req, res, next) => {
   try {
-    const{ status} = req?.query;
+    const { status } = req?.query;
 
     let courses;
-    
-    if (status === 'pending') {
-      courses = await courseCollection.find({ status: 'pending' }).toArray();
+
+    if (status === "pending") {
+      courses = await courseCollection.find({ status: "pending" }).toArray();
     } else {
-      courses = await courseCollection.find({ status: { $ne: 'pending' } }).toArray();
+      courses = await courseCollection
+        .find({ status: { $ne: "pending" } })
+        .toArray();
     }
 
     if (!courses.length) {
@@ -141,11 +143,10 @@ exports.allCourse = async (req, res, next) => {
 
 // update course for user teacher and student
 exports.updateCourse = async (req, res, next) => {
-  const id  = req?.params.id;
+  const id = req?.params.id;
   const { updateStatus } = req.body;
   const query = { _id: new ObjectId(id) };
   try {
-    
     const updateDoc = {
       $set: {
         status: updateStatus,
@@ -154,10 +155,36 @@ exports.updateCourse = async (req, res, next) => {
     const result = await courseCollection.updateOne(query, updateDoc);
     res.status(200).json({
       message: `This course has been ${updateStatus} successfully!`,
-      data:result,
+      data: result,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
+    next(error);
+  }
+};
+
+// Delete a course by teacher
+exports.deleteCourse = async (req, res,next) => {
+  const { id } = req.params;
+  const query = { _id: new ObjectId(id) };
+
+  try {
+    const result = await courseCollection.deleteOne(query);
+    
+    if (result.deletedCount === 1) {
+      res.status(200).json({
+        message: "Course deleted successfully!",
+      });
+    } else {
+      res.status(404).json({
+        message: "Course not found!",
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: "Error deleting course",
+      error: error.message,
+    });
     next(error)
   }
-}
+};
