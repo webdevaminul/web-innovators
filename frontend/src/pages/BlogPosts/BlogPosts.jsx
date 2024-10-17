@@ -145,12 +145,10 @@ const BlogPosts = () => {
                             <div key={post._id} className="bg-gray-100 p-4 mb-4 rounded-lg shadow-md">
                                 <div
                                     className="bg-no-repeat bg-cover h-64 rounded-lg mb-2"
-                                    style={{
-                                        backgroundImage: `url(http://localhost:5000/${post.image})`,
-                                        backgroundPosition: 'center',
-                                        backgroundSize: 'cover',
-                                    }}
-                                ></div>
+                                   
+                                >
+                                    <img src={post.image} alt="" className='w-full h-3/4 bg-transparent' />
+                                </div>
                                 <span
                                     className="px-2 py-1 text-xs rounded-full bg-violet-400 text-gray-900 cursor-pointer"
                                     onClick={() => filterByCategory(post.category)}
@@ -219,7 +217,7 @@ const BlogPosts = () => {
             </div>
 
             {/* Pagination */}
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-4 p-4">
                 {Array.from({ length: totalPages }, (_, index) => (
                     <button
                         key={index}
