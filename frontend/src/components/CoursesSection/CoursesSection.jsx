@@ -1,4 +1,3 @@
-import React from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import CoursesDiv from "./CoursesDiv";
@@ -13,29 +12,30 @@ const CoursesSection = () => {
           "Discover courses by category—popular, latest, free, or discounted. Find the perfect course for your learning journey!"
         }
       />
-      <div>
-        <Tabs>
-          <TabList>
-            <Tab>Popular Courses</Tab>
-            <Tab>Latest Courses</Tab>
-            <Tab>Free</Tab>
-            <Tab>Discounted</Tab>
-          </TabList>
+      <Tabs>
+        <TabList>
+          <Tab>Popular Courses</Tab>
+          <Tab>Latest Courses</Tab>
+          <Tab>Free</Tab>
+          <Tab>Discounted</Tab>
+        </TabList>
 
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-        </Tabs>
-      </div>
+        <TabPanel>
+          <CoursesDiv />
+        </TabPanel>
+
+        <TabPanel>
+          <CoursesDiv />
+        </TabPanel>
+
+        <TabPanel>
+          <CoursesDiv />
+        </TabPanel>
+
+        <TabPanel>
+          <CoursesDiv />
+        </TabPanel>
+      </Tabs>
     </div>
   );
 };

@@ -15,7 +15,7 @@ const TeacherDashboard = () => {
   const [isRotating, setIsRotating] = useState(false);
   const sidebarRef = useRef(null);
   const loginUser = user?.userInfo.userName;
-  console.log("user", loginUser);
+
 
   const handleRotating = () => {
     setIsRotating(true);

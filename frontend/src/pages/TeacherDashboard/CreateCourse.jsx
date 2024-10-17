@@ -45,7 +45,6 @@ const CreateCourse = () => {
           },
         })
         .then((response) => {
-          console.log(response.data);
           if (response.data.courseId) {
             toast.success(response.data.message);
           }
