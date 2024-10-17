@@ -4,15 +4,21 @@ import FirstSection from "./FirstSection";
 import SecondSection from "./SecondSection";
 import VideoCard from "./VideoCard";
 import Instructor from "./Instructor";
-import useAvailableCourse from "../../api/useAvailableCourse";
+import Loader from "../../utils/Loader";
+import useAllCourse from "../../api/useAllCourse";
 
 const CourseDetails = () => {
-  const {courses} = useAvailableCourse()
+  // const { } = useAvailableCourse();
+  const {courses , isLoading } = useAllCourse()
   console.table(courses);
 
+
   const { id } = useParams();
+console.log('id',id)
   const singleCourse = courses?.find((data) => data._id === id);
-  console.log(singleCourse);
+  console.log('singleCourse',singleCourse);
+  if (isLoading) return <Loader />;
+
   return (
     <div className="heading py-4 md:py-8 px-5">
       <div className="container mx-auto">

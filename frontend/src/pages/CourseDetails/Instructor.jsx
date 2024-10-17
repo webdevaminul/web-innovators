@@ -2,7 +2,7 @@
 import instructorImg from "../../assets/sumitSaha.jpg";
 import PropTypes from "prop-types";
 
-const Instructor = ({singleCourse}) => {
+const Instructor = ({singleCourse={}}) => {
 console.table(singleCourse)
   return (
     <div className="mt-10 flex flex-col md:flex-row justify-center items-center">

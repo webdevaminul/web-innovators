@@ -22,7 +22,6 @@ const AllCourses = () => {
   useEffect(() => {
     setSelectedCategory(categoryName || null);
   }, [categoryName]);
-  console.log("avbai courses", courses);
 
    // Get all categories including an "All" option
    const allCategory = ["All","Language","Marketing","Photography","Videography","Development","Design","Business","Fitness"]

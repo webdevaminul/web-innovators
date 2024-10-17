@@ -1,7 +1,12 @@
+import useAvailableCourse from "../../api/useAvailableCourse";
+import Loader from "../../utils/Loader";
 import VideoCard from "./VideoCard";
 import PropTypes from "prop-types";
 
-const FirstSection = ({ singleCourse }) => {
+const FirstSection = ({ singleCourse ={} }) => {
+  const {isLoading} = useAvailableCourse() ;
+  if(isLoading) return <Loader />
+  
   const { detailsCourse, price, oldPrice, title } = singleCourse;
   
   return (
