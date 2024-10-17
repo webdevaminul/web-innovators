@@ -114,13 +114,10 @@ exports.allCourse = async (req, res, next) => {
     
     if (status === 'pending') {
       courses = await courseCollection.find({ status: 'pending' }).toArray();
-    } else if (status === 'approved') {
-      courses = await courseCollection.find({ status: 'approved' }).toArray();
     } else {
-      courses = await courseCollection.find().toArray();
+      courses = await courseCollection.find({ status: { $ne: 'pending' } }).toArray();
     }
 
-    // const courses = await courseCollection.find().toArray();
     if (!courses.length) {
       return res.status(404).json({
         success: false,
@@ -156,7 +153,7 @@ exports.updateCourse = async (req, res, next) => {
     };
     const result = await courseCollection.updateOne(query, updateDoc);
     res.status(200).json({
-      message: "This course has been approved successfully!",
+      message: `This course has been ${updateStatus} successfully!`,
       data:result,
     });
   } catch (error) {

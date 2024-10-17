@@ -16,6 +16,7 @@ const CourseManage = () => {
       const res = await axiosInstance.put(`/approve/courses/${id}`, { updateStatus: status });
       
       // Check if the response is acknowledged
+      console.log('res', res.data)
       if (res?.data?.data?.acknowledged) {
         toast.success(res?.data?.message); 
         refetch();
