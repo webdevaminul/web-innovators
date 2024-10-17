@@ -8,7 +8,7 @@ import useAvailableCourse from "../../api/useAvailableCourse";
 
 const CourseDetails = () => {
   const {courses} = useAvailableCourse()
-  console.log(courses);
+  console.table(courses);
 
   const { id } = useParams();
   const singleCourse = courses?.find((data) => data._id === id);
@@ -27,7 +27,7 @@ const CourseDetails = () => {
         <SecondSection />
 
         {/* Instructor details */}
-        <Instructor />
+        <Instructor singleCourse={singleCourse} />
       </div>
     </div>
   );

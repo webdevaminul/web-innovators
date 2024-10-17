@@ -22,7 +22,7 @@ const AllCourses = () => {
   useEffect(() => {
     setSelectedCategory(categoryName || null);
   }, [categoryName]);
-  console.log("avbai courses", courses?.length);
+  console.log("avbai courses", courses);
 
    // Get all categories including an "All" option
    const allCategory = ["All","Language","Marketing","Photography","Videography","Development","Design","Business","Fitness"]
@@ -199,8 +199,14 @@ const handleCategoryChange = (e) => {
               </div>
 
               {/* Pagination Controls */}
-              {courses?.length >= itemsPerPage && (
+              {currentPage > 1 || courses?.length >= itemsPerPage ? (
                 <div className="join border mx-auto">{renderPagination()}</div>
+              ) : (
+                <div className="join border mx-auto">
+                  <button className="join-item btn btn-md" onClick={() => setCurrentPage(1)}>
+                    1
+                  </button>
+                </div>
               )}
             </div>
           </div>

@@ -65,10 +65,10 @@ const categories = [
 export default function Categories() {
   const navigate = useNavigate();
   const handleCategory = (category) => {
-    navigate(`/all-course/${category}`)
+    navigate(`/all-course/${category}`);
     // console.log(category);
   };
-  
+
   return (
     <section className="p-5">
       <Title
