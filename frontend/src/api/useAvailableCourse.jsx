@@ -7,7 +7,7 @@ const useAvailableCourse = (
   limit = 6,
   selectedCategory = null
 ) => {
-  const { data = { data: [], totalPages: 0 }, isLoading } = useQuery({
+  const { data = { data: [], totalPages: 0 }, isLoading ,refetch} = useQuery({
     queryKey: ["course", sortOrder, page, limit, selectedCategory],
     queryFn: async () => {
       // Pass sortOrder as a query parameter
@@ -25,7 +25,7 @@ const useAvailableCourse = (
     },
   });
   const { data: courses, totalPages } = data;
-  return { courses, isLoading, totalPages };
+  return { courses, isLoading, totalPages,refetch };
 };
 
 export default useAvailableCourse;

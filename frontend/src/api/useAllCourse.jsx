@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "./axiosInstance";
 
 const useAllCourse = ({status} ={ status: undefined }) => {
-  const { data: courses = [], isLoading } = useQuery({
+  const { data: courses = [], isLoading, refetch } = useQuery({
     queryKey: ["courses",status],
     queryFn: async () => {
       const res = await axiosInstance.get("/all/courses",{
@@ -14,7 +14,7 @@ const useAllCourse = ({status} ={ status: undefined }) => {
     
   });
 
-  return { courses, isLoading };
+  return { courses, isLoading ,refetch};
 };
 
 export default useAllCourse;

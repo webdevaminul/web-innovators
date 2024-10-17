@@ -1,4 +1,4 @@
-const { client } = require("../config/mongoDB");
+const { client, ObjectId } = require("../config/mongoDB");
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
 
@@ -109,7 +109,6 @@ exports.availableCourse = async (req, res, next) => {
 exports.allCourse = async (req, res, next) => {
   try {
     const{ status} = req?.query;
-    console.log(' 112',status)
 
     let courses;
     
@@ -142,3 +141,26 @@ exports.allCourse = async (req, res, next) => {
     next(error);
   }
 };
+
+// update course for user teacher and student
+exports.updateCourse = async (req, res, next) => {
+  const id  = req?.params.id;
+  const { updateStatus } = req.body;
+  const query = { _id: new ObjectId(id) };
+  try {
+    
+    const updateDoc = {
+      $set: {
+        status: updateStatus,
+      },
+    };
+    const result = await courseCollection.updateOne(query, updateDoc);
+    res.status(200).json({
+      message: "This course has been approved successfully!",
+      data:result,
+    });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+    next(error)
+  }
+}

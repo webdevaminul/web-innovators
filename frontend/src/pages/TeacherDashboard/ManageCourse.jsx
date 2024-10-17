@@ -6,7 +6,8 @@ import Loader from "../../utils/Loader";
 
 const ManageCourse = () => {
   const baseUrl = axiosInstance.defaults.baseURL;
-  const { courses, isLoading } = useAllCourse();
+  const status = "approved";
+  const { courses, isLoading } = useAllCourse({ status });
   console.log("course", courses);
 
   if (isLoading) return <Loader />;
@@ -24,7 +25,9 @@ const ManageCourse = () => {
               <th className="py-4 pr-6 text-left text-text font-bold uppercase">
                 Category
               </th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Price</th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
+                Price
+              </th>
               <th className="py-4 pr-6 text-left text-text font-bold uppercase">
                 Students
               </th>
@@ -53,9 +56,7 @@ const ManageCourse = () => {
                 <td className="border-b truncate">{course.category}</td>
                 <td className="border-b"> {course.price} </td>
                 <td className="border-b"> studens </td>
-                <td className="border-b">                  
-                  {course.status}
-                </td>
+                <td className="border-b">{course.status}</td>
                 <td className="py-4 px-6 border-b border-gray-200 flex gap-2">
                   <span className="text-text rounded-full text-xs">
                     <FaRegEye className="w-5 h-5" />

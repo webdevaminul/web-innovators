@@ -5,7 +5,7 @@ const cookieParser = require("cookie-parser");
 const multer = require("multer");
 const path = require("path")
 
-const { connectDB, client } = require("./api/config/mongoDB");
+const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const coursesRoutes = require("./api/routes/course.route");
@@ -118,9 +118,10 @@ app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
 app.use("/be", instructorRoutes);
-app.use("/aproved", instructorRoutes);
-app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
+app.use("/approved", instructorRoutes);
 app.use("/all", coursesRoutes)  // all courses get for admin
+app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
+app.use("/approve", coursesRoutes)  // approve courses from admin
 app.use("/get", allTeacher)  // all teaacher get
 app.use("/get", allUser)  // all user get for admin 
 
