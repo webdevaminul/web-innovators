@@ -1,16 +1,19 @@
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "./axiosInstance";
 
-const useAllCourse = () => {
+const useAllCourse = ({status} ={ status: undefined }) => {
   const { data: courses = [], isLoading } = useQuery({
-    queryKey: ["course"],
+    queryKey: ["courses",status],
     queryFn: async () => {
-      // Pass sortOrder as a query parameter
-      const res = await axiosInstance.get("/all/courses")
+      const res = await axiosInstance.get("/all/courses",{
+        params : {status}
+      });
       const data = res?.data?.data;
       return data;
     },
+    
   });
+
   return { courses, isLoading };
 };
 

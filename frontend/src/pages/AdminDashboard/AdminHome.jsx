@@ -42,7 +42,7 @@ const AdminHome = () => {
           <h3 className="text-xl font-semibold text-text">Total Courses</h3>
           <p className="text-3xl font-bold text-green-500">
             {" "}
-            {courses.length}0
+            {courses?.length}0
           </p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">

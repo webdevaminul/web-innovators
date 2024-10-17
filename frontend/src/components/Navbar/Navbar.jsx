@@ -20,15 +20,13 @@ import Loader from "../../utils/Loader";
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
   const [profileMenu, setProfileMenu] = useState(false);
-
   const [openMenu, setOpenMenu] = useState(false);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
 
-  const { users, isLoading } = useAllUser();
+  const { isLoading } = useAllUser();
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -51,15 +49,11 @@ const Navbar = () => {
     };
   }, []);
 
-  const foundUser = users?.find(
-    (u) => u?.userEmail === user?.userInfo?.userEmail
-  );
-
   if(isLoading) return <Loader />
 
   // const role = "Admin";
   // const role = "Teacher";
-  const role = foundUser?.userRole;
+  const role = user?.userInfo?.userRole;
   console.log("role", role);
 
   const handleSignOut = async () => {

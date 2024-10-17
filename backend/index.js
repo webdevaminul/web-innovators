@@ -122,7 +122,7 @@ app.use("/aproved", instructorRoutes);
 app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
 app.use("/all", coursesRoutes)  // all courses get for admin
 app.use("/get", allTeacher)  // all teaacher get
-app.use("/get", allUser)  // all teaacher get
+app.use("/get", allUser)  // all user get for admin 
 
 
 // Custom error handling middleware

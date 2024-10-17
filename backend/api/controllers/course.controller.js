@@ -67,7 +67,7 @@ exports.availableCourse = async (req, res, next) => {
     if (selectedCategory && selectedCategory !== "All") {
       query.category = selectedCategory;
     }
-    console.log("category 70", query);
+    // console.log("category 70", query);
 
     // Fetch total number of courses for pagination calculation
     const totalCourses = await courseCollection.estimatedDocumentCount();
@@ -108,7 +108,20 @@ exports.availableCourse = async (req, res, next) => {
 // all course for admin maintain
 exports.allCourse = async (req, res, next) => {
   try {
-    const courses = await courseCollection.find().toArray();
+    const{ status} = req?.query;
+    console.log(' 112',status)
+
+    let courses;
+    
+    if (status === 'pending') {
+      courses = await courseCollection.find({ status: 'pending' }).toArray();
+    } else if (status === 'approved') {
+      courses = await courseCollection.find({ status: 'approved' }).toArray();
+    } else {
+      courses = await courseCollection.find().toArray();
+    }
+
+    // const courses = await courseCollection.find().toArray();
     if (!courses.length) {
       return res.status(404).json({
         success: false,

@@ -79,7 +79,7 @@ exports.getAllTeacher = async (req, res, next) => {
 
 exports.getAllUser = async (req, res, next) => {
   try {
-    const query = { status: { $exists: false } }
+    const query = { status: { $exists: false }, userRole: { $ne: "Admin" } }; // ne means not equal, it's mongodb operator
     const users = await usersCollection.find(query).toArray();
     if (!users.length) {
       return res.status(404).json({
@@ -87,7 +87,7 @@ exports.getAllUser = async (req, res, next) => {
         message: "No users found",
       });
     }
-    // res.status(200).send(users);
+
     res.status(200).json({
       success: true,
       data: users,

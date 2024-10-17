@@ -6,11 +6,12 @@ import useAllTeacher from "../../api/useAllTeacher";
 import useAllUser from "../../api/useAllUser";
 
 const UserManage = () => {
+  const { users } = useAllUser();
+  console.table(users)
   const [activeTab, setActiveTab] = useState(1);
   const [status, setStatus] = useState("Pending");
-  const { users } = useAllUser();
   const { teachers, isLoading, refetch } = useAllTeacher(status);
-  console.log("user ", users);
+ 
   const handleUpdateRole = (id) => {
     const status = "Aproved";
     const userNewRole = "Teacher";
@@ -156,7 +157,7 @@ const UserManage = () => {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium text-text uppercase tracking-wider"
               >
-                Name
+                Name and Email
               </th>
               <th
                 scope="col"
@@ -175,12 +176,6 @@ const UserManage = () => {
                 className="px-6 py-3 text-left text-xs font-medium text-text uppercase tracking-wider"
               >
                 Role
-              </th>
-              <th
-                scope="col"
-                className="px-6 py-3 text-left text-xs font-medium text-text uppercase tracking-wider"
-              >
-                Email
               </th>
               <th
                 scope="col"
@@ -221,9 +216,6 @@ const UserManage = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
                   {teacher.userRole}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-text">
-                  {teacher.userEmail}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap  text-sm font-medium">
                   {teacher.status && teacher.status === "Pending" ? (
