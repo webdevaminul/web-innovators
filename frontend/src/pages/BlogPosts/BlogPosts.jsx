@@ -7,6 +7,7 @@ import {
     TwitterIcon,
     LinkedinIcon
 } from 'react-share';
+import axiosInstance from '../../api/axiosInstance';
 
 const BlogPosts = () => {
     const [allPosts, setAllPosts] = useState([]);
@@ -20,10 +21,13 @@ const BlogPosts = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
 
     const fetchPosts = async () => {
+        // const baseUrl = axiosInstance.defaults.baseURL;
         try {
-            const response = await fetch("http://localhost:5000/blog/allBlogPosts");
+            const response = await axiosInstance.get(`/blog/allBlogPosts`);
             if (!response.ok) throw new Error("Error fetching posts: " + response.statusText);
-            const data = await response.json();
+            const data = response.data
+            console.log('data',data)
+            // const data = await response.json();
             setAllPosts(data);
             setPosts(data);
             setLatestPosts(data.slice(0, 5));

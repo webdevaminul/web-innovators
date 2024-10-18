@@ -1,4 +1,3 @@
-import React from "react";
 
 const VideoCard = () => {
   return (
@@ -6,9 +5,9 @@ const VideoCard = () => {
       <iframe
         className="w-full h-full rounded-md border-4 border-secondary"
         src="https://www.youtube.com/embed/yckDUJh7mxo?si=UAjiy_7_ULoAq8u1"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen
+        allowFullScreen
       ></iframe>
     </div>
   );
