@@ -110,7 +110,15 @@ const Navbar = () => {
           About Us
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}></li>
+      <li onClick={() => setOpenMenu(false)}>
+        {
+          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
+            Dashboard
+          </NavLink> : <NavLink to="/admin-dashboard" className="text-nowrap">
+            Dashboard
+          </NavLink>
+        }
+      </li>
     </>
   );
 
@@ -162,9 +170,8 @@ const Navbar = () => {
 
         {/* search bar for small device */}
         <div
-          className={`container mx-auto px-3 absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-backgroundPrimary transition-all duration-400 ease-in-out ${
-            searchBarOpen ? "w-full left-0" : "w-0 left-[-300px]"
-          }`}
+          className={`container mx-auto px-3 border-b absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-bg transition-all duration-400 ease-in-out ${searchBarOpen ? "w-full left-0" : "w-0 left-[-300px]"
+            }`}
         >
           {/* Close button for search bar */}
           <button
@@ -193,6 +200,7 @@ const Navbar = () => {
           className={`container mx-auto transition-all duration-400 ease-in-out md:hidden absolute top-[3.8rem] flex flex-col gap-5 list-none bg-backgroundPrimary h-screen ${
             openMenu ? "left-0 right-0" : "left-[-150%] right-[100%]"
           } font-semibold p-3 text-textPrimary text-center`}
+        
         >
           {links}
         </div>

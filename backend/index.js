@@ -1,3 +1,5 @@
+// Your main server file
+
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
@@ -8,10 +10,13 @@ const path = require("path")
 const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
+const blogRoutes = require("./api/routes/blog.route");
+const courseRoutes = require("./api/routes/course.route");
 const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
-const errorMiddleware = require("./api/middleware/errorMiddleware");
 const instructorRoutes = require("./api/routes/instructor.route");
+const errorMiddleware = require("./api/middleware/errorMiddleware");
+// const instructorRoutes = require("./api/routes/instructor.route");
 const allTeacher = require("./api/routes/instructor.route");
 const allUser = require("./api/routes/instructor.route");
 const { createCourse } = require("./api/controllers/course.controller");
@@ -22,15 +27,14 @@ dotenv.config();
 // Initialize the app
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 
 // CORS Middleware
-const allowedOrigins =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:5173"
-    : "https://web-innovators-learnup.vercel.app";
+const allowedOrigins = process.env.NODE_ENV === "development"
+  ? "http://localhost:5173"
+  : "https://web-innovators-learnup.vercel.app";
 
 app.use(
   cors({
@@ -62,7 +66,7 @@ app.use((req, res, next) => {
 });
 
 // Connect to MongoDB
-connectDB();
+// connectDB();
 
 // Serve the "public/images" directory for uploaded images
 app.use("/images", express.static(path.join(__dirname, "public/images")));
@@ -116,6 +120,7 @@ app.post("/create/course", upload.single("coverPicture"), createCourse);
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
+app.use("/blog", blogRoutes);
 app.use("/user", userRoutes);
 app.use("/be", instructorRoutes);
 app.use("/approved", instructorRoutes);
@@ -135,8 +140,15 @@ app.get("/", (req, res) => {
   res.send("LearnUP server is running fine");
 });
 
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Connect to MongoDB and start the server
+connectDB()
+  .then(() => {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err);
+    process.exit(1);
+  });
 
 module.exports = app;

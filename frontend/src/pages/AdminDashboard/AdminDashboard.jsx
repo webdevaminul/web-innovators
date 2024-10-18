@@ -8,6 +8,7 @@ import {
   FaSignOutAlt,
   FaSearch,
 } from "react-icons/fa";
+// import Darkmode from "../../components/Darkmode/Darkmode";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
@@ -49,10 +50,10 @@ const AdminDashboard = () => {
           </div>
           <Darkmode />
           <button>
-            <FaBell className="text-text text-lg" />
+            <FaBell className="text-primary text-xl" />
           </button>
           <button>
-            <FaUser className="text-text text-lg" />
+            <FaUser className="text-primary text-xl" />
           </button>
         </div>
       </div>
@@ -80,7 +81,7 @@ const AdminDashboard = () => {
                 isActive("/admin-dashboard/user-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
               }`}
             >
-              <FaUsers className="mr-2" />
+              <FaUsers className="mr-2 inline" />
               User Manage
             </Link>
             <Link
@@ -89,8 +90,22 @@ const AdminDashboard = () => {
                 isActive("/admin-dashboard/course-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
               }`}
             >
-              <FaFileAlt className="mr-2" />
+              <FaFileAlt className="mr-2 inline" />
               Course Manage
+            </Link>
+            <Link
+              to="/admin-dashboard/blog-creation"
+              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
+            >
+              <FaHome className="mr-2 inline" />
+              Blog Creation
+            </Link>
+            <Link
+              to="adminBlog-management"
+              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
+            >
+              <FaHome className="mr-2 inline" />
+              Blog Management
             </Link>
           </nav>
 
@@ -117,6 +132,7 @@ const AdminDashboard = () => {
             />
           </div>
 
+          {/* Container for the 4 sections */}
           {/* Content sections */}
           <Outlet />
         </div>        
