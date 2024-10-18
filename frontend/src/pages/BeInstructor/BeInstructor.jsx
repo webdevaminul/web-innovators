@@ -5,16 +5,13 @@ import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../../utils/CustomModal";
-import PrimaryButton from "../../utils/PrimaryButton";
-import { MdError } from "react-icons/md";
-import LinkButton from "../../utils/LinkButton";
 
 const BeInstructor = () => {
   const { user } = useSelector((state) => state.authUsers);
   const [selectedOption, setSelectedOption] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
-  const [text, setText] = useState("")
+  const [text, setText] = useState("");
 
   const email = user?.userInfo.userEmail || "";
   const name = user?.userInfo.userName || "";
@@ -41,7 +38,7 @@ const BeInstructor = () => {
     if (user) {
       if (role === "Admin") {
         setModalMessage("You are is an admin.");
-        setText("Do you want to log in ?")
+        setText("Do you want to log in ?");
         return setModalOpen(true); // Open warning modal
       }
       axiosInstance
@@ -79,12 +76,6 @@ const BeInstructor = () => {
           <h1 className="font-semibold font-bai md:text-4xl text-2xl md:my-10">
             Apply as an Instructor in Learn Up{" "}
           </h1>
-          <img
-            src="https://edly-moodle.hibootstrap.com/pluginfile.php/34/mod_page/content/3/main.png"
-            alt=""
-          />
-          <PrimaryButton text={"Button"} icon={MdError} /> <br /> <br />
-          <LinkButton text={"Button"} />
           <p>
             Online courses are getting popular really fast. This fact is not only an opportunity for
             the students but also an opportunity for teachers and professionals. Through online

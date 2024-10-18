@@ -24,7 +24,6 @@ const Navbar = () => {
 
   // this user role will be dynamic
 
-  // const role = "Teacher";
   const role = foundUser?.userRole;
   console.log("role", role);
   // Toggle Profile Menu
@@ -84,11 +83,10 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/contactUs" className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue">
+        <NavLink to="/contactUs" className="text-nowrap p-2 hover:text-textSecondary">
           About Us
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}></li>
     </>
   );
 
@@ -139,7 +137,7 @@ const Navbar = () => {
 
         {/* search bar for small device */}
         <div
-          className={`container mx-auto px-3 absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-backgroundPrimary transition-all duration-400 ease-in-out ${
+          className={`container mx-auto px-3 border-b absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-bg transition-all duration-400 ease-in-out ${
             searchBarOpen ? "w-full left-0" : "w-0 left-[-300px]"
           }`}
         >
