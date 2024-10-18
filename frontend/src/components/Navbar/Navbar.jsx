@@ -10,7 +10,6 @@ import { requestFailure, requestStart, userClearSuccess } from "../../redux/auth
 import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 import logo from "../../assets/logo.png";
-import "./Navbar.css";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
@@ -19,6 +18,8 @@ const Navbar = () => {
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const linkClass = ({ isActive }) =>
+    `text-nowrap p-1 lg:p-2 hover:text-textBlue ${isActive ? "text-textBlue" : ""}`;
 
   const foundUser = users?.find((u) => u?.userEmail === user?.userInfo?.userEmail);
 
@@ -65,25 +66,22 @@ const Navbar = () => {
   const links = (
     <>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/all-courses" className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue">
+        <NavLink to="/all-courses" className={linkClass}>
           Our Courses
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/blog" className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue">
+        <NavLink to="/blog" className={linkClass}>
           Blogs
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink
-          to="/become-instructor"
-          className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue"
-        >
+        <NavLink to="/become-instructor" className={linkClass}>
           Become Instructor
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/contactUs" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink to="/contactUs" className={linkClass}>
           About Us
         </NavLink>
       </li>
@@ -95,27 +93,28 @@ const Navbar = () => {
 
   return (
     <header className="fixed h-[3.8rem] border-b border-borderPrimary w-full top-0 left-0 z-50 bg-backgroundPrimary">
-      <nav className="gap-2 h-full p-5 flex justify-between items-center relative">
+      <nav className="gap-2 h-full p-2 md:p-4 lg:p-5 flex justify-between items-center relative w-full">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-12">
           {/* Logo and Menu button for small devices */}
-          <div className="flex items-center gap-1">
+          <div className="flex items-center">
             {/* Menu button for small devices */}
-            <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
-              <button className="h-8 w-8">
-                {openMenu ? (
-                  <RiMenuFoldLine className="m-auto text-2xl text-textBlue" />
-                ) : (
-                  <RiMenuFold2Line className="m-auto text-2xl text-textBlue" />
-                )}
-              </button>
-            </div>
+            <button
+              onClick={() => setOpenMenu(!openMenu)}
+              className="md:hidden w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center"
+            >
+              {openMenu ? (
+                <RiMenuFoldLine className="m-auto text-2xl text-textBlue w-full h-full" />
+              ) : (
+                <RiMenuFold2Line className="m-auto text-2xl text-textBlue w-full h-full" />
+              )}
+            </button>
 
             {/* Logo */}
             <Link to="/">
               <div className="flex items-center">
-                <img src={logo} alt="LearnUP" className="w-10" />
-                <h1 className="font-bold text-3xl font-ubuntu text-textBlue">
+                <img src={logo} alt="LearnUP" className="w-7" />
+                <h1 className="font-bold text-2xl md:text-3xl font-ubuntu text-textBlue">
                   Learn<span className="text-textOrange">UP</span>
                 </h1>
               </div>
@@ -137,27 +136,27 @@ const Navbar = () => {
 
         {/* search bar for small device */}
         <div
-          className={`container mx-auto px-3 border-b absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-bg transition-all duration-400 ease-in-out ${
+          className={`px-3 absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-backgroundPrimary transition-all duration-400 ease-in-out ${
             searchBarOpen ? "w-full left-0" : "w-0 left-[-300px]"
           }`}
         >
           {/* Close button for search bar */}
           <button
             onClick={() => setSearchBarOpen(false)}
-            className="absolute left-4 top-1/2 transform translate-y-[-50%]  bg-backgroundOrange shadow-sm rounded-full p-3"
+            className="absolute left-4 top-1/2 transform translate-y-[-50%] text-textWhite bg-backgroundBlue hover:bg-backgroundBlueHover shadow-sm rounded-full p-3"
           >
             <MdArrowBackIosNew />
           </button>
 
           {/* Search bar and search button*/}
-          <div className="flex w-full my-auto">
+          <div className="flex absolute left-16 right-4 top-1/2 transform translate-y-[-50%] bg-backgroundPrimary border border-borderPrimary rounded-full overflow-hidden">
             <input
-              className="outline-none bg-transparent w-full placeholder:text-text/70 text-text my-auto ml-12 p-2 px-4 border border-r-0 border-border rounded-l-full"
+              className="outline-none bg-transparent w-full placeholder:text-textPrimary my-auto p-2 px-4"
               type="text"
               placeholder="Search program..."
             />
 
-            <button className="text-2xl p-2 my-auto rounded-r-full border border-borderPrimary">
+            <button className="text-2xl p-2 my-auto bg-backgroundBlue text-textWhite rounded-full">
               <IoSearchOutline />
             </button>
           </div>
@@ -165,7 +164,7 @@ const Navbar = () => {
 
         {/* nav links for small device */}
         <div
-          className={`container mx-auto transition-all duration-400 ease-in-out md:hidden absolute top-[3.8rem] flex flex-col gap-5 list-none bg-backgroundPrimary h-screen ${
+          className={`transition-all duration-400 ease-in-out md:hidden absolute top-[3.8rem] flex flex-col gap-5 list-none bg-backgroundPrimary h-screen ${
             openMenu ? "left-0 right-0" : "left-[-150%] right-[100%]"
           } font-semibold p-3 text-textPrimary text-center`}
         >
@@ -173,7 +172,7 @@ const Navbar = () => {
         </div>
 
         {/* nav links for large device and buttons*/}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1">
           {/* nav links for large device */}
           <div className="list-none hidden md:flex flex-nowrap font-semibold text-textPrimary">
             {links}
@@ -183,14 +182,17 @@ const Navbar = () => {
           <div className="flex w-full items-center gap-2">
             {/* Profile or Sign in */}
             {user && isAuthenticated ? (
-              <div ref={profileMenuRef} className="relative mt-[6px]">
-                <button onClick={toggleProfileMenu}>
+              <div ref={profileMenuRef} className="relative rounded-full">
+                <div
+                  onClick={toggleProfileMenu}
+                  className="bg-blue-500 rounded-full m-auto h-8 w-8 sm:h-9 sm:w-9 cursor-pointer"
+                >
                   <img
                     src={user?.userInfo?.userPhoto}
-                    className="h-8 w-8 rounded-full object-center"
+                    className="rounded-full object-center object-cover"
                     loading="lazy"
                   />
-                </button>
+                </div>
 
                 {profileMenu && (
                   <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderPrimary rounded-xl flex flex-col gap-4">
@@ -253,7 +255,7 @@ const Navbar = () => {
             ) : (
               <Link
                 to="sign-in"
-                className="text-nowrap bg-backgroundBlue hover:bg-backgroundBlueHover text-textWhite p-2 rounded-md font-medium w-full sm:w-fit text-center sm:text-start flex gap-1 items-center justify-center"
+                className="text-nowrap w-fit bg-backgroundBlue hover:bg-backgroundBlueHover text-textWhite p-1 sm:p-2 rounded-md font-medium flex gap-1 items-center justify-center"
               >
                 <span className="text-2xl">{/* <IoEnterOutline /> */}</span>
                 <span>Sign In</span>
@@ -263,9 +265,9 @@ const Navbar = () => {
             {/* Search button  */}
             <button
               onClick={() => setSearchBarOpen(true)}
-              className="h-8 w-8 sm:hidden md:flex lg:hidden bg-blue-300 hover:bg-blue-400 border border-borderPrimary rounded-full"
+              className="h-8 w-8 sm:h-9 sm:w-9 m-auto p-1 sm:hidden md:flex lg:hidden bg-blue-500 hover:bg-blue-600 border border-borderPrimary rounded-full"
             >
-              <IoSearchOutline className="m-auto text-2xl text-textBlack" />
+              <IoSearchOutline className="text-2xl text-textWhite w-full m-auto" />
             </button>
 
             {/* Theme Switch */}

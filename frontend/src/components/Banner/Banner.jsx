@@ -3,7 +3,7 @@ import banner_image from "../../assets/banner_image.png";
 
 const Banner = () => {
   return (
-    <section className="p-5 min-h-[calc(100vh-3.8rem)] flex gap-4 flex-col md:flex-row items-center justify-between overflow-hidden">
+    <section className="p-5 flex gap-4 flex-col md:flex-row items-center justify-between overflow-hidden">
       {/* Left Column: Heading and Subheading */}
       <div className="flex flex-col gap-4 text-center md:text-left md:max-w-[50%]">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-bai text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-blue-500 to-red-500">
@@ -12,14 +12,11 @@ const Banner = () => {
             Learn
           </span>
         </h1>
-        <p className="text-justify md:text-left md:text-xl text-textPrimary">
-          Access expert-led courses across various fields and develop new skills at your own pace.
-          Unlock your potential with engaging content tailored for all levels.
+        <p className="text-justify md:text-left md:text-xl text-textPrimary font-extralight">
+          Access expert-led courses across various fields and unlock your potential with engaging
+          content tailored for all levels.
         </p>
-        <Link
-          to="/all-courses"
-          className="relative px-5 py-4 font-bold text-lg font-poppins text-textWhite group md:w-fit"
-        >
+        <Link to="/all-courses" className="relative p-3 font-poppins text-textWhite group md:w-fit">
           <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-12 bg-blue-500 group-hover:bg-blue-700 group-hover:skew-x-12"></span>
           <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-12 bg-blue-700 group-hover:bg-blue-500 group-hover:-skew-x-12"></span>
           <span className="absolute bottom-0 left-0 hidden w-10 h-20 transition-all duration-100 ease-out transform -translate-x-8 translate-y-10 bg-blue-600 -rotate-12"></span>
@@ -33,10 +30,10 @@ const Banner = () => {
         {/* Background and Spinning Border Container */}
         <div className="relative max-w-[30rem] max-h-[34rem] p-4">
           {/* Spinning Border */}
-          <div className="absolute inset-2 rounded-full border-[2rem] border-blue-400 animate-spin-infinite z-10"></div>
+          <div className="absolute inset-2 rounded-full border-[2rem] border-blue-500 animate-spin-infinite z-10"></div>
 
           {/* Background Color */}
-          <div className="absolute inset-0 bg-blue-400 rounded-full w-full h-full"></div>
+          <div className="absolute inset-0 bg-backgroundBlue rounded-full w-full h-full"></div>
 
           {/* Image */}
           <img

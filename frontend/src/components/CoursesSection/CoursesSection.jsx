@@ -1,42 +1,53 @@
-import React from "react";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import "react-tabs/style/react-tabs.css";
-import CoursesDiv from "./CoursesDiv";
+import { useEffect, useState } from "react";
 import Title from "../../utils/Title";
+import Loader from "../../utils/Loader";
+import CourseCard from "../../pages/AllCourses/CourseCard";
 
 const CoursesSection = () => {
-  return (
-    <div className="container mx-auto mt-8">
-      <Title
-        title={"Our Courses"}
-        subTitle={
-          "Discover courses by category—popular, latest, free, or discounted. Find the perfect course for your learning journey!"
-        }
-      />
-      <div>
-        <Tabs>
-          <TabList>
-            <Tab>Popular Courses</Tab>
-            <Tab>Latest Courses</Tab>
-            <Tab>Free</Tab>
-            <Tab>Discounted</Tab>
-          </TabList>
+  const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-          <TabPanel>
-            <CoursesDiv />
-          </TabPanel>
-        </Tabs>
+  useEffect(() => {
+    fetch("./courses.json") // Ensure your data file is at the correct path
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setCourses(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  // Limit to showing only the first 6 courses
+  const displayedCourses = courses.slice(0, 4);
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500 my-10">Error: {error.message}</div>;
+  }
+  return (
+    <section className="container mx-auto mt-8">
+      <Title
+        title={"Latest Courses"}
+        subTitle={"Explore the newest courses and stay ahead with the latest trends"}
+      />
+      <div className="gap-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+        {displayedCourses.map((course) => (
+          <CourseCard key={course.id} course={course} />
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 
