@@ -72,7 +72,7 @@ const AdminDashboard = () => {
                 isActive("/admin-dashboard/admin-home") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
               }`}
             >
-              <FaHome className="mr-2" />
+              <FaHome className="mr-2 inline" />
               Home
             </Link>
             <Link
@@ -94,15 +94,10 @@ const AdminDashboard = () => {
               Course Manage
             </Link>
             <Link
-              to="/admin-dashboard/blog-creation"
-              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
-            >
-              <FaHome className="mr-2 inline" />
-              Blog Creation
-            </Link>
-            <Link
               to="adminBlog-management"
-              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/adminBlog-management") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+              }`}
             >
               <FaHome className="mr-2 inline" />
               Blog Management
@@ -114,7 +109,7 @@ const AdminDashboard = () => {
             className="block text-text py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text mt-auto"
             to="/"
           >
-            <FaSignOutAlt className="mr-2" />
+            <FaSignOutAlt className="mr-2 inline" />
            Leave to Home
           </Link>
         </div>

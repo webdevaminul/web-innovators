@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
-import { useSelector } from "react-redux";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal";
+import axiosInstance from "../../api/axiosInstance";
 
 const AdminBlogManage = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [blogToDelete, setBlogToDelete] = useState(null);
   const [toast, setToast] = useState({ message: '', visible: false }); // Toast state
-  const { user } = useSelector((state) => state.authUsers);
   const navigate = useNavigate(); // Hook for navigation
+  const baseUrl = axiosInstance.defaults.baseURL;
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
@@ -66,6 +66,7 @@ const AdminBlogManage = () => {
         // Navigate to blog creation page
       } else {
         const errorData = await response.json();
+        console.log(errorData)
         showToast(`Successfully approve this Blog post...`); // Show toast with error
         navigate("/admin-dashboard/blog-creation");
       }
@@ -105,6 +106,10 @@ const AdminBlogManage = () => {
               <tr key={post._id}>
                 <td className="border border-gray-300 px-4 py-2">
                   <img src={post.image} alt={post.title} className="w-16 h-16 object-cover" />
+                  <img
+                        src={`${baseUrl}${post?.image}`}
+                        alt={post.title}
+                      />
                 </td>
                 <td className="border border-gray-300 px-4 py-2">{post.title}</td>
                 <td className="border border-gray-300 px-4 py-2">{new Date(post.date).toLocaleString()}</td>

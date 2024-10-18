@@ -99,7 +99,7 @@ const Navbar = () => {
           to="/become-instructor"
           className="text-nowrap p-2 hover:text-textSecondary"
         >
-          Become Instructor
+          Become an Instructor
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
@@ -109,15 +109,6 @@ const Navbar = () => {
         >
           About Us
         </NavLink>
-      </li>
-      <li onClick={() => setOpenMenu(false)}>
-        {
-          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
-            Dashboard
-          </NavLink> : <NavLink to="/admin-dashboard" className="text-nowrap">
-            Dashboard
-          </NavLink>
-        }
       </li>
     </>
   );

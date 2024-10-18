@@ -3,7 +3,7 @@
 const { client } = require("../config/mongoDB");
 const { ObjectId } = require("mongodb");
 const database = client.db("LearnUp");
-const blogCollection = database.collection("blogPosts");
+const blogCollection = database.collection("blogs");
 
 // Create a blog post
 exports.createBlogPost = async (req, res, next) => {

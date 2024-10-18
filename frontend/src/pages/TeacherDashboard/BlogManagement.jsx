@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import UpdateBlogModal from "../../components/UpdateBlogModal/UpdateBlogModal";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal"; // Import the delete modal
 
-const BlogPostTable = ({ userEmail }) => {
+const BlogPostTable = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
