@@ -29,15 +29,15 @@ export default function EmailVerify() {
           navigate("/"); // Navigate to homepage
         }, 1000);
       } catch (error) {
-        console.log(error)
+        console.log(error);
         dispatch(loginFailure("Email verification failed")); // Dispatch login failure action on error
       }
     };
     verifyEmail();
-  }, [location,navigate,dispatch]);
+  }, [location, navigate, dispatch]);
 
   return (
-    <main className="min-h-[calc(100vh-44px)] sm:min-h-[calc(100vh-58px)] flex flex-col items-center justify-center bg-primaryBg">
+    <main className="min-h-[calc(100vh-3.8rem)] flex flex-col items-center justify-center bg-backgroundPrimary">
       <Heading heading={"Email Verify"} />
       {loading ? (
         <>

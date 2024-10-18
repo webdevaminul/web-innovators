@@ -41,7 +41,7 @@ export default function Darkmode() {
       onClick={toggleTheme}
       className={`${
         rotating ? "animate-rotate" : ""
-      } text-textSecondary h-8 w-8 bg-blue-300 hover:bg-blue-400 border border-borderPrimary rounded-full`}
+      } h-8 w-8 bg-blue-300 hover:bg-blue-400 border border-borderPrimary rounded-full`}
     >
       {darkMode ? (
         <IoMdSunny className="m-auto text-2xl text-textBlack" />

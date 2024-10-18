@@ -8,14 +8,18 @@
   /* Define variables for light theme */
   :root {
     --text-primary: 40, 40, 43; /* General text color - Matte Black*/
-    --text-secondary: 62, 130, 252; /* Secondary text color - Dodger Blue*/
-    --text-highlight: 248, 114, 23; /* Highlight text color - Pumpkin Orange*/
-    --text-white: 229, 229, 229; /* Always white text color - Mercury*/
-    --text-black: 40, 40, 43; /* Always black text color - Matte Black*/
     --text-reverse: 229, 229, 229; /* White text color in light mode - Mercury*/
+    --text-black: 40, 40, 43; /* Always black text color - Matte Black*/
+    --text-white: 229, 229, 229; /* Always white text color - Mercury*/
+    --text-blue: 62, 130, 252; /* Secondary text color - Dodger Blue*/
+    --text-orange: 248, 114, 23; /* Highlight text color - Pumpkin Orange*/
 
     --background-primary: 229, 229, 229; /* General background color - Mercury*/
-    --background-highlight: 248, 114, 23; /* Highlight background color - Pumpkin Orange*/
+    --background-orange: 248, 114, 23; /* Highlight background color - Pumpkin Orange*/
+    --background-orange-hover: 238, 104, 23; /* Highlight background color - Pumpkin Orange*/
+    --background-shade-one: 220, 220, 220; /* Element background color - Gainsboro*/
+    --background-blue: 62, 130, 252; /* Element background color - Gainsboro*/
+    --background-blue-hover: 37, 99, 235; /* Element background color - Gainsboro*/
 
     --border-primary: 212, 215, 217; /* General border color - Iron*/
 
@@ -27,13 +31,12 @@
 
     --text-color: 51, 51, 51; /* General text color */
     --text-reversed: 244, 244, 249; /* White text color */
-    --text-white: 204, 204, 209; /* White text color */
 
     --secondary-color: 240, 138, 36; /* Primary button/Action/Hightlight color */
     --secondary-hover-color: 209, 109, 18; /* Primary button/Action/Hightlight hover color */
 
-    --link-color: 0, 123, 255; /* Link color */
-    --link-hover-color: 0, 86, 179; /* Link hover color */
+    --link-color: 62, 130, 252; /* Link color */
+    --link-hover-color: 62, 130, 252; /* Link hover color */
 
     --border-color: 210, 210, 210; /* Border color */
     --outline-color: 0, 123, 255; /* Outline color for focus */
@@ -54,6 +57,7 @@
     --text-reverse: 40, 40, 43; /* Black text color in dark mode - Matte Black*/
 
     --background-primary: 40, 40, 43; /* General background color - Matte Black*/
+    --background-shade-one: 32, 32, 32; /* Element background color - Dark Jungle*/
 
     --border-primary: 56, 53, 51; /* General border color - Dune*/
 

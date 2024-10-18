@@ -345,3 +345,32 @@ exports.recoverPassword = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.refreshAccessToken = async (req, res, next) => {
+  try {
+    // Extract the refresh token from the cookie
+    const refreshToken = req.cookies.refreshToken;
+
+    // If the refresh token is missing return an error
+    if (!refreshToken) {
+      return next(errorHandler(401, "Missing refresh token. Please sign in again."));
+    }
+
+    // Verify the refresh token
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_TOKEN_SECRET, (err, user) => {
+      if (err) {
+        return next(errorHandler(403, "Invalid refresh token"));
+      }
+
+      // Generate a new access token
+      const newAccessToken = jwt.sign({ id: user.id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+        expiresIn: "15m",
+      });
+
+      // Send a success response with the new access token
+      return res.status(200).json({ success: true, token: newAccessToken });
+    });
+  } catch (error) {
+    next(error);
+  }
+};

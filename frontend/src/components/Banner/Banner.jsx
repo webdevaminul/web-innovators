@@ -8,7 +8,7 @@ const Banner = () => {
       <div className="flex flex-col gap-4 text-center md:text-left md:max-w-[50%]">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-black font-bai text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-blue-500 to-red-500">
           Best Online <br /> Platform to{" "}
-          <span className="bg-backgroundHighlight text-textReverse px-3 rounded-3xl leading-normal font-ubuntu">
+          <span className="bg-backgroundOrange text-textReverse px-3 rounded-3xl leading-normal font-ubuntu">
             Learn
           </span>
         </h1>

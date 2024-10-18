@@ -6,11 +6,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import Darkmode from "../Darkmode/Darkmode";
-import {
-  requestFailure,
-  requestStart,
-  userClearSuccess,
-} from "../../redux/authUsersSlice";
+import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
 import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 import logo from "../../assets/logo.png";
@@ -24,10 +20,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const foundUser = users?.find(
-    (u) => u?.userEmail === user?.userInfo?.userEmail
-  );
-  
+  const foundUser = users?.find((u) => u?.userEmail === user?.userInfo?.userEmail);
+
   // this user role will be dynamic
 
   // const role = "Teacher";
@@ -42,10 +36,7 @@ const Navbar = () => {
   // Handle Click Outside Mobile Menu
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (
-        profileMenuRef.current &&
-        !profileMenuRef.current.contains(e.target)
-      ) {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
         setProfileMenu(false);
       }
     };
@@ -67,10 +58,7 @@ const Navbar = () => {
       }
     } catch (error) {
       dispatch(
-        requestFailure(
-          error.response?.data?.message ||
-            "Something went wrong. Please try again."
-        )
+        requestFailure(error.response?.data?.message || "Something went wrong. Please try again.")
       );
     }
   };
@@ -78,22 +66,25 @@ const Navbar = () => {
   const links = (
     <>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/all-courses" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink to="/all-courses" className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue">
           Our Courses
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/blog" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink to="/blog" className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue">
           Blogs
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/become-instructor" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink
+          to="/become-instructor"
+          className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue"
+        >
           Become Instructor
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/contactUs" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink to="/contactUs" className="text-nowrap p-2 md:p-1 lg:p-2 hover:text-textBlue">
           About Us
         </NavLink>
       </li>
@@ -115,9 +106,9 @@ const Navbar = () => {
             <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
               <button className="h-8 w-8">
                 {openMenu ? (
-                  <RiMenuFoldLine className="m-auto text-2xl text-textSecondary" />
+                  <RiMenuFoldLine className="m-auto text-2xl text-textBlue" />
                 ) : (
-                  <RiMenuFold2Line className="m-auto text-2xl text-textSecondary" />
+                  <RiMenuFold2Line className="m-auto text-2xl text-textBlue" />
                 )}
               </button>
             </div>
@@ -126,8 +117,8 @@ const Navbar = () => {
             <Link to="/">
               <div className="flex items-center">
                 <img src={logo} alt="LearnUP" className="w-10" />
-                <h1 className="font-bold text-3xl font-ubuntu text-textSecondary">
-                  Learn<span className="text-textHighlight">UP</span>
+                <h1 className="font-bold text-3xl font-ubuntu text-textBlue">
+                  Learn<span className="text-textOrange">UP</span>
                 </h1>
               </div>
             </Link>
@@ -155,7 +146,7 @@ const Navbar = () => {
           {/* Close button for search bar */}
           <button
             onClick={() => setSearchBarOpen(false)}
-            className="absolute left-4 top-1/2 transform translate-y-[-50%]  bg-backgroundHighlight shadow-sm rounded-full p-3"
+            className="absolute left-4 top-1/2 transform translate-y-[-50%]  bg-backgroundOrange shadow-sm rounded-full p-3"
           >
             <MdArrowBackIosNew />
           </button>
@@ -204,72 +195,71 @@ const Navbar = () => {
                 </button>
 
                 {profileMenu && (
-                  <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-accentOne p-4 shadow-sm border border-border rounded-xl flex flex-col gap-4">
+                  <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderPrimary rounded-xl flex flex-col gap-4">
                     <div className="">
-                      <p className="whitespace-nowrap">
-                        Hi, {user?.userInfo?.userName}
-                      </p>
+                      <p className="whitespace-nowrap">Hi, {user?.userInfo?.userName}</p>
                       <p className="text-xs ">{user?.userInfo?.userEmail}</p>
                     </div>
 
                     {role === "student" ? (
                       <Link
                         onClick={() => setProfileMenu(false)}
-                        to="/dashbroad/home"
-                        className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                        to="dashboard/home"
+                        className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                       >
                         <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                         <span>Dashboard</span>
                       </Link>
                     ) : (
                       <>
-                      {role === "Teacher" ? <Link
-                        onClick={() => setProfileMenu(false)}
-                        to="/teacher-dashboard"
-                        className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
-                      >
-                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
-                        <span>Dashboard</span>
-                      </Link> : <Link
-                        onClick={() => setProfileMenu(false)}
-                        to="/admin-dashboard"
-                        className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
-                      >
-                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
-                        <span>Dashboard</span>
-                      </Link>}
-                      
+                        {role === "Teacher" ? (
+                          <Link
+                            onClick={() => setProfileMenu(false)}
+                            to="/teacher-dashboard"
+                            className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                          >
+                            <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                            <span>Dashboard</span>
+                          </Link>
+                        ) : (
+                          <Link
+                            onClick={() => setProfileMenu(false)}
+                            to="/admin-dashboard"
+                            className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                          >
+                            <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                            <span>Dashboard</span>
+                          </Link>
+                        )}
                       </>
                     )}
 
                     <Link
                       onClick={() => setProfileMenu(false)}
                       to="/manage-account/overview"
-                      className="text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                      className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
                       <span className="text-2xl">{/* <IoOptions /> */}</span>
                       <span>Manage account</span>
                     </Link>
                     <button
                       onClick={handleSignOut}
-                      className="text-sm bg-secondary hover:bg-secondaryHover text-primaryWhite border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                      className="text-sm bg-red-500 hover:bg-red-600 text-textWhite border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
-                      <span className="text-2xl">
-                        {/* <IoExitOutline /> */}
-                      </span>
+                      <span className="text-2xl">{/* <IoExitOutline /> */}</span>
                       <span>Sign out</span>
                     </button>
                   </div>
                 )}
               </div>
             ) : (
-              <NavLink
+              <Link
                 to="sign-in"
-                className="bg-link hover:bg-linkHover text-textReverse hover:text-textReverse p-2 rounded-md font-medium w-full sm:w-fit text-center sm:text-start flex gap-1 items-center justify-center"
+                className="text-nowrap bg-backgroundBlue hover:bg-backgroundBlueHover text-textWhite p-2 rounded-md font-medium w-full sm:w-fit text-center sm:text-start flex gap-1 items-center justify-center"
               >
                 <span className="text-2xl">{/* <IoEnterOutline /> */}</span>
                 <span>Sign In</span>
-              </NavLink>
+              </Link>
             )}
 
             {/* Search button  */}
