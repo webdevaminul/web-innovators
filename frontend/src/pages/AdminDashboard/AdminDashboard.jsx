@@ -61,7 +61,7 @@ const AdminDashboard = () => {
       <div className="flex-1 flex">
         {/* Sidebar - visible on md and lg, drawer on smaller devices */}
         <div
-          className={`p-2 bg-backgroundPrimary md:w-60 lg:w-60 md:flex-col lg:flex-col transform top-0 left-0 fixed md:relative lg:relative h-full z-50 transition-transform duration-300 ease-in-out ${
+          className={`p-2 bg-backgroundPrimary md:w-60 lg:w-60 md:flex-col lg:flex-col transform top-0 left-0 fixed md:relative lg:relative h-full md:z-0 z-50 transition-transform duration-300 ease-in-out ${
             open ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0 lg:translate-x-0`}
         >

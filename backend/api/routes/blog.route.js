@@ -7,7 +7,8 @@ const router = express.Router();
 
 router.get("/allBlogPosts", getAllBlogPosts); // all blog post get from here for admin
 router.get("/allBlogPosts/:id", getBlogPostById);
-router.put("/updateBlogPost/:id", updateBlogPost);
+router.put("/updateBlogPost/:id", updateBlogPost); 
+// router.put("/approvedBlog/:id", updateBlogPost); // update status from admin
 router.delete("/deleteBlogPost/:id", deleteBlogPost); // Add this line for the delete route
 router.put("/updateStatus/:id", updateBlogPostStatus); // Route for updating blog post status
 

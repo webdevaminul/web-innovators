@@ -8,26 +8,15 @@ import useBlogPost from "../../api/useBlogPost";
 import Loader from "../../utils/Loader";
 
 const AdminBlogManage = () => {
-  const {blogs, isLoading} = useBlogPost()
-
+  const status = "approved";
+  const { blogs, isLoading, refetch } = useBlogPost();
+  console.table("blogs", blogs);
   const [blogPosts, setBlogPosts] = useState([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [blogToDelete, setBlogToDelete] = useState(null);
 
   const navigate = useNavigate(); // Hook for navigation
   const baseUrl = axiosInstance.defaults.baseURL;
-
-console.log('blog', blogs)
-
-  useEffect(() => {
-    const fetchBlogPosts = async () => {
-      const response = await fetch("http://localhost:5000/blog/allBlogPosts");
-      const data = await response.json();
-      setBlogPosts(data);
-    };
-
-    fetchBlogPosts();
-  }, []);
 
   const handleDelete = (id) => {
     setBlogToDelete(id);
@@ -36,13 +25,17 @@ console.log('blog', blogs)
 
   const confirmDelete = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/blog/deleteBlogPost/${blogToDelete}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `http://localhost:5000/blog/deleteBlogPost/${blogToDelete}`,
+        {
+          method: "DELETE",
+        }
+      );
       if (response.ok) {
-        setBlogPosts((prevPosts) => prevPosts.filter((post) => post._id !== blogToDelete));
+        setBlogPosts((prevPosts) =>
+          prevPosts.filter((post) => post._id !== blogToDelete)
+        );
         toast.success("Blog post deleted successfully."); // Show toast notification
-        
       } else {
         const errorData = await response.json();
         toast(`Error: ${errorData.message}`); // Show toast with error
@@ -56,36 +49,52 @@ console.log('blog', blogs)
     }
   };
 
+  // const handleApproval = async (id) => {
+  //   try {
+  //     const response = await fetch(`http://localhost:5000/blog/updateStatus/${id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({ status: true }), // Set status to true
+  //     });
+
+  //     if (response.ok) {
+  //       setBlogPosts((prevPosts) =>
+  //         prevPosts.map((post) => (post._id === id ? { ...post, status: true } : post))
+  //       );
+  //       toast.success("Blog post approved successfully."); // Show toast notification
+  //       // Navigate to blog creation page
+  //     } else {
+  //       const errorData = await response.json();
+  //       console.log(errorData)
+  //       toast.success(`Successfully approve this Blog post...`); // Show toast with error
+  //       navigate("/admin-dashboard/blog-creation");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error approving blog post:", error);
+  //     toast.error("Failed to approve the blog post."); // Show toast notification
+  //   }
+  // };
+
   const handleApproval = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/blog/updateStatus/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: true }), // Set status to true
+      const res = await axiosInstance.put(`/blog/updateStatus/${id}`, {
+        status,
       });
-
-      if (response.ok) {
-        setBlogPosts((prevPosts) =>
-          prevPosts.map((post) => (post._id === id ? { ...post, status: true } : post))
-        );
-        toast.success("Blog post approved successfully."); // Show toast notification
-        // Navigate to blog creation page
-      } else {
-        const errorData = await response.json();
-        console.log(errorData)
-        toast.success(`Successfully approve this Blog post...`); // Show toast with error
-        navigate("/admin-dashboard/blog-creation");
+      console.log("res", res);
+      // Check if the response is acknowledged
+      if (res?.data?.result?.acknowledged) {
+        toast.success(res?.data?.message);
+        refetch();
       }
-    } catch (error) {
-      console.error("Error approving blog post:", error);
-      toast.error("Failed to approve the blog post."); // Show toast notification
+    } catch (err) {
+      console.error(err);
+      toast.error(`Failed to update status`);
     }
   };
 
-
-if(isLoading) return <Loader />
+  if (isLoading) return <Loader />;
 
   return (
     <div className="overflow-x-auto h-screen">
@@ -107,40 +116,48 @@ if(isLoading) return <Loader />
         </thead>
         <tbody>
           {blogs?.map((post) => (
-              <tr key={post._id}>
-                <td className="border border-gray-300 px-4 py-2">
-                  <img className="w-16 h-16 object-cover"
-                        src={`${baseUrl}${post?.image}`}
-                        alt={post.title}
-                      />
-                </td>
-                <td className="border border-gray-300 px-4 py-2"> 116 {post.title} </td>
-                <td className="border border-gray-300 px-4 py-2">{new Date(post.date).toLocaleString()}</td>
-                <td className="border border-gray-300 px-4 py-2">{post.status}</td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <div className="flex items-center justify-center space-x-4">
-                    <Link to={`/teacher-dashboard/blog/${post._id}`}>
-                      <AiOutlineEye className="text-2xl text-blue-600" />
-                    </Link>
-                    <button onClick={() => handleDelete(post._id)}>
-                      <AiOutlineDelete className="text-2xl text-red-600" />
-                    </button>
-                  </div>
-                </td>
-                <td className="border border-gray-300 px-4 py-2 justify-center">
-                  {post.status === true ? (
-                    <AiOutlineCheck className="text-green-600 text-2xl" /> // Show approved icon
-                  ) : (
-                    <button
-                      onClick={() => handleApproval(post._id)}
-                      className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
-                    >
-                      Approve
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
+            <tr key={post._id}>
+              <td className="border border-gray-300 px-4 py-2">
+                <img
+                  className="w-16 h-16 object-cover"
+                  src={`${baseUrl}${post?.image}`}
+                  alt={post.title}
+                />
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {" "}
+                116 {post.title}{" "}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {new Date(post.date).toLocaleString()}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {post.status}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                <span className="flex items-center justify-center space-x-4">
+                  <Link to={`/teacher-dashboard/blog/${post._id}`}>
+                    <AiOutlineEye className="text-2xl text-blue-600" />
+                  </Link>
+                  <button onClick={() => handleDelete(post._id)}>
+                    <AiOutlineDelete className="text-2xl text-red-600" />
+                  </button>
+                </span>
+              </td>
+              <td className="border border-gray-300 px-4 py-2 justify-center">
+                {post.status === "approved" ? (
+                  <AiOutlineCheck className="text-green-600 text-2xl" /> // Show approved icon
+                ) : (
+                  <button
+                    onClick={() => handleApproval(post._id)}
+                    className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                  >
+                    Approve
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
         <ToastContainer />
       </table>

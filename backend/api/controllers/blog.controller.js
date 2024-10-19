@@ -18,7 +18,7 @@ exports.createBlogPost = async (req, res, next) => {
       time,
       status,
     } = req.body;
-    
+
     if (!req.file) {
       return res.status(400).json({ message: "No image uploaded." });
     }
@@ -29,7 +29,7 @@ exports.createBlogPost = async (req, res, next) => {
       category,
       image: req.file.path,
       date: new Date(),
-      photo: userPicture,
+      photo: `/images/${userPicture?.filename},`,
       name: userName,
       email: userEmail,
       time,
@@ -87,7 +87,7 @@ exports.updateBlogPost = async (req, res) => {
   try {
     const { title, description, category, image, date, name, email, time } =
       req.body;
-
+    console.log("90 ");
     const updatedPost = await blogCollection.findOneAndUpdate(
       { _id: new ObjectId(req.params.id) },
       {
@@ -100,7 +100,7 @@ exports.updateBlogPost = async (req, res) => {
       return res.status(404).json({ message: "Blog post not found" });
     }
 
-    res.status(200).json(updatedPost.value);
+    // res.status(200).json(updatedPost.value);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to update the blog post" });
@@ -128,17 +128,22 @@ exports.deleteBlogPost = async (req, res) => {
 // Update blog post status
 exports.updateBlogPostStatus = async (req, res) => {
   try {
-    const result = await blogCollection.findOneAndUpdate(
-      { _id: new ObjectId(req.params.id) },
-      { $set: { status: req.body.status } },
-      { returnOriginal: false }
-    );
+    const id = req?.params.id;
+    const { status } = req?.body;
+    const updateDoc = { $set: { status: status } };
+    const query = { _id: new ObjectId(id) };
+console.log(135, id)
+    const result = await blogCollection.updateOne(query, updateDoc);
 
-    if (!result.value) {
-      return res.status(404).json({ message: "Blog post not found" });
+    // Check if any documents were modified
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: "Blog post status unchanged" });
     }
 
-    res.status(200).json(result.value);
+    res.status(200).json({
+      message: "Blog approved successfully",
+      result,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to update the blog post status" });

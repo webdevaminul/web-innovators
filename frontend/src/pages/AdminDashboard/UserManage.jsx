@@ -12,6 +12,7 @@ const UserManage = () => {
   const [status, setStatus] = useState("Pending");
   const { teachers, isLoading, refetch } = useAllTeacher(status);
 
+  // user role update
   const handleUpdateRole = async (id) => {
     const status = "Approved"; // Fixed typo from "Aproved" to "Approved"
     const userNewRole = "Teacher";
