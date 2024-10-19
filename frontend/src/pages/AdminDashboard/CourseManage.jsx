@@ -9,7 +9,7 @@ const CourseManage = () => {
   const status = "pending";
   const baseUrl = axiosInstance.defaults.baseURL;
   const { courses, isLoading, refetch } = useAllCourse({ status });
-
+console.log('course', courses)
 
   const updateCourseStatus = async (id, status) => {
     try {

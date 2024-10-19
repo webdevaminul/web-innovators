@@ -1,19 +1,24 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { AiOutlineEye, AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal";
 import axiosInstance from "../../api/axiosInstance";
 import useBlogPost from "../../api/useBlogPost";
+import Loader from "../../utils/Loader";
 
 const AdminBlogManage = () => {
   const {blogs, isLoading} = useBlogPost()
+
   const [blogPosts, setBlogPosts] = useState([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [blogToDelete, setBlogToDelete] = useState(null);
-  const [toast, setToast] = useState({ message: '', visible: false }); // Toast state
+
   const navigate = useNavigate(); // Hook for navigation
   const baseUrl = axiosInstance.defaults.baseURL;
+
 console.log('blog', blogs)
+
   useEffect(() => {
     const fetchBlogPosts = async () => {
       const response = await fetch("http://localhost:5000/blog/allBlogPosts");
@@ -36,14 +41,15 @@ console.log('blog', blogs)
       });
       if (response.ok) {
         setBlogPosts((prevPosts) => prevPosts.filter((post) => post._id !== blogToDelete));
-        showToast("Blog post deleted successfully."); // Show toast notification
+        toast.success("Blog post deleted successfully."); // Show toast notification
+        
       } else {
         const errorData = await response.json();
-        showToast(`Error: ${errorData.message}`); // Show toast with error
+        toast(`Error: ${errorData.message}`); // Show toast with error
       }
     } catch (error) {
       console.error("Error deleting blog post:", error);
-      showToast("Failed to delete the blog post."); // Show toast notification
+      toast.error("Failed to delete the blog post."); // Show toast notification
     } finally {
       setIsDeleteModalOpen(false);
       setBlogToDelete(null);
@@ -64,25 +70,22 @@ console.log('blog', blogs)
         setBlogPosts((prevPosts) =>
           prevPosts.map((post) => (post._id === id ? { ...post, status: true } : post))
         );
-        showToast("Blog post approved successfully."); // Show toast notification
+        toast.success("Blog post approved successfully."); // Show toast notification
         // Navigate to blog creation page
       } else {
         const errorData = await response.json();
         console.log(errorData)
-        showToast(`Successfully approve this Blog post...`); // Show toast with error
+        toast.success(`Successfully approve this Blog post...`); // Show toast with error
         navigate("/admin-dashboard/blog-creation");
       }
     } catch (error) {
       console.error("Error approving blog post:", error);
-      showToast("Failed to approve the blog post."); // Show toast notification
+      toast.error("Failed to approve the blog post."); // Show toast notification
     }
   };
 
-  // Function to show toast
-  const showToast = (message) => {
-    setToast({ message, visible: true });
-    setTimeout(() => setToast({ message: '', visible: false }), 3000); // Hide toast after 3 seconds
-  };
+
+if(isLoading) return <Loader />
 
   return (
     <div className="overflow-x-auto h-screen">
@@ -97,23 +100,23 @@ console.log('blog', blogs)
             <th className="border border-gray-300 px-4 py-2">Image</th>
             <th className="border border-gray-300 px-4 py-2">Title</th>
             <th className="border border-gray-300 px-4 py-2">Date & Time</th>
+            <th className="border border-gray-300 px-4 py-2">Status</th>
             <th className="border border-gray-300 px-4 py-2">Actions</th>
             <th className="border border-gray-300 px-4 py-2">Approval</th>
           </tr>
         </thead>
         <tbody>
-          {blogs?.filter(post => post.status === "false") // Ensure filtering matches actual data type
-            .map((post) => (
+          {blogs?.map((post) => (
               <tr key={post._id}>
                 <td className="border border-gray-300 px-4 py-2">
-                  <img src={post.photo} alt={post.title} className="w-16 h-16 object-cover" />
-                  <img
+                  <img className="w-16 h-16 object-cover"
                         src={`${baseUrl}${post?.image}`}
                         alt={post.title}
                       />
                 </td>
-                <td className="border border-gray-300 px-4 py-2">{post.title}</td>
+                <td className="border border-gray-300 px-4 py-2"> 116 {post.title} </td>
                 <td className="border border-gray-300 px-4 py-2">{new Date(post.date).toLocaleString()}</td>
+                <td className="border border-gray-300 px-4 py-2">{post.status}</td>
                 <td className="border border-gray-300 px-4 py-2">
                   <div className="flex items-center justify-center space-x-4">
                     <Link to={`/teacher-dashboard/blog/${post._id}`}>
@@ -139,6 +142,7 @@ console.log('blog', blogs)
               </tr>
             ))}
         </tbody>
+        <ToastContainer />
       </table>
 
       <DeleteConfirmationModal

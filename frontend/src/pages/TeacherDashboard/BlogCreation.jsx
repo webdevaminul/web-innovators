@@ -9,9 +9,9 @@ const BlogCreation = () => {
   const [category, setCategory] = useState("General");
   const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(false);
-const name = user?.userInfo?.userName;
-const email = user?.userInfo?.userEmail;
-const userPhoto = user?.userInfo?.userPhoto;
+  const name = user?.userInfo?.userName;
+  const email = user?.userInfo?.userEmail;
+  const userPhoto = user?.userInfo?.userPhoto;
   const status = "pending";
 
   const categories = [
@@ -64,7 +64,7 @@ const userPhoto = user?.userInfo?.userPhoto;
           },
         })
         .then((response) => {
-          if (response?.data?.postId) {            
+          if (response?.data?.postId) {
             toast.success(response.data.message);
             toast.success(response.data.message2);
           }
@@ -76,7 +76,7 @@ const userPhoto = user?.userInfo?.userPhoto;
       console.log(error);
     } finally {
       setLoading(false);
-      form.reset()
+      form.reset();
     }
   };
 
