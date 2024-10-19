@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { AiOutlineEye, AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
-import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal";
 import axiosInstance from "../../api/axiosInstance";
 import useBlogPost from "../../api/useBlogPost";
 import Loader from "../../utils/Loader";
@@ -10,78 +9,55 @@ import Loader from "../../utils/Loader";
 const AdminBlogManage = () => {
   const status = "approved";
   const { blogs, isLoading, refetch } = useBlogPost();
-  console.table("blogs", blogs);
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [blogToDelete, setBlogToDelete] = useState(null);
 
-  const navigate = useNavigate(); // Hook for navigation
   const baseUrl = axiosInstance.defaults.baseURL;
 
-  const handleDelete = (id) => {
-    setBlogToDelete(id);
-    setIsDeleteModalOpen(true);
-  };
+ const handleDelete = async (id) =>{
+  try {
+    // Show confirmation alert before deletion
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this blog !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  const confirmDelete = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/blog/deleteBlogPost/${blogToDelete}`,
-        {
-          method: "DELETE",
-        }
-      );
-      if (response.ok) {
-        setBlogPosts((prevPosts) =>
-          prevPosts.filter((post) => post._id !== blogToDelete)
-        );
-        toast.success("Blog post deleted successfully."); // Show toast notification
-      } else {
-        const errorData = await response.json();
-        toast(`Error: ${errorData.message}`); // Show toast with error
+    // If user confirms, proceed with deletion
+    if (result.isConfirmed) {
+      const res = await axiosInstance.delete(`/blog/deleteBlogPost/${id}`);
+
+      // Handle success response from the backend
+      if (res.status === 200) {
+        // Show success alert
+        Swal.fire({
+          title: "Deleted!",
+          text: res.data.message,
+          icon: "success",
+        });
+
+        // Show toast notification for deletion success
+        toast.success(res.data.message || "Course deleted successfully!");
+
+        // Refetch or update course list
+        refetch();
       }
-    } catch (error) {
-      console.error("Error deleting blog post:", error);
-      toast.error("Failed to delete the blog post."); // Show toast notification
-    } finally {
-      setIsDeleteModalOpen(false);
-      setBlogToDelete(null);
     }
-  };
+  } catch (error) {
+    // Show error toast if deletion fails
+    toast.error("Failed to delete course: " + error.message);
+  }
+ }
 
-  // const handleApproval = async (id) => {
-  //   try {
-  //     const response = await fetch(`http://localhost:5000/blog/updateStatus/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify({ status: true }), // Set status to true
-  //     });
-
-  //     if (response.ok) {
-  //       setBlogPosts((prevPosts) =>
-  //         prevPosts.map((post) => (post._id === id ? { ...post, status: true } : post))
-  //       );
-  //       toast.success("Blog post approved successfully."); // Show toast notification
-  //       // Navigate to blog creation page
-  //     } else {
-  //       const errorData = await response.json();
-  //       console.log(errorData)
-  //       toast.success(`Successfully approve this Blog post...`); // Show toast with error
-  //       navigate("/admin-dashboard/blog-creation");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error approving blog post:", error);
-  //     toast.error("Failed to approve the blog post."); // Show toast notification
-  //   }
-  // };
 
   const handleApproval = async (id) => {
     try {
       const res = await axiosInstance.put(`/blog/updateStatus/${id}`, {
         status,
       });
+      
       console.log("res", res);
       // Check if the response is acknowledged
       if (res?.data?.result?.acknowledged) {
@@ -136,7 +112,7 @@ const AdminBlogManage = () => {
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 <span className="flex items-center justify-center space-x-4">
-                  <Link to={`/teacher-dashboard/blog/${post._id}`}>
+                  <Link to={`/blog-details/${post._id}`}>
                     <AiOutlineEye className="text-2xl text-blue-600" />
                   </Link>
                   <button onClick={() => handleDelete(post._id)}>
@@ -161,12 +137,6 @@ const AdminBlogManage = () => {
         </tbody>
         <ToastContainer />
       </table>
-
-      <DeleteConfirmationModal
-        isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={confirmDelete}
-      />
     </div>
   );
 };

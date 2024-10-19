@@ -1,5 +1,3 @@
-// src/components/DeleteConfirmationModal/DeleteConfirmationModal.js
-import React from "react";
 
 const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
   if (!isOpen) return null;

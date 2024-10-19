@@ -87,20 +87,23 @@ exports.updateBlogPost = async (req, res) => {
   try {
     const { title, description, category, image, date, name, email, time } =
       req.body;
-    console.log("90 ");
-    const updatedPost = await blogCollection.findOneAndUpdate(
-      { _id: new ObjectId(req.params.id) },
-      {
-        $set: { title, description, category, image, date, name, email, time },
-      },
-      { returnOriginal: false }
-    );
+    const query = { _id: new ObjectId(req.params.id) };
+    console.log("90 ", query);
+    const updateDoc = {
+      $set: { title, description, category, image, date, name, email, time },
+    };
 
-    if (!updatedPost.value) {
+    const updatedPost = await blogCollection.updateOne(query,updateDoc);
+
+    if (!updatedPost) {
       return res.status(404).json({ message: "Blog post not found" });
     }
-
-    // res.status(200).json(updatedPost.value);
+    res
+      .status(200)
+      .json({
+        message: "Blog post updated successfully",
+        data: updatedPost,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to update the blog post" });
@@ -132,7 +135,6 @@ exports.updateBlogPostStatus = async (req, res) => {
     const { status } = req?.body;
     const updateDoc = { $set: { status: status } };
     const query = { _id: new ObjectId(id) };
-console.log(135, id)
     const result = await blogCollection.updateOne(query, updateDoc);
 
     // Check if any documents were modified

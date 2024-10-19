@@ -28,12 +28,12 @@ import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
 import BlogCreation from "../pages/TeacherDashboard/BlogCreation";
 import BlogManagement from "../pages/TeacherDashboard/BlogManagement";
-import BlogDetails from "../pages/TeacherDashboard/BlogDetails";
 import AdminBlogManage from "../pages/AdminDashboard/AdminBlogManage";
 
 import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
 import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
 import CourseManage from "../pages/AdminDashboard/CourseManage";
+import BlogDetails from "../components/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -46,8 +46,7 @@ const router = createBrowserRouter([
       { path: "/sign-up", element: <SignUp /> },
       { path: "/email-verify", element: <EmailVerify /> },
       {
-        path: "/forget-password",
-        element: <ForgetPassword />,
+        path: "/forget-password", element: <ForgetPassword />,
       },
       {
         path: "/password-recovery",
@@ -80,6 +79,8 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <BlogPosts />,
       },
+    
+      { path: "/blog-details/:id", element: <BlogDetails  /> },
       {
         path: "/contact-us",
         element: <ContactPage />,
@@ -138,7 +139,6 @@ const router = createBrowserRouter([
         ),
       },
       { path: "blog-management", element: <BlogManagement /> },
-      { path: "blog/:id", element: <BlogDetails /> },
     ],
   },
 

@@ -9,6 +9,7 @@ const BlogCreation = () => {
   const [category, setCategory] = useState("General");
   const [previewUrl, setPreviewUrl] = useState("");
   const [loading, setLoading] = useState(false);
+  
   const name = user?.userInfo?.userName;
   const email = user?.userInfo?.userEmail;
   const userPhoto = user?.userInfo?.userPhoto;
@@ -52,7 +53,7 @@ const BlogCreation = () => {
     formData.append("userEmail", email || " ");
     formData.append("time", time || " ");
     formData.append("status", status || " ");
-    //blog/createBlog
+
 
     console.log("formdata", formData);
     try {

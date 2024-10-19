@@ -115,7 +115,6 @@ const upload = multer({
   },
 });
 
-
 // POST route to upload file and save data in MongoDB
 app.post("/create/course", upload.single("coverPicture"), createCourse);
 app.post("/blog/createBlog", upload.single("blogImage"), createBlogPost);

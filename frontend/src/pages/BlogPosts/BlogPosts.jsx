@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axiosInstance from "../../api/axiosInstance";
 import useBlogPost from "../../api/useBlogPost";
 import { Link } from "react-router-dom";
@@ -46,29 +46,24 @@ const BlogPosts = () => {
         </div>
         <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-4">
           {blogs?.map((article) => (
-            <article key={article.id} className="flex flex-col ">
-              <Link>
-                <Link
+            <article key={article._id} className="flex flex-col ">
+                <Link to={`/blog-details/${article._id}`} 
                   rel="noopener noreferrer"
-                  href="#"
                   aria-label={article.title}
                 >
                   <img
                     alt={article.title}
                     className="object-cover w-full h-52"
-                    src={`${baseUrl}/images/${article?.image}`}
+                    src={`${baseUrl}${article?.image}`}
                   />
                 </Link>
-              </Link>
               <div className="flex flex-col flex-1 p-6">
-                <Link
-                  rel="noopener noreferrer"
-                  href="#"
-                  className="text-xs tracking-wider uppercase hover:underline"
+                <span
+                  className="text-xs tracking-wider uppercase hover:underline cursor-pointer"
                 >
                   {article.category}
-                </Link>
-                <Link>
+                </span>
+                <Link to={`/blog-details/${article._id}`}>
                 <h3 className="flex-1 py-2 text-lg font-semibold leading-snug">
                   {article.title}
                 </h3>
