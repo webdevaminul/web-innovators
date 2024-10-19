@@ -8,27 +8,27 @@ const blogCollection = database.collection("blogs");
 // Create a blog post
 exports.createBlogPost = async (req, res, next) => {
   try {
+    const { title, description, category, userPicture, userName, userEmail, time, status } = req.body;
     if (!req.file) {
       return res.status(400).json({ message: "No image uploaded." });
     }
-
-    const newPost = {
-      title: req.body.title,
-      description: req.body.description,
-      category: req.body.category,
-      image: req.file.path,
-      date: new Date(),
-      photo: req.body.userProfilePicture || '', // Ensure a default value
-      name: req.body.userName || '', // Ensure a default value
-      email: req.body.userEmail || '', // Ensure a default value
-      time: req.body.time || '', // Ensure a default value
-      status: req.body.status || '', // Ensure a default value
-    };
     
-
+const newPost = {
+  title,
+  description,
+  category,
+  image: req.file.path,
+  date: new Date(),
+  photo: userPicture,
+  name: userName,
+  email: userEmail,
+  time,
+  status
+};
     const result = await blogCollection.insertOne(newPost);
     res.status(201).json({
       message: "Blog post created successfully!",
+      message2: "Wait for admin approval",
       postId: result.insertedId,
     });
   } catch (err) {
@@ -40,13 +40,23 @@ exports.createBlogPost = async (req, res, next) => {
 // Get all blog posts
 exports.getAllBlogPosts = async (req, res, next) => {
   try {
-    const posts = await blogCollection.find().toArray();
-    res.status(200).json(posts);
-  } catch (err) {
-    console.error(err);
-    next(err);
+    // Fetch all blog posts from the collection
+    const allPosts = await blogCollection.find().toArray();
+    
+    // Respond with a success message and the fetched blog posts
+    res.status(200).json({
+      success: true,
+      message: 'Blog posts retrieved successfully',
+      data: allPosts
+    });
+  } catch (error) {
+    console.error('Error fetching blog posts:', error);
+    
+    // Pass the error to the next middleware
+    next(error);
   }
 };
+
 
 // Get a blog post by ID
 exports.getBlogPostById = async (req, res, next) => {

@@ -3,15 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineEye, AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
 import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal";
 import axiosInstance from "../../api/axiosInstance";
+import useBlogPost from "../../api/useBlogPost";
 
 const AdminBlogManage = () => {
+  const {blogs, isLoading} = useBlogPost()
   const [blogPosts, setBlogPosts] = useState([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [blogToDelete, setBlogToDelete] = useState(null);
   const [toast, setToast] = useState({ message: '', visible: false }); // Toast state
   const navigate = useNavigate(); // Hook for navigation
   const baseUrl = axiosInstance.defaults.baseURL;
-
+console.log('blog', blogs)
   useEffect(() => {
     const fetchBlogPosts = async () => {
       const response = await fetch("http://localhost:5000/blog/allBlogPosts");
@@ -100,12 +102,11 @@ const AdminBlogManage = () => {
           </tr>
         </thead>
         <tbody>
-          {blogPosts
-            .filter(post => post.status === "false") // Ensure filtering matches actual data type
+          {blogs?.filter(post => post.status === "false") // Ensure filtering matches actual data type
             .map((post) => (
               <tr key={post._id}>
                 <td className="border border-gray-300 px-4 py-2">
-                  <img src={post.image} alt={post.title} className="w-16 h-16 object-cover" />
+                  <img src={post.photo} alt={post.title} className="w-16 h-16 object-cover" />
                   <img
                         src={`${baseUrl}${post?.image}`}
                         alt={post.title}

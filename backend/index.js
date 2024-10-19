@@ -10,16 +10,14 @@ const path = require("path")
 const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
-const blogRoutes = require("./api/routes/blog.route");
-const courseRoutes = require("./api/routes/course.route");
 const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
 const instructorRoutes = require("./api/routes/instructor.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
-// const instructorRoutes = require("./api/routes/instructor.route");
 const allTeacher = require("./api/routes/instructor.route");
 const allUser = require("./api/routes/instructor.route");
 const { createCourse } = require("./api/controllers/course.controller");
+const { createBlogPost } = require("./api/controllers/blog.controller");
 
 // Load environment variables
 dotenv.config();
@@ -116,11 +114,11 @@ const upload = multer({
 
 // POST route to upload file and save data in MongoDB
 app.post("/create/course", upload.single("coverPicture"), createCourse);
+app.post("/blog/createBlog", upload.single("blogImage"), createBlogPost);
 
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
-app.use("/blog", blogRoutes);
 app.use("/user", userRoutes);
 app.use("/be", instructorRoutes);
 app.use("/approved", instructorRoutes);

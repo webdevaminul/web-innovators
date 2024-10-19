@@ -26,8 +26,8 @@ const upload = multer({
   },
 });
 
-router.post("/createBlog", upload.single("image"), createBlogPost);
-router.get("/allBlogPosts", getAllBlogPosts);
+// router.post("/createBlog", upload.single("image"), createBlogPost);
+router.get("/allBlogPosts", getAllBlogPosts); // all blog post get here
 router.get("/allBlogPosts/:id", getBlogPostById);
 router.put("/updateBlogPost/:id", updateBlogPost);
 router.delete("/deleteBlogPost/:id", deleteBlogPost); // Add this line for the delete route
