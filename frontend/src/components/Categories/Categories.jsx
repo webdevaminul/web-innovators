@@ -80,7 +80,7 @@ export default function Categories() {
           <Link
             onClick={() => handleCategory(category.name)}
             key={index}
-            className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+            className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
           >
             <div className={`${category.bgColor} rounded-full p-4`}>
               {/* Render the icon dynamically */}
@@ -100,7 +100,7 @@ export default function Categories() {
       </h1>
       <div className="grid grid-cols-4 gap-5">
         {/* cat 1 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-pink-100 rounded-full p-4 ">
             <IoLanguage className="text-5xl text-pink-400" />
           </div>
@@ -110,7 +110,7 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 2 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-green-100 rounded-full p-4 ">
             <IoLanguage className="text-5xl text-green-400" />
           </div>
@@ -120,7 +120,7 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 3 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -130,7 +130,7 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 4 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -140,7 +140,7 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 5 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -150,7 +150,7 @@ export default function Categories() {
           </div>
         </Link>
         {/* cat 6 */}
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -159,7 +159,7 @@ export default function Categories() {
             <p>10 Courses</p>
           </div>
         </Link>
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>
@@ -168,7 +168,7 @@ export default function Categories() {
             <p>10 Courses</p>
           </div>
         </Link>
-        <Link className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
+        <Link className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3">
           <div className="bg-purple-50 rounded-full p-4 ">
             <IoLanguage className="text-5xl" />
           </div>

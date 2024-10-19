@@ -32,7 +32,8 @@ export default {
         backgroundOrange: "rgba(var(--background-orange))",
         backgroundOrangeHover: "rgba(var(--background-orange-hover))",
 
-        borderPrimary: "rgba(var(--border-primary))",
+        borderLight: "rgba(var(--border-light))",
+        borderDark: "rgba(var(--border-dark))",
 
         accentOne: "rgba(var(--accent-one))",
         accentTwo: "rgba(var(--accent-two))",

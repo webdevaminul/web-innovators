@@ -21,7 +21,8 @@
     --background-blue: 62, 130, 252; /* Element background color - Gainsboro*/
     --background-blue-hover: 37, 99, 235; /* Element background color - Gainsboro*/
 
-    --border-primary: 212, 215, 217; /* General border color - Iron*/
+    --border-light: 212, 215, 217; /* General border color - Iron*/
+    --border-dark: 190, 190, 190; /* General border color - Iron*/
 
     --accent-one: 234, 234, 239; /* Element background color */
     --accent-two: 224, 224, 229; /* Element background color */
@@ -59,7 +60,8 @@
     --background-primary: 40, 40, 43; /* General background color - Matte Black*/
     --background-shade-one: 32, 32, 32; /* Element background color - Dark Jungle*/
 
-    --border-primary: 56, 53, 51; /* General border color - Dune*/
+    --border-light: 56, 53, 51; /* General border color - Dune*/
+    --border-dark: 20, 20, 20; /* General border color - Dune*/
 
     --accent-one: 28, 28, 28; /* Dark theme element background color */
     --accent-two: 38, 38, 38; /* Dark theme element background color */

@@ -37,12 +37,12 @@ const CoursesSection = () => {
     return <div className="text-center text-red-500 my-10">Error: {error.message}</div>;
   }
   return (
-    <section className="container mx-auto mt-8">
+    <section className="p-2 md:p-4 lg:p-5">
       <Title
         title={"Latest Courses"}
         subTitle={"Explore the newest courses and stay ahead with the latest trends"}
       />
-      <div className="gap-5 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid gap-4 grid-cols-4">
         {displayedCourses.map((course) => (
           <CourseCard key={course.id} course={course} />
         ))}

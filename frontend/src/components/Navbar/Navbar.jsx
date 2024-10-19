@@ -92,7 +92,7 @@ const Navbar = () => {
   const [searchBarOpen, setSearchBarOpen] = useState(false);
 
   return (
-    <header className="fixed h-[3.8rem] border-b border-borderPrimary w-full top-0 left-0 z-50 bg-backgroundPrimary">
+    <header className="fixed h-[3.8rem] border-b border-borderLight w-full top-0 left-0 z-50 bg-backgroundPrimary">
       <nav className="gap-2 h-full p-2 md:p-4 lg:p-5 flex justify-between items-center relative w-full">
         {/* Logo and Search bar */}
         <div className="flex items-center gap-12">
@@ -122,7 +122,7 @@ const Navbar = () => {
           </div>
 
           {/* search bar for large device */}
-          <div className="px-4 border border-borderPrimary rounded-3xl w-full max-w-md justify-between sm:flex md:hidden lg:flex hidden">
+          <div className="px-4 border border-borderLight rounded-3xl w-full max-w-md justify-between sm:flex md:hidden lg:flex hidden">
             <input
               className="outline-none w-full placeholder:text-text/70 text-text py-2 bg-transparent"
               type="text"
@@ -149,7 +149,7 @@ const Navbar = () => {
           </button>
 
           {/* Search bar and search button*/}
-          <div className="flex absolute left-16 right-4 top-1/2 transform translate-y-[-50%] bg-backgroundPrimary border border-borderPrimary rounded-full overflow-hidden">
+          <div className="flex absolute left-16 right-4 top-1/2 transform translate-y-[-50%] bg-backgroundPrimary border border-borderLight rounded-full overflow-hidden">
             <input
               className="outline-none bg-transparent w-full placeholder:text-textPrimary my-auto p-2 px-4"
               type="text"
@@ -195,7 +195,7 @@ const Navbar = () => {
                 </div>
 
                 {profileMenu && (
-                  <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderPrimary rounded-xl flex flex-col gap-4">
+                  <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderDark rounded-xl flex flex-col gap-4">
                     <div className="">
                       <p className="whitespace-nowrap">Hi, {user?.userInfo?.userName}</p>
                       <p className="text-xs ">{user?.userInfo?.userEmail}</p>
@@ -205,7 +205,7 @@ const Navbar = () => {
                       <Link
                         onClick={() => setProfileMenu(false)}
                         to="dashboard/home"
-                        className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                        className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                       >
                         <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                         <span>Dashboard</span>
@@ -216,7 +216,7 @@ const Navbar = () => {
                           <Link
                             onClick={() => setProfileMenu(false)}
                             to="/teacher-dashboard"
-                            className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                            className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                           >
                             <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                             <span>Dashboard</span>
@@ -225,7 +225,7 @@ const Navbar = () => {
                           <Link
                             onClick={() => setProfileMenu(false)}
                             to="/admin-dashboard"
-                            className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                            className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                           >
                             <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                             <span>Dashboard</span>
@@ -237,7 +237,7 @@ const Navbar = () => {
                     <Link
                       onClick={() => setProfileMenu(false)}
                       to="/manage-account/overview"
-                      className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderPrimary whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                      className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
                       <span className="text-2xl">{/* <IoOptions /> */}</span>
                       <span>Manage account</span>
@@ -265,7 +265,7 @@ const Navbar = () => {
             {/* Search button  */}
             <button
               onClick={() => setSearchBarOpen(true)}
-              className="h-8 w-8 sm:h-9 sm:w-9 m-auto p-1 sm:hidden md:flex lg:hidden bg-blue-500 hover:bg-blue-600 border border-borderPrimary rounded-full"
+              className="h-8 w-8 sm:h-9 sm:w-9 m-auto p-1 sm:hidden md:flex lg:hidden bg-blue-500 hover:bg-blue-600 border border-borderLight rounded-full"
             >
               <IoSearchOutline className="text-2xl text-textWhite w-full m-auto" />
             </button>

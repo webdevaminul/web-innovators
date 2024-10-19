@@ -58,7 +58,7 @@ export default function Reviews() {
       />
 
       <Swiper
-        spaceBetween={20}
+        spaceBetween={0}
         loop={true}
         autoplay={{
           delay: 5000,
@@ -72,34 +72,31 @@ export default function Reviews() {
           768: {
             slidesPerView: 2,
           },
-          1024: {
+          1400: {
             slidesPerView: 3,
           },
         }}
-        className="mySwiper container mx-auto"
+        className="mySwiper"
       >
         {reviews.map((review) => (
-          <SwiperSlide key={review.id} className="py-10 px-3">
-            <div className="bg-accentOne rounded-3xl">
-              <div className="relative border border-border rounded-3xl p-6 h-full flex flex-col gap-4 justify-between shadow-md">
-                <div className="text-2xl text-secondary border border-secondary absolute z-10 top-3 left-10 bg-backgroundPrimary p-2 rounded-full">
+          <SwiperSlide key={review.id} className="p-2 md:p-4 lg:p-5">
+            <div className="bg-backgroundShadeOne rounded-2xl overflow-hidden">
+              <div className="relative border border-borderLight rounded-2xl p-6 h-full flex flex-col gap-4 justify-between">
+                <div className="text-2xl text-textWhite absolute z-10 top-3 left-10 bg-backgroundBlue p-2 rounded-full">
                   <ImQuotesLeft />
                 </div>
 
-                {/* Cut message to 250 characters and show full message on hover */}
-                <p
-                  className="leading-relaxed border border-secondary rounded-xl h-[14rem] py-10 px-4 tooltip tooltip-top tooltip-info"
-                  data-tip={review.message} // Custom DaisyUI tooltip
-                >
+                {/* Cut message to 250 characters */}
+                <p className="leading-relaxed border rounded border-blue-500 h-[14rem] py-10 px-4">
                   {cutText(review.message, 250)}
                 </p>
 
-                <div className="flex justify-end text-secondary border border-secondary absolute bottom-[4.5rem] right-10 bg-backgroundPrimary p-2 rounded-full">
+                <div className="flex justify-end text-textWhite border border-borderLight absolute bottom-[4.5rem] right-10 bg-backgroundBlue p-2 rounded-full">
                   <ImQuotesRight className="text-2xl" />
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <figure className="w-10 h-10 rounded-full overflow-hidden border">
+                  <figure className="w-10 h-10 rounded-full overflow-hidden border border-blue-500">
                     <img
                       src="https://randomuser.me/api/portraits/women/44.jpg"
                       className="w-full h-full object-cover"
@@ -107,7 +104,7 @@ export default function Reviews() {
                   </figure>
                   <div>
                     <p className="font-medium">{review.userName}</p>
-                    <p className="text-sm text-text/50">{review.role}</p>
+                    <p className="text-sm text-textPrimary/50">{review.role}</p>
                   </div>
                 </div>
               </div>

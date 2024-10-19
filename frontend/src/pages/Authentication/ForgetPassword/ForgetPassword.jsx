@@ -54,7 +54,7 @@ export default function ForgetPassword() {
           {/* Email address input */}
           <div
             className={`flex items-center border rounded ${
-              errors.userEmail ? "border-red-500" : "border-borderPrimary"
+              errors.userEmail ? "border-red-500" : "border-borderLight"
             } mt-4 `}
           >
             <span className="p-2 text-xl text-textPrimary">
