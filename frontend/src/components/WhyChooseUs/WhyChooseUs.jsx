@@ -43,7 +43,7 @@ const WhyChooseUs = () => {
             <img className="w-[50px] rounded-full" src={demoImg} alt="" />
           </div>
           <h1 className="text-lg font-medium font-bai">Free demo Class:-</h1>
-          <p>
+          <p className="font-bai">
             Experience our platform with a free demo class! Get a firsthand look
             at how easy it is to manage and participate in courses before
             committing to a full enrollment.
@@ -55,7 +55,7 @@ const WhyChooseUs = () => {
             <img className="w-[50px] rounded-full" src={examImg} alt="" />
           </div>
           <h1 className="text-lg font-medium font-bai">Exam:-</h1>
-          <p>
+          <p className="font-bai">
             Conduct and take exams seamlessly. Our platform provides teachers
             with easy exam setup options and students with a smooth, stress-free
             test-taking experience.
@@ -67,7 +67,7 @@ const WhyChooseUs = () => {
             <img className="w-[50px] rounded-full" src={resultImg} alt="" />
           </div>
           <h1 className="text-lg font-medium font-bai">Result:-</h1>
-          <p>
+          <p className="font-bai">
             Get instant access to exam results. Teachers can quickly publish
             results, and students can view their performance right away with
             full transparency.
@@ -79,7 +79,7 @@ const WhyChooseUs = () => {
             <img className="w-[50px] rounded-full" src={progressImg} alt="" />
           </div>
           <h1 className="text-lg font-medium font-bai">Progress Tracking:-</h1>
-          <p>
+          <p className="font-bai">
             Monitor your academic journey! Teachers can track student progress,
             while students can review their learning milestones and achievements
             with easy-to-read progress reports.
@@ -91,7 +91,7 @@ const WhyChooseUs = () => {
             <img className="w-[50px] rounded-full" src={managementImg} alt="" />
           </div>
           <h1 className="text-lg font-medium font-bai">Course Management:-</h1>
-          <p>
+          <p className="font-bai">
             Organize, manage, and update courses effortlessly. Our intuitive
             tools allow teachers to create and share content, while students can
             easily enroll, access materials, and keep up with coursework.
