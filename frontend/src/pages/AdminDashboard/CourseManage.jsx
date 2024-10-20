@@ -7,7 +7,8 @@ import Loader from "../../utils/Loader";
 
 const CourseManage = () => {
   const baseUrl = axiosInstance.defaults.baseURL;
-  const { courses, isLoading, refetch } = useAllCourse();
+  const status = "pending"
+  const { courses, isLoading, refetch } = useAllCourse({status});
 
   const updateCourseStatus = async (id, status) => {
     try {

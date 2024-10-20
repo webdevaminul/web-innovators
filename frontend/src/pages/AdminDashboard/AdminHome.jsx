@@ -24,10 +24,14 @@ const data = [
 ];
 //
 const AdminHome = () => {
+  const status = "pending";
   const { users } = useAllUser();
   const { teachers } = useAllTeacher();
   const { courses } = useAllCourse();
   const totalUser = users?.length + teachers?.length;
+  console.log('c',courses)
+  const pending = courses?.filter((c) => c.status === status);
+  console.log('c',pending)
   return (
     <div>
       <Heading heading={"Admin Home"} />
@@ -47,7 +51,7 @@ const AdminHome = () => {
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Pending Approvals</h3>
-          <p className="text-3xl font-bold text-red-500"> s 5</p>
+          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
         </div>
       </div>
       {/* Main Content */}
