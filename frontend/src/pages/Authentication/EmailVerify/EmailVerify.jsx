@@ -38,7 +38,7 @@ export default function EmailVerify() {
   }, [location, navigate, dispatch]);
 
   return (
-    <main className="min-h-[calc(100vh-44px)] sm:min-h-[calc(100vh-58px)] flex flex-col items-center justify-center bg-primaryBg">
+    <main className="min-h-[calc(100vh-3.8rem)] flex flex-col items-center justify-center bg-backgroundPrimary">
       <Heading heading={"Email Verify"} />
       {loading ? (
         <>

@@ -7,34 +7,33 @@ import Loader from "../../utils/Loader";
 
 const CourseManage = () => {
   const baseUrl = axiosInstance.defaults.baseURL;
-  const status = "pending"
-  const { courses, isLoading, refetch } = useAllCourse({status});
+  const status = "pending";
+  const { courses, isLoading, refetch } = useAllCourse({ status });
 
   const updateCourseStatus = async (id, status) => {
     try {
       const res = await axiosInstance.put(`/approve/courses/${id}`, { updateStatus: status });
-      
+
       // Check if the response is acknowledged
       if (res?.data?.data?.acknowledged) {
-        toast.success(res?.data?.message); 
+        toast.success(res?.data?.message);
         refetch();
       }
     } catch (err) {
-      console.error(err); 
-      toast.error(`Failed to update status to ${status}`); 
+      console.error(err);
+      toast.error(`Failed to update status to ${status}`);
     }
   };
-  
+
   // For approving a course
   const handleApproved = (id) => {
     updateCourseStatus(id, "approved");
   };
-  
+
   // For rejecting a course
   const handleRejected = (id) => {
-    updateCourseStatus(id, "rejected"); 
+    updateCourseStatus(id, "rejected");
   };
-  
 
   if (isLoading) return <Loader />;
   if (!courses?.length) return <p>No Data available</p>;
@@ -45,21 +44,11 @@ const CourseManage = () => {
         <table className="w-full">
           <thead>
             <tr className="bg-backgroundPrimary/10">
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
-                Name
-              </th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
-                Category
-              </th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
-                Price
-              </th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
-                Status
-              </th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
-                Action
-              </th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Name</th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Category</th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Price</th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Status</th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Action</th>
             </tr>
           </thead>
           <tbody className="bg-backgroundPrimary overflow-x-auto">
@@ -68,10 +57,7 @@ const CourseManage = () => {
                 <td className="flex items-center gap-3">
                   <span className="avatar">
                     <span className="mask mask-squircle h-12 w-12">
-                      <img
-                        src={`${baseUrl}${course?.coverPicture}`}
-                        alt={course.title}
-                      />
+                      <img src={`${baseUrl}${course?.coverPicture}`} alt={course.title} />
                     </span>
                   </span>
                   <span>{course.title}</span>

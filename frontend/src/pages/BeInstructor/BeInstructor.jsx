@@ -76,7 +76,7 @@ const BeInstructor = () => {
           <h1 className="font-semibold font-bai md:text-4xl text-2xl md:my-10">
             Apply as an Instructor in Learn Up{" "}
           </h1>
-         
+
           <p>
             Online courses are getting popular really fast. This fact is not only an opportunity for
             the students but also an opportunity for teachers and professionals. Through online

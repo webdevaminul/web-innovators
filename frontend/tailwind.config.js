@@ -19,21 +19,25 @@ export default {
 
       colors: {
         textPrimary: "rgba(var(--text-primary))",
-        textSecondary: "rgba(var(--text-secondary))",
-        textHighlight: "rgba(var(--text-highlight))",
-        textWhite: "rgba(var(--text-white))",
-        textBlack: "rgba(var(--text-black))",
         textReverse: "rgba(var(--text-reverse))",
+        textBlack: "rgba(var(--text-black))",
+        textWhite: "rgba(var(--text-white))",
+        textBlue: "rgba(var(--text-blue))",
+        textOrange: "rgba(var(--text-orange))",
 
         backgroundPrimary: "rgba(var(--background-primary))",
-        backgroundHighlight: "rgba(var(--background-highlight))",
+        backgroundShadeOne: "rgba(var(--background-shade-one))",
+        backgroundBlue: "rgba(var(--background-blue))",
+        backgroundBlueHover: "rgba(var(--background-blue-hover))",
+        backgroundOrange: "rgba(var(--background-orange))",
+        backgroundOrangeHover: "rgba(var(--background-orange-hover))",
 
-        borderPrimary: "rgba(var(--border-primary))",
+        borderLight: "rgba(var(--border-light))",
+        borderDark: "rgba(var(--border-dark))",
 
         accentOne: "rgba(var(--accent-one))",
         accentTwo: "rgba(var(--accent-two))",
         text: "rgba(var(--text-color))",
-        textWhite: "rgba(var(--text-white))",
         link: "rgba(var(--text-link))",
         linkHover: "rgba(var(--text-link-hover))",
         secondary: "rgba(var(--secondary-color))",

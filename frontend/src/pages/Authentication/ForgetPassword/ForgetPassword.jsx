@@ -44,9 +44,9 @@ export default function ForgetPassword() {
   };
 
   return (
-    <main className="min-h-[90vh] max-w-xs mx-auto flex items-center justify-center">
-      <section className="flex flex-col justify-center p-4 w-full">
-        <p className="text-center text-primary mb-4 font-medium">
+    <main className="min-h-[calc(100vh-3.8rem)] max-w-xs mx-auto flex items-center justify-center">
+      <section className="flex flex-col justify-center p-4 w-full ">
+        <p className="text-center text-textPrimary mb-4 font-medium">
           Enter your email address to get a recovery link.
         </p>
 
@@ -55,16 +55,16 @@ export default function ForgetPassword() {
           {/* Email address input */}
           <div
             className={`flex items-center border rounded ${
-              errors.userEmail ? "border-red-500" : "border-highlightGray/25"
-            } mt-4`}
+              errors.userEmail ? "border-red-500" : "border-borderLight"
+            } mt-4 `}
           >
-            <span className="p-2 text-xl text-highlightGray/75">
+            <span className="p-2 text-xl text-textPrimary">
               <MdOutlineEmail />
             </span>
             <input
               type="email"
               placeholder="Email address*"
-              className={`bg-transparent outline-none placeholder:text-highlightGray/75 p-2 w-full`}
+              className={`bg-transparent outline-none placeholder:text-textPrimary p-2 w-full`}
               {...register("userEmail", {
                 required: "Email address is required",
                 pattern: {
@@ -87,9 +87,9 @@ export default function ForgetPassword() {
 
           {/* Error message */}
           {error && (
-            <p className="text-primaryWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textWhite bg-red-600 rounded p-2 mt-4 flex gap-2">
               <span className="text-xl">
-                <MdError />
+                <MdError className="text-textWhite mt-1" />
               </span>
               <span>{error}</span>
             </p>
@@ -97,9 +97,9 @@ export default function ForgetPassword() {
 
           {/* Success message */}
           {success && (
-            <p className="text-primaryBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textBlack bg-green-400 rounded p-2 mt-4 flex gap-2">
               <span className="text-xl">
-                <MdCheckCircle />
+                <MdCheckCircle className="text-textBlack mt-1" />
               </span>
               <span>{success}</span>
             </p>
@@ -109,7 +109,7 @@ export default function ForgetPassword() {
           <button
             disabled={forgetPasswordMutation.isLoading}
             type="submit"
-            className="p-2 mt-4 bg-highlight hover:bg-highlightHover border-none rounded text-primaryWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-textWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
           >
             {forgetPasswordMutation.isLoading ? "Loading..." : "Get recovery link"}
           </button>

@@ -81,7 +81,7 @@ export default function Categories() {
           <Link
             onClick={() => handleCategory(category.name)}
             key={index}
-            className="border border-borderPrimary hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
+            className="border border-borderLight hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
           >
             <div className={`${category.bgColor} rounded-full p-4`}>
               {/* Render the icon dynamically */}

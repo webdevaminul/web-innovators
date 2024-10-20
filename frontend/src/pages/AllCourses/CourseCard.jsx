@@ -4,15 +4,7 @@ import axiosInstance from "../../api/axiosInstance";
 import PropTypes from "prop-types";
 
 const CourseCard = ({ course }) => {
-  const {
-    category,
-    coverPicture,
-    name,
-    price,
-    oldPrice,
-    title,
-    _id,
-  } = course;
+  const { category, coverPicture, name, price, oldPrice, title, _id } = course;
 
   const baseUrl = axiosInstance.defaults.baseURL;
 
