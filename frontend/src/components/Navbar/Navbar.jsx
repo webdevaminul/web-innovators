@@ -30,9 +30,8 @@ const Navbar = () => {
   
   // this user role will be dynamic
 
-  // const role = "Teacher";
   const role = foundUser?.userRole;
-  console.log("role", role);
+  console.log('role', role)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -93,11 +92,24 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
+        <NavLink to="/become-instructor" className="text-nowrap">
+          Become an Instructor
+        </NavLink>
+      </li>
+      <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/contactUs" className="text-nowrap p-2 hover:text-textSecondary">
           About Us
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}></li>
+      <li onClick={() => setOpenMenu(false)}>
+        {
+          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
+            Dashboard
+          </NavLink> : <NavLink to="/admin-dashboard" className="text-nowrap">
+            Dashboard
+          </NavLink>
+        }
+      </li>
     </>
   );
 
@@ -148,9 +160,8 @@ const Navbar = () => {
 
         {/* search bar for small device */}
         <div
-          className={`container mx-auto px-3 absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-backgroundPrimary transition-all duration-400 ease-in-out ${
-            searchBarOpen ? "w-full left-0" : "w-0 left-[-300px]"
-          }`}
+          className={`container mx-auto px-3 border-b absolute z-10 top-0 h-[3.8rem] flex gap-3 bg-bg transition-all duration-400 ease-in-out ${searchBarOpen ? "w-full left-0" : "w-0 left-[-300px]"
+            }`}
         >
           {/* Close button for search bar */}
           <button
@@ -179,6 +190,7 @@ const Navbar = () => {
           className={`container mx-auto transition-all duration-400 ease-in-out md:hidden absolute top-[3.8rem] flex flex-col gap-5 list-none bg-backgroundPrimary h-screen ${
             openMenu ? "left-0 right-0" : "left-[-150%] right-[100%]"
           } font-semibold p-3 text-textPrimary text-center`}
+        
         >
           {links}
         </div>
