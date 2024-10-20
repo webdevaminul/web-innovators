@@ -43,7 +43,7 @@ export default function SignIn() {
     onSuccess: (data) => {
       console.log("Sign in API Response:", data);
       if (!data.success) {
-        dispatch(loginFailure(data.message)); // Dispatch login failure action if login is fail
+        dispatch(loginFailure(data.message)); // Dispatch login failure action if login fails
       } else {
         dispatch(emailLoginSuccess(data)); // Dispatch login success action if login is successful
         localStorage.setItem("accessToken", data.token); // Store the access token in localStorage
@@ -52,7 +52,7 @@ export default function SignIn() {
     },
     onError: (error) => {
       dispatch(
-        loginFailure(error.response?.data?.message || "Some thing went wrong. Please try again")
+        loginFailure(error.response?.data?.message || "Something went wrong. Please try again")
       ); // Dispatch login failure action on error
     },
   });
@@ -66,7 +66,7 @@ export default function SignIn() {
   return (
     <main className="min-h-[90vh] max-w-xs mx-auto flex items-center justify-center">
       <Heading heading={"Sign In"} />
-      <section className="flex flex-col gap-4 justify-center p-4 w-full ">
+      <section className="flex flex-col gap-4 justify-center p-4 w-full">
         {/* Switch between signup and signin */}
         <div>
           <p className="text-2xl sm:text-3xl">Sign In</p>
@@ -79,7 +79,7 @@ export default function SignIn() {
           <div
             className={`flex items-center border rounded ${
               errors.userEmail ? "border-red-500" : "border-border"
-            } mt-4 `}
+            } mt-4`}
           >
             <span className="p-2 text-xl text-text/75">
               <MdOutlineEmail />
@@ -111,7 +111,7 @@ export default function SignIn() {
           <div
             className={`flex items-center border rounded ${
               errors.userPassword ? "border-red-500" : "border-border"
-            } mt-4 `}
+            } mt-4`}
           >
             <span className="p-2 text-xl text-text/75">
               <MdOutlineLock />
@@ -134,7 +134,7 @@ export default function SignIn() {
                   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
                   message: "Password must contain at least one letter and one number",
                 },
-                onChange: () => {
+                onChange: (event) => {
                   setPassValue(event.target.value);
                   dispatch(resetError());
                 },
@@ -144,13 +144,9 @@ export default function SignIn() {
             {passValue.length > 0 && (
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="p-2 text-xl text-text/75"
+                className="p-2 text-xl text-text/75 cursor-pointer"
               >
-                {showPassword ? (
-                  <FaRegEyeSlash className="cursor-pointer" />
-                ) : (
-                  <FaRegEye className="cursor-pointer" />
-                )}
+                {showPassword ? <FaRegEyeSlash /> : <FaRegEye />}
               </span>
             )}
           </div>
@@ -184,8 +180,8 @@ export default function SignIn() {
           </button>
         </form>
 
-        <p className="flex  items-center gap-2">
-          <span>Don&apos;t have an acoount?</span>
+        <p className="flex items-center gap-2">
+          <span>Don&apos;t have an account?</span>
           <span>
             <Link to="/sign-up" className="text-blue-500 hover:underline">
               sign up here

@@ -15,23 +15,18 @@ import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 import logo from "../../assets/logo.png";
 import "./Navbar.css";
+import Loader from "../../utils/Loader";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
-  const { users } = useAllUser();
   const [profileMenu, setProfileMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [searchBarOpen, setSearchBarOpen] = useState(false);
+
+  const { isLoading } = useAllUser();
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const foundUser = users?.find(
-    (u) => u?.userEmail === user?.userInfo?.userEmail
-  );
-  
-  // this user role will be dynamic
-
-  const role = foundUser?.userRole;
-  console.log('role', role)
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -53,6 +48,13 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  if(isLoading) return <Loader />
+
+  // const role = "Admin";
+  // const role = "Teacher";
+  const role = user?.userInfo?.userRole;
+  console.log("role", role);
 
   const handleSignOut = async () => {
     try {
@@ -77,44 +79,40 @@ const Navbar = () => {
   const links = (
     <>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/all-courses" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink
+          to="/all-courses"
+          className="text-nowrap p-2 hover:text-textSecondary"
+        >
           Our Courses
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/blog" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink
+          to="/blog"
+          className="text-nowrap p-2 hover:text-textSecondary"
+        >
           Blogs
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/become-instructor" className="text-nowrap p-2 hover:text-textSecondary">
-          Become Instructor
-        </NavLink>
-      </li>
-      <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/become-instructor" className="text-nowrap">
+        <NavLink
+          to="/become-instructor"
+          className="text-nowrap p-2 hover:text-textSecondary"
+        >
           Become an Instructor
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/contactUs" className="text-nowrap p-2 hover:text-textSecondary">
+        <NavLink
+          to="/contact-us"
+          className="text-nowrap p-2 hover:text-textSecondary"
+        >
           About Us
         </NavLink>
-      </li>
-      <li onClick={() => setOpenMenu(false)}>
-        {
-          role === "student" ? <NavLink to="/dashbroad/home" className="text-nowrap">
-            Dashboard
-          </NavLink> : <NavLink to="/admin-dashboard" className="text-nowrap">
-            Dashboard
-          </NavLink>
-        }
       </li>
     </>
   );
 
-  const [openMenu, setOpenMenu] = useState(false);
-  const [searchBarOpen, setSearchBarOpen] = useState(false);
 
   return (
     <header className="fixed h-[3.8rem] border-b border-borderPrimary w-full top-0 left-0 z-50 bg-backgroundPrimary">
@@ -124,7 +122,10 @@ const Navbar = () => {
           {/* Logo and Menu button for small devices */}
           <div className="flex items-center gap-1">
             {/* Menu button for small devices */}
-            <div onClick={() => setOpenMenu(!openMenu)} className="md:hidden flex items-center">
+            <div
+              onClick={() => setOpenMenu(!openMenu)}
+              className="md:hidden flex items-center"
+            >
               <button className="h-8 w-8">
                 {openMenu ? (
                   <RiMenuFoldLine className="m-auto text-2xl text-textSecondary" />
@@ -227,30 +228,39 @@ const Navbar = () => {
                     {role === "student" ? (
                       <Link
                         onClick={() => setProfileMenu(false)}
-                        to="/dashbroad/home"
+                        to="/dashboard/home"
                         className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                       >
-                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                        <span className="text-2xl">
+                          {/* <BiCreditCardFront /> */}
+                        </span>
                         <span>Dashboard</span>
                       </Link>
                     ) : (
                       <>
-                      {role === "Teacher" ? <Link
-                        onClick={() => setProfileMenu(false)}
-                        to="/teacher-dashboard"
-                        className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
-                      >
-                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
-                        <span>Dashboard</span>
-                      </Link> : <Link
-                        onClick={() => setProfileMenu(false)}
-                        to="/admin-dashboard"
-                        className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
-                      >
-                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
-                        <span>Dashboard</span>
-                      </Link>}
-                      
+                        {role === "Teacher" ? (
+                          <Link
+                            onClick={() => setProfileMenu(false)}
+                            to="/teacher-dashboard"
+                            className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                          >
+                            <span className="text-2xl">
+                              {/* <BiCreditCardFront /> */}
+                            </span>
+                            <span>Dashboard</span>
+                          </Link>
+                        ) : (
+                          <Link
+                            onClick={() => setProfileMenu(false)}
+                            to="/admin-dashboard"
+                            className="text-nowrap text-sm bg-backgroundPrimary hover:bg-secondaryHover border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                          >
+                            <span className="text-2xl">
+                              {/* <BiCreditCardFront /> */}
+                            </span>
+                            <span>Dashboard</span>
+                          </Link>
+                        )}
                       </>
                     )}
 

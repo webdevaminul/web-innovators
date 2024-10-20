@@ -5,19 +5,22 @@ import {
   FaHome,
   FaFileAlt,
   FaUsers,
-  FaStore,
-  FaExchangeAlt,
   FaSignOutAlt,
   FaSearch,
 } from "react-icons/fa";
 // import Darkmode from "../../components/Darkmode/Darkmode";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import Darkmode from "../../components/Darkmode/Darkmode";
 
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  
+  // define the route is active
+  const isActive = (route) => location?.pathname === route;
+
 
   return (
     <div className="flex flex-col md:px-10 px-5">
@@ -58,60 +61,47 @@ const AdminDashboard = () => {
       <div className="flex-1 flex">
         {/* Sidebar - visible on md and lg, drawer on smaller devices */}
         <div
-          className={`p-2 bg-backgroundPrimary md:w-60 lg:w-60 md:flex-col lg:flex-col transform top-0 left-0 fixed md:relative lg:relative h-full z-50 transition-transform duration-300 ease-in-out ${
+          className={`p-2 bg-backgroundPrimary md:w-60 lg:w-60 md:flex-col lg:flex-col transform top-0 left-0 fixed md:relative lg:relative h-full md:z-0 z-50 transition-transform duration-300 ease-in-out ${
             open ? "translate-x-0" : "-translate-x-full"
           } md:translate-x-0 lg:translate-x-0`}
         >
           <nav>
             <Link
               to="admin-home"
-              className="block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text"
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/admin-home") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+              }`}
             >
-              <FaHome className="mr-2" />
+              <FaHome className="mr-2 inline" />
               Home
             </Link>
             <Link
-              className="block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text"
               to="user-manage"
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/user-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+              }`}
             >
               <FaUsers className="mr-2 inline" />
               User Manage
             </Link>
             <Link
               to="course-manage"
-              className="block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text"
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/course-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+              }`}
             >
               <FaFileAlt className="mr-2 inline" />
               Course Manage
             </Link>
             <Link
-              to="/admin-dashboard/blog-creation"
-              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
-            >
-              <FaHome className="mr-2 inline" />
-              Blog Creation
-            </Link>
-            <Link
               to="adminBlog-management"
-              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/adminBlog-management") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+              }`}
             >
               <FaHome className="mr-2 inline" />
               Blog Management
             </Link>
-            <a
-              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
-              href="#"
-            >
-              <FaStore className="mr-2 inline" />
-              Comercios
-            </a>
-            <a
-              className="block text-primary py-2.5 px-4 my-2 rounded-lg transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-white"
-              href="#"
-            >
-              <FaExchangeAlt className="mr-2" />
-              Transactions
-            </a>
           </nav>
 
           {/* Logout */}
@@ -119,7 +109,7 @@ const AdminDashboard = () => {
             className="block text-text py-2.5 px-4 my-2 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text mt-auto"
             to="/"
           >
-            <FaSignOutAlt className="mr-2" />
+            <FaSignOutAlt className="mr-2 inline" />
            Leave to Home
           </Link>
         </div>
