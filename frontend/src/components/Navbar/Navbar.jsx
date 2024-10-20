@@ -83,7 +83,7 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li onClick={() => setOpenMenu(false)}>
-        <NavLink to="/contactUs" className={linkClass}>
+        <NavLink to="/contact-us" className={linkClass}>
           About Us
         </NavLink>
       </li>

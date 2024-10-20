@@ -14,8 +14,7 @@ exports.createCourse = async (req, res, next) => {
     }
 
     // Other form fields from req.body
-    const { name, email, title, price, status, category, detailsCourse } =
-      courseData;
+    const { name, email, title, price, status, category, detailsCourse } = courseData;
 
     // Prepare the course data
     const newCourse = {
@@ -48,12 +47,7 @@ exports.createCourse = async (req, res, next) => {
 // available course for user, student and teacher
 exports.availableCourse = async (req, res, next) => {
   try {
-    const {
-      sortOrder = "asc",
-      page = 1,
-      limit = 6,
-      selectedCategory,
-    } = req.query;
+    const { sortOrder = "asc", page = 1, limit = 6, selectedCategory } = req.query;
 
     const currentPage = parseInt(page, 10) || 1; // 10 for decimal
     const itemsPerPage = parseInt(limit, 10) || 6; // 10 for decimal
@@ -82,9 +76,7 @@ exports.availableCourse = async (req, res, next) => {
       .toArray();
 
     if (courses.length === 0) {
-      return res
-        .status(404)
-        .json({ success: false, message: "No courses found", data: [] });
+      return res.status(404).json({ success: false, message: "No courses found", data: [] });
     }
 
     // Send response if courses are found
@@ -98,8 +90,7 @@ exports.availableCourse = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message:
-        "An error occurred while fetching courses. Please try again later.",
+      message: "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }
@@ -110,23 +101,14 @@ exports.allCourse = async (req, res, next) => {
   try {
     const { status } = req?.query;
 
-    let courses;
-
+    let courses = [];
     if (status === "pending") {
       courses = await courseCollection.find({ status: "pending" }).toArray();
     } else {
-      courses = await courseCollection
-        .find({ status: { $ne: "pending" } })
-        .toArray();
+      courses = await courseCollection.find({ status: { $ne: "pending" } }).toArray();
     }
 
-    if (!courses.length) {
-      return res.status(404).json({
-        success: false,
-        message: "No courses found",
-      });
-    }
-
+    // Always return a valid response with an array
     res.status(200).json({
       success: true,
       data: courses,
@@ -134,8 +116,7 @@ exports.allCourse = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message:
-        "An error occurred while fetching courses. Please try again later.",
+      message: "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }
@@ -164,13 +145,13 @@ exports.updateCourse = async (req, res, next) => {
 };
 
 // Delete a course by teacher
-exports.deleteCourse = async (req, res,next) => {
+exports.deleteCourse = async (req, res, next) => {
   const { id } = req.params;
   const query = { _id: new ObjectId(id) };
 
   try {
     const result = await courseCollection.deleteOne(query);
-    
+
     if (result.deletedCount === 1) {
       res.status(200).json({
         message: "Course deleted successfully!",
@@ -185,6 +166,6 @@ exports.deleteCourse = async (req, res,next) => {
       message: "Error deleting course",
       error: error.message,
     });
-    next(error)
+    next(error);
   }
 };
