@@ -26,6 +26,7 @@ const BeInstructor = () => {
     const institute = data.instName.value;
     const message = data.message.value;
     const status = "Pending";
+
     const updateData = {
       name,
       email,
@@ -38,14 +39,13 @@ const BeInstructor = () => {
     if (user) {
       if (role === "Admin") {
         setModalMessage("You are is an admin.");
-        setText("Do you want to log in ?");
+        setText("Do you want to log in?");
         return setModalOpen(true); // Open warning modal
       }
+
       axiosInstance
         .put(`/be/instructor/${id}`, updateData)
         .then((res) => {
-          // console.log(res?.data);
-          console.log(res?.status);
           if (res.status === 200) {
             toast.success(res?.data?.message);
             navigate("/");
@@ -76,6 +76,7 @@ const BeInstructor = () => {
           <h1 className="font-semibold font-bai md:text-4xl text-2xl md:my-10">
             Apply as an Instructor in Learn Up{" "}
           </h1>
+
           <p>
             Online courses are getting popular really fast. This fact is not only an opportunity for
             the students but also an opportunity for teachers and professionals. Through online

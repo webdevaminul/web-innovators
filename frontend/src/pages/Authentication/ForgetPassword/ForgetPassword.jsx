@@ -42,6 +42,7 @@ export default function ForgetPassword() {
     // Trigger the mutation to send the forget password email
     forgetPasswordMutation.mutate(formData);
   };
+
   return (
     <main className="min-h-[calc(100vh-3.8rem)] max-w-xs mx-auto flex items-center justify-center">
       <section className="flex flex-col justify-center p-4 w-full ">
@@ -49,7 +50,7 @@ export default function ForgetPassword() {
           Enter your email address to get a recovery link.
         </p>
 
-        {/* Foreget password form */}
+        {/* Forget password form */}
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
           {/* Email address input */}
           <div

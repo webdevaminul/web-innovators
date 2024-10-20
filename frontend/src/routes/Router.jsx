@@ -28,13 +28,12 @@ import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
 import BlogCreation from "../pages/TeacherDashboard/BlogCreation";
 import BlogManagement from "../pages/TeacherDashboard/BlogManagement";
-import BlogDetails from "../pages/TeacherDashboard/BlogDetails";
 import AdminBlogManage from "../pages/AdminDashboard/AdminBlogManage";
-import AdminBlogCreation from "../pages/AdminDashboard/AdminBlogCreation";
 
 import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
 import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
 import CourseManage from "../pages/AdminDashboard/CourseManage";
+import BlogDetails from "../components/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
   {
@@ -47,8 +46,7 @@ const router = createBrowserRouter([
       { path: "/sign-up", element: <SignUp /> },
       { path: "/email-verify", element: <EmailVerify /> },
       {
-        path: "/forget-password",
-        element: <ForgetPassword />,
+        path: "/forget-password", element: <ForgetPassword />,
       },
       {
         path: "/password-recovery",
@@ -69,6 +67,10 @@ const router = createBrowserRouter([
         element: <AllCourses />,
       },
       {
+        path: "/all-course/:categoryName",
+        element: <AllCourses />,
+      },
+      {
         path: "/course-details/:id",
         element: <CourseDetails />,
         loader: () => fetch("./courses.json"),
@@ -77,8 +79,10 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <BlogPosts />,
       },
+    
+      { path: "/blog-details/:id", element: <BlogDetails  /> },
       {
-        path: "/contactUs",
+        path: "/contact-us",
         element: <ContactPage />,
       },
       {
@@ -126,12 +130,15 @@ const router = createBrowserRouter([
         path: "create-course",
         element: <CreateCourse />,
       },
-      { path: "create-post", element: <PrivateRouter><BlogCreation /></PrivateRouter> },
+      {
+        path: "create-post",
+        element: (
+          <PrivateRouter>
+            <BlogCreation />
+          </PrivateRouter>
+        ),
+      },
       { path: "blog-management", element: <BlogManagement /> },
-      { path: "blog/:id", element: <BlogDetails /> },
-
-
-
     ],
   },
 
@@ -145,7 +152,6 @@ const router = createBrowserRouter([
     ),
     errorElement: <ErrorPage />,
     children: [
-
       {
         path: "",
         element: <Navigate to="admin-home" />,
@@ -163,11 +169,13 @@ const router = createBrowserRouter([
         element: <CourseManage />,
       },
 
-      { path: "adminBlog-management", element: <AdminBlogManage /> },
-      { path: "blog-creation", element: <AdminBlogCreation /> },
+      {
+      path: "adminBlog-management", 
+      element: <AdminBlogManage />
+    },
     ],
   },
- 
+
   {
     path: "*", // Catch all for any undefined routes
     element: <ErrorPage />,

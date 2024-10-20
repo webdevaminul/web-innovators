@@ -1,16 +1,38 @@
+import { MdBlock } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+import { FaCheckCircle } from "react-icons/fa";
 import axiosInstance from "../../api/axiosInstance";
 import useAllCourse from "../../api/useAllCourse";
 import Loader from "../../utils/Loader";
-import { FaCheckCircle } from "react-icons/fa";
-import { MdBlock } from "react-icons/md";
+
 const CourseManage = () => {
   const baseUrl = axiosInstance.defaults.baseURL;
-  const { courses, isLoading } = useAllCourse();
-  const handleApproved = (id) => {
-    console.log("hello", id);
+  const status = "pending";
+  const { courses, isLoading, refetch } = useAllCourse({ status });
+
+  const updateCourseStatus = async (id, status) => {
+    try {
+      const res = await axiosInstance.put(`/approve/courses/${id}`, { updateStatus: status });
+
+      // Check if the response is acknowledged
+      if (res?.data?.data?.acknowledged) {
+        toast.success(res?.data?.message);
+        refetch();
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error(`Failed to update status to ${status}`);
+    }
   };
+
+  // For approving a course
+  const handleApproved = (id) => {
+    updateCourseStatus(id, "approved");
+  };
+
+  // For rejecting a course
   const handleRejected = (id) => {
-    console.log("hello", id);
+    updateCourseStatus(id, "rejected");
   };
 
   if (isLoading) return <Loader />;
@@ -46,15 +68,17 @@ const CourseManage = () => {
                 <td className="py-4 px-6 border-b border-gray-200 flex gap-2">
                   <span
                     onClick={() => handleApproved(course._id)}
-                    className="text-text cursor-pointer rounded-full text-xs"
+                    className="text-text cursor-pointer rounded-full text-xs tooltip"
+                    data-tip="Approved"
                   >
-                    <FaCheckCircle className="w-5 h-5" />
+                    <FaCheckCircle className="w-5 h-5 text-green-500" />
                   </span>
                   <span
                     onClick={() => handleRejected(course._id)}
-                    className="text-text cursor-pointer rounded-full text-xs"
+                    className="text-text cursor-pointer rounded-full text-xs tooltip"
+                    data-tip="Rejected"
                   >
-                    <MdBlock className="w-5 h-5" />
+                    <MdBlock className="w-5 h-5 text-red-600" />
                   </span>
                 </td>
               </tr>
@@ -62,6 +86,7 @@ const CourseManage = () => {
           </tbody>
         </table>
       </div>
+      <ToastContainer />
     </div>
   );
 };

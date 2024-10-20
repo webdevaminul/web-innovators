@@ -3,32 +3,42 @@
 const { client } = require("../config/mongoDB");
 const { ObjectId } = require("mongodb");
 const database = client.db("LearnUp");
-const blogCollection = database.collection("blogPosts");
+const blogCollection = database.collection("blogs");
 
 // Create a blog post
 exports.createBlogPost = async (req, res, next) => {
   try {
+    const {
+      title,
+      description,
+      category,
+      userPicture,
+      userName,
+      userEmail,
+      time,
+      status,
+    } = req.body;
+
     if (!req.file) {
       return res.status(400).json({ message: "No image uploaded." });
     }
 
     const newPost = {
-      title: req.body.title,
-      description: req.body.description,
-      category: req.body.category,
+      title,
+      description,
+      category,
       image: req.file.path,
       date: new Date(),
-      photo: req.body.userProfilePicture || '', // Ensure a default value
-      name: req.body.userName || '', // Ensure a default value
-      email: req.body.userEmail || '', // Ensure a default value
-      time: req.body.time || '', // Ensure a default value
-      status: req.body.status || '', // Ensure a default value
+      photo: `/images/${userPicture?.filename},`,
+      name: userName,
+      email: userEmail,
+      time,
+      status,
     };
-    
-
     const result = await blogCollection.insertOne(newPost);
     res.status(201).json({
       message: "Blog post created successfully!",
+      message2: "Wait for admin approval",
       postId: result.insertedId,
     });
   } catch (err) {
@@ -40,18 +50,29 @@ exports.createBlogPost = async (req, res, next) => {
 // Get all blog posts
 exports.getAllBlogPosts = async (req, res, next) => {
   try {
-    const posts = await blogCollection.find().toArray();
-    res.status(200).json(posts);
-  } catch (err) {
-    console.error(err);
-    next(err);
+    // Fetch all blog posts from the collection
+    const allPosts = await blogCollection.find().toArray();
+
+    // Respond with a success message and the fetched blog posts
+    res.status(200).json({
+      success: true,
+      message: "Blog posts retrieved successfully",
+      data: allPosts,
+    });
+  } catch (error) {
+    console.error("Error fetching blog posts:", error);
+
+    // Pass the error to the next middleware
+    next(error);
   }
 };
 
 // Get a blog post by ID
 exports.getBlogPostById = async (req, res, next) => {
   try {
-    const blogPost = await blogCollection.findOne({ _id: new ObjectId(req.params.id) });
+    const blogPost = await blogCollection.findOne({
+      _id: new ObjectId(req.params.id),
+    });
     if (!blogPost) {
       return res.status(404).json({ message: "Blog post not found" });
     }
@@ -62,35 +83,40 @@ exports.getBlogPostById = async (req, res, next) => {
   }
 };
 
-
 exports.updateBlogPost = async (req, res) => {
   try {
-    const { title, description, category, image, date, name, email, time } = req.body;
+    const { title, description, category, image, date, name, email, time } =
+      req.body;
+    const query = { _id: new ObjectId(req.params.id) };
+    console.log("90 ", query);
+    const updateDoc = {
+      $set: { title, description, category, image, date, name, email, time },
+    };
 
-    const updatedPost = await blogCollection.findOneAndUpdate(
-      { _id: new ObjectId(req.params.id) },
-      { $set: { title, description, category, image, date, name, email, time } },
-      { returnOriginal: false }
-    );
+    const updatedPost = await blogCollection.updateOne(query,updateDoc);
 
-    if (!updatedPost.value) {
+    if (!updatedPost) {
       return res.status(404).json({ message: "Blog post not found" });
     }
-
-    res.status(200).json(updatedPost.value);
+    res
+      .status(200)
+      .json({
+        message: "Blog post updated successfully",
+        data: updatedPost,
+      });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to update the blog post" });
   }
 };
 
-
-
 // Delete a blog post
 exports.deleteBlogPost = async (req, res) => {
   try {
-    const result = await blogCollection.deleteOne({ _id: new ObjectId(req.params.id) });
-    
+    const result = await blogCollection.deleteOne({
+      _id: new ObjectId(req.params.id),
+    });
+
     if (result.deletedCount === 0) {
       return res.status(404).json({ message: "Blog post not found" });
     }
@@ -102,22 +128,24 @@ exports.deleteBlogPost = async (req, res) => {
   }
 };
 
-
-
 // Update blog post status
 exports.updateBlogPostStatus = async (req, res) => {
   try {
-    const result = await blogCollection.findOneAndUpdate(
-      { _id: new ObjectId(req.params.id) },
-      { $set: { status: req.body.status } },
-      { returnOriginal: false }
-    );
+    const id = req?.params.id;
+    const { status } = req?.body;
+    const updateDoc = { $set: { status: status } };
+    const query = { _id: new ObjectId(id) };
+    const result = await blogCollection.updateOne(query, updateDoc);
 
-    if (!result.value) {
-      return res.status(404).json({ message: "Blog post not found" });
+    // Check if any documents were modified
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: "Blog post status unchanged" });
     }
 
-    res.status(200).json(result.value);
+    res.status(200).json({
+      message: "Blog approved successfully",
+      result,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Failed to update the blog post status" });

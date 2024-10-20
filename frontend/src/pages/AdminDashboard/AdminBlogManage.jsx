@@ -1,85 +1,76 @@
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import { AiOutlineEye, AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
-import { useSelector } from "react-redux";
-import DeleteConfirmationModal from "../../components/DeleteConfirmationModal/DeleteConfirmationModal";
+import axiosInstance from "../../api/axiosInstance";
+import useBlogPost from "../../api/useBlogPost";
+import Loader from "../../utils/Loader";
 
 const AdminBlogManage = () => {
-  const [blogPosts, setBlogPosts] = useState([]);
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [blogToDelete, setBlogToDelete] = useState(null);
-  const [toast, setToast] = useState({ message: '', visible: false }); // Toast state
-  const { user } = useSelector((state) => state.authUsers);
-  const navigate = useNavigate(); // Hook for navigation
+  const status = "approved";
+  const { blogs, isLoading, refetch } = useBlogPost();
 
-  useEffect(() => {
-    const fetchBlogPosts = async () => {
-      const response = await fetch("http://localhost:5000/blog/allBlogPosts");
-      const data = await response.json();
-      setBlogPosts(data);
-    };
+  const baseUrl = axiosInstance.defaults.baseURL;
 
-    fetchBlogPosts();
-  }, []);
+ const handleDelete = async (id) =>{
+  try {
+    // Show confirmation alert before deletion
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to delete this blog !",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
 
-  const handleDelete = (id) => {
-    setBlogToDelete(id);
-    setIsDeleteModalOpen(true);
-  };
+    // If user confirms, proceed with deletion
+    if (result.isConfirmed) {
+      const res = await axiosInstance.delete(`/blog/deleteBlogPost/${id}`);
 
-  const confirmDelete = async () => {
-    try {
-      const response = await fetch(`http://localhost:5000/blog/deleteBlogPost/${blogToDelete}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        setBlogPosts((prevPosts) => prevPosts.filter((post) => post._id !== blogToDelete));
-        showToast("Blog post deleted successfully."); // Show toast notification
-      } else {
-        const errorData = await response.json();
-        showToast(`Error: ${errorData.message}`); // Show toast with error
+      // Handle success response from the backend
+      if (res.status === 200) {
+        // Show success alert
+        Swal.fire({
+          title: "Deleted!",
+          text: res.data.message,
+          icon: "success",
+        });
+
+        // Show toast notification for deletion success
+        toast.success(res.data.message || "Course deleted successfully!");
+
+        // Refetch or update course list
+        refetch();
       }
-    } catch (error) {
-      console.error("Error deleting blog post:", error);
-      showToast("Failed to delete the blog post."); // Show toast notification
-    } finally {
-      setIsDeleteModalOpen(false);
-      setBlogToDelete(null);
     }
-  };
+  } catch (error) {
+    // Show error toast if deletion fails
+    toast.error("Failed to delete course: " + error.message);
+  }
+ }
+
 
   const handleApproval = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/blog/updateStatus/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ status: true }), // Set status to true
+      const res = await axiosInstance.put(`/blog/updateStatus/${id}`, {
+        status,
       });
-
-      if (response.ok) {
-        setBlogPosts((prevPosts) =>
-          prevPosts.map((post) => (post._id === id ? { ...post, status: true } : post))
-        );
-        showToast("Blog post approved successfully."); // Show toast notification
-        // Navigate to blog creation page
-      } else {
-        const errorData = await response.json();
-        showToast(`Successfully approve this Blog post...`); // Show toast with error
-        navigate("/admin-dashboard/blog-creation");
+      
+      console.log("res", res);
+      // Check if the response is acknowledged
+      if (res?.data?.result?.acknowledged) {
+        toast.success(res?.data?.message);
+        refetch();
       }
-    } catch (error) {
-      console.error("Error approving blog post:", error);
-      showToast("Failed to approve the blog post."); // Show toast notification
+    } catch (err) {
+      console.error(err);
+      toast.error(`Failed to update status`);
     }
   };
 
-  // Function to show toast
-  const showToast = (message) => {
-    setToast({ message, visible: true });
-    setTimeout(() => setToast({ message: '', visible: false }), 3000); // Hide toast after 3 seconds
-  };
+  if (isLoading) return <Loader />;
 
   return (
     <div className="overflow-x-auto h-screen">
@@ -94,52 +85,58 @@ const AdminBlogManage = () => {
             <th className="border border-gray-300 px-4 py-2">Image</th>
             <th className="border border-gray-300 px-4 py-2">Title</th>
             <th className="border border-gray-300 px-4 py-2">Date & Time</th>
+            <th className="border border-gray-300 px-4 py-2">Status</th>
             <th className="border border-gray-300 px-4 py-2">Actions</th>
             <th className="border border-gray-300 px-4 py-2">Approval</th>
           </tr>
         </thead>
         <tbody>
-          {blogPosts
-            .filter(post => post.status === "false") // Ensure filtering matches actual data type
-            .map((post) => (
-              <tr key={post._id}>
-                <td className="border border-gray-300 px-4 py-2">
-                  <img src={post.image} alt={post.title} className="w-16 h-16 object-cover" />
-                </td>
-                <td className="border border-gray-300 px-4 py-2">{post.title}</td>
-                <td className="border border-gray-300 px-4 py-2">{new Date(post.date).toLocaleString()}</td>
-                <td className="border border-gray-300 px-4 py-2">
-                  <div className="flex items-center justify-center space-x-4">
-                    <Link to={`/teacher-dashboard/blog/${post._id}`}>
-                      <AiOutlineEye className="text-2xl text-blue-600" />
-                    </Link>
-                    <button onClick={() => handleDelete(post._id)}>
-                      <AiOutlineDelete className="text-2xl text-red-600" />
-                    </button>
-                  </div>
-                </td>
-                <td className="border border-gray-300 px-4 py-2 justify-center">
-                  {post.status === true ? (
-                    <AiOutlineCheck className="text-green-600 text-2xl" /> // Show approved icon
-                  ) : (
-                    <button
-                      onClick={() => handleApproval(post._id)}
-                      className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
-                    >
-                      Approve
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
+          {blogs?.map((post) => (
+            <tr key={post._id}>
+              <td className="border border-gray-300 px-4 py-2">
+                <img
+                  className="w-16 h-16 object-cover"
+                  src={`${baseUrl}${post?.image}`}
+                  alt={post.title}
+                />
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {" "}
+                116 {post.title}{" "}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {new Date(post.date).toLocaleString()}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {post.status}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                <span className="flex items-center justify-center space-x-4">
+                  <Link to={`/blog-details/${post._id}`}>
+                    <AiOutlineEye className="text-2xl text-blue-600" />
+                  </Link>
+                  <button onClick={() => handleDelete(post._id)}>
+                    <AiOutlineDelete className="text-2xl text-red-600" />
+                  </button>
+                </span>
+              </td>
+              <td className="border border-gray-300 px-4 py-2 justify-center">
+                {post.status === "approved" ? (
+                  <AiOutlineCheck className="text-green-600 text-2xl" /> // Show approved icon
+                ) : (
+                  <button
+                    onClick={() => handleApproval(post._id)}
+                    className="bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600"
+                  >
+                    Approve
+                  </button>
+                )}
+              </td>
+            </tr>
+          ))}
         </tbody>
+        <ToastContainer />
       </table>
-
-      <DeleteConfirmationModal
-        isOpen={isDeleteModalOpen}
-        onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={confirmDelete}
-      />
     </div>
   );
 };

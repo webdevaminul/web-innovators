@@ -10,23 +10,25 @@ import { requestFailure, requestStart, userClearSuccess } from "../../redux/auth
 import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 import logo from "../../assets/logo.png";
+import Loader from "../../utils/Loader";
 
 const Navbar = () => {
   const { user, isAuthenticated } = useSelector((state) => state.authUsers);
-  const { users } = useAllUser();
   const [profileMenu, setProfileMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [searchBarOpen, setSearchBarOpen] = useState(false);
+
+  const { isLoading } = useAllUser();
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const linkClass = ({ isActive }) =>
     `text-nowrap p-1 lg:p-2 hover:text-textBlue ${isActive ? "text-textBlue" : ""}`;
 
-  const foundUser = users?.find((u) => u?.userEmail === user?.userInfo?.userEmail);
+  // const role = "Admin";
+  // const role = "Teacher";
+  const role = user?.userInfo?.userRole;
 
-  // this user role will be dynamic
-
-  const role = foundUser?.userRole;
-  console.log("role", role);
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
     setProfileMenu(!profileMenu);
@@ -88,8 +90,7 @@ const Navbar = () => {
     </>
   );
 
-  const [openMenu, setOpenMenu] = useState(false);
-  const [searchBarOpen, setSearchBarOpen] = useState(false);
+  if (isLoading) return <Loader />;
 
   return (
     <header className="fixed h-[3.8rem] border-b border-borderLight w-full top-0 left-0 z-50 bg-backgroundPrimary">

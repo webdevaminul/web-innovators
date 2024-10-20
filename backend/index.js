@@ -10,16 +10,18 @@ const path = require("path")
 const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
-const blogRoutes = require("./api/routes/blog.route");
-const courseRoutes = require("./api/routes/course.route");
 const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
-const instructorRoutes = require("./api/routes/instructor.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
-// const instructorRoutes = require("./api/routes/instructor.route");
-const allTeacher = require("./api/routes/instructor.route");
+
 const allUser = require("./api/routes/instructor.route");
+const allTeacher = require("./api/routes/instructor.route");
+const instructorRoutes = require("./api/routes/instructor.route");
+
+const blogRoutes = require("./api/routes/blog.route")
+
 const { createCourse } = require("./api/controllers/course.controller");
+const { createBlogPost } = require("./api/controllers/blog.controller");
 
 // Load environment variables
 dotenv.config();
@@ -98,7 +100,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1000000, // 1 mb = 1000kb = 1000000 byte
+    fileSize: 2000000, // 1 mb = 1000kb = 1000000 byte
   },
   fileFilter: (req, file, cb) => {
     if (
@@ -113,20 +115,27 @@ const upload = multer({
   },
 });
 
-
 // POST route to upload file and save data in MongoDB
 app.post("/create/course", upload.single("coverPicture"), createCourse);
+app.post("/blog/createBlog", upload.single("blogImage"), createBlogPost);
 
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
-app.use("/blog", blogRoutes);
 app.use("/user", userRoutes);
+
 app.use("/be", instructorRoutes);
-app.use("/aproved", instructorRoutes);
-app.use("/all", coursesRoutes)  // all courses get
+app.use("/approved", instructorRoutes);
+
+app.use("/all", coursesRoutes)  // all courses get for admin
+app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
+app.use("/delete", coursesRoutes)  // delete course by teacher 
+app.use("/approve", coursesRoutes)  // approve courses from admin
+
+app.use("/blog",blogRoutes)
+
 app.use("/get", allTeacher)  // all teaacher get
-app.use("/get", allUser)  // all teaacher get
+app.use("/get", allUser)  // all user get for admin 
 
 
 // Custom error handling middleware

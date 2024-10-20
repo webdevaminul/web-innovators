@@ -1,38 +1,42 @@
-import React from "react";
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../api/axiosInstance";
+import PropTypes from "prop-types";
 
 const CourseCard = ({ course }) => {
+  const { category, coverPicture, name, price, oldPrice, title, _id } = course;
+
+  const baseUrl = axiosInstance.defaults.baseURL;
+
   return (
     <Link
-      to={`/course-details/${course.id}`}
-      className="card card-compact border border-borderDark bg-backgroundShadeOne col-span-4 sm:col-span-2 lg:col-span-1 group"
+      to={`/course-details/${_id}`}
+      className="card card-compact border border-border bg-accentOne"
     >
-      <figure className="overflow-hidden">
-        <img
-          src={course.image}
-          alt="Course Image"
-          className="w-full object-cover object-center transition-transform duration-300 ease-in-out group-hover:scale-105"
-          loading="lazy"
-        />
+      <figure>
+        <img src={`${baseUrl}${coverPicture}`} alt={title} />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{course.title}</h2>
-        <p>{course.instructor}</p>
-
+        <h2 className="card-title">{title}</h2>
+        <span className="text-sm">Category: {category}</span>
+        <p>{name}</p>
         <div>
           <p className="flex justify-start items-center text-xl text-secondary">
             <FaBangladeshiTakaSign />
-            {course.price}
+            {price}
             <span className="line-through text-text flex justify-start items-center ml-2 text-base">
               <FaBangladeshiTakaSign />
-              {course.old_price}
+              {oldPrice}
             </span>
           </p>
         </div>
       </div>
     </Link>
   );
+};
+
+CourseCard.propTypes = {
+  course: PropTypes.object,
 };
 
 export default CourseCard;

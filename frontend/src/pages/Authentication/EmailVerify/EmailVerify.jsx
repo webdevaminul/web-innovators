@@ -33,6 +33,7 @@ export default function EmailVerify() {
         dispatch(loginFailure("Email verification failed")); // Dispatch login failure action on error
       }
     };
+
     verifyEmail();
   }, [location, navigate, dispatch]);
 
