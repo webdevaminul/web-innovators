@@ -5,18 +5,39 @@ export default {
     extend: {
       fontFamily: {
         bai: ["Bai Jamjuree", " sans-serif"],
-        raleway: ["Raleway", "system-ui"],
-        lato: ["Lato", "system-ui"],
-        inter: ["Inter", "system-ui"],
+        poppins: ["Poppins", "sans-serif"],
+        ubuntu: ["Ubuntu", "sans-serif"],
+      },
+      fontWeight: {
+        thin: 100,
+        light: 300,
+        normal: 400,
+        medium: 500,
+        bold: 700,
+        black: 900,
       },
 
       colors: {
-        bg: "rgba(var(--bg-color))",
+        textPrimary: "rgba(var(--text-primary))",
+        textReverse: "rgba(var(--text-reverse))",
+        textBlack: "rgba(var(--text-black))",
+        textWhite: "rgba(var(--text-white))",
+        textBlue: "rgba(var(--text-blue))",
+        textOrange: "rgba(var(--text-orange))",
+
+        backgroundPrimary: "rgba(var(--background-primary))",
+        backgroundShadeOne: "rgba(var(--background-shade-one))",
+        backgroundBlue: "rgba(var(--background-blue))",
+        backgroundBlueHover: "rgba(var(--background-blue-hover))",
+        backgroundOrange: "rgba(var(--background-orange))",
+        backgroundOrangeHover: "rgba(var(--background-orange-hover))",
+
+        borderLight: "rgba(var(--border-light))",
+        borderDark: "rgba(var(--border-dark))",
+
         accentOne: "rgba(var(--accent-one))",
         accentTwo: "rgba(var(--accent-two))",
         text: "rgba(var(--text-color))",
-        textReversed: "rgba(var(--text-reversed))",
-        textWhite: "rgba(var(--text-white))",
         link: "rgba(var(--text-link))",
         linkHover: "rgba(var(--text-link-hover))",
         secondary: "rgba(var(--secondary-color))",
@@ -37,9 +58,14 @@ export default {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
         },
+        "spin-infinite": {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
+        },
       },
       animation: {
         rotate: "rotate 0.4s ease-in-out",
+        "spin-infinite": "spin-infinite 10s linear infinite",
       },
     },
   },

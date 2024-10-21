@@ -1,10 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import App from "../App";
 import Home from "../pages/Home/Home";
 import SignUp from "../pages/Authentication/SignUp/SignUp";
 import SignIn from "../pages/Authentication/SignIn/SignIn";
 import AllCourses from "../pages/AllCourses/AllCourses";
-import BlogPosts from "../pages//BlogPosts/BlogPosts";
+import BlogPosts from "../pages/BlogPosts/BlogPosts";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
@@ -14,6 +14,7 @@ import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
 import ManageCourse from "../pages/TeacherDashboard/ManageCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
+import ErrorBoundary from "../pages/UserDashboard/ErrorBoundary/ErrorBoundary";
 import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateRouter from "./PrivateRouter";
@@ -25,56 +26,48 @@ import Overview from "../pages/AccountManagement/Overview";
 import UpdateProfile from "../pages/AccountManagement/UpdateProfile";
 import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
+import BlogCreation from "../pages/TeacherDashboard/BlogCreation";
+import BlogManagement from "../pages/TeacherDashboard/BlogManagement";
+import AdminBlogManage from "../pages/AdminDashboard/AdminBlogManage";
+
+import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
+import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
+import CourseManage from "../pages/AdminDashboard/CourseManage";
+import BlogDetails from "../components/BlogDetails/BlogDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <ErrorPage />,
+    errorElement: <ErrorBoundary />,
     children: [
+      { path: "/", element: <Home /> },
+      { path: "/sign-in", element: <SignIn /> },
+      { path: "/sign-up", element: <SignUp /> },
+      { path: "/email-verify", element: <EmailVerify /> },
       {
-        path: "/",
-        element: <Home />,
+        path: "/forget-password", element: <ForgetPassword />,
       },
-
       {
-        path: "/sign-in",
-        element: <SignIn />,
-      },
-
-      {
-        path: "/sign-up",
-        element: <SignUp />,
-      },
-
-      {
-        path: "/email-verify",
-        element: <EmailVerify />,
+        path: "/password-recovery",
+        element: <PasswordRecovery />,
       },
       {
         path: "/manage-account",
         element: <ManageAccount />,
         children: [
-          {
-            path: "/manage-account/overview",
-            element: <Overview />,
-          },
-          {
-            path: "/manage-account/manage-profile",
-            element: <UpdateProfile />,
-          },
-          {
-            path: "/manage-account/change-password",
-            element: <ChangePassword />,
-          },
-          {
-            path: "/manage-account/delete-account",
-            element: <DeleteAccount />,
-          },
+          { path: "overview", element: <Overview /> },
+          { path: "manage-profile", element: <UpdateProfile /> },
+          { path: "change-password", element: <ChangePassword /> },
+          { path: "delete-account", element: <DeleteAccount /> },
         ],
       },
       {
-        path: "/allCourses",
+        path: "/all-courses",
+        element: <AllCourses />,
+      },
+      {
+        path: "/all-course/:categoryName",
         element: <AllCourses />,
       },
       {
@@ -86,39 +79,43 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <BlogPosts />,
       },
+    
+      { path: "/blog-details/:id", element: <BlogDetails  /> },
       {
-        path: "/contactUs",
+        path: "/contact-us",
         element: <ContactPage />,
       },
       {
         path: "/become-instructor",
-        element: (
-          <PrivateRouter>
-            <BeInstructor />
-          </PrivateRouter>
-        ),
+        element: <BeInstructor />,
       },
     ],
   },
-
   {
-    path: "dashbroad/home",
+    path: "dashboard/home",
     element: (
       <PrivateRouter>
         <DashboardLayoutBasic />
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
+    // children:
   },
   {
-    path: "teacher-dashboard",
+    path: "/teacher-dashboard",
     element: (
       <PrivateRouter>
         <TeacherDashboard />
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
+        path: "",
+        element: <Navigate to="home" />,
+      },
+      {
+        path: "home",
         element: <TeacherHome />,
       },
       {
@@ -133,17 +130,32 @@ const router = createBrowserRouter([
         path: "create-course",
         element: <CreateCourse />,
       },
+      {
+        path: "create-post",
+        element: (
+          <PrivateRouter>
+            <BlogCreation />
+          </PrivateRouter>
+        ),
+      },
+      { path: "blog-management", element: <BlogManagement /> },
     ],
   },
+
+  // Admin dashboard here
   {
-    path: "admin-dashboard",
+    path: "/admin-dashboard",
     element: (
       <PrivateRouter>
-        {" "}
-        <AdminDashboard />{" "}
+        <AdminDashboard />
       </PrivateRouter>
     ),
+    errorElement: <ErrorPage />,
     children: [
+      {
+        path: "",
+        element: <Navigate to="admin-home" />,
+      },
       {
         path: "admin-home",
         element: <AdminHome />,
@@ -152,7 +164,22 @@ const router = createBrowserRouter([
         path: "user-manage",
         element: <UserManage />,
       },
+      {
+        path: "course-manage",
+        element: <CourseManage />,
+      },
+
+      {
+      path: "adminBlog-management", 
+      element: <AdminBlogManage />
+    },
     ],
   },
+
+  {
+    path: "*", // Catch all for any undefined routes
+    element: <ErrorPage />,
+  },
 ]);
+
 export default router;

@@ -1,26 +1,11 @@
 const express = require("express");
-const multer = require("multer")
 const router = express.Router();
-const upload = require("../utilities/imageUp")
-const { createCourse, allCourse } = require("../controllers/course.controller");
+const { allCourse, availableCourse, updateCourse, deleteCourse } = require("../controllers/course.controller");
+const upload = require("../middleware/imageUpload");
 
-// POST request to create a new course courseRoutes
-
-// Route for creating a course with image upload
-// router.post("/create", createCourse);
-router.post("/course", (req, res, next) => {
-    upload.single("coverPicture")(req, res, (err) => {
-      if (err instanceof multer.MulterError) {
-        // Multer-specific errors (like file too large)
-        return res.status(400).send({ error: err.message });
-      } else if (err) {
-        // General error
-        return res.status(400).send({ error: err.message });
-      }
-      next(); // Proceed to the controller if no errors
-    });
-  }, createCourse);
-
-router.get("/courses",allCourse)
+router.get("/available", availableCourse); // available course for user, student and teacher
+router.get("/courses", allCourse); // all course for admin
+router.put("/courses/:id", updateCourse); // approved course to admin
+router.delete('/courses/:id', deleteCourse);; // deleted course by teacher
 
 module.exports = router;

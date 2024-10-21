@@ -39,11 +39,15 @@ export default function Darkmode() {
   return (
     <button
       onClick={toggleTheme}
-      className={`text-xl ${
+      className={`${
         rotating ? "animate-rotate" : ""
-      } p-2 text-text bg-accentTwo hover:bg-accentOne border border-border/25 rounded-full`}
+      } h-8 w-8 sm:h-9 sm:w-9 bg-blue-500 hover:bg-blue-400 border border-borderLight rounded-full`}
     >
-      {darkMode ? <IoMdSunny /> : <IoMdMoon />}
+      {darkMode ? (
+        <IoMdSunny className="m-auto text-2xl text-textWhite" />
+      ) : (
+        <IoMdMoon className="m-auto text-2xl text-textWhite" />
+      )}
     </button>
   );
 }

@@ -51,7 +51,7 @@ export default function SignUp() {
   };
 
   return (
-    <main className="min-h-[90vh] max-w-xs mx-auto flex items-center justify-center">
+    <main className="min-h-[calc(100vh-3.8rem)] max-w-xs mx-auto flex items-center justify-center">
       <Heading heading={"Sign Up"} />
       <section className="flex flex-col gap-3 justify-center p-4 w-full ">
         {/* Switch between signup and signin */}
@@ -184,9 +184,9 @@ export default function SignUp() {
 
           {/* Error message */}
           {error && (
-            <p className="text-primaryWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textWhite bg-red-600 rounded p-2 mt-4 flex gap-2">
               <span className="text-xl">
-                <MdError />
+                <MdError className="text-textWhite mt-1" />
               </span>
               <span>{error}</span>
             </p>
@@ -194,9 +194,9 @@ export default function SignUp() {
 
           {/* Success message */}
           {success && (
-            <p className="text-primaryBlack bg-green-400 rounded p-2 mt-4 flex justify-center gap-2">
-              <span className="text-xl pt-1">
-                <MdCheckCircle />
+            <p className="text-textBlack bg-green-400 rounded p-2 mt-4 flex gap-2">
+              <span className="text-xl">
+                <MdCheckCircle className="text-textBlack mt-1" />
               </span>
               <span>{success}</span>
             </p>
@@ -206,16 +206,16 @@ export default function SignUp() {
           <button
             disabled={signUpMutation.isLoading}
             type="submit"
-            className="p-2 mt-4 bg-link hover:bg-linkHover border-none rounded text-textReversed disabled:bg-disabled disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-textWhite disabled:bg-disabled disabled:cursor-not-allowed select-none"
           >
             {signUpMutation.isLoading ? "Loading..." : "Sign up"}
           </button>
         </form>
 
-        <p className="flex  items-center gap-2">
+        <p className="text-sm">
           <span>Already have an acoount?</span>
           <span>
-            <Link to="/sign-in" className="text-blue-500 hover:underline">
+            <Link to="/sign-in" className="text-textBlue hover:underline ml-1">
               sign in here
             </Link>
           </span>

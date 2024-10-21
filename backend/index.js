@@ -1,19 +1,27 @@
+// Your main server file
+
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
-const multer = require("multer");
-const path = require("path");
 const cookieParser = require("cookie-parser");
+const multer = require("multer");
+const path = require("path")
 
-const { connectDB, client } = require("./api/config/mongoDB");
+const { connectDB } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
-const courseRoutes = require("./api/routes/course.route");
 const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
 const errorMiddleware = require("./api/middleware/errorMiddleware");
+
+const allUser = require("./api/routes/instructor.route");
+const allTeacher = require("./api/routes/instructor.route");
 const instructorRoutes = require("./api/routes/instructor.route");
-const allUser = require("./api/routes/instructor.route")
+
+const blogRoutes = require("./api/routes/blog.route")
+
+const { createCourse } = require("./api/controllers/course.controller");
+const { createBlogPost } = require("./api/controllers/blog.controller");
 
 // Load environment variables
 dotenv.config();
@@ -21,15 +29,14 @@ dotenv.config();
 // Initialize the app
 const app = express();
 
-// Middlewares
+// Middleware
 app.use(express.json());
 app.use(cookieParser());
 
 // CORS Middleware
-const allowedOrigins =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:5173"
-    : "https://web-innovators-learnup.vercel.app";
+const allowedOrigins = process.env.NODE_ENV === "development"
+  ? "http://localhost:5173"
+  : "https://web-innovators-learnup.vercel.app";
 
 app.use(
   cors({
@@ -61,10 +68,10 @@ app.use((req, res, next) => {
 });
 
 // Connect to MongoDB
-connectDB();
+// connectDB();
 
-const database = client.db("LearnUp");
-const usersCollection = database.collection("users");
+// Serve the "public/images" directory for uploaded images
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
 // multer using for file upload
 const folder = "./public/images";
@@ -93,7 +100,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1000000, // 1 mb = 1000kb = 1000000 byte
+    fileSize: 2000000, // 1 mb = 1000kb = 1000000 byte
   },
   fileFilter: (req, file, cb) => {
     if (
@@ -108,15 +115,28 @@ const upload = multer({
   },
 });
 
+// POST route to upload file and save data in MongoDB
+app.post("/create/course", upload.single("coverPicture"), createCourse);
+app.post("/blog/createBlog", upload.single("blogImage"), createBlogPost);
+
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
 app.use("/user", userRoutes);
+
 app.use("/be", instructorRoutes);
-app.use("/aproved", instructorRoutes);
-app.use("/all", coursesRoutes)  // all courses get
-app.use("/get", allUser)  // all user get
-app.use("/create", upload.single("coverPicture"), courseRoutes);
+app.use("/approved", instructorRoutes);
+
+app.use("/all", coursesRoutes)  // all courses get for admin
+app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
+app.use("/delete", coursesRoutes)  // delete course by teacher 
+app.use("/approve", coursesRoutes)  // approve courses from admin
+
+app.use("/blog",blogRoutes)
+
+app.use("/get", allTeacher)  // all teaacher get
+app.use("/get", allUser)  // all user get for admin 
+
 
 // Custom error handling middleware
 app.use(errorMiddleware);
@@ -126,8 +146,15 @@ app.get("/", (req, res) => {
   res.send("LearnUP server is running fine");
 });
 
-// Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Connect to MongoDB and start the server
+connectDB()
+  .then(() => {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  })
+  .catch((err) => {
+    console.error("Failed to connect to MongoDB:", err);
+    process.exit(1);
+  });
 
 module.exports = app;

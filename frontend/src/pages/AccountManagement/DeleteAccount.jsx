@@ -195,7 +195,7 @@ export default function DeleteAccount() {
           <button
             disabled={loading || !isConfirm}
             type="submit"
-            className="p-2 mt-4 bg-link hover:bg-linkHover border-none rounded text-primaryWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-primaryWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
           >
             {loading ? "Loading.." : "Delete my account"}
           </button>

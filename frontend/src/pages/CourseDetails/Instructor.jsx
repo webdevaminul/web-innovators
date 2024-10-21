@@ -1,7 +1,9 @@
-import React from "react";
-import instructorImg from "../../assets/sumitSaha.jpg";
 
-const Instructor = () => {
+import instructorImg from "../../assets/sumitSaha.jpg";
+import PropTypes from "prop-types";
+
+const Instructor = ({singleCourse={}}) => {
+console.table(singleCourse)
   return (
     <div className="mt-10 flex flex-col md:flex-row justify-center items-center">
       <div className="w-full md:w-1/2 md:border-r-4 md:border-secondary md:pl-10">
@@ -14,9 +16,9 @@ const Instructor = () => {
       <div className="w-full md:w-1/2 pl-8">
         <h1 className="text-sm">
           Sumit Saha is a tech entrepreneur. While studying Computer Science and
-          Engineering at BUET, he founded Bangladesh's first digital agency,
+          Engineering at BUET, he founded Bangladesh&apos;s first digital agency,
           Analyzen, in 2008. Driven by his love for programming and passion for
-          teaching others, he later founded the "Learn with Sumit" platform in
+          teaching others, he later founded the &quot;Learn with Sumit&qout; platform in
           2020, which offers over 350+ programming-related video tutorials.
         </h1>
         <p className="text-sm">
@@ -31,5 +33,7 @@ const Instructor = () => {
     </div>
   );
 };
-
+Instructor.propTypes = {
+  singleCourse: PropTypes.object,
+};
 export default Instructor;

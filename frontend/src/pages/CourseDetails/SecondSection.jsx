@@ -1,4 +1,4 @@
-import React from "react";
+
 import { HiOutlineVideoCamera } from "react-icons/hi";
 import { MdQuiz, MdAssignmentAdd } from "react-icons/md";
 
@@ -6,7 +6,7 @@ const SecondSection = () => {
   return (
     <div className="mt-8">
       <h1 className="text-center text-2xl md:text-3xl font-bold mb-10">
-        What's included in this course ???
+        What&apos;s included in this course ???
       </h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-9">
         {/* Classes */}
