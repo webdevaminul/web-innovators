@@ -23,7 +23,7 @@ exports.beInstructor = async (req, res, next) => {
       return res.status(404).json({ message: "Instructor not found" });
     }
 
-    res.status(200).json({ message: "Instructor updated successfully" });
+    return res.status(200).json({ message: "Instructor updated successfully" });
   } catch (error) {
     next(error);
   }
@@ -41,7 +41,7 @@ exports.approvedInstructor = async (req, res, next) => {
       },
     };
     const result = await usersCollection.updateOne(query, updateDoc);
-    res.status(200).json({
+    return res.status(200).json({
       message: "Congratulations, You are Teacher now !!",
       result,
     });
@@ -63,12 +63,12 @@ exports.getAllTeacher = async (req, res, next) => {
       });
     }
     // res.status(200).send(users);
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: users,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Server error while fetching users",
       error: error.message,
@@ -79,8 +79,8 @@ exports.getAllTeacher = async (req, res, next) => {
 
 exports.getAllUser = async (req, res, next) => {
   try {
-    const query = { status: { $exists: false }, userRole: { $ne: "Admin" } }; // ne means not equal, it's mongodb operator
-    const users = (await usersCollection.find(query).toArray()) || [];
+    // const query = { status: { $exists: false }, userRole: { $ne: "Admin" } }; // ne means not equal, it's mongodb operator
+    const users = await usersCollection.find().toArray();
     if (!users.length) {
       return res.status(404).json({
         success: false,
@@ -88,12 +88,12 @@ exports.getAllUser = async (req, res, next) => {
       });
     }
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: users,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Server error while fetching users",
       error: error.message,
