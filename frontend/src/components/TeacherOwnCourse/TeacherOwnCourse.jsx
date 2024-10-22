@@ -1,13 +1,11 @@
 import { HiOutlineUsers } from "react-icons/hi2";
 import { BiLike } from "react-icons/bi";
 import { useState } from "react";
-import axiosInstance from "../../api/axiosInstance";
 import useAllCourse from "../../api/useAllCourse";
 import Loader from "../../utils/Loader";
 const TeacherOwnCourse = () => {
   const { courses, isLoading } = useAllCourse();
   const [isImageLoading, setIsImageLoading] = useState(true);
-  const baseUrl = axiosInstance.defaults.baseURL;
 
   // TODO :- NEED TO POPULAR COURSE BY RATING
 
@@ -21,7 +19,7 @@ const TeacherOwnCourse = () => {
         <div key={card._id} className="card bg-base-100 shadow-xl">
           <figure>
             <img
-              src={`${baseUrl}${card?.coverPicture}`}
+              src={card?.coverPicture}
               style={{ display: isImageLoading ? 'https://i.ibb.co/MDZYgz6/LearnUp.jpg' : 'block' }}
               alt={card.title}
               onLoad={() => setIsImageLoading(false)}

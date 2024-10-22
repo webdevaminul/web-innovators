@@ -10,15 +10,15 @@ const TestCourse = () => {
   const name = user.userInfo.userName;
   const email = user.userInfo.userEmail;
 
-  // const [videos, setVideos] = useState([]);
-  // console.log("videos",videos)
+  const [videos, setVideos] = useState([]);
+  console.log("videos", videos);
 
   // Handle image file selection and generate preview URL
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     console.log("file", file);
     // Generate a preview URL
-  
+
     const previewURL = URL.createObjectURL(file);
     setPreviewUrl(previewURL);
   };
@@ -32,21 +32,10 @@ const TestCourse = () => {
     const price = form.price.value;
     const detailsCourse = form.textarea.value;
     const status = "pending";
+    const file = e.target.image.files[0];  
+   
 
-    const file = e.target.image.files[0];
-    console.log("file", file);
     const formData = new FormData();
-
-    console.log(
-      "details",
-      name,
-      email,
-      title,
-      price,
-      status,
-      category,
-      detailsCourse
-    );
 
     formData.append("name", name);
     formData.append("email", email);
@@ -57,6 +46,12 @@ const TestCourse = () => {
     formData.append("category", category);
     formData.append("detailsCourse", detailsCourse);
 
+    if(videos && videos?.length > 0){
+      for (let i = 0; i < videos.length; i++) {
+        formData.append('videos', videos[i]);
+      }
+    }
+
     // Append the serialized course data (as a string)
 
     try {
@@ -66,10 +61,12 @@ const TestCourse = () => {
         },
       };
 
-      const response = await axiosInstance.post("/course/testCreate", formData,config);
+      const response = await axiosInstance.post(
+        "/course/testCreate",
+        formData,
+        config
+      );
       console.log("Response:", response); // Accessing the response data
-
-
     } catch (error) {
       console.error("Error Creating Course:", error);
     }
@@ -149,7 +146,7 @@ const TestCourse = () => {
             </div>
           </div>
         </div>
-        {/* <div>
+        <div>
           <label className="block font-medium">Upload Videos (up to 5)</label>
           <input
             type="file"
@@ -158,7 +155,7 @@ const TestCourse = () => {
             multiple
             onChange={(e) => setVideos(e.target.files)}
           />
-        </div> */}
+        </div>
         <div>
           <textarea
             name="textarea"

@@ -6,7 +6,6 @@ import useAllCourse from "../../api/useAllCourse";
 import Loader from "../../utils/Loader";
 
 const CourseManage = () => {
-  const baseUrl = axiosInstance.defaults.baseURL;
   const status = "pending";
   const { courses, isLoading, refetch } = useAllCourse({ status });
 
@@ -57,7 +56,7 @@ const CourseManage = () => {
                 <td className="flex items-center gap-3">
                   <span className="avatar">
                     <span className="mask mask-squircle h-12 w-12">
-                      <img src={`${baseUrl}${course?.coverPicture}`} alt={course.title} />
+                      <img src={course?.coverPicture} alt={course.title} />
                     </span>
                   </span>
                   <span>{course.title}</span>

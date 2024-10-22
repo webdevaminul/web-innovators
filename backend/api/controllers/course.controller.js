@@ -6,18 +6,11 @@ const courseCollection = database.collection("courses");
 // Create a course
 exports.createCourse = async (req, res, next) => {
   try {
-    const courseData = JSON.parse(req?.body?.courseData);
-    // File uploaded by multer
-    const coverPicture = req.file; // This will contain the uploaded file information
+    // here code
+    const { name, email, title, price, status, category, detailsCourse } =
+      req.body;
 
-    if (!coverPicture) {
-      return res.status(400).json({ message: "Cover picture is required!" });
-    }
-
-    // Other form fields from req.body
-    const { name, email, title, price, status, category, detailsCourse } = courseData;
-
-    // Prepare the course data
+    const image = req?.file?.path;
     const newCourse = {
       name,
       email,
@@ -26,7 +19,7 @@ exports.createCourse = async (req, res, next) => {
       status,
       category,
       detailsCourse,
-      coverPicture: `/images/${coverPicture?.filename}`, // Store the uploaded filename in the database
+      coverPicture: image, // Store the uploaded filename in the database
     };
 
     // Insert the course data into the MongoDB collection
@@ -48,7 +41,12 @@ exports.createCourse = async (req, res, next) => {
 // available course for user, student and teacher
 exports.availableCourse = async (req, res, next) => {
   try {
-    const { sortOrder = "asc", page = 1, limit = 6, selectedCategory } = req.query;
+    const {
+      sortOrder = "asc",
+      page = 1,
+      limit = 6,
+      selectedCategory,
+    } = req.query;
 
     const currentPage = parseInt(page, 10) || 1; // 10 for decimal
     const itemsPerPage = parseInt(limit, 10) || 6; // 10 for decimal
@@ -77,7 +75,9 @@ exports.availableCourse = async (req, res, next) => {
       .toArray();
 
     if (courses.length === 0) {
-      return res.status(404).json({ success: false, message: "No courses found", data: [] });
+      return res
+        .status(404)
+        .json({ success: false, message: "No courses found", data: [] });
     }
 
     // Send response if courses are found
@@ -91,7 +91,8 @@ exports.availableCourse = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "An error occurred while fetching courses. Please try again later.",
+      message:
+        "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }
@@ -106,7 +107,9 @@ exports.allCourse = async (req, res, next) => {
     if (status === "pending") {
       courses = await courseCollection.find({ status: "pending" }).toArray();
     } else {
-      courses = await courseCollection.find({ status: { $ne: "pending" } }).toArray();
+      courses = await courseCollection
+        .find({ status: { $ne: "pending" } })
+        .toArray();
     }
 
     // Always return a valid response with an array
@@ -117,7 +120,8 @@ exports.allCourse = async (req, res, next) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "An error occurred while fetching courses. Please try again later.",
+      message:
+        "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }
@@ -171,41 +175,46 @@ exports.deleteCourse = async (req, res, next) => {
   }
 };
 
-
 // Create a new course with multiple videos and an image
 
-exports.testCreateCourse = async (req, res,next) => {
+exports.testCreateCourse = async (req, res, next) => {
   try {
- // here code
- const { name, email, title, price, status, category, detailsCourse } = req.body;
- console.log("Course-image:", req.file);
- const image = req?.file?.path;
- console.log("Course-Data:", req.body);
- const newCourse = {
-  name,
-  email,
-  title,
-  price,
-  status,
-  category,
-  detailsCourse,
-  coverPicture: image, // Store the uploaded filename in the database
-};
+    // here code
+    const { name, email, title, price, status, category, detailsCourse } =
+      req.body;
 
-// Insert the course data into the MongoDB collection
-const result = await courseCollection.insertOne(newCourse);
+    const image = req?.file?.path;
 
-// Success response
-res.status(201).json({
-  message: "Course created successfully!",
-  courseId: result.insertedId,
-  course: newCourse,
-});
+    // Handle the videos (req.files for multiple video uploads)
+    const videoUrls = req?.files.map((file) => file.path);
+    console.log(videoUrls);
 
+    console.log("Course-Data:", req.body);
+    const newCourse = {
+      name,
+      email,
+      title,
+      price,
+      status,
+      category,
+      detailsCourse,
+      coverPicture: image, // Store the uploaded filename in the database
+      videoUrl: videoUrls,
+    };
 
+    // Insert the course data into the MongoDB collection
+    const result = await courseCollection.insertOne(newCourse);
 
+    // Success response
+    res.status(201).json({
+      message: "Course created successfully!",
+      courseId: result.insertedId,
+      course: newCourse,
+    });
   } catch (error) {
-    console.error('Error creating course:', error);
-    res.status(500).json({ message: 'Error creating course', error: error.message });
+    console.error("Error creating course:", error);
+    res
+      .status(500)
+      .json({ message: "Error creating course", error: error.message });
   }
 };

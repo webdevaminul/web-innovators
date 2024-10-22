@@ -17,43 +17,40 @@ const CreateCourse = () => {
     const form = e.target;
     const title = form.title.value;
     const price = form.price.value;
-    const file = form.coverPicture.files[0]; // File input
     const detailsCourse = form.textarea.value;
     const status = "pending";
+    const file = e.target.image.files[0];
 
     const formData = new FormData();
-    const courseData = {
-      name,
-      email,
-      title,
-      price,
-      status,
-      category,
-      detailsCourse,
-    };
-    if(file){
-      formData.append("coverPicture", file);
+
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("title", title);
+    formData.append("price", price);
+    formData.append("status", status);
+    formData.append("category", category);
+    formData.append("detailsCourse", detailsCourse);
+
+    if (file) {
+      formData.append("image", file);
     }
 
-    // Append the serialized course data (as a string)
-    formData.append("courseData", JSON.stringify(courseData));
-
     try {
-      // Sending POST request with Axios
-      axiosInstance
-        .post("/create/course", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data", // Important for file upload
-          },
-        })
-        .then((response) => {
-          if (response.data.courseId) {
-            toast.success(response.data.message);
-          }
-        })
-        .catch((error) => {
-          console.error("Error Creating Course:", error);
-        });
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data", // Important for file upload
+        },
+      };
+
+      const response = await axiosInstance.post(
+        "course/create",
+        formData,
+        config
+      );
+
+      if(response?.data?.courseId){
+        toast.success(response.data.message)
+      }
     } catch (error) {
       console.log(error);
     }
@@ -125,7 +122,7 @@ const CreateCourse = () => {
               onChange={handleFileChange}
               type="file"
               accept="image/*"
-              name="coverPicture"
+              name="image"
               className="border-2 border-border"
             />
           </label>
@@ -135,7 +132,11 @@ const CreateCourse = () => {
               {previewUrl === "" ? (
                 "image preview"
               ) : (
-                <img className="w-20 border rounded-sm" src={previewUrl} alt="" />
+                <img
+                  className="w-20 border rounded-sm"
+                  src={previewUrl}
+                  alt=""
+                />
               )}
             </div>
           </div>
