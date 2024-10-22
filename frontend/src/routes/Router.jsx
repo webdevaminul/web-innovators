@@ -46,7 +46,8 @@ const router = createBrowserRouter([
       { path: "/sign-up", element: <SignUp /> },
       { path: "/email-verify", element: <EmailVerify /> },
       {
-        path: "/forget-password", element: <ForgetPassword />,
+        path: "/forget-password",
+        element: <ForgetPassword />,
       },
       {
         path: "/password-recovery",
@@ -73,14 +74,13 @@ const router = createBrowserRouter([
       {
         path: "/course-details/:id",
         element: <CourseDetails />,
-        loader: () => fetch("./courses.json"),
       },
       {
         path: "/blog",
         element: <BlogPosts />,
       },
-    
-      { path: "/blog-details/:id", element: <BlogDetails  /> },
+
+      { path: "/blog-details/:id", element: <BlogDetails /> },
       {
         path: "/contact-us",
         element: <ContactPage />,
@@ -170,9 +170,9 @@ const router = createBrowserRouter([
       },
 
       {
-      path: "adminBlog-management", 
-      element: <AdminBlogManage />
-    },
+        path: "adminBlog-management",
+        element: <AdminBlogManage />,
+      },
     ],
   },
 
