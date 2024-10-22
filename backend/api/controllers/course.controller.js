@@ -1,4 +1,5 @@
 const { client, ObjectId } = require("../config/mongoDB");
+const { uploadVideo, uploadImage } = require("../middleware/imgVdoUpload");
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
 
@@ -167,5 +168,44 @@ exports.deleteCourse = async (req, res, next) => {
       error: error.message,
     });
     next(error);
+  }
+};
+
+
+// Create a new course with multiple videos and an image
+
+exports.testCreateCourse = async (req, res,next) => {
+  try {
+ // here code
+ const { name, email, title, price, status, category, detailsCourse } = req.body;
+ console.log("Course-image:", req.file);
+ const image = req?.file?.path;
+ console.log("Course-Data:", req.body);
+ const newCourse = {
+  name,
+  email,
+  title,
+  price,
+  status,
+  category,
+  detailsCourse,
+  coverPicture: image, // Store the uploaded filename in the database
+};
+
+// Insert the course data into the MongoDB collection
+const result = await courseCollection.insertOne(newCourse);
+
+// Success response
+res.status(201).json({
+  message: "Course created successfully!",
+  courseId: result.insertedId,
+  course: newCourse,
+});
+
+
+
+  } catch (error) {
+    console.error('Error creating course:', error);
+    res.status(500).json({ message: 'Error creating course', error: error.message });
   }
 };

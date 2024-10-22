@@ -20,8 +20,9 @@ const instructorRoutes = require("./api/routes/instructor.route");
 
 const blogRoutes = require("./api/routes/blog.route")
 
-const { createCourse } = require("./api/controllers/course.controller");
+const { createCourse, testCreateCourse } = require("./api/controllers/course.controller");
 const { createBlogPost } = require("./api/controllers/blog.controller");
+const { uploadImage } = require("./api/middleware/imgVdoUpload");
 
 // Load environment variables
 dotenv.config();
@@ -32,6 +33,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
 // CORS Middleware
 const allowedOrigins = process.env.NODE_ENV === "development"
@@ -100,7 +102,7 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 2000000, // 1 mb = 1000kb = 1000000 byte
+    fileSize: 4 * 1000 * 1000, // 1 mb = 1000kb = 1000000 byte
   },
   fileFilter: (req, file, cb) => {
     if (
@@ -136,6 +138,26 @@ app.use("/blog",blogRoutes)
 
 app.use("/get", allTeacher)  // all teaacher get
 app.use("/get", allUser)  // all user get for admin 
+
+
+
+
+
+
+
+
+
+
+// test purpose
+app.use("/course", coursesRoutes)
+
+
+
+
+
+
+
+
 
 
 // Custom error handling middleware
