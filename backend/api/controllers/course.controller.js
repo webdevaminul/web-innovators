@@ -18,7 +18,9 @@ exports.createCourse = async (req, res, next) => {
       detailsCourse,
     } = req.body;
 
-    const image = req?.file?.path;
+const imageUrl = req?.files?.image?.[0]?.path;
+const videoUrl = req?.files?.video?.[0]?.path;
+
     const newCourse = {
       name,
       email,
@@ -28,7 +30,8 @@ exports.createCourse = async (req, res, next) => {
       status,
       category,
       detailsCourse,
-      coverPicture: image, // Store the uploaded filename in the database
+      coverPicture: imageUrl,
+      videoUrl: videoUrl,
     };
 
     // Insert the course data into the MongoDB collection
@@ -181,45 +184,5 @@ exports.deleteCourse = async (req, res, next) => {
       error: error.message,
     });
     next(error);
-  }
-};
-
-// Create a new course with multiple videos and an image
-
-exports.testCreateCourse = async (req, res, next) => {
-  try {
-    // here code
-    const { name, email, title, price, status, category, detailsCourse } =
-      req.body;
-
-const imageUrl = req?.files?.image?.[0]?.path;
-const videoUrl = req?.files?.video?.[0]?.path;
-
-    const newCourse = {
-      name,
-      email,
-      title,
-      price,
-      status,
-      category,
-      detailsCourse,
-      coverPicture: imageUrl,
-      videoUrl: videoUrl,
-    };
-
-    // Insert the course data into the MongoDB collection
-    const result = await courseCollection.insertOne(newCourse);
-
-    // Success response
-    res.status(201).json({
-      message: "Course created successfully!",
-      courseId: result.insertedId,
-      course: newCourse,
-    });
-  } catch (error) {
-    console.error("Error creating course:", error);
-    res
-      .status(500)
-      .json({ message: "Error creating course", error: error.message });
   }
 };

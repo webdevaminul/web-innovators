@@ -20,7 +20,7 @@ const instructorRoutes = require("./api/routes/instructor.route");
 
 const blogRoutes = require("./api/routes/blog.route")
 
-const { createCourse, testCreateCourse } = require("./api/controllers/course.controller");
+const { createCourse} = require("./api/controllers/course.controller");
 const { createBlogPost } = require("./api/controllers/blog.controller");
 const { uploadImage } = require("./api/middleware/imgVdoUpload");
 

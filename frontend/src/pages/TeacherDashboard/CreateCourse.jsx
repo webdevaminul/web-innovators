@@ -59,6 +59,7 @@ const CreateCourse = () => {
       if (response?.data?.courseId) {
         toast.success(response.data.message);
         setLoading(false)
+        e.target.reset()
       }
     } catch (error) {
       console.log(error);
@@ -188,7 +189,7 @@ const CreateCourse = () => {
           <button
           disabled={loading}
             type="submit"
-            className={`cursor-pointer rounded-lg px-8 py-5 text-sm font-semibold text-white ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-700'}`}
+            className={`cursor-pointer rounded-lg px-8 py-5 text-sm font-semibold text-white ${loading ? 'bg-gray-400 !cursor-not-allowed' : 'bg-blue-700'}`}
           >
             {loading ? "loading..." : "Submit"}
           </button>

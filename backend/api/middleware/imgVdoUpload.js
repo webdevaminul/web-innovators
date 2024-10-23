@@ -6,7 +6,7 @@ const { cloudinary } = require("../config/cloudinaryConfig");
 const imageStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: "LearnUp-images",
+    folder: "LearnUp/blog-images",
     format: async (req, file) => "png", // Convert all images to PNG format
     public_id: (req, file) => {
       // Append a timestamp to the user's provided name to ensure uniqueness
@@ -56,7 +56,7 @@ const storage = new CloudinaryStorage({
     // Determine the folder and format based on the file type
     if (file?.fieldname === "image") {
       return {
-        folder: "LearnUp-images",
+        folder: "LearnUp/course-images",
         format: "png", // Convert all images to PNG format
         public_id: req?.body.fileName
           ? `${req.body.fileName}_${Date.now()}`
@@ -65,7 +65,7 @@ const storage = new CloudinaryStorage({
       };
     } else if (file?.fieldname === "video") {
       return {
-        folder: "LearnUp-videos",
+        folder: "LearnUp/course-video",
         format: "mp4", // Convert all videos to MP4 format
         public_id: req?.body.fileName
           ? `${req.body.fileName}_${Date.now()}`
@@ -78,12 +78,12 @@ const storage = new CloudinaryStorage({
 
 // Combined file upload and validation middleware
 const uploadFiles = (req, res, next) => {
-  console.log("Starting upload validation...");
 
   const upload = multer({
     storage: storage,
     fileFilter: (req, files, cb) => {
       // File type validation
+      console.log('files 86',req.files)
       if (files.fieldname === "image") {
         if (
           files.mimetype === "image/jpg" ||
@@ -141,6 +141,7 @@ const uploadFiles = (req, res, next) => {
 
     // File size validation for image (4MB) and video (100MB)
     const files = req?.files;
+
     // // Validate the image size (max 4MB)
     if (files?.image[0]?.size > 4 * 1024 * 1024) {
       return res.status(400).json({ error: "Image file size exceeds 4MB." });
