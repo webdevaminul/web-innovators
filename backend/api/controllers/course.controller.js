@@ -1,5 +1,4 @@
 const { client, ObjectId } = require("../config/mongoDB");
-// const { uploadVideo, uploadImage } = require("../middleware/imgVdoUpload");
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
 

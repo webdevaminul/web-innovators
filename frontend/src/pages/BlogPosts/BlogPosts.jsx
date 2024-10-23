@@ -54,7 +54,7 @@ const BlogPosts = () => {
                   <img
                     alt={article.title}
                     className="object-cover w-full h-52"
-                    src={`${baseUrl}${article?.image}`}
+                    src={article?.image}
                   />
                 </Link>
               <div className="flex flex-col flex-1 p-6">

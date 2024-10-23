@@ -24,6 +24,7 @@ const uploadImage = (req, res, next) => {
     storage: imageStorage,
     limits: { fileSize: 4 * 1000 * 1000 }, // 4 MB limit
     fileFilter: (req, file, cb) => {
+      console.log("Checking file type:", req.file);
       console.log("Checking file type:", file.mimetype);
       if (
         file.mimetype === "image/jpg" ||
@@ -35,7 +36,7 @@ const uploadImage = (req, res, next) => {
         cb(new Error("Only .jpg, .png, or .jpeg formats are allowed!"), false);
       }
     },
-  }).single("image"); // 'image' match the key of the uploaded file from front end form
+  }).single("blogImage");
 
   upload(req, res, (err) => {
     if (err instanceof multer.MulterError) {
