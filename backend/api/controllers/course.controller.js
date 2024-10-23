@@ -1,5 +1,5 @@
 const { client, ObjectId } = require("../config/mongoDB");
-const { uploadVideo, uploadImage } = require("../middleware/imgVdoUpload");
+// const { uploadVideo, uploadImage } = require("../middleware/imgVdoUpload");
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
 
@@ -192,13 +192,9 @@ exports.testCreateCourse = async (req, res, next) => {
     const { name, email, title, price, status, category, detailsCourse } =
       req.body;
 
-    const image = req?.file?.path;
+const imageUrl = req?.files?.image?.[0]?.path;
+const videoUrl = req?.files?.video?.[0]?.path;
 
-    // Handle the videos (req.files for multiple video uploads)
-    const videoUrls = req?.files.map((file) => file.path);
-    console.log(videoUrls);
-
-    console.log("Course-Data:", req.body);
     const newCourse = {
       name,
       email,
@@ -207,8 +203,8 @@ exports.testCreateCourse = async (req, res, next) => {
       status,
       category,
       detailsCourse,
-      coverPicture: image, // Store the uploaded filename in the database
-      videoUrl: videoUrls,
+      coverPicture: imageUrl,
+      videoUrl: videoUrl,
     };
 
     // Insert the course data into the MongoDB collection

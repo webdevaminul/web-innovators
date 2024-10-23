@@ -18,22 +18,6 @@ const imageStorage = new CloudinaryStorage({
   },
 });
 
-// Define Cloudinary storage for videos
-const videoStorage = new CloudinaryStorage({
-  cloudinary: cloudinary,
-  params: {
-    folder: "LearnUp-videos",
-    format: async (req, file) => "mp4", // Convert all videos to MP4 format
-    public_id: (req, file) => {
-      // Append a timestamp to the user's provided name to ensure uniqueness
-      return req.body.fileName
-        ? `${req.body.fileName}_${Date.now()}`
-        : `video_${Date.now()}`; // Fallback to timestamp if no fileName is provided
-    },
-    resource_type: "video",
-  },
-});
-
 // Error-handling for image upload with a 4 MB limit
 const uploadImage = (req, res, next) => {
   const upload = multer({
@@ -62,43 +46,113 @@ const uploadImage = (req, res, next) => {
     } else if (err) {
       return res.status(400).json({ error: err.message });
     }
-    next(); // Proceed to the next middleware if no error
+    next(err); // Proceed to the next middleware if no error
   });
 };
 
-// Error-handling for video upload with a 50 MB limit (adjustable)
-const uploadVideo = (req, res, next) => {
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: async (req, file) => {
+    // Determine the folder and format based on the file type
+    if (file?.fieldname === "image") {
+      return {
+        folder: "LearnUp-images",
+        format: "png", // Convert all images to PNG format
+        public_id: req?.body.fileName
+          ? `${req.body.fileName}_${Date.now()}`
+          : `image_${Date.now()}`, // Fallback to timestamp if no fileName is provided
+        resource_type: "image",
+      };
+    } else if (file?.fieldname === "video") {
+      return {
+        folder: "LearnUp-videos",
+        format: "mp4", // Convert all videos to MP4 format
+        public_id: req?.body.fileName
+          ? `${req.body.fileName}_${Date.now()}`
+          : `video_${Date.now()}`, // Fallback to timestamp if no fileName is provided
+        resource_type: "video",
+      };
+    }
+  },
+});
+
+// Combined file upload and validation middleware
+const uploadFiles = (req, res, next) => {
+  console.log("Starting upload validation...");
+
   const upload = multer({
-    storage: videoStorage,
-    limits: { fileSize: 100 * 1000 * 1000 }, // 100 MB limit (or set according to your needs)
-    fileFilter: (req, file, cb) => {
-      console.log("75", file)
-      console.log("Checking file type for video:", file.mimetype);
-      if (
-        file.mimetype === "video/mp4" ||
-        file.mimetype === "video/mpeg" ||
-        file.mimetype === "video/webm"
-      ) {
-        cb(null, true);
+    storage: storage,
+    fileFilter: (req, files, cb) => {
+      // File type validation
+      if (files.fieldname === "image") {
+        if (
+          files.mimetype === "image/jpg" ||
+          files.mimetype === "image/jpeg" ||
+          files.mimetype === "image/png"
+        ) {
+          cb(null, true);
+        } else {
+          cb(
+            new Error(
+              "Only .jpg, .png, or .jpeg formats are allowed for images!"
+            ),
+            false
+          );
+        }
+      } else if (files.fieldname === "video") {
+        if (
+          files.mimetype === "video/mp4" ||
+          files.mimetype === "video/mpeg" ||
+          files.mimetype === "video/webm"
+        ) {
+          cb(null, true);
+        } else {
+          cb(
+            new Error(
+              "Only .mp4, .mpeg, or .webm formats are allowed for videos!"
+            ),
+            false
+          );
+        }
       } else {
-        cb(new Error("Only .mp4, .mpeg, or .webm formats are allowed!"), false);
+        cb(new Error("Invalid file type!"), false);
       }
     },
-  }).single("video"); // 'video' should match the key of the uploaded file in your form
+    limits: {
+      fileSize: 100 * 1024 * 1024, // Max file size limit for both
+    },
+  }).fields([
+    { name: "image", maxCount: 1 }, // Max 1 image
+    { name: "video", maxCount: 1 }, // Max 1 video
+  ]);
 
   upload(req, res, (err) => {
     if (err instanceof multer.MulterError) {
       if (err.code === "LIMIT_FILE_SIZE") {
-        return res
-          .status(400)
-          .json({ error: "Video file size exceeds 50MB limit." });
+        return res.status(400).json({
+          error:
+            "File size exceeds the limit for video (100MB) or image (4MB).",
+        });
       }
       return res.status(400).json({ error: err.message });
     } else if (err) {
       return res.status(400).json({ error: err.message });
     }
-    next();
+
+    // File size validation for image (4MB) and video (100MB)
+    const files = req?.files;
+    // // Validate the image size (max 4MB)
+    if (files?.image[0]?.size > 4 * 1024 * 1024) {
+      return res.status(400).json({ error: "Image file size exceeds 4MB." });
+    }
+
+    // Validate the video size (max 100MB)
+    if (files?.video[0]?.size > 100 * 1024 * 1024) {
+      return res.status(400).json({ error: "Video file size exceeds 100MB." });
+    }
+
+    next(); // Proceed to the next middleware
   });
 };
 
-module.exports = { uploadImage, uploadVideo };
+module.exports = { uploadImage, uploadFiles };

@@ -118,9 +118,6 @@ const upload = multer({
 });
 
 // POST route to upload file and save data in MongoDB
-app.use("/course", coursesRoutes);
-// test purpose
-app.use("/course", coursesRoutes)
 
 app.post("/blog/createBlog", upload.single("blogImage"), createBlogPost);
 
@@ -136,6 +133,7 @@ app.use("/all", coursesRoutes)  // all courses get for admin
 app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
 app.use("/delete", coursesRoutes)  // delete course by teacher 
 app.use("/approve", coursesRoutes)  // approve courses from admin
+app.use("/course", coursesRoutes);
 
 app.use("/blog",blogRoutes)
 

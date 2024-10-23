@@ -14,6 +14,7 @@ const CreateCourse = () => {
   const handleCreateCourse = async (e) => {
     e.preventDefault();
     setLoading(true)
+    
     // FormData object to handle file and other data
     const form = e.target;
     const title = form.title.value;
@@ -22,6 +23,7 @@ const CreateCourse = () => {
     const detailsCourse = form.textarea.value;
     const status = "pending";
     const file = e.target.image.files[0];
+    const videoFile = e.target.video.files[0];
 
     const formData = new FormData();
 
@@ -36,6 +38,9 @@ const CreateCourse = () => {
 
     if (file) {
       formData.append("image", file);
+    }
+    if (videoFile) {
+      formData.append("video", videoFile);
     }
 
     try {
@@ -90,7 +95,7 @@ const CreateCourse = () => {
           />
         </div>
 
-        {/* title and video */}
+        {/* title and category */}
         <div className="md:flex gap-4 my-4">
           <input
             required
@@ -141,7 +146,7 @@ const CreateCourse = () => {
               type="file"
               accept="image/*"
               name="image"
-              className="border-2 border-border"
+              className="border-2 border-border "
             />
           </label>
 
@@ -159,13 +164,23 @@ const CreateCourse = () => {
             </div>
           </div>
         </div>
+        
+        <div>
+          <label className="block font-medium">Upload Videos (one video for now)</label>
+          <input
+            type="file"
+            name="video"
+            accept="video/*"
+          />
+        </div>
+
         <div>
           <textarea
             name="textarea"
             id="text"
-            cols={30}
+            cols={10}
             rows={10}
-            className="mb-10 mt-5 h-40 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-backgroundPrimary placeholder-placeholder "
+            className="mb-10 mt-5 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-backgroundPrimary placeholder-placeholder "
             placeholder="Details about this..."
           />
         </div>
@@ -176,7 +191,6 @@ const CreateCourse = () => {
             className={`cursor-pointer rounded-lg px-8 py-5 text-sm font-semibold text-white ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-700'}`}
           >
             {loading ? "loading..." : "Submit"}
-            Submit
           </button>
         </div>
       </form>

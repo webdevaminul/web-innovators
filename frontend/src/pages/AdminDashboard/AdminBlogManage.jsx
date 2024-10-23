@@ -102,7 +102,7 @@ const AdminBlogManage = () => {
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {" "}
-                116 {post.title}{" "}
+                 {post.title}{" "}
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {new Date(post.date).toLocaleString()}
