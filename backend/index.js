@@ -3,8 +3,15 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+// Load environment variables
+dotenv.config();
+// for ssl commerze
+const SSLCommerzPayment = require("sslcommerz-lts");
+const store_id = process.env.STORE_ID;
+const store_passwd = process.env.STORE_PASS;
+const is_live = false; //true for live, false for sandbox
 
-const { connectDB, ObjectId } = require("./api/config/mongoDB");
+const { connectDB, client, ObjectId } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const coursesRoutes = require("./api/routes/course.route");
@@ -16,9 +23,6 @@ const allTeacher = require("./api/routes/instructor.route");
 const instructorRoutes = require("./api/routes/instructor.route");
 
 const blogRoutes = require("./api/routes/blog.route");
-
-// Load environment variables
-dotenv.config();
 
 // Initialize the app
 const app = express();
@@ -83,55 +87,102 @@ app.use("/get", allTeacher); // all teaacher get
 app.use("/get", allUser); // all user get for admin
 
 // --------------------------post route for enrollment--------------------------
+const database = client.db("LearnUp");
+const courseCollection = database.collection("courses");
+const enrollCollection = database.collection("enrollCollection");
 // generating transaction ID for student
 const tran_id = new ObjectId().toString();
 
 app.post("/enroll", async (req, res) => {
   const enroll = req.body;
+  const courseId = req.body.courseId;
   // specific course getting here
-  // const course = await courseCollection.findOne({
-  //   _id: new ObjectId(req.body.courseId),
-  // });
-  // console.log(course);
-  // console.log(course.price);
+  const course = await courseCollection.findOne({
+    _id: new ObjectId(courseId),
+  });
+
+  const teacherName = course.name;
+  const teacherEmail = course.email;
+
   const data = {
-    total_amount: "wll be the price course.price",
+    total_amount: course.price,
     currency: "BDT",
+    courseId: course._id,
     tran_id: tran_id, // use unique tran_id for each api call
-    success_url: "http://localhost:3030/success",
-    fail_url: "http://localhost:3030/fail",
+    success_url: `http://localhost:5000/enroll/success/${tran_id}`,
+    fail_url: `http://localhost:5000/enroll/fail/${tran_id}`,
     cancel_url: "http://localhost:3030/cancel",
     ipn_url: "http://localhost:3030/ipn",
-    shipping_method: "",
-    product_name: enroll.courseTitle,
-    product_category: "Electronic",
-    product_profile: "general",
-    cus_name: enroll.name,
+    shipping_method: "Courier",
+    product_name: " ",
+    product_category: " ",
+    product_profile: " ",
+    cus_name: " ",
     cus_email: enroll.studentEmail,
-    cus_add1: enroll.address,
-    cus_add2: "",
-    cus_city: "",
-    cus_state: "",
-    cus_postcode: "",
+    cus_add1: " ",
+    cus_add2: " ",
+    cus_city: " ",
+    cus_state: " ",
+    cus_postcode: " ",
+    cus_country: " ",
+    cus_phone: " ",
+    cus_fax: " ",
+    ship_name: " ",
+    ship_add1: " ",
+    ship_add2: " ",
+    ship_city: " ",
+    ship_state: " ",
+    ship_postcode: " ",
+    ship_country: " ",
+    course_name: course.title,
+    course_category: course.category,
+    course_banner: course.coverPicture,
+    teacher_name: teacherName,
+    teacher_email: teacherEmail,
+    student_name: enroll.name,
+    student_email: enroll.studentEmail,
+    student_add1: enroll.address,
     cus_country: "Bangladesh",
-    cus_phone: enroll.phone,
-    cus_fax: "",
-    ship_name: "",
-    ship_add1: "",
-    ship_add2: "",
-    ship_city: "",
-    ship_state: "",
-    ship_postcode: "",
-    ship_country: "Bangladesh",
+    student_phone: enroll.phone,
   };
-  // const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
-  // sslcz.init(data).then((apiResponse) => {
-  //   // Redirect the user to payment gateway
-  //   let GatewayPageURL = apiResponse.GatewayPageURL;
-  //   res.redirect(GatewayPageURL);
-  //   console.log("Redirecting to: ", GatewayPageURL);
-  // });
+  // console.log(data);
+
+  const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
+  sslcz.init(data).then((apiResponse) => {
+    // Redirect the user to payment gateway
+    let GatewayPageURL = apiResponse.GatewayPageURL;
+    // sending url to redirect in frontend
+    res.send({ url: GatewayPageURL });
+
+    // this is the final data to store in database
+    const finalEnroll = {
+      course,
+      paidStatus: false,
+      transaction: tran_id,
+      data,
+    };
+    // inserting data on database
+    const result = enrollCollection.insertOne(finalEnroll);
+  });
+
+  // hitting on a route for ensuring that the payment success
+  app.post("/enroll/success/:tranId", async (req, res) => {
+    const tranId = req.params.tranId;
+    console.log(tranId);
+    const result = await enrollCollection.updateOne(
+      { transaction: tranId },
+      {
+        $set: {
+          paidStatus: true,
+        },
+      }
+    );
+    if (result.modifiedCount > 0) {
+      res.redirect(`http://localhost:5173`);
+    }
+  });
 });
+
 app.use("/get", allTeacher); // all teaacher get
 app.use("/get", allUser); // all user get for admin
 
