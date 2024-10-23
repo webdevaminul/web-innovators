@@ -7,8 +7,16 @@ const courseCollection = database.collection("courses");
 exports.createCourse = async (req, res, next) => {
   try {
     // here code
-    const { name, email, title, price, status, category, detailsCourse } =
-      req.body;
+    const {
+      name,
+      email,
+      title,
+      price,
+      oldPrice,
+      status,
+      category,
+      detailsCourse,
+    } = req.body;
 
     const image = req?.file?.path;
     const newCourse = {
@@ -16,6 +24,7 @@ exports.createCourse = async (req, res, next) => {
       email,
       title,
       price,
+      oldPrice,
       status,
       category,
       detailsCourse,

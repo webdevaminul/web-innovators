@@ -7,16 +7,18 @@ const CreateCourse = () => {
   const [category, setCategory] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
   const { user } = useSelector((state) => state.authUsers);
+  const [loading, setLoading] = useState(false)
   const name = user.userInfo.userName;
   const email = user.userInfo.userEmail;
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
-
+    setLoading(true)
     // FormData object to handle file and other data
     const form = e.target;
     const title = form.title.value;
     const price = form.price.value;
+    const oldPrice = form.oldPrice.value;
     const detailsCourse = form.textarea.value;
     const status = "pending";
     const file = e.target.image.files[0];
@@ -27,6 +29,7 @@ const CreateCourse = () => {
     formData.append("email", email);
     formData.append("title", title);
     formData.append("price", price);
+    formData.append("oldPrice", oldPrice);
     formData.append("status", status);
     formData.append("category", category);
     formData.append("detailsCourse", detailsCourse);
@@ -48,8 +51,9 @@ const CreateCourse = () => {
         config
       );
 
-      if(response?.data?.courseId){
-        toast.success(response.data.message)
+      if (response?.data?.courseId) {
+        toast.success(response.data.message);
+        setLoading(false)
       }
     } catch (error) {
       console.log(error);
@@ -95,15 +99,7 @@ const CreateCourse = () => {
             className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
             placeholder="Your course title"
           />
-          <input
-            type="number"
-            name="price"
-            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
-            placeholder="Your course price"
-          />
-        </div>
 
-        <div className="md:my-6 md:flex gap-4 relative">
           <select
             name="select"
             id="select"
@@ -111,10 +107,32 @@ const CreateCourse = () => {
             className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 text-text py-2 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
           >
             <option className="font-semibold text-text">Please Select</option>
-            <option className="font-semibold text-text">Freelancing</option>
-            <option className="font-semibold text-text">Web Design</option>
+            <option className="font-semibold text-text">Language</option>
+            <option className="font-semibold text-text">Marketing</option>
+            <option className="font-semibold text-text">Photography</option>
+            <option className="font-semibold text-text">Business</option>
+            <option className="font-semibold text-text">Videography</option>
+            <option className="font-semibold text-text">Design</option>
+            <option className="font-semibold text-text">Fitness</option>
+            <option className="font-semibold text-text">Development</option>
           </select>
+        </div>
 
+        <div className="md:my-6 md:flex gap-4">
+          <input
+            type="number"
+            name="price"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            placeholder="Your course discount price"
+          />
+          <input
+            type="number"
+            name="oldPrice"
+            className="mt-1 block md:w-1/2 w-full rounded-md border border-slate-300 bg-backgroundPrimary px-3 py-2 placeholder-placeholder shadow-sm placeholder:font-semibold focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 sm:text-sm"
+            placeholder="Your course regular price"
+          />
+        </div>
+        <div className="md:my-6 relative">
           <label className="form-control text-text">
             Course cover picture
             <input
@@ -153,9 +171,11 @@ const CreateCourse = () => {
         </div>
         <div className="text-center">
           <button
+          disabled={loading}
             type="submit"
-            className="cursor-pointer rounded-lg bg-blue-700 px-8 py-5 text-sm font-semibold text-white"
+            className={`cursor-pointer rounded-lg px-8 py-5 text-sm font-semibold text-white ${loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-700'}`}
           >
+            {loading ? "loading..." : "Submit"}
             Submit
           </button>
         </div>
