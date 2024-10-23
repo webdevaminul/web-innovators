@@ -37,14 +37,14 @@ const videoUrl = req?.files?.video?.[0]?.path;
     const result = await courseCollection.insertOne(newCourse);
 
     // Success response
-    res.status(201).json({
+    return res.status(201).json({
       message: "Course created successfully!",
       courseId: result.insertedId,
       course: newCourse,
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error" });
     next(error);
   }
 };
@@ -92,7 +92,7 @@ exports.availableCourse = async (req, res, next) => {
     }
 
     // Send response if courses are found
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: courses,
       currentPage,
@@ -100,7 +100,7 @@ exports.availableCourse = async (req, res, next) => {
       totalCourses, // Total number of courses for client to know
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message:
         "An error occurred while fetching courses. Please try again later.",
@@ -124,12 +124,12 @@ exports.allCourse = async (req, res, next) => {
     }
 
     // Always return a valid response with an array
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       data: courses,
     });
   } catch (error) {
-    res.status(500).json({
+    return res.status(500).json({
       success: false,
       message:
         "An error occurred while fetching courses. Please try again later.",
@@ -150,12 +150,12 @@ exports.updateCourse = async (req, res, next) => {
       },
     };
     const result = await courseCollection.updateOne(query, updateDoc);
-    res.status(200).json({
+    return res.status(200).json({
       message: `This course has been ${updateStatus} successfully!`,
       data: result,
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
     next(error);
   }
 };
