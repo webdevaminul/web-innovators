@@ -12,8 +12,7 @@ const FirstSection = ({ singleCourse = {} }) => {
   };
   const { isLoading } = useAvailableCourse();
   if (isLoading) return <Loader />;
-  console.log(singleCourse);
-  const { detailsCourse, price, oldPrice, title } = singleCourse;
+  const { detailsCourse, price, oldPrice, title, _id } = singleCourse;
 
   return (
     <div className="md:flex md:items-center justify-between gap-7">
@@ -61,7 +60,13 @@ const FirstSection = ({ singleCourse = {} }) => {
           Enroll Now
         </button>
       </div>
-      {isOpen && <EnrollModal toggleModal={toggleModal} />}
+      {isOpen && (
+        <EnrollModal
+          courseTitle={title}
+          courseId={_id}
+          toggleModal={toggleModal}
+        />
+      )}
     </div>
   );
 };
