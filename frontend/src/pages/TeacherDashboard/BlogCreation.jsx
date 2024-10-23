@@ -54,8 +54,6 @@ const BlogCreation = () => {
     formData.append("time", time || " ");
     formData.append("status", status || " ");
 
-
-    console.log("formdata", formData);
     try {
       // Sending POST request with Axios
       axiosInstance
@@ -68,16 +66,17 @@ const BlogCreation = () => {
           if (response?.data?.postId) {
             toast.success(response.data.message);
             toast.success(response.data.message2);
+            form.reset();
+            setLoading(false);
           }
         })
         .catch((error) => {
-          console.error("Error Creating Course:", error);
+          console.error("Error Creating Blog:", error);
         });
     } catch (error) {
       console.log(error);
     } finally {
       setLoading(false);
-      form.reset();
     }
   };
 
@@ -140,7 +139,7 @@ const BlogCreation = () => {
           </div>
           <div className="mb-4 relative">
             <label className="form-control text-text">
-              Course cover picture
+              Blog cover picture
               <input
                 required
                 onChange={handleImageChange}
@@ -183,7 +182,7 @@ const BlogCreation = () => {
             <button
               type="submit"
               className={`${
-                loading ? "bg-gray-400" : "bg-violet-600 hover:bg-violet-700"
+                loading ? "bg-gray-400 !cursor-not-allowed " : "bg-violet-600 hover:bg-violet-700"
               } text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline`}
               disabled={loading}
             >

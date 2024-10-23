@@ -10,8 +10,6 @@ const AdminBlogManage = () => {
   const status = "approved";
   const { blogs, isLoading, refetch } = useBlogPost();
 
-  const baseUrl = axiosInstance.defaults.baseURL;
-
  const handleDelete = async (id) =>{
   try {
     // Show confirmation alert before deletion
@@ -96,13 +94,13 @@ const AdminBlogManage = () => {
               <td className="border border-gray-300 px-4 py-2">
                 <img
                   className="w-16 h-16 object-cover"
-                  src={`${baseUrl}${post?.image}`}
+                  src={post?.image}
                   alt={post.title}
                 />
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {" "}
-                116 {post.title}{" "}
+                 {post.title}{" "}
               </td>
               <td className="border border-gray-300 px-4 py-2">
                 {new Date(post.date).toLocaleString()}

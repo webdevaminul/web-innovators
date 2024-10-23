@@ -1,11 +1,8 @@
 // Your main server file
-
 const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const multer = require("multer");
-const path = require("path");
 
 const { connectDB, ObjectId } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
@@ -20,9 +17,6 @@ const instructorRoutes = require("./api/routes/instructor.route");
 
 const blogRoutes = require("./api/routes/blog.route");
 
-const { createCourse } = require("./api/controllers/course.controller");
-const { createBlogPost } = require("./api/controllers/blog.controller");
-
 // Load environment variables
 dotenv.config();
 
@@ -32,6 +26,7 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: true }));
 
 // CORS Middleware
 const allowedOrigins =
@@ -68,58 +63,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Connect to MongoDB
-// connectDB();
-
-// Serve the "public/images" directory for uploaded images
-app.use("/images", express.static(path.join(__dirname, "public/images")));
-
-// multer using for file upload
-const folder = "./public/images";
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, folder); // Where to store the files
-  },
-  filename: (req, file, cb) => {
-    // control file name like -> important file.png => important-file-time(forUni).png
-    const fileExt = path.extname(file?.originalname);
-    const fileName =
-      (file.originalname
-        ? file.originalname
-            .replace(fileExt, "") // here your file name will be -> important file
-            .toLowerCase()
-            .split(" ") // split by spaces, split return array -> ['important', 'file']
-            .join("-") // join with hyphen -> important-file
-        : "unknown-file") + // if file name is nothing
-      "-" +
-      Date.now(); // Add timestamp nano-second -> important-file-123456
-    cb(null, fileName + fileExt); // here filename and fileExt -> important-file-123456.png
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  limits: {
-    fileSize: 2000000, // 1 mb = 1000kb = 1000000 byte
-  },
-  fileFilter: (req, file, cb) => {
-    if (
-      file.mimetype === "image/jpg" ||
-      file.mimetype === "image/jpeg" ||
-      file.mimetype === "image/png"
-    ) {
-      cb(null, true);
-    } else {
-      cb(new Error("Only .jpg, .png, or .jpeg formats are allowed!"));
-    }
-  },
-});
-
-// POST route to upload file and save data in MongoDB
-app.post("/create/course", upload.single("coverPicture"), createCourse);
-app.post("/blog/createBlog", upload.single("blogImage"), createBlogPost);
-
 // Routes
 app.use("/test", testRoutes);
 app.use("/auth", authRoutes);
@@ -132,13 +75,14 @@ app.use("/all", coursesRoutes); // all courses get for admin
 app.use("/courses", coursesRoutes); // all courses get for user, teacher and student
 app.use("/delete", coursesRoutes); // delete course by teacher
 app.use("/approve", coursesRoutes); // approve courses from admin
+app.use("/course", coursesRoutes);
 
 app.use("/blog", blogRoutes);
 
 app.use("/get", allTeacher); // all teaacher get
 app.use("/get", allUser); // all user get for admin
 
-// -------------------post route for enrollment--------------------------
+// --------------------------post route for enrollment--------------------------
 // generating transaction ID for student
 const tran_id = new ObjectId().toString();
 
@@ -188,6 +132,8 @@ app.post("/enroll", async (req, res) => {
   //   console.log("Redirecting to: ", GatewayPageURL);
   // });
 });
+app.use("/get", allTeacher); // all teaacher get
+app.use("/get", allUser); // all user get for admin
 
 // Custom error handling middleware
 app.use(errorMiddleware);
