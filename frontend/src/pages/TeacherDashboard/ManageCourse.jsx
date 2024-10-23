@@ -8,7 +8,6 @@ import Loader from "../../utils/Loader";
 import { toast } from "react-toastify";
 
 const ManageCourse = () => {
-  const baseUrl = axiosInstance.defaults.baseURL;
   const status = "approved";
   const { courses, isLoading, refetch } = useAllCourse({ status });
 
@@ -88,7 +87,7 @@ const ManageCourse = () => {
                   <span className="avatar">
                     <span className="mask mask-squircle h-12 w-12">
                       <img
-                        src={`${baseUrl}${course?.coverPicture}`}
+                        src={course?.coverPicture}
                         alt={course.title}
                       />
                     </span>

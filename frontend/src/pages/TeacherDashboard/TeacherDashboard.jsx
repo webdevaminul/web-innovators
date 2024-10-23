@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { HiBars3, HiOutlineUsers } from "react-icons/hi2";
 import { IoHomeOutline } from "react-icons/io5";
@@ -15,7 +15,8 @@ const TeacherDashboard = () => {
   const [isRotating, setIsRotating] = useState(false);
   const sidebarRef = useRef(null);
   const loginUser = user?.userInfo.userName;
-
+  const location = useLocation();
+  const isActive = (route) => location?.pathname === route;
 
   const handleRotating = () => {
     setIsRotating(true);
@@ -64,18 +65,22 @@ const TeacherDashboard = () => {
             <li>
               <Link to="home" className="active">
                 <button
-                  className="font-bai transition-all py-3 rounded-lg text-text w-full flex items-center gap-4 px-4"
+                  className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
+                    isActive("/teacher-dashboard/home") ? "bg-blue-400" : ""}`}
                   type="button"
                 >
                   <IoHomeOutline className="w-5 h-5" />
-                  <p className="block font-bai text-base text-text font-medium">dashboard</p>
+                  <p className="block font-bai text-base text-text font-medium">
+                    dashboard
+                  </p>
                 </button>
               </Link>
             </li>
             <li>
               <Link to="profile">
                 <button
-                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
+                    isActive("/teacher-dashboard/profile") ? "bg-blue-400" : ""}`}
                   type="button"
                 >
                   <HiOutlineUsers className="w-5 h-5" />
@@ -88,7 +93,8 @@ const TeacherDashboard = () => {
             <li>
               <Link to="/teacher-dashboard/manage-course">
                 <button
-                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
+                    isActive("/teacher-dashboard/manage-course") ? "bg-blue-400" : ""}`}
                   type="button"
                 >
                   <MdManageAccounts className="w-5 h-5" />
@@ -101,7 +107,8 @@ const TeacherDashboard = () => {
             <li>
               <Link to="/teacher-dashboard/create-course">
                 <button
-                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
+                    isActive("/teacher-dashboard/create-course") ? "bg-blue-400" : ""}`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
@@ -111,11 +118,11 @@ const TeacherDashboard = () => {
                 </button>
               </Link>
             </li>
-
             <li>
               <Link to="/teacher-dashboard/blog-Management">
                 <button
-                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
+                    isActive("/teacher-dashboard/blog-Management") ? "bg-blue-400" : ""}`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
@@ -129,7 +136,8 @@ const TeacherDashboard = () => {
             <li>
               <Link to="/teacher-dashboard/create-post">
                 <button
-                  className="middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text hover:bg-white/10 active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize"
+                  className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
+                    isActive("/teacher-dashboard/create-post") ? "bg-blue-400" : ""}`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
@@ -194,7 +202,11 @@ const TeacherDashboard = () => {
                 type="button"
               >
                 <span className="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
-                  {isOpen ? <RxCross1 className="w-5 h-5 " /> : <HiBars3 className="w-5 h-5" />}
+                  {isOpen ? (
+                    <RxCross1 className="w-5 h-5 " />
+                  ) : (
+                    <HiBars3 className="w-5 h-5" />
+                  )}
                 </span>
               </button>
 
@@ -243,7 +255,11 @@ const TeacherDashboard = () => {
             <div className="flex w-full flex-wrap items-center justify-center gap-6 px-2 md:justify-between">
               <p className="block antialiased font-bai text-sm leading-normal font-normal text-text">
                 © 2023, made with by{" "}
-                <a href="/" target="_blank" className="transition-colors hover:text-blue-500">
+                <a
+                  href="/"
+                  target="_blank"
+                  className="transition-colors hover:text-blue-500"
+                >
                   Learn Up
                 </a>{" "}
                 for a better web.{" "}

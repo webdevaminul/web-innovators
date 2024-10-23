@@ -12,7 +12,6 @@ const BlogPostTable = () => {
   const { blogs, isLoading, refetch } = useBlogPost();
   const [selectedBlog, setSelectedBlog] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const baseUrl = axiosInstance.defaults.baseURL;
 
   const handleDelete = async (id) => {
     try {
@@ -80,7 +79,7 @@ const BlogPostTable = () => {
             <tr key={post._id}>
               <td className="border border-gray-300 px-4 py-2">
                 <img
-                  src={`${baseUrl}${post?.image}`}
+                  src={post?.image}
                   alt={post.title}
                   className="w-16 h-16 object-cover"
                 />
