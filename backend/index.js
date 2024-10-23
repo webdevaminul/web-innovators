@@ -5,9 +5,9 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const multer = require("multer");
-const path = require("path")
+const path = require("path");
 
-const { connectDB } = require("./api/config/mongoDB");
+const { connectDB, ObjectId } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const coursesRoutes = require("./api/routes/course.route");
@@ -18,7 +18,7 @@ const allUser = require("./api/routes/instructor.route");
 const allTeacher = require("./api/routes/instructor.route");
 const instructorRoutes = require("./api/routes/instructor.route");
 
-const blogRoutes = require("./api/routes/blog.route")
+const blogRoutes = require("./api/routes/blog.route");
 
 const { createCourse } = require("./api/controllers/course.controller");
 const { createBlogPost } = require("./api/controllers/blog.controller");
@@ -34,9 +34,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 // CORS Middleware
-const allowedOrigins = process.env.NODE_ENV === "development"
-  ? "http://localhost:5173"
-  : "https://web-innovators-learnup.vercel.app";
+const allowedOrigins =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5173"
+    : "https://web-innovators-learnup.vercel.app";
 
 app.use(
   cors({
@@ -127,16 +128,66 @@ app.use("/user", userRoutes);
 app.use("/be", instructorRoutes);
 app.use("/approved", instructorRoutes);
 
-app.use("/all", coursesRoutes)  // all courses get for admin
-app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
-app.use("/delete", coursesRoutes)  // delete course by teacher 
-app.use("/approve", coursesRoutes)  // approve courses from admin
+app.use("/all", coursesRoutes); // all courses get for admin
+app.use("/courses", coursesRoutes); // all courses get for user, teacher and student
+app.use("/delete", coursesRoutes); // delete course by teacher
+app.use("/approve", coursesRoutes); // approve courses from admin
 
-app.use("/blog",blogRoutes)
+app.use("/blog", blogRoutes);
 
-app.use("/get", allTeacher)  // all teaacher get
-app.use("/get", allUser)  // all user get for admin 
+app.use("/get", allTeacher); // all teaacher get
+app.use("/get", allUser); // all user get for admin
 
+// -------------------post route for enrollment--------------------------
+// generating transaction ID for student
+const tran_id = new ObjectId().toString();
+
+app.post("/enroll", async (req, res) => {
+  const enroll = req.body;
+  // specific course getting here
+  // const course = await courseCollection.findOne({
+  //   _id: new ObjectId(req.body.courseId),
+  // });
+  // console.log(course);
+  // console.log(course.price);
+  const data = {
+    total_amount: "wll be the price course.price",
+    currency: "BDT",
+    tran_id: tran_id, // use unique tran_id for each api call
+    success_url: "http://localhost:3030/success",
+    fail_url: "http://localhost:3030/fail",
+    cancel_url: "http://localhost:3030/cancel",
+    ipn_url: "http://localhost:3030/ipn",
+    shipping_method: "",
+    product_name: enroll.courseTitle,
+    product_category: "Electronic",
+    product_profile: "general",
+    cus_name: enroll.name,
+    cus_email: enroll.studentEmail,
+    cus_add1: enroll.address,
+    cus_add2: "",
+    cus_city: "",
+    cus_state: "",
+    cus_postcode: "",
+    cus_country: "Bangladesh",
+    cus_phone: enroll.phone,
+    cus_fax: "",
+    ship_name: "",
+    ship_add1: "",
+    ship_add2: "",
+    ship_city: "",
+    ship_state: "",
+    ship_postcode: "",
+    ship_country: "Bangladesh",
+  };
+  // const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
+  // sslcz.init(data).then((apiResponse) => {
+  //   // Redirect the user to payment gateway
+  //   let GatewayPageURL = apiResponse.GatewayPageURL;
+  //   res.redirect(GatewayPageURL);
+  //   console.log("Redirecting to: ", GatewayPageURL);
+  // });
+});
 
 // Custom error handling middleware
 app.use(errorMiddleware);
