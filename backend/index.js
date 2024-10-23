@@ -156,7 +156,6 @@ app.post("/enroll", async (req, res) => {
 
     // this is the final data to store in database
     const finalEnroll = {
-      course,
       paidStatus: false,
       transaction: tran_id,
       data,
@@ -165,7 +164,7 @@ app.post("/enroll", async (req, res) => {
     const result = enrollCollection.insertOne(finalEnroll);
   });
 
-  // hitting on a route for ensuring that the payment success
+  // hitting on a route for ensuring that the payment success routes
   app.post("/enroll/success/:tranId", async (req, res) => {
     const tranId = req.params.tranId;
     console.log(tranId);
@@ -178,6 +177,16 @@ app.post("/enroll", async (req, res) => {
       }
     );
     if (result.modifiedCount > 0) {
+      res.redirect(`http://localhost:5173`);
+    }
+  });
+
+  // payment fail routes
+  app.post("/enroll/fail/:tranId", async (req, res) => {
+    const tranId = req.params.tranId;
+    const result = await enrollCollection.deleteOne({ transaction: tranId });
+
+    if (result.deletedCount) {
       res.redirect(`http://localhost:5173`);
     }
   });
