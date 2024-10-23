@@ -1,12 +1,10 @@
 import { useState } from "react";
-import axiosInstance from "../../api/axiosInstance";
 import useBlogPost from "../../api/useBlogPost";
 import { Link } from "react-router-dom";
 
 
 const BlogPosts = () => {
   const { blogs, isLoading, refetch } = useBlogPost();
-  const baseUrl = axiosInstance.defaults.baseURL;
 
   const [allPosts, setAllPosts] = useState([]);
   const [posts, setPosts] = useState([]);
