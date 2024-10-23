@@ -23,12 +23,12 @@ const EnrollModal = ({ toggleModal, courseId, courseTitle }) => {
     console.log(email, studentId);
     try {
       // Sending POST request with Axios
-      axiosInstance.post("/enroll", data, {});
-      // .then((response) => {
-      //   if (response.data.courseId) {
-      //     toast.success(response.data.message);
-      //   }
-      // })
+      axiosInstance.post("/enroll", data, {}).then((res) => {
+        const url = res.data?.url;
+
+        window.location.replace(url);
+      });
+
       // .catch((error) => {
       //   console.error("Error Creating Course:", error);
       // });
