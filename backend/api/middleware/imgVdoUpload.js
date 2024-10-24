@@ -84,7 +84,7 @@ const uploadFiles = (req, res, next) => {
     storage: storage,
     fileFilter: (req, files, cb) => {
       // File type validation
-      console.log('files 86',req.files)
+      
       if (files.fieldname === "image") {
         if (
           files.mimetype === "image/jpg" ||
@@ -142,7 +142,6 @@ const uploadFiles = (req, res, next) => {
 
     // File size validation for image (4MB) and video (100MB)
     const files = req?.files;
-
     // // Validate the image size (max 4MB)
     if (files?.image[0]?.size > 4 * 1024 * 1024) {
       return res.status(400).json({ error: "Image file size exceeds 4MB." });

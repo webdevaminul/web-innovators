@@ -85,7 +85,7 @@ exports.availableCourse = async (req, res, next) => {
       .limit(itemsPerPage)
       .toArray();
 
-    if (courses.length === 0) {
+    if (!courses.length) {
       return res
         .status(404)
         .json({ success: false, message: "No courses found", data: [] });

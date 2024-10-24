@@ -63,6 +63,9 @@ const CreateCourse = () => {
       }
     } catch (error) {
       console.log(error);
+      toast.error('Failed to uploaded')
+    }finally{
+      setLoading(false)
     }
   };
 
