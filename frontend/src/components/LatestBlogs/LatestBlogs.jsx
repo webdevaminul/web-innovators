@@ -21,7 +21,9 @@ const LatestBlogs = () => {
   // Fetch and sort the latest blogs when the component mounts
   useEffect(() => {
     const fetchData = () => {
-      const sortedBlogs = postsBlogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const sortedBlogs = postsBlogs.sort(
+        (a, b) => new Date(b.date) - new Date(a.date)
+      );
       setLatestBlogs(sortedBlogs.slice(0, 2)); // Extract the top 2 latest blogs
     };
 
@@ -38,7 +40,9 @@ const LatestBlogs = () => {
 
       <div className="grid grid-cols-2 gap-4">
         {latestBlogs.length === 0 ? (
-          <p className="text-center text-3xl py-10 col-span-2">No blogs available at the moment</p>
+          <p className="text-center text-3xl py-10 col-span-2">
+            No blogs available at the moment
+          </p>
         ) : (
           latestBlogs.map((blog, index) => (
             <Link
@@ -65,10 +69,14 @@ const LatestBlogs = () => {
                 </span>
 
                 {/* Blog title */}
-                <h2 className="text-xl font-semibold">{blog.title || "Blog Title"}</h2>
+                <h2 className="text-xl font-semibold">
+                  {blog.title || "Blog Title"}
+                </h2>
 
                 {/* Blog description */}
-                <p className="text-sm">{blog.description || "No description available."}</p>
+                <p className="text-sm">
+                  {blog.description || "No description available."}
+                </p>
 
                 {/* Blog author and date */}
                 <div className="flex items-center justify-between">
@@ -78,9 +86,9 @@ const LatestBlogs = () => {
                       src={blog.authorImage || "https://via.placeholder.com/48"}
                       alt={blog.author || "Author avatar"}
                     />
-                    <Link to="" className="mx-2 font-semibold text-textPrimary">
+                    <p className="mx-2 font-semibold text-textPrimary">
                       {blog.author || "Writer Name"}
-                    </Link>
+                    </p>
                   </div>
 
                   <span className="mx-1 text-xs text-textPrimary">
