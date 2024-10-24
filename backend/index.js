@@ -9,7 +9,7 @@ dotenv.config();
 const SSLCommerzPayment = require("sslcommerz-lts");
 const store_id = process.env.STORE_ID;
 const store_passwd = process.env.STORE_PASS;
-const is_live = false; //true for live, false for sandbox
+const is_live = process.env.NODE_ENV === "development" ? false : true; //true for live, false for sandbox
 
 const { connectDB, client, ObjectId } = require("./api/config/mongoDB");
 const testRoutes = require("./api/routes/test.route");
@@ -109,10 +109,10 @@ app.post("/enroll", async (req, res) => {
     currency: "BDT",
     courseId: course._id,
     tran_id: tran_id, // use unique tran_id for each api call
-    success_url: `http://localhost:5000/enroll/success/${tran_id}`,
-    fail_url: `http://localhost:5000/enroll/fail/${tran_id}`,
-    cancel_url: "http://localhost:3030/cancel",
-    ipn_url: "http://localhost:3030/ipn",
+    success_url: `${process.env.SERVER_API}/enroll/success/${tran_id}`,
+    fail_url: `${process.env.SERVER_API}/enroll/fail/${tran_id}`,
+    cancel_url: `${process.env.SERVER_API}/enroll/cancel/${tran_id}`,
+    ipn_url: `${process.env.SERVER_API}/enroll/ipn/${tran_id}`,
     shipping_method: "Courier",
     product_name: " ",
     product_category: " ",
@@ -177,7 +177,7 @@ app.post("/enroll", async (req, res) => {
       }
     );
     if (result.modifiedCount > 0) {
-      res.redirect(`http://localhost:5173`);
+      res.redirect(`${process.env.CLIENT_API}`);
     }
   });
 
@@ -187,13 +187,10 @@ app.post("/enroll", async (req, res) => {
     const result = await enrollCollection.deleteOne({ transaction: tranId });
 
     if (result.deletedCount) {
-      res.redirect(`http://localhost:5173`);
+      res.redirect(`${process.env.CLIENT_API}`);
     }
   });
 });
-
-app.use("/get", allTeacher); // all teaacher get
-app.use("/get", allUser); // all user get for admin
 
 // Custom error handling middleware
 app.use(errorMiddleware);
