@@ -51,6 +51,10 @@ export default function SignIn() {
       }
     },
     onError: (error) => {
+      console.log("full error", error);
+      console.log("response error", error.response);
+      console.log("data error", error.response?.data);
+      console.log("message error", error.response?.data?.message);
       dispatch(
         loginFailure(error.response?.data?.message || "Something went wrong. Please try again")
       ); // Dispatch login failure action on error
@@ -67,7 +71,7 @@ export default function SignIn() {
     <main className="min-h-[calc(100vh-3.8rem)] max-w-xs mx-auto flex items-center justify-center">
       <Heading heading={"Sign In"} />
       <section className="flex flex-col gap-4 justify-center p-4 w-full">
-        {/* Switch between signup and signin */}
+        {/* Sign in Title */}
         <div>
           <p className="text-2xl sm:text-3xl">Sign In</p>
           <p className="text-sm">Fill in the form to access your account</p>

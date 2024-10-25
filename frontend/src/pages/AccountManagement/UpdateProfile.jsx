@@ -111,7 +111,7 @@ export default function UpdateProfile() {
   };
 
   return (
-    <main className="min-h-[90vh] max-w-sm mx-auto flex items-center justify-center">
+    <main className="min-h-[90vh] max-w-sm mx-auto flex items-center justify-center pb-10">
       <section className="flex flex-col gap-4 justify-center p-4 w-full">
         <Title
           title={"Update Profile"}
@@ -136,7 +136,7 @@ export default function UpdateProfile() {
 
           {/* Profile Image */}
           <div className="col-span-4 flex flex-col items-center justify-center">
-            <figure className="w-40 h-40 border border-highlightGray rounded-full relative">
+            <figure className="w-40 h-40 border border-borderLight rounded-full relative">
               <img
                 className="w-full h-full object-cover object-center rounded-full"
                 src={avatarURL || user?.userInfo?.userPhoto}
@@ -144,7 +144,7 @@ export default function UpdateProfile() {
               />
               <span
                 onClick={() => imageRef.current.click()}
-                className="absolute bottom-2 right-2 z-10 bg-primary text-textBg cursor-pointer p-2 rounded-full transition-none"
+                className="absolute bottom-2 right-2 z-10 bg-backgroundBlue text-textWhite cursor-pointer p-2 rounded-full transition-none"
               >
                 <FaEdit className="transition-none" />
               </span>

@@ -13,7 +13,7 @@ export default function Home() {
       <Banner />
       <Categories />
       <CoursesSection />
-      <LatestBlogs />
+      {/* <LatestBlogs /> */}
       <WhyChooseUs />
       <Reviews />
     </>

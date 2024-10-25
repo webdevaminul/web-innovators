@@ -3,19 +3,14 @@ const express = require("express");
 const dotenv = require("dotenv");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-
 const { connectDB } = require("./api/config/mongoDB");
-const testRoutes = require("./api/routes/test.route");
 const authRoutes = require("./api/routes/auth.route");
 const coursesRoutes = require("./api/routes/course.route");
 const userRoutes = require("./api/routes/user.route");
-const errorMiddleware = require("./api/middleware/errorMiddleware");
-
 const allUser = require("./api/routes/instructor.route");
 const allTeacher = require("./api/routes/instructor.route");
 const instructorRoutes = require("./api/routes/instructor.route");
-
-const blogRoutes = require("./api/routes/blog.route")
+const blogRoutes = require("./api/routes/blog.route");
 
 // Load environment variables
 dotenv.config();
@@ -29,9 +24,10 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // CORS Middleware
-const allowedOrigins = process.env.NODE_ENV === "development"
-  ? "http://localhost:5173"
-  : "https://web-innovators-learnup.vercel.app";
+const allowedOrigins =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:5173"
+    : "https://web-innovators-learnup.vercel.app";
 
 app.use(
   cors({
@@ -62,33 +58,6 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-app.use("/test", testRoutes);
-app.use("/auth", authRoutes);
-app.use("/user", userRoutes);
-
-app.use("/be", instructorRoutes);
-app.use("/approved", instructorRoutes);
-
-app.use("/all", coursesRoutes)  // all courses get for admin
-app.use("/courses", coursesRoutes)  // all courses get for user, teacher and student
-app.use("/delete", coursesRoutes)  // delete course by teacher 
-app.use("/approve", coursesRoutes)  // approve courses from admin
-app.use("/course", coursesRoutes);
-
-app.use("/blog",blogRoutes)
-
-app.use("/get", allTeacher)  // all teaacher get
-app.use("/get", allUser)  // all user get for admin 
-
-// Custom error handling middleware
-app.use(errorMiddleware);
-
-// Root route
-app.get("/", (req, res) => {
-  res.send("LearnUP server is running fine");
-});
-
 // Connect to MongoDB and start the server
 connectDB()
   .then(() => {
@@ -99,5 +68,30 @@ connectDB()
     console.error("Failed to connect to MongoDB:", err);
     process.exit(1);
   });
+
+// Routes
+app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/be", instructorRoutes);
+app.use("/approved", instructorRoutes);
+app.use("/all", coursesRoutes); // all courses get for admin
+app.use("/courses", coursesRoutes); // all courses get for user, teacher and student
+app.use("/delete", coursesRoutes); // delete course by teacher
+app.use("/approve", coursesRoutes); // approve courses from admin
+app.use("/course", coursesRoutes);
+app.use("/blog", blogRoutes);
+app.use("/get", allTeacher); // all teaacher get
+app.use("/get", allUser); // all user get for admin
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("LearnUP server is running fine");
+});
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  return res.status(statusCode).json({ success: false, statusCode, message });
+});
 
 module.exports = app;

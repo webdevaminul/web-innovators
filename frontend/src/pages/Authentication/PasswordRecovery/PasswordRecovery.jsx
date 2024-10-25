@@ -53,10 +53,10 @@ export default function PasswordRecovery() {
     <main className="min-h-[90vh] max-w-sm mx-auto flex items-center justify-center">
       <section className="flex flex-col gap-4 justify-center p-4 w-full">
         <div>
-          <h2 className="text-xl md:text-3xl text-center md:font-light text-primary">
+          <h2 className="text-xl md:text-3xl text-center md:font-light text-textPrimary">
             Set a new password
           </h2>
-          <p className="text-center text-primary mb-5 font-sans font-light">
+          <p className="text-center text-textPrimary mb-5 font-sans font-light">
             Combine alphabet with number to create a secure password
           </p>
         </div>
@@ -66,16 +66,16 @@ export default function PasswordRecovery() {
           {/* Set new password input */}
           <div
             className={`flex items-center border rounded ${
-              errors.newPassword ? "border-red-500" : "border-highlightGray/25"
+              errors.newPassword ? "border-red-500" : "border-borderLight"
             } mt-4 `}
           >
-            <span className="p-2 text-xl text-highlightGray/75">
+            <span className="p-2 text-xl text-textPrimary">
               <MdPassword />
             </span>
             <input
               type={`${showNewPassword ? "text" : "password"}`}
               placeholder="New password"
-              className={`bg-transparent outline-none placeholder:text-highlightGray/75 p-2 w-full`}
+              className={`bg-transparent outline-none placeholder:text-textPrimary p-2 w-full`}
               {...register("newPassword", {
                 required: "Password can not be empty",
                 minLength: {
@@ -101,7 +101,7 @@ export default function PasswordRecovery() {
             {newPassValue.length > 0 && (
               <span
                 onClick={() => setShowNewPassword(!showNewPassword)}
-                className="p-2 text-xl text-highlightGray/75"
+                className="p-2 text-xl text-textPrimary"
               >
                 {showNewPassword ? (
                   <FaRegEyeSlash className="cursor-pointer" />
@@ -119,7 +119,7 @@ export default function PasswordRecovery() {
 
           {/* Error message */}
           {errorMessage && (
-            <p className="text-primaryWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdError />
               </span>
@@ -129,7 +129,7 @@ export default function PasswordRecovery() {
 
           {/* Success message */}
           {successMessage && (
-            <p className="text-primaryBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdCheckCircle />
               </span>
@@ -140,7 +140,7 @@ export default function PasswordRecovery() {
           <button
             disabled={loading}
             type="submit"
-            className="p-2 mt-4 bg-highlight hover:bg-highlightHover border-none rounded text-primaryWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-textWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
           >
             {loading ? "Loading..." : "Change password"}
           </button>
