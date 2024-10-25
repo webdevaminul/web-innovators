@@ -63,6 +63,7 @@ const BeInstructor = () => {
   return (
     <div>
       <Heading heading={"Become a teacher"} />
+
       {/* Breadcumb in here */}
       <div className="bg-black py-14">
         <h1 className="text-white md:text-5xl text-3xl md:mx-12 mx-5 px-4 font-bai font-semibold border-l-[3px] border-secondary ">

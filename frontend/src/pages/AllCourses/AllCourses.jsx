@@ -12,13 +12,17 @@ const AllCourses = () => {
   const [currentPage, setCurrentPage] = useState(1); // Track the current page
   const itemsPerPage = 6; // Number of items to display per page
 
+  const status = "approved"
   // Fetch courses from API including totalPages
   const { courses, isLoading, totalPages } = useAvailableCourse(
     sortOrder,
     currentPage,
     itemsPerPage,
-    selectedCategory
+    selectedCategory,
+    status
   ); // All course data from the hook
+  const homePageShownCourse = courses?.filter(course => course.status === status) ;
+  console.log('homePageShownCourse',homePageShownCourse)
 
   useEffect(() => {
     setSelectedCategory(categoryName || null);
@@ -191,14 +195,14 @@ const AllCourses = () => {
 
             <div className="flex flex-col items-center justify-center">
               <div className="mb-10">
-                {courses?.length === 0 ? (
+                {homePageShownCourse?.length === 0 ? (
                   <div className="text-2xl font-bold text-gray-500 mt-10">
                     No courses available for this category
                   </div>
                 ) : (
                   <div className="mb-10">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                      {courses?.map((course) => (
+                      {homePageShownCourse?.map((course) => (
                         <CourseCard key={course._id} course={course} />
                       ))}
                     </div>

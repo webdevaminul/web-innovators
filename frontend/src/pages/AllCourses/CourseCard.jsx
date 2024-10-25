@@ -1,12 +1,9 @@
 import { FaBangladeshiTakaSign } from "react-icons/fa6";
 import { Link } from "react-router-dom";
-import axiosInstance from "../../api/axiosInstance";
 import PropTypes from "prop-types";
 
 const CourseCard = ({ course }) => {
   const { category, coverPicture, name, price, oldPrice, title, _id } = course;
-
-  const baseUrl = axiosInstance.defaults.baseURL;
 
   return (
     <Link
@@ -14,7 +11,7 @@ const CourseCard = ({ course }) => {
       className="card card-compact border border-border bg-accentOne"
     >
       <figure>
-        <img src={`${baseUrl}${coverPicture}`} alt={title} />
+        <img src={coverPicture} alt={title} />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{title}</h2>
