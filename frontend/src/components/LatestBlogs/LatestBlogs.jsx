@@ -78,9 +78,9 @@ const LatestBlogs = () => {
                       src={blog.authorImage || "https://via.placeholder.com/48"}
                       alt={blog.author || "Author avatar"}
                     />
-                    <Link to="" className="mx-2 font-semibold text-textPrimary">
+                    <p className="mx-2 font-semibold text-textPrimary">
                       {blog.author || "Writer Name"}
-                    </Link>
+                    </p>
                   </div>
 
                   <span className="mx-1 text-xs text-textPrimary">

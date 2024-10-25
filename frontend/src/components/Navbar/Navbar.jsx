@@ -72,11 +72,11 @@ const Navbar = () => {
           Our Courses
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}>
+      {/* <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/blog" className={linkClass}>
           Blogs
         </NavLink>
-      </li>
+      </li> */}
       <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/become-instructor" className={linkClass}>
           Become Instructor

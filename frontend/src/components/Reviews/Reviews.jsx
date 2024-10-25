@@ -79,7 +79,7 @@ export default function Reviews() {
         className="mySwiper"
       >
         {reviews.map((review) => (
-          <SwiperSlide key={review.id} className="p-2 md:p-4 lg:p-5">
+          <SwiperSlide key={review.id} className="p-2 md:py-4 lg:py-5">
             <div className="bg-backgroundShadeOne rounded-2xl overflow-hidden">
               <div className="relative border border-borderLight rounded-2xl p-6 h-full flex flex-col gap-4 justify-between">
                 <div className="text-2xl text-textWhite absolute z-10 top-3 left-10 bg-backgroundBlue p-2 rounded-full">
@@ -88,7 +88,7 @@ export default function Reviews() {
 
                 {/* Cut message to 250 characters */}
                 <p className="leading-relaxed border rounded border-blue-500 h-[14rem] py-10 px-4">
-                  {cutText(review.message, 250)}
+                  {cutText(review.message, 200)}
                 </p>
 
                 <div className="flex justify-end text-textWhite border border-borderLight absolute bottom-[4.5rem] right-10 bg-backgroundBlue p-2 rounded-full">
