@@ -99,7 +99,7 @@ const TeacherDashboard = () => {
                 >
                   <MdManageAccounts className="w-5 h-5" />
                   <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
-                    Manage course
+                    Manage All course
                   </p>
                 </button>
               </Link>

@@ -1,4 +1,4 @@
-const multer = require("multer");
+const multer = require ("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const { cloudinary } = require("../config/cloudinaryConfig");
 
@@ -14,7 +14,7 @@ const imageStorage = new CloudinaryStorage({
         ? `${req.body.fileName}_${Date.now()}`
         : `image_${Date.now()}`; // Fallback to timestamp if no fileName is provided
     },
-    resource_type: "image",
+    resource_type: "auto",
   },
 });
 
@@ -62,7 +62,7 @@ const storage = new CloudinaryStorage({
         public_id: req?.body.fileName
           ? `${req.body.fileName}_${Date.now()}`
           : `image_${Date.now()}`, // Fallback to timestamp if no fileName is provided
-        resource_type: "image",
+        resource_type: "auto",
       };
     } else if (file?.fieldname === "video") {
       return {
@@ -71,7 +71,7 @@ const storage = new CloudinaryStorage({
         public_id: req?.body.fileName
           ? `${req.body.fileName}_${Date.now()}`
           : `video_${Date.now()}`, // Fallback to timestamp if no fileName is provided
-        resource_type: "video",
+        resource_type: "auto",
       };
     }
   },
@@ -156,4 +156,30 @@ const uploadFiles = (req, res, next) => {
   });
 };
 
-module.exports = { uploadImage, uploadFiles };
+
+
+
+const uploadMediaToCloudinary = async (filePath) => {
+  try {
+    const result = await cloudinary.uploader.upload(filePath, {
+      resource_type: "auto",
+    });
+
+    return result;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error uploading to cloudinary");
+  }
+};
+
+const deleteMediaFromCloudinary = async (publicId) => {
+  try {
+    await cloudinary.uploader.destroy(publicId);
+  } catch (error) {
+    console.log(error);
+    throw new Error("failed to delete assest from cloudinary");
+  }
+};
+
+
+module.exports = { uploadImage, uploadFiles,uploadMediaToCloudinary,deleteMediaFromCloudinary};

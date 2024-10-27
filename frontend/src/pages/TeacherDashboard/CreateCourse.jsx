@@ -7,14 +7,14 @@ const CreateCourse = () => {
   const [category, setCategory] = useState("");
   const [previewUrl, setPreviewUrl] = useState("");
   const { user } = useSelector((state) => state.authUsers);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   const name = user.userInfo.userName;
   const email = user.userInfo.userEmail;
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
-    setLoading(true)
-    
+    setLoading(true);
+
     // FormData object to handle file and other data
     const form = e.target;
     const title = form.title.value;
@@ -58,14 +58,14 @@ const CreateCourse = () => {
 
       if (response?.data?.courseId) {
         toast.success(response.data.message);
-        setLoading(false)
-        e.target.reset()
+        setLoading(false);
+        e.target.reset();
       }
     } catch (error) {
       console.log(error);
-      toast.error('Failed to uploaded')
-    }finally{
-      setLoading(false)
+      toast.error("Failed to uploaded");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,8 +79,7 @@ const CreateCourse = () => {
   };
 
   return (
-    <div className="mx-14 mt-10 border-2 border-blue-400 rounded-lg">
-      <div className="mt-10 text-center font-bold text-text">Upload Course</div>
+    <div className="mt-10 border-2 border-blue-400 rounded-lg">
       <div className="mt-3 text-center text-4xl text-text font-bold">
         Share your experiene for student
       </div>
@@ -168,14 +167,12 @@ const CreateCourse = () => {
             </div>
           </div>
         </div>
-        
+
         <div>
-          <label className="block font-medium">Upload Videos (one video for now)</label>
-          <input
-            type="file"
-            name="video"
-            accept="video/*"
-          />
+          <label className="block font-medium">
+            Upload Videos (one video for now)
+          </label>
+          <input type="file" name="video" accept="video/*" className="border-2 border-border"/>
         </div>
 
         <div>
@@ -190,9 +187,9 @@ const CreateCourse = () => {
         </div>
         <div className="text-center">
           <button
-          disabled={loading}
+            disabled={loading}
             type="submit"
-            className={`cursor-pointer rounded-lg px-8 py-5 text-sm font-semibold text-white ${loading ? 'bg-gray-400 !cursor-not-allowed' : 'bg-blue-700'}`}
+            className={`cursor-pointer rounded-lg px-8 py-5 text-sm font-semibold text-white ${loading ? "bg-gray-400 !cursor-not-allowed" : "bg-blue-700"}`}
           >
             {loading ? "loading..." : "Submit"}
           </button>

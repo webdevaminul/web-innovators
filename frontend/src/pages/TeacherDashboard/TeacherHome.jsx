@@ -1,14 +1,13 @@
 import { HiOutlineUsers } from "react-icons/hi2";
 import { IoIosTrendingUp } from "react-icons/io";
 import Heading from "../../utils/Heading";
-import Calendar from "../../components/Calender/Calendar";
 import TeacherOwnCourse from "../../components/TeacherOwnCourse/TeacherOwnCourse";
 
 const TeacherHome = () => {
 
   return (
     <div className="mt-12">
-      <Heading heading={"Teacher Home"} />
+      <Heading heading={"Teacher Home"} />    
       <div className="mb-12 grid gap-y-10 gap-x-6 grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4">
         <div className="relative flex flex-col rounded-xl shadow-md border py-3">
           <div
@@ -86,82 +85,8 @@ const TeacherHome = () => {
           </div>
         </div>
       </div>
-
       {/* Project */}
-
-      <div className="mb-4 grid grid-cols-1 gap-6 xl:grid-cols-3">
-        <div className="relative flex flex-col rounded-xl shadow-md xl:col-span-2">
-          <div>
-            <div className="p-6">
-              <h6 className="block antialiased tracking-normal font-bai text-base font-semibold leading-relaxed text-text mb-1">
-                Popular Courses
-              </h6>
-            </div>
-            <TeacherOwnCourse />
-
-            <div className="p-6">
-              <h6 className="block antialiased tracking-normal font-bai text-base font-semibold leading-relaxed text-text mb-1">
-                Assignment
-              </h6>
-            </div>
-            <div className="p-6 overflow-x-scroll px-0 pt-0 pb-2">
-              <table className="w-full min-w-[640px] table-auto">
-                <thead>
-                  <tr>
-                    <th className="border-b border-blue-gray-50 py-3 px-6 text-left">
-                      <p className="block antialiased font-bai text-[11px] font-medium uppercase text-text">
-                        Subject
-                      </p>
-                    </th>
-                    <th className="border-b border-blue-gray-50 py-3 px-6 text-left">
-                      <p className="block antialiased font-bai text-[11px] font-medium uppercase text-text">
-                        All students
-                      </p>
-                    </th>
-                    <th className="border-b border-blue-gray-50 py-3 px-6 text-left">
-                      <p className="block antialiased font-bai text-[11px] font-medium uppercase text-text">
-                        Exam Students
-                      </p>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className="py-3 px-5 border-b border-blue-gray-50">
-                      <div className="flex items-center gap-4">
-                        <p className="block antialiased font-bai text-sm leading-normal text-text font-bold">
-                          Mathematics
-                        </p>
-                      </div>
-                    </td>
-                    <td className="py-3 px-5 border-b border-blue-gray-50">
-                      <p className="block antialiased font-bai text-xs font-medium text-text">
-                        14,000
-                      </p>
-                    </td>
-                    <td className="py-3 px-5 border-b border-blue-gray-50">
-                      <div className="w-10/12">
-                        <p className="antialiased font-bai mb-1 block text-xs font-medium text-text">
-                          60%
-                        </p>
-                        <div className="flex flex-start bg-blue-gray-50 overflow-hidden w-full rounded-sm font-bai text-xs font-medium h-1">
-                          <div
-                            className="flex justify-center items-center h-full bg-backgroundPrimary from-blue-600 to-blue-400 text-white"
-                            style={{ width: "60%" }}
-                          />
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        <div>
-          <Calendar />
-        </div>
-      </div>
+      <TeacherOwnCourse />
     </div>
   );
 };

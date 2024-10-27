@@ -185,3 +185,53 @@ exports.deleteCourse = async (req, res, next) => {
     next(error);
   }
 };
+
+
+
+exports.testCreateCourse = async (req, res, next) => {
+  try {
+    // here code
+    const {
+      name,
+      email,
+      title,
+      price,
+      oldPrice,
+      status,
+      category,
+      detailsCourse,
+    } = req.body;
+
+const imageUrl = req?.files?.image?.[0]?.path;
+// const videoUrl = req?.files?.video?.[0]?.path;
+const videoUrls = req?.files?.video?.map(file => file.path);
+
+
+    const newCourse = {
+      name,
+      email,
+      title,
+      price,
+      oldPrice,
+      status,
+      category,
+      detailsCourse,
+      coverPicture: imageUrl,
+      videoUrl: videoUrls,
+    };
+console.log('newCourse',newCourse)
+    // Insert the course data into the MongoDB collection
+    // const result = await courseCollection.insertOne(newCourse);
+
+    // // Success response
+    // return res.status(201).json({
+    //   message: "Course created successfully!",
+    //   courseId: result.insertedId,
+    //   course: newCourse,
+    // });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+    next(error);
+  }
+};
