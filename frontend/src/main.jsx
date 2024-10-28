@@ -10,6 +10,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { persistor, store } from "./redux/store.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Make sure to import the styles
+import TeacherProvider from "./context/TeacherContext.jsx";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,9 @@ createRoot(document.getElementById("root")).render(
       <PersistGate loading={null} persistor={persistor}>
         <QueryClientProvider client={queryClient}>
           <HelmetProvider>
-            <RouterProvider router={router} />
+            <TeacherProvider>
+              <RouterProvider router={router} />
+            </TeacherProvider>
             <ToastContainer /> {/* Move here for better context */}
           </HelmetProvider>
         </QueryClientProvider>

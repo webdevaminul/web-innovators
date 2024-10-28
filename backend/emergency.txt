@@ -1,0 +1,12 @@
+MONGODB_URI=mongodb+srv://mohibullahmohim2020:0Rel5x7hfNZHIbog@learnup.kqn3n.mongodb.net/?retryWrites=true&w=majority&appName=LearnUp
+
+JWT_ACCESS_TOKEN_SECRET=4297afa93211baf2
+JWT_REFRESH_TOKEN_SECRET=3090404fa8840cd2
+AUTH_EMAIL=mohibullahmohim2020@gmail.com
+AUTH_PASS=thuavyqsvncvnlhm
+
+CLOUDINARY_CLOUD_NAME=dzixtpptv
+CLOUDINARY_API_KEY=344665762374471
+CLOUDINARY_API_SECRET=T27cfWiWl4fwTzFWAql_Am0055g
+
+NODE_ENV=development
