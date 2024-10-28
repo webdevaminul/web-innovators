@@ -1,0 +1,127 @@
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Define variables for light theme */
+  :root {
+    --text-primary: 40, 40, 43; /* General text color - Matte Black*/
+    --text-reverse: 229, 229, 229; /* White text color in light mode - Mercury*/
+    --text-black: 40, 40, 43; /* Always black text color - Matte Black*/
+    --text-white: 229, 229, 229; /* Always white text color - Mercury*/
+    --text-blue: 62, 130, 252; /* Secondary text color - Dodger Blue*/
+    --text-orange: 248, 114, 23; /* Highlight text color - Pumpkin Orange*/
+
+    --background-primary: 229, 229, 229; /* General background color - Mercury*/
+    --background-orange: 248, 114, 23; /* Highlight background color - Pumpkin Orange*/
+    --background-orange-hover: 238, 104, 23; /* Highlight background color - Pumpkin Orange*/
+    --background-shade-one: 220, 220, 220; /* Element background color - Gainsboro*/
+    --background-blue: 62, 130, 252; /* Element background color - Gainsboro*/
+    --background-blue-hover: 37, 99, 235; /* Element background color - Gainsboro*/
+
+    --border-light: 212, 215, 217; /* General border color - Iron*/
+    --border-dark: 190, 190, 190; /* General border color - Iron*/
+
+    --accent-one: 234, 234, 239; /* Element background color */
+    --accent-two: 224, 224, 229; /* Element background color */
+
+    --text-link: 0, 123, 255; /* Primary link color */
+    --text-link-hover: 0, 80, 180; /* Primary link hover */
+
+    --text-color: 51, 51, 51; /* General text color */
+    --text-reversed: 244, 244, 249; /* White text color */
+
+    --secondary-color: 240, 138, 36; /* Primary button/Action/Hightlight color */
+    --secondary-hover-color: 209, 109, 18; /* Primary button/Action/Hightlight hover color */
+
+    --link-color: 62, 130, 252; /* Link color */
+    --link-hover-color: 62, 130, 252; /* Link hover color */
+
+    --border-color: 210, 210, 210; /* Border color */
+    --outline-color: 0, 123, 255; /* Outline color for focus */
+
+    --error-color: 220, 53, 69; /* Error message color */
+    --success-color: 40, 167, 69; /* Success message color */
+    --warning-color: 255, 193, 7; /* Warning message color */
+    --info-color: 23, 162, 184; /* Info message color */
+
+    --disabled-color: 204, 204, 204; /* Disabled button color */
+    --input-bg-color: 255, 255, 255; /* Input field background */
+    --placeholder-color: 108, 117, 125; /* Placeholder text color */
+  }
+
+  /* Define variables for dark theme */
+  [data-theme="dark"] {
+    --text-primary: 229, 229, 229; /* General text color - Mercury*/
+    --text-reverse: 40, 40, 43; /* Black text color in dark mode - Matte Black*/
+
+    --background-primary: 40, 40, 43; /* General background color - Matte Black*/
+    --background-shade-one: 32, 32, 32; /* Element background color - Dark Jungle*/
+
+    --border-light: 56, 53, 51; /* General border color - Dune*/
+    --border-dark: 20, 20, 20; /* General border color - Dune*/
+
+    --accent-one: 28, 28, 28; /* Dark theme element background color */
+    --accent-two: 38, 38, 38; /* Dark theme element background color */
+
+    --text-color: 204, 204, 209; /* General text color for dark theme */
+    --text-reversed: 18, 18, 18; /* Black text color */
+    --text-link: 85, 157, 216; /* Primary link color */
+    --text-link-hover: 58, 116, 171; /* Primary link hover */
+    --secondary-color: 240, 138, 36; /* Primary button/Action/Hightlight color */
+    --secondary-hover-color: 199, 123, 26; /* Primary button/Action/Hightlight hover color */
+
+    --link-color: 85, 157, 216; /* Link color */
+    --link-hover-color: 58, 116, 171; /* Link hover color */
+
+    --border-color: 58, 58, 58; /* Border color */
+    --outline-color: 85, 157, 216; /* Outline color for focus */
+
+    --error-color: 245, 124, 131; /* Error message color */
+    --success-color: 111, 207, 151; /* Success message color */
+    --warning-color: 243, 181, 99; /* Warning message color */
+    --info-color: 93, 192, 207; /* Info message color */
+
+    --disabled-color: 85, 85, 85; /* Disabled button color */
+    --input-bg-color: 31, 31, 31; /* Input field background */
+    --placeholder-color: 169, 169, 169; /* Placeholder text color */
+  }
+
+  body {
+    @apply font-poppins bg-backgroundPrimary;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  svg,
+  button,
+  table,
+  thead,
+  th,
+  tr,
+  td {
+    @apply transition-none duration-0 !important;
+  }
+
+  /* Apply styles to elements */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  button,
+  input {
+    @apply text-textPrimary;
+  }
+}

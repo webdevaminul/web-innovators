@@ -1,0 +1,290 @@
+[
+  {
+    "id": 1,
+    "title": "IELTS LIVE Batch",
+    "instructor": "Hasnain Nur",
+    "price": "8500",
+    "old_price": "10000",
+    "image": "./card01.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 2,
+    "title": "ঘরে বসে Spoken English",
+    "instructor": "Munzereen Shahid",
+    "price": "1950",
+    "old_price": "3000",
+    "image": "./card02.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 3,
+    "title": "Complete English Grammar Course",
+    "instructor": "Munzereen Shahid",
+    "price": "1950",
+    "old_price": "3500",
+    "image": "./card03.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 4,
+    "title": "IELTS Course by Munzereen Shahid",
+    "instructor": "Munzereen Shahid",
+    "price": "3850",
+    "old_price": "4000",
+    "image": "./card04.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 5,
+    "title": "Email Marketing করে Freelancing",
+    "instructor": "Itati Fatema",
+    "price": "2500",
+    "old_price": "N/A",
+    "image": "./card05.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 6,
+    "title": "YouTube Marketing করে Freelancing",
+    "instructor": "Md. Sabbir",
+    "price": "2500",
+    "old_price": "N/A",
+    "image": "./card01.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 7,
+    "title": "WordPress দিয়ে Freelancing",
+    "instructor": "Asaduzzaman ",
+    "price": "2500",
+    "old_price": "N/A",
+    "image": "./card02.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 8,
+    "title": "ঘরে বসে Freelancing",
+    "instructor": "Joyeta Banerjee",
+    "price": "1500",
+    "old_price": "N/A",
+    "image": "./card03.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 9,
+    "title": "Basic Graphic Design",
+    "instructor": "Nazmul Hossain",
+    "price": "3000",
+    "old_price": "N/A",
+    "image": "./card04.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 10,
+    "title": "Advanced Photoshop",
+    "instructor": "Tahmid Islam",
+    "price": "4000",
+    "old_price": "N/A",
+    "image": "./card05.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 11,
+    "title": "UI/UX Design Basics",
+    "instructor": "Shahina Akter",
+    "price": "3500",
+    "old_price": "N/A",
+    "image": "./card01.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 12,
+    "title": "Logo Design Masterclass",
+    "instructor": "Anik Rahman",
+    "price": "4500",
+    "old_price": "N/A",
+    "image": "./card02.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 13,
+    "title": "Python for Beginners",
+    "instructor": "Rahul Amin",
+    "price": "5000",
+    "old_price": "N/A",
+    "image": "./card03.jpg",
+    "category": "Programming"
+  },
+  {
+    "id": 14,
+    "title": "JavaScript Mastery",
+    "instructor": "Fahim Hossain",
+    "price": "5500",
+    "old_price": "N/A",
+    "image": "./card04.jpg",
+    "category": "Programming"
+  },
+  {
+    "id": 15,
+    "title": "React.js from Scratch",
+    "instructor": "Fariha Nasrin",
+    "price": "6000",
+    "old_price": "N/A",
+    "image": "./card05.jpg",
+    "category": "Programming"
+  },
+  {
+    "id": 16,
+    "title": "Node.js for Developers",
+    "instructor": "Salman Saeed",
+    "price": "6500",
+    "old_price": "N/A",
+    "image": "./card01.jpg",
+    "category": "Programming"
+  },
+  {
+    "id": 17,
+    "title": "IELTS LIVE Batch",
+    "instructor": "Hasnain Nur",
+    "price": "8500",
+    "old_price": "10000",
+    "image": "./card01.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 18,
+    "title": "ঘরে বসে Spoken English",
+    "instructor": "Munzereen Shahid",
+    "price": "1950",
+    "old_price": "3000",
+    "image": "./card02.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 19,
+    "title": "Complete English Grammar Course",
+    "instructor": "Munzereen Shahid",
+    "price": "1950",
+    "old_price": "3500",
+    "image": "./card03.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 20,
+    "title": "IELTS Course by Munzereen Shahid",
+    "instructor": "Munzereen Shahid",
+    "price": "3850",
+    "old_price": "4000",
+    "image": "./card04.jpg",
+    "category": "Language"
+  },
+  {
+    "id": 21,
+    "title": "Email Marketing করে Freelancing",
+    "instructor": "Itati Fatema",
+    "price": "2500",
+    "old_price": "N/A",
+    "image": "./card05.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 22,
+    "title": "YouTube Marketing করে Freelancing",
+    "instructor": "Md. Sabbir",
+    "price": "2500",
+    "old_price": "N/A",
+    "image": "./card01.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 23,
+    "title": "WordPress দিয়ে Freelancing",
+    "instructor": "Asaduzzaman ",
+    "price": "2500",
+    "old_price": "N/A",
+    "image": "./card02.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 24,
+    "title": "ঘরে বসে Freelancing",
+    "instructor": "Joyeta Banerjee",
+    "price": "1500",
+    "old_price": "N/A",
+    "image": "./card03.jpg",
+    "category": "Freelancing"
+  },
+  {
+    "id": 25,
+    "title": "Basic Graphic Design",
+    "instructor": "Nazmul Hossain",
+    "price": "3000",
+    "old_price": "N/A",
+    "image": "./card04.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 26,
+    "title": "Advanced Photoshop",
+    "instructor": "Tahmid Islam",
+    "price": "4000",
+    "old_price": "N/A",
+    "image": "./card05.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 27,
+    "title": "UI/UX Design Basics",
+    "instructor": "Shahina Akter",
+    "price": "3500",
+    "old_price": "N/A",
+    "image": "./card01.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 28,
+    "title": "Logo Design Masterclass",
+    "instructor": "Anik Rahman",
+    "price": "4500",
+    "old_price": "N/A",
+    "image": "./card02.jpg",
+    "category": "Design"
+  },
+  {
+    "id": 29,
+    "title": "Python for Beginners",
+    "instructor": "Rahul Amin",
+    "price": "5000",
+    "old_price": "N/A",
+    "image": "./card03.jpg",
+    "category": "Programming"
+  },
+  {
+    "id": 30,
+    "title": "JavaScript Mastery",
+    "instructor": "Fahim Hossain",
+    "price": "5500",
+    "old_price": "N/A",
+    "image": "./card04.jpg",
+    "category": "Programming"
+  },
+  {
+    "id": 31,
+    "title": "React.js from Scratch",
+    "instructor": "Fariha Nasrin",
+    "price": "6000",
+    "old_price": "N/A",
+    "image": "./card05.jpg",
+    "category": "Programming"
+  },
+  {
+    "id": 32,
+    "title": "Node.js for Developers",
+    "instructor": "Salman Saeed",
+    "price": "6500",
+    "old_price": "N/A",
+    "image": "./card01.jpg",
+    "category": "Programming"
+  }
+]
