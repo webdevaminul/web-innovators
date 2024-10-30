@@ -51,7 +51,7 @@ const TeacherDashboard = () => {
     <div className="min-h-screen bg-backgroundPrimary">
       <aside
         ref={sidebarRef}
-        className={`bg-backgroundPrimary border border-border fixed inset-0 md:z-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
+        className={`bg-backgroundPrimary border border-border fixed inset-0 lg:z-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
           isOpen ? "translate-x-0" : "-translate-x-80"
         } `}
       >
@@ -99,7 +99,7 @@ const TeacherDashboard = () => {
                 >
                   <MdManageAccounts className="w-5 h-5" />
                   <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
-                    Manage course
+                    Manage All course
                   </p>
                 </button>
               </Link>

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEye, AiOutlineEdit, AiOutlineDelete } from "react-icons/ai";
-import UpdateBlogModal from "../../components/UpdateBlogModal/UpdateBlogModal";
-import useBlogPost from "../../api/useBlogPost";
-import axiosInstance from "../../api/axiosInstance";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import Loader from "../../utils/Loader";
+import Loader from "../../../utils/Loader";
+import useBlogPost from "../../../api/useBlogPost";
+import axiosInstance from "../../../api/axiosInstance";
+import UpdateBlogModal from "../../../components/UpdateBlogModal/UpdateBlogModal";
 
 const BlogPostTable = () => {
   const { blogs, isLoading, refetch } = useBlogPost();
@@ -63,6 +63,9 @@ const BlogPostTable = () => {
   };
 
   if (isLoading) return <Loader />;
+  if (!blogs?.length) return <p className="flex justify-center items-center h-screen">No Data available</p>;
+
+
   return (
     <div className="overflow-x-auto h-screen">
       <table className="min-w-full border-collapse border border-gray-200">

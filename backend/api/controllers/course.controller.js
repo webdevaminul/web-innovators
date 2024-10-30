@@ -17,9 +17,9 @@ exports.createCourse = async (req, res, next) => {
       detailsCourse,
     } = req.body;
 
-const imageUrl = req?.files?.image?.[0]?.path;
-const videoUrl = req?.files?.video?.[0]?.path;
-
+    const imageUrl = req?.files?.image ? req?.files?.image[0].path : null;
+    const videoUrls = req?.files?.video ? req?.files?.video?.map(file => file.path) : [];
+    
     const newCourse = {
       name,
       email,
@@ -30,7 +30,7 @@ const videoUrl = req?.files?.video?.[0]?.path;
       category,
       detailsCourse,
       coverPicture: imageUrl,
-      videoUrl: videoUrl,
+      videoUrl: videoUrls,
     };
 
     // Insert the course data into the MongoDB collection
@@ -39,7 +39,7 @@ const videoUrl = req?.files?.video?.[0]?.path;
     // Success response
     return res.status(201).json({
       message: "Course created successfully!",
-      courseId: result.insertedId,
+      courseId: result?.insertedId,
       course: newCourse,
     });
   } catch (error) {
@@ -85,7 +85,7 @@ exports.availableCourse = async (req, res, next) => {
       .limit(itemsPerPage)
       .toArray();
 
-    if (courses.length === 0) {
+    if (!courses.length) {
       return res
         .status(404)
         .json({ success: false, message: "No courses found", data: [] });

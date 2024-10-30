@@ -281,7 +281,6 @@ const BeInstructor = () => {
                   type="text"
                   name="instName"
                   required="required"
-                  autoFocus="autofocus"
                   placeholder="Type Institute Name"
                 />
               </div>

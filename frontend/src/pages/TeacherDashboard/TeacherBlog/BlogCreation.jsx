@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import axiosInstance from "../../api/axiosInstance";
+import axiosInstance from "../../../api/axiosInstance";
 
 const BlogCreation = () => {
   const { user } = useSelector((state) => state.authUsers);

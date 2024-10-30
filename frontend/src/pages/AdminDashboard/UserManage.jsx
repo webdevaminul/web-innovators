@@ -129,7 +129,7 @@ const UserManage = () => {
                       />
                     </span>
                     <span className="ml-4">
-                      <span className="text-sm flex flex-col font-medium text-gray-900">
+                      <span className="text-sm flex flex-col font-medium text-text">
                         {user.userName}
                       </span>
                       <span className="text-sm text-text">
