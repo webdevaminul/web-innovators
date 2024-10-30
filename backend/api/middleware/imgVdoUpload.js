@@ -1,8 +1,10 @@
-const multer = require ("multer");
+const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const { cloudinary } = require("../config/cloudinaryConfig");
 
-// Define Cloudinary storage for images
+// (only for blog) ==> start
+
+// Define Cloudinary storage for images (only for blog)
 const imageStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -50,6 +52,7 @@ const uploadImage = (req, res, next) => {
     next(err); // Proceed to the next middleware if no error
   });
 };
+// (only for blog) ==> end
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
@@ -84,7 +87,7 @@ const uploadFiles = (req, res, next) => {
     storage: storage,
     fileFilter: (req, files, cb) => {
       // File type validation
-      
+
       if (files.fieldname === "image") {
         if (
           files.mimetype === "image/jpg" ||
@@ -157,21 +160,6 @@ const uploadFiles = (req, res, next) => {
 };
 
 
-
-
-const uploadMediaToCloudinary = async (filePath) => {
-  try {
-    const result = await cloudinary.uploader.upload(filePath, {
-      resource_type: "auto",
-    });
-
-    return result;
-  } catch (error) {
-    console.log(error);
-    throw new Error("Error uploading to cloudinary");
-  }
-};
-
 const deleteMediaFromCloudinary = async (publicId) => {
   try {
     await cloudinary.uploader.destroy(publicId);
@@ -181,5 +169,8 @@ const deleteMediaFromCloudinary = async (publicId) => {
   }
 };
 
+// Initialize multer with Cloudinary storage
+const upload = multer({ storage: storage });
 
-module.exports = { uploadImage, uploadFiles,uploadMediaToCloudinary,deleteMediaFromCloudinary};
+
+module.exports = { uploadImage, uploadFiles, deleteMediaFromCloudinary, upload };

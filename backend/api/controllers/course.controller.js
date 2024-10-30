@@ -186,9 +186,24 @@ exports.deleteCourse = async (req, res, next) => {
   }
 };
 
-
-
 exports.testCreateCourse = async (req, res, next) => {
+  // Verify if files are received
+  console.log("191 Received files:", req.files);
+
+  // Retrieve URLs from Cloudinary response
+  const fileUrls = {
+    imageUrl: req?.files?.image ? req?.files?.image[0].path : null,
+    videoUrls: req?.files?.video ? req?.files?.video?.map(file => file.path) : [],
+  };
+
+  console.log("Uploaded file URLs:", fileUrls);
+
+  res.status(200).json({
+    success: true,
+    data: fileUrls, // Send URLs back to frontend
+  });
+
+
   try {
     // here code
     const {
@@ -203,7 +218,6 @@ exports.testCreateCourse = async (req, res, next) => {
     } = req.body;
 
 const imageUrl = req?.files?.image?.[0]?.path;
-// const videoUrl = req?.files?.video?.[0]?.path;
 const videoUrls = req?.files?.video?.map(file => file.path);
 
 

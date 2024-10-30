@@ -10,7 +10,7 @@ import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
 import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile";
 import TeacherHome from "../pages/TeacherDashboard/TeacherHome";
-import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
+import CreateCourse from "../pages/TeacherDashboard/createCourse/CreateCourse";
 import ManageCourse from "../pages/TeacherDashboard/ManageCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";

@@ -13,7 +13,7 @@ const useAllCourse = ({ status } = { status: undefined }) => {
         params: { status },
       });
       const data = res?.data?.data;
-      return data;
+      return data || [ ];
     },
   });
 
