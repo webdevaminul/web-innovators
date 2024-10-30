@@ -159,7 +159,6 @@ const uploadFiles = (req, res, next) => {
   });
 };
 
-
 const deleteMediaFromCloudinary = async (publicId) => {
   try {
     await cloudinary.uploader.destroy(publicId);
@@ -171,6 +170,5 @@ const deleteMediaFromCloudinary = async (publicId) => {
 
 // Initialize multer with Cloudinary storage
 const upload = multer({ storage: storage });
-
 
 module.exports = { uploadImage, uploadFiles, deleteMediaFromCloudinary, upload };

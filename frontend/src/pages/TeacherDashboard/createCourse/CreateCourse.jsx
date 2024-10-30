@@ -9,13 +9,14 @@ const CreateCourse = () => {
   const [freePreviewIndex, setFreePreviewIndex] = useState(null);
   const { user } = useSelector((state) => state.authUsers);
   const [loading, setLoading] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [videoCount, setVideoCount] = useState(1);
   const name = user.userInfo.userName;
   const email = user.userInfo.userEmail;
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
-    // setLoading(true);
+    setLoading(true);
 
     // FormData object to handle file and other data
     const form = e.target;
@@ -46,7 +47,6 @@ const CreateCourse = () => {
       if (videoFile) {
         formData.append("video", videoFile);
       }
-      console.log('49 vdo file', videoFile)
     }
 
     try {
@@ -54,17 +54,23 @@ const CreateCourse = () => {
         headers: {
           "Content-Type": "multipart/form-data", // Important for file upload
         },
+        onUploadProgress: (event) => {
+          const percentComplete = Math.round((event.loaded * 100) / event.total);
+          setProgress(percentComplete); // Update progress
+        },
       };
 
       const response = await axiosInstance.post(
-        "/course/create/test",
+        "/course/create",
         formData,
         config
       );
       console.log('response', response)
       if (response?.data?.courseId) {
-        toast.success(response.data.message);
-        // setLoading(false);
+        toast.success(response?.data?.message);
+        setLoading(false);
+        setProgress(100);
+        setTimeout(() => setProgress(0), 500);
         setVideoCount(1);
         e.target.reset();
       }
@@ -96,6 +102,17 @@ const CreateCourse = () => {
   return (
     <div className="mt-10 border-2 border-blue-400 rounded-lg">
       <form onSubmit={handleCreateCourse} className="p-8">
+
+        {/* Progress bar */}
+        {loading && (
+          <div className="relative h-2 bg-gray-300 rounded-full overflow-hidden mt-2">
+            <div
+              style={{ width: `${progress}%` }}
+              className="h-full bg-blue-600 transition-all duration-150"
+            ></div>
+          </div>
+        )}
+
 
         <div className="my-3 flex justify-between">
           <h1 className="text-center text-4xl text-text font-bold">Create a new course</h1>
@@ -235,9 +252,9 @@ const CreateCourse = () => {
           <textarea
             name="textarea"
             id="text"
-            cols={10}
-            rows={10}
-            className="mb-10 mt-5 w-full resize-none rounded-md border border-slate-300 p-5 text-text bg-backgroundPrimary placeholder-placeholder "
+            cols={5}
+            rows={5}
+            className="mb-10 mt-5 w-full rounded-md border border-slate-300 p-5 text-text bg-backgroundPrimary placeholder-placeholder "
             placeholder="Details about this..."
           />
         </div>

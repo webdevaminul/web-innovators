@@ -6,12 +6,12 @@ const { uploadFiles, upload } = require("../middleware/imgVdoUpload");
 
 
 
-router.post("/create/test", upload.fields([
+router.post("/create", upload.fields([
   { name: "image", maxCount: 1 },
   { name: "video", maxCount: 10 },
-]), testCreateCourse)
+]), createCourse)
 
-router.post("/create", uploadFiles, createCourse)
+// router.post("/create", uploadFiles, createCourse)
 router.get("/available", availableCourse); // available course for user, student and teacher
 router.get("/courses", allCourse); // all course for admin
 router.put("/courses/:id", updateCourse); // approved course to admin
