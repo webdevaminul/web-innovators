@@ -51,11 +51,7 @@ const TeacherDashboard = () => {
     <div className="min-h-screen bg-backgroundPrimary">
       <aside
         ref={sidebarRef}
-<<<<<<< HEAD
-        className={`bg-backgroundPrimary border border-border fixed inset-0 md:z-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
-=======
         className={`bg-backgroundPrimary border border-border fixed inset-0 lg:z-0 z-50 my-4 ml-4 h-[calc(100vh-32px)] w-72 rounded-xl transition-transform duration-300 xl:translate-x-0 ${
->>>>>>> 154c25b5aaae52182ce513edb51da41933a71fb1
           isOpen ? "translate-x-0" : "-translate-x-80"
         } `}
       >
@@ -70,7 +66,8 @@ const TeacherDashboard = () => {
               <Link to="home" className="active">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/home") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/home") ? "bg-blue-400" : ""
+                  }`}
                   type="button"
                 >
                   <IoHomeOutline className="w-5 h-5" />
@@ -84,7 +81,8 @@ const TeacherDashboard = () => {
               <Link to="profile">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/profile") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/profile") ? "bg-blue-400" : ""
+                  }`}
                   type="button"
                 >
                   <HiOutlineUsers className="w-5 h-5" />
@@ -98,16 +96,15 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/manage-course">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/manage-course") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/manage-course")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <MdManageAccounts className="w-5 h-5" />
                   <p className="block antialiased font-bai text-base leading-relaxed text-text font-medium capitalize">
-<<<<<<< HEAD
-                    Manage course
-=======
                     Manage All course
->>>>>>> 154c25b5aaae52182ce513edb51da41933a71fb1
                   </p>
                 </button>
               </Link>
@@ -116,7 +113,10 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/create-course">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/create-course") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/create-course")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
@@ -130,7 +130,10 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/blog-Management">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/blog-Management") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/blog-Management")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
@@ -145,7 +148,10 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/create-post">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/create-post") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/create-post")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
