@@ -1,7 +1,7 @@
 import { HiOutlineUsers } from "react-icons/hi2";
 import { IoIosTrendingUp } from "react-icons/io";
-import Heading from "../../utils/Heading";
-import TeacherOwnCourse from "../../components/TeacherOwnCourse/TeacherOwnCourse";
+import Heading from "../../../utils/Heading";
+import TeacherOwnCourse from "../../../components/TeacherOwnCourse/TeacherOwnCourse";
 
 const TeacherHome = () => {
 

@@ -2,10 +2,10 @@ import { MdBlock } from "react-icons/md";
 import { Link } from "react-router-dom";
 import Swal from 'sweetalert2'
 import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
-import axiosInstance from "../../api/axiosInstance";
-import useAllCourse from "../../api/useAllCourse";
-import Loader from "../../utils/Loader";
 import { toast } from "react-toastify";
+import useAllCourse from "../../../api/useAllCourse";
+import axiosInstance from "../../../api/axiosInstance";
+import Loader from "../../../utils/Loader";
 
 const ManageCourse = () => {
   const status = "approved";
@@ -52,7 +52,7 @@ const ManageCourse = () => {
   };
 
   if (isLoading) return <Loader />;
-  if (!courses?.length) return <p>No Data available</p>;
+  if (!courses?.length) return <p className="flex justify-center items-center h-screen">No Data available</p>;
 
   return (
     <div className="overflow-x-auto w-full px-2 py-5">

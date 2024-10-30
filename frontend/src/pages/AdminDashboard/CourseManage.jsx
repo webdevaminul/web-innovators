@@ -35,7 +35,7 @@ const CourseManage = () => {
   };
 
   if (isLoading) return <Loader />;
-  if (!courses?.length) return <p>No Data available</p>;
+  if (!courses?.length) return <p className="calc(h-screen-[45px]) flex justify-center items-center" >No Data available</p>;
 
   return (
     <div className="overflow-x-auto w-full px-2 py-5">

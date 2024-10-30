@@ -13,10 +13,6 @@ const TeacherOwnCourse = () => {
   const { courses, isLoading ,refetch} = useAllCourse();
   const navigate = useNavigate()
   // TODO :- NEED TO POPULAR COURSE BY RATING
-
-  const handleCreatePage = () =>{
-    navigate("create-course")
-  }
   
   const handleDeleteCourse = async (id) => {
     try {
@@ -65,10 +61,9 @@ const TeacherOwnCourse = () => {
     <div className="">       
       <div className="flex justify-between flex-row items-center my-10">
         <h1 className="text-3xl font-extrabold">Popular Courses</h1>
-        <button onClick={handleCreatePage} className="bg-black hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">Create a new course</button>
       </div> 
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto text-text">
         <table className="table">
           {/* head */}
           <thead>

@@ -35,25 +35,54 @@ const AdminHome = () => {
   return (
     <div>
       <Heading heading={"Admin Home"} />
-      {/* Summary Cards */}
-      <h2 className="text-2xl font-semibold mb-4 text-text">Overview</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {/* All users here */}
+      <h2 className="text-xl mb-4 text-text">Users overview</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Total Users</h3>
           <p className="text-3xl font-bold text-blue-500">{totalUser}200</p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Total Courses</h3>
+          <h3 className="text-xl font-semibold text-text">Total Teachers</h3>
           <p className="text-3xl font-bold text-green-500">
             {" "}
             {courses?.length}0
           </p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Pending Approvals</h3>
+          <h3 className="text-xl font-semibold text-text">Total Students</h3>
+          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+        </div>
+        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-text">Pending Request</h3>
           <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
         </div>
       </div>
+
+      {/* Courses and Blog */}
+      <h2 className="text-xl my-4 text-text">Courses and Blogs overview</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-text">Total Courses</h3>
+          <p className="text-3xl font-bold text-blue-500">{totalUser}200</p>
+        </div>
+        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-text">Pending Courses</h3>
+          <p className="text-3xl font-bold text-green-500">
+            {" "}
+            {courses?.length}0
+          </p>
+        </div>
+        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-text">Total Blogs</h3>
+          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+        </div>
+        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
+          <h3 className="text-xl font-semibold text-text">Pending Blogs</h3>
+          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+        </div>
+      </div>
+
       {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-bg h-screen">
         {/* Recent Activities Section */}
