@@ -19,7 +19,7 @@ dotenv.config();
 const SSLCommerzPayment = require("sslcommerz-lts");
 const store_id = process.env.STORE_ID;
 const store_passwd = process.env.STORE_PASS;
-const is_live = false; //true for live, false for sandbox
+const is_live = process.env.NODE_ENV === "development" ? false : true; //true for live, false for sandbox
 
 // Initialize the app
 const app = express();
