@@ -5,27 +5,32 @@ const courseCollection = database.collection("courses");
 // Create a course
 exports.createCourse = async (req, res, next) => {
   try {
-    const courseData = JSON.parse(req?.body?.courseData);
-    // File uploaded by multer
-    const coverPicture = req.file; // This will contain the uploaded file information
+    // here code
+    const {
+      name,
+      email,
+      title,
+      price,
+      oldPrice,
+      status,
+      category,
+      detailsCourse,
+    } = req.body;
 
-    if (!coverPicture) {
-      return res.status(400).json({ message: "Cover picture is required!" });
-    }
-
-    // Other form fields from req.body
-    const { name, email, title, price, status, category, detailsCourse } = courseData;
-
-    // Prepare the course data
+    const imageUrl = req?.files?.image ? req?.files?.image[0].path : null;
+    const videoUrls = req?.files?.video ? req?.files?.video?.map(file => file.path) : [];
+    
     const newCourse = {
       name,
       email,
       title,
       price,
+      oldPrice,
       status,
       category,
       detailsCourse,
-      coverPicture: `/images/${coverPicture?.filename}`, // Store the uploaded filename in the database
+      coverPicture: imageUrl,
+      videoUrl: videoUrls,
     };
 
     // Insert the course data into the MongoDB collection
@@ -34,7 +39,7 @@ exports.createCourse = async (req, res, next) => {
     // Success response
     return res.status(201).json({
       message: "Course created successfully!",
-      courseId: result.insertedId,
+      courseId: result?.insertedId,
       course: newCourse,
     });
   } catch (error) {
@@ -47,7 +52,12 @@ exports.createCourse = async (req, res, next) => {
 // available course for user, student and teacher
 exports.availableCourse = async (req, res, next) => {
   try {
-    const { sortOrder = "asc", page = 1, limit = 6, selectedCategory } = req.query;
+    const {
+      sortOrder = "asc",
+      page = 1,
+      limit = 6,
+      selectedCategory,
+    } = req.query;
 
     const currentPage = parseInt(page, 10) || 1; // 10 for decimal
     const itemsPerPage = parseInt(limit, 10) || 6; // 10 for decimal
@@ -75,8 +85,10 @@ exports.availableCourse = async (req, res, next) => {
       .limit(itemsPerPage)
       .toArray();
 
-    if (courses.length === 0) {
-      return res.status(404).json({ success: false, message: "No courses found", data: [] });
+    if (!courses.length) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No courses found", data: [] });
     }
 
     // Send response if courses are found
@@ -90,7 +102,8 @@ exports.availableCourse = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "An error occurred while fetching courses. Please try again later.",
+      message:
+        "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }
@@ -105,7 +118,9 @@ exports.allCourse = async (req, res, next) => {
     if (status === "pending") {
       courses = await courseCollection.find({ status: "pending" }).toArray();
     } else {
-      courses = await courseCollection.find({ status: { $ne: "pending" } }).toArray();
+      courses = await courseCollection
+        .find({ status: { $ne: "pending" } })
+        .toArray();
     }
 
     // Always return a valid response with an array
@@ -116,7 +131,8 @@ exports.allCourse = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "An error occurred while fetching courses. Please try again later.",
+      message:
+        "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }

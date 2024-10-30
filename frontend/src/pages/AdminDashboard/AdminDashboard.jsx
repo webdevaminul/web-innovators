@@ -1,26 +1,24 @@
 import {
   FaBell,
-  FaUser,
   FaBars,
   FaHome,
   FaFileAlt,
   FaUsers,
   FaSignOutAlt,
-  FaSearch,
 } from "react-icons/fa";
-// import Darkmode from "../../components/Darkmode/Darkmode";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import Darkmode from "../../components/Darkmode/Darkmode";
+import { useSelector } from "react-redux";
 
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
+  const { user } = useSelector((state) => state.authUsers);
   const location = useLocation();
-  
+
   // define the route is active
   const isActive = (route) => location?.pathname === route;
-
 
   return (
     <div className="flex flex-col md:px-10 px-5">
@@ -53,7 +51,15 @@ const AdminDashboard = () => {
             <FaBell className="text-primary text-xl" />
           </button>
           <button>
-            <FaUser className="text-primary text-xl" />
+            <span className="relative rounded-full">
+              <span className="bg-blue-500 rounded-full m-auto ">
+                <img
+                  src={user?.userInfo?.userPhoto}
+                  className="rounded-full object-center object-cover h-8 w-8 sm:h-9 sm:w-9 cursor-pointer"
+                  loading="lazy"
+                />
+              </span>
+            </span>
           </button>
         </div>
       </div>
@@ -69,7 +75,9 @@ const AdminDashboard = () => {
             <Link
               to="admin-home"
               className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
-                isActive("/admin-dashboard/admin-home") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+                isActive("/admin-dashboard/admin-home")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
               }`}
             >
               <FaHome className="mr-2 inline" />
@@ -78,7 +86,9 @@ const AdminDashboard = () => {
             <Link
               to="user-manage"
               className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
-                isActive("/admin-dashboard/user-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+                isActive("/admin-dashboard/user-manage")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
               }`}
             >
               <FaUsers className="mr-2 inline" />
@@ -87,7 +97,9 @@ const AdminDashboard = () => {
             <Link
               to="course-manage"
               className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
-                isActive("/admin-dashboard/course-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+                isActive("/admin-dashboard/course-manage")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
               }`}
             >
               <FaFileAlt className="mr-2 inline" />
@@ -96,7 +108,9 @@ const AdminDashboard = () => {
             <Link
               to="adminBlog-management"
               className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
-                isActive("/admin-dashboard/adminBlog-management") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
+                isActive("/admin-dashboard/adminBlog-management")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
               }`}
             >
               <FaHome className="mr-2 inline" />
@@ -110,27 +124,15 @@ const AdminDashboard = () => {
             to="/"
           >
             <FaSignOutAlt className="mr-2 inline" />
-           Leave to Home
+            Leave to Home
           </Link>
         </div>
 
         {/* Main content area */}
         <div className="flex-1 p-4">
-          <div className="relative max-w-md w-full">
-            <div className="absolute top-1 left-2 inline-flex items-center p-2">
-              <FaSearch className="text-gray-400" />
-            </div>
-            <input
-              className="w-full h-10 pl-10 pr-4 py-1 bg-backgroundPrimary text-base placeholder-placeholder border rounded-full focus:shadow-outline"
-              type="search"
-              placeholder="Search..."
-            />
-          </div>
-
-          {/* Container for the 4 sections */}
           {/* Content sections */}
           <Outlet />
-        </div>        
+        </div>
       </div>
 
       {/* Overlay for the drawer on smaller screens */}

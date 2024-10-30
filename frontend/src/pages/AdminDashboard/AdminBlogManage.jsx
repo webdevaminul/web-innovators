@@ -10,52 +10,51 @@ const AdminBlogManage = () => {
   const status = "approved";
   const { blogs, isLoading, refetch } = useBlogPost();
 
- const handleDelete = async (id) =>{
-  try {
-    // Show confirmation alert before deletion
-    const result = await Swal.fire({
-      title: "Are you sure?",
-      text: "Do you want to delete this blog !",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    });
+  const handleDelete = async (id) => {
+    try {
+      // Show confirmation alert before deletion
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "Do you want to delete this blog !",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
 
-    // If user confirms, proceed with deletion
-    if (result.isConfirmed) {
-      const res = await axiosInstance.delete(`/blog/deleteBlogPost/${id}`);
+      // If user confirms, proceed with deletion
+      if (result.isConfirmed) {
+        const res = await axiosInstance.delete(`/blog/deleteBlogPost/${id}`);
 
-      // Handle success response from the backend
-      if (res.status === 200) {
-        // Show success alert
-        Swal.fire({
-          title: "Deleted!",
-          text: res.data.message,
-          icon: "success",
-        });
+        // Handle success response from the backend
+        if (res.status === 200) {
+          // Show success alert
+          Swal.fire({
+            title: "Deleted!",
+            text: res.data.message,
+            icon: "success",
+          });
 
-        // Show toast notification for deletion success
-        toast.success(res.data.message || "Course deleted successfully!");
+          // Show toast notification for deletion success
+          toast.success(res.data.message || "Course deleted successfully!");
 
-        // Refetch or update course list
-        refetch();
+          // Refetch or update course list
+          refetch();
+        }
       }
+    } catch (error) {
+      // Show error toast if deletion fails
+      toast.error("Failed to delete course: " + error.message);
     }
-  } catch (error) {
-    // Show error toast if deletion fails
-    toast.error("Failed to delete course: " + error.message);
-  }
- }
-
+  };
 
   const handleApproval = async (id) => {
     try {
       const res = await axiosInstance.put(`/blog/updateStatus/${id}`, {
         status,
       });
-      
+
       console.log("res", res);
       // Check if the response is acknowledged
       if (res?.data?.result?.acknowledged) {
@@ -77,38 +76,39 @@ const AdminBlogManage = () => {
           {toast.message}
         </div>
       )}
-      <table className="min-w-full border-collapse border border-gray-200">
+      <table className="min-w-full border-collapse border border-border">
         <thead>
           <tr>
-            <th className="border border-gray-300 px-4 py-2">Image</th>
-            <th className="border border-gray-300 px-4 py-2">Title</th>
-            <th className="border border-gray-300 px-4 py-2">Date & Time</th>
-            <th className="border border-gray-300 px-4 py-2">Status</th>
-            <th className="border border-gray-300 px-4 py-2">Actions</th>
-            <th className="border border-gray-300 px-4 py-2">Approval</th>
+            <th className="border border-border text-text px-4 py-2">Image</th>
+            <th className="border border-border text-text px-4 py-2">Title</th>
+            <th className="border border-border text-text px-4 py-2">
+              Date & Time
+            </th>
+            <th className="border border-border text-text px-4 py-2">Status</th>
+            <th className="border border-border text-text px-4 py-2">
+              Actions
+            </th>
+            <th className="border border-border text-text px-4 py-2">
+              Approval
+            </th>
           </tr>
         </thead>
         <tbody>
           {blogs?.map((post) => (
             <tr key={post._id}>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-border px-4 py-2">
                 <img
                   className="w-16 h-16 object-cover"
                   src={post?.image}
                   alt={post.title}
                 />
               </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {" "}
-                 {post.title}{" "}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-border px-4 py-2"> {post.title} </td>
+              <td className="border border-border px-4 py-2">
                 {new Date(post.date).toLocaleString()}
               </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {post.status}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
+              <td className="border border-border px-4 py-2">{post.status}</td>
+              <td className="border border-border px-4 py-2">
                 <span className="flex items-center justify-center space-x-4">
                   <Link to={`/blog-details/${post._id}`}>
                     <AiOutlineEye className="text-2xl text-blue-600" />
@@ -118,7 +118,7 @@ const AdminBlogManage = () => {
                   </button>
                 </span>
               </td>
-              <td className="border border-gray-300 px-4 py-2 justify-center">
+              <td className="border border-border px-4 py-2 justify-center">
                 {post.status === "approved" ? (
                   <AiOutlineCheck className="text-green-600 text-2xl" /> // Show approved icon
                 ) : (

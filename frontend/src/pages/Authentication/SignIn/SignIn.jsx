@@ -51,8 +51,15 @@ export default function SignIn() {
       }
     },
     onError: (error) => {
+      console.log("full error", error);
+      console.log("response error", error.response);
+      console.log("data error", error.response?.data);
+      console.log("message error", error.response?.data?.message);
       dispatch(
-        loginFailure(error.response?.data?.message || "Something went wrong. Please try again")
+        loginFailure(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again"
+        )
       ); // Dispatch login failure action on error
     },
   });
@@ -67,7 +74,7 @@ export default function SignIn() {
     <main className="min-h-[calc(100vh-3.8rem)] max-w-xs mx-auto flex items-center justify-center">
       <Heading heading={"Sign In"} />
       <section className="flex flex-col gap-4 justify-center p-4 w-full">
-        {/* Switch between signup and signin */}
+        {/* Sign in Title */}
         <div>
           <p className="text-2xl sm:text-3xl">Sign In</p>
           <p className="text-sm">Fill in the form to access your account</p>
@@ -132,7 +139,8 @@ export default function SignIn() {
                 },
                 pattern: {
                   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-                  message: "Password must contain at least one letter and one number",
+                  message:
+                    "Password must contain at least one letter and one number",
                 },
                 onChange: (event) => {
                   setPassValue(event.target.value);
@@ -166,7 +174,10 @@ export default function SignIn() {
             </p>
           )}
 
-          <Link to="/forget-password" className="mt-4 text-sm text-blue-500 hover:underline">
+          <Link
+            to="/forget-password"
+            className="mt-4 text-sm text-blue-500 hover:underline"
+          >
             Forget password?
           </Link>
 

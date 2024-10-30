@@ -6,7 +6,11 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import Darkmode from "../Darkmode/Darkmode";
-import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
+import {
+  requestFailure,
+  requestStart,
+  userClearSuccess,
+} from "../../redux/authUsersSlice";
 import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 import logo from "../../assets/logo.png";
@@ -38,7 +42,10 @@ const Navbar = () => {
   // Handle Click Outside Mobile Menu
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(e.target)
+      ) {
         setProfileMenu(false);
       }
     };
@@ -60,7 +67,10 @@ const Navbar = () => {
       }
     } catch (error) {
       dispatch(
-        requestFailure(error.response?.data?.message || "Something went wrong. Please try again.")
+        requestFailure(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again."
+        )
       );
     }
   };
@@ -72,11 +82,11 @@ const Navbar = () => {
           Our Courses
         </NavLink>
       </li>
-      <li onClick={() => setOpenMenu(false)}>
+      {/* <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/blog" className={linkClass}>
           Blogs
         </NavLink>
-      </li>
+      </li> */}
       <li onClick={() => setOpenMenu(false)}>
         <NavLink to="/become-instructor" className={linkClass}>
           Become Instructor
@@ -198,7 +208,9 @@ const Navbar = () => {
                 {profileMenu && (
                   <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderDark rounded-xl flex flex-col gap-4">
                     <div className="">
-                      <p className="whitespace-nowrap">Hi, {user?.userInfo?.userName}</p>
+                      <p className="whitespace-nowrap">
+                        Hi, {user?.userInfo?.userName}
+                      </p>
                       <p className="text-xs ">{user?.userInfo?.userEmail}</p>
                     </div>
 
@@ -208,7 +220,9 @@ const Navbar = () => {
                         to="dashboard/home"
                         className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                       >
-                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                        <span className="text-2xl">
+                          {/* <BiCreditCardFront /> */}
+                        </span>
                         <span>Dashboard</span>
                       </Link>
                     ) : (
@@ -219,7 +233,9 @@ const Navbar = () => {
                             to="/teacher-dashboard"
                             className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                           >
-                            <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                            <span className="text-2xl">
+                              {/* <BiCreditCardFront /> */}
+                            </span>
                             <span>Dashboard</span>
                           </Link>
                         ) : (
@@ -228,7 +244,9 @@ const Navbar = () => {
                             to="/admin-dashboard"
                             className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                           >
-                            <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
+                            <span className="text-2xl">
+                              {/* <BiCreditCardFront /> */}
+                            </span>
                             <span>Dashboard</span>
                           </Link>
                         )}
@@ -247,7 +265,9 @@ const Navbar = () => {
                       onClick={handleSignOut}
                       className="text-sm bg-red-500 hover:bg-red-600 text-textWhite border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
-                      <span className="text-2xl">{/* <IoExitOutline /> */}</span>
+                      <span className="text-2xl">
+                        {/* <IoExitOutline /> */}
+                      </span>
                       <span>Sign out</span>
                     </button>
                   </div>

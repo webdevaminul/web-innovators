@@ -1,6 +1,11 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { MdCheckCircle, MdError, MdOutlineLock, MdPassword } from "react-icons/md";
+import {
+  MdCheckCircle,
+  MdError,
+  MdOutlineLock,
+  MdPassword,
+} from "react-icons/md";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useMutation } from "@tanstack/react-query";
 import { useDispatch, useSelector } from "react-redux";
@@ -54,7 +59,10 @@ export default function ChangePassword() {
     },
     onError: (error) => {
       dispatch(
-        requestFailure(error.response?.data?.message || "Some thing went wrong. Please try again")
+        requestFailure(
+          error.response?.data?.message ||
+            "Some thing went wrong. Please try again"
+        )
       ); // Dispatch request failure action on error
     },
   });
@@ -80,16 +88,16 @@ export default function ChangePassword() {
           {/* Verify old password input */}
           <div
             className={`flex items-center border rounded ${
-              errors.userPassword ? "border-red-500" : "border-highlightGray/25"
+              errors.userPassword ? "border-red-500" : "border-borderLight"
             }`}
           >
-            <span className="p-2 text-xl text-highlightGray/75">
+            <span className="p-2 text-xl text-textPrimary">
               <MdPassword />
             </span>
             <input
               type={`${showOldPassword ? "text" : "password"}`}
               placeholder="Current password"
-              className={`bg-transparent outline-none placeholder:text-highlightGray/75 p-2 w-full`}
+              className={`bg-transparent outline-none placeholder:text-textPrimary p-2 w-full`}
               {...register("userPassword", {
                 required: "Password can not be empty",
                 minLength: {
@@ -102,7 +110,8 @@ export default function ChangePassword() {
                 },
                 pattern: {
                   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-                  message: "Password must contain at least one letter and one number",
+                  message:
+                    "Password must contain at least one letter and one number",
                 },
                 onChange: () => {
                   setOldPassValue(event.target.value);
@@ -115,7 +124,7 @@ export default function ChangePassword() {
             {oldPassValue.length > 0 && (
               <span
                 onClick={() => setShowOldPassword(!showOldPassword)}
-                className="p-2 text-xl text-highlightGray/75"
+                className="p-2 text-xl text-textPrimary"
               >
                 {showOldPassword ? (
                   <FaRegEyeSlash className="cursor-pointer" />
@@ -134,16 +143,16 @@ export default function ChangePassword() {
           {/* Create a new password input */}
           <div
             className={`flex items-center border rounded ${
-              errors.newPassword ? "border-red-500" : "border-highlightGray/25"
+              errors.newPassword ? "border-red-500" : "border-borderLight"
             } mt-4 `}
           >
-            <span className="p-2 text-xl text-highlightGray/75">
+            <span className="p-2 text-xl text-textPrimary">
               <MdOutlineLock />
             </span>
             <input
               type={`${showNewPassword ? "text" : "password"}`}
               placeholder="New password"
-              className={`bg-transparent outline-none placeholder:text-highlightGray/75 p-2 w-full`}
+              className={`bg-transparent outline-none placeholder:text-textPrimary p-2 w-full`}
               {...register("newPassword", {
                 required: "Password can not be empty",
                 minLength: {
@@ -156,7 +165,8 @@ export default function ChangePassword() {
                 },
                 pattern: {
                   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-                  message: "Password must contain at least one letter and one number",
+                  message:
+                    "Password must contain at least one letter and one number",
                 },
                 onChange: () => {
                   setNewPassValue(event.target.value);
@@ -187,7 +197,7 @@ export default function ChangePassword() {
 
           {/* Error message */}
           {error && (
-            <p className="text-primaryWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdError />
               </span>
@@ -197,7 +207,7 @@ export default function ChangePassword() {
 
           {/* Success message */}
           {successMessage && (
-            <p className="text-primaryBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdCheckCircle />
               </span>
@@ -209,7 +219,7 @@ export default function ChangePassword() {
           <button
             disabled={loading}
             type="submit"
-            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-primaryWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-textWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
           >
             {loading ? "Loading..." : "Change password"}
           </button>

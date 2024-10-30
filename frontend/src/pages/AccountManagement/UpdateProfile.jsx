@@ -5,7 +5,12 @@ import { FaEdit } from "react-icons/fa";
 import { BiMaleFemale } from "react-icons/bi";
 import { MdCheckCircle, MdError } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { app } from "../../../firebase.config";
 import { useDispatch } from "react-redux";
 import { useMutation } from "@tanstack/react-query";
@@ -46,7 +51,8 @@ export default function UpdateProfile() {
       uploadTask.on(
         "state_changed",
         (snapshot) => {
-          const process = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          const process =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           setFilePercent(Math.round(process)); // Update the upload progress
         },
         (error) => {
@@ -92,7 +98,10 @@ export default function UpdateProfile() {
     onError: (error) => {
       // Handle errors during the update process
       dispatch(
-        requestFailure(error.response?.data?.message || "Something went wrong. Please try again")
+        requestFailure(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again"
+        )
       );
     },
   });
@@ -111,11 +120,13 @@ export default function UpdateProfile() {
   };
 
   return (
-    <main className="min-h-[90vh] max-w-sm mx-auto flex items-center justify-center">
+    <main className="min-h-[90vh] max-w-sm mx-auto flex items-center justify-center pb-10">
       <section className="flex flex-col gap-4 justify-center p-4 w-full">
         <Title
           title={"Update Profile"}
-          subTitle={"Add your information to help other users to know who you are."}
+          subTitle={
+            "Add your information to help other users to know who you are."
+          }
         />
 
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
@@ -136,7 +147,7 @@ export default function UpdateProfile() {
 
           {/* Profile Image */}
           <div className="col-span-4 flex flex-col items-center justify-center">
-            <figure className="w-40 h-40 border border-highlightGray rounded-full relative">
+            <figure className="w-40 h-40 border border-borderLight rounded-full relative">
               <img
                 className="w-full h-full object-cover object-center rounded-full"
                 src={avatarURL || user?.userInfo?.userPhoto}
@@ -144,7 +155,7 @@ export default function UpdateProfile() {
               />
               <span
                 onClick={() => imageRef.current.click()}
-                className="absolute bottom-2 right-2 z-10 bg-primary text-textBg cursor-pointer p-2 rounded-full transition-none"
+                className="absolute bottom-2 right-2 z-10 bg-backgroundBlue text-textWhite cursor-pointer p-2 rounded-full transition-none"
               >
                 <FaEdit className="transition-none" />
               </span>
@@ -271,13 +282,17 @@ export default function UpdateProfile() {
               placeholder="Add your date of birth"
               defaultValue={
                 user?.userInfo?.userBirth
-                  ? new Date(user.userInfo.userBirth).toISOString().split("T")[0]
+                  ? new Date(user.userInfo.userBirth)
+                      .toISOString()
+                      .split("T")[0]
                   : ""
               }
               className="w-full bg-backgroundPrimary outline-none placeholder:text-text text-text"
               {...register("userBirth", {
                 validate: (value) => {
-                  return value <= today || "Date of birth cannot be in the future";
+                  return (
+                    value <= today || "Date of birth cannot be in the future"
+                  );
                 },
                 onChange: () => {
                   dispatch(resetError());

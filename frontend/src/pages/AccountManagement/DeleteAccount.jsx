@@ -18,7 +18,9 @@ import Title from "../../utils/Title";
 export default function DeleteAccount() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, loading, error, isGoogle } = useSelector((state) => state.authUsers);
+  const { user, loading, error, isGoogle } = useSelector(
+    (state) => state.authUsers
+  );
   const [oldPassValue, setOldPassValue] = useState("");
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -42,9 +44,12 @@ export default function DeleteAccount() {
   const deleteAccountMutation = useMutation({
     mutationFn: async (formData) => {
       dispatch(requestStart()); // Dispatch request start action before making API call
-      const res = await axiosInstance.delete(`/user/delete-account/${user?.userInfo?._id}`, {
-        data: formData,
-      });
+      const res = await axiosInstance.delete(
+        `/user/delete-account/${user?.userInfo?._id}`,
+        {
+          data: formData,
+        }
+      );
       return res.data;
     },
     onSuccess: (data) => {
@@ -60,7 +65,10 @@ export default function DeleteAccount() {
     },
     onError: (error) => {
       dispatch(
-        requestFailure(error.response?.data?.message || "Some thing went wrong. Please try again")
+        requestFailure(
+          error.response?.data?.message ||
+            "Some thing went wrong. Please try again"
+        )
       ); // Dispatch request failure action on error
     },
   });
@@ -90,16 +98,16 @@ export default function DeleteAccount() {
           {!isGoogle && (
             <div
               className={`flex items-center border rounded ${
-                errors.userPassword ? "border-red-500" : "border-highlightGray/25"
+                errors.userPassword ? "border-red-500" : "border-borderLight"
               }`}
             >
-              <span className="p-2 text-xl text-highlightGray/75">
+              <span className="p-2 text-xl text-textPrimary">
                 <MdPassword />
               </span>
               <input
                 type={`${showOldPassword ? "text" : "password"}`}
                 placeholder="Current password"
-                className={`bg-transparent outline-none placeholder:text-highlightGray/75 p-2 w-full`}
+                className={`bg-transparent outline-none placeholder:text-textPrimary p-2 w-full`}
                 {...register("userPassword", {
                   required: "Password can not be empty",
                   minLength: {
@@ -112,7 +120,8 @@ export default function DeleteAccount() {
                   },
                   pattern: {
                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-                    message: "Password must contain at least one letter and one number",
+                    message:
+                      "Password must contain at least one letter and one number",
                   },
                   onChange: () => {
                     setOldPassValue(event.target.value);
@@ -125,7 +134,7 @@ export default function DeleteAccount() {
               {oldPassValue.length > 0 && (
                 <span
                   onClick={() => setShowOldPassword(!showOldPassword)}
-                  className="p-2 text-xl text-highlightGray/75"
+                  className="p-2 text-xl text-textPrimary"
                 >
                   {showOldPassword ? (
                     <FaRegEyeSlash className="cursor-pointer" />
@@ -145,16 +154,16 @@ export default function DeleteAccount() {
           {/* Take confirm input */}
           <div
             className={`flex items-center border rounded ${
-              errors.confirm ? "border-red-500" : "border-highlightGray/25"
+              errors.confirm ? "border-red-500" : "border-borderLight"
             } mt-4 `}
           >
-            <span className="p-2 text-xl text-highlightGray/75">
+            <span className="p-2 text-xl text-textPrimary">
               <IoIosWarning />
             </span>
             <input
               type="text"
               placeholder="Type 'Confirm' to continue"
-              className={`bg-transparent outline-none placeholder:text-highlightGray/75 p-2 w-full`}
+              className={`bg-transparent outline-none placeholder:text-textPrimary p-2 w-full`}
               {...register("confirm", {
                 required: "Type 'Confirm' to continue",
                 onChange: () => {
@@ -173,7 +182,7 @@ export default function DeleteAccount() {
 
           {/* Error message */}
           {error && (
-            <p className="text-primaryWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textWhite bg-red-600 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdError />
               </span>
@@ -183,7 +192,7 @@ export default function DeleteAccount() {
 
           {/* Success message */}
           {successMessage && (
-            <p className="text-primaryBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
+            <p className="text-textBlack bg-green-400 rounded p-2 mt-4 flex items-center justify-center gap-2">
               <span className="text-xl">
                 <MdCheckCircle />
               </span>
@@ -195,7 +204,7 @@ export default function DeleteAccount() {
           <button
             disabled={loading || !isConfirm}
             type="submit"
-            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-primaryWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
+            className="p-2 mt-4 bg-backgroundBlue hover:bg-backgroundBlueHover border-none rounded text-textWhite disabled:bg-primaryWhite disabled:text-primaryBlack disabled:cursor-not-allowed select-none"
           >
             {loading ? "Loading.." : "Delete my account"}
           </button>
