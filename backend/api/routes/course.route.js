@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const multer = require("multer");
-const { allCourse, availableCourse, updateCourse, deleteCourse, createCourse, testCreateCourse } = require("../controllers/course.controller");
-const { uploadFiles, upload } = require("../middleware/imgVdoUpload");
+const { allCourse, availableCourse, updateCourse, deleteCourse, createCourse } = require("../controllers/course.controller");
+const { upload } = require("../middleware/imgVdoUpload");
 
 
 
@@ -11,7 +10,6 @@ router.post("/create", upload.fields([
   { name: "video", maxCount: 10 },
 ]), createCourse)
 
-// router.post("/create", uploadFiles, createCourse)
 router.get("/available", availableCourse); // available course for user, student and teacher
 router.get("/courses", allCourse); // all course for admin
 router.put("/courses/:id", updateCourse); // approved course to admin
