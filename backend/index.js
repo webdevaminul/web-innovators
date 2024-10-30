@@ -12,6 +12,7 @@ const allTeacher = require("./api/routes/instructor.route");
 const instructorRoutes = require("./api/routes/instructor.route");
 const blogRoutes = require("./api/routes/blog.route");
 
+
 // Load environment variables
 dotenv.config();
 
