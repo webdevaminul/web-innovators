@@ -19,7 +19,7 @@ import CourseDetails from "../pages/CourseDetails/CourseDetails";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateRouter from "./PrivateRouter";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
-import AdminHome from "../pages/AdminDashboard/AdminHome";
+import AdminHome from "../pages/AdminDashboard/AdminHome/AdminHome";
 import UserManage from "../pages/AdminDashboard/UserManage";
 import ManageAccount from "../pages/AccountManagement/ManageAccount";
 import Overview from "../pages/AccountManagement/Overview";
