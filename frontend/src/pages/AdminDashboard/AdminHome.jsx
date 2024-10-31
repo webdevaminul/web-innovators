@@ -1,5 +1,4 @@
 import useAllCourse from "../../api/useAllCourse";
-import useAllTeacher from "../../api/useAllTeacher";
 import useAllUser from "../../api/useAllUser";
 import Heading from "../../utils/Heading";
 import {
@@ -24,47 +23,45 @@ const data = [
 ];
 //
 const AdminHome = () => {
-  const status = "pending";
   const { users } = useAllUser();
-  const { teachers } = useAllTeacher();
   const { courses } = useAllCourse();
-  const totalUser = users?.length + teachers?.length;
-  console.log('c',courses)
-  const pending = courses?.filter((c) => c.status === status);
-  console.log('c',pending)
+
+  const students = users?.filter(std => std.userRole === "student");
+  const pending = users?.filter((c) => c.status === "Pending");
+  console.log('c', pending)
   return (
     <div>
       <Heading heading={"Admin Home"} />
       {/* All users here */}
-      <h2 className="text-xl mb-4 text-text">Users overview</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <h2 className="text-sm text-text">Users overview</h2>
+      <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-4 gap-5 md:mb-10">
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Total Users</h3>
-          <p className="text-3xl font-bold text-blue-500">{totalUser}200</p>
+          <h3 className="text-base font-semibold text-text">Total Users</h3>
+          <p className="text-2xl font-bold text-blue-500">{users?.length}</p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Total Teachers</h3>
-          <p className="text-3xl font-bold text-green-500">
+          <h3 className="text-base font-semibold text-text">Total Teachers</h3>
+          <p className="text-2xl font-bold text-green-500">
             {" "}
             {courses?.length}0
           </p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Total Students</h3>
-          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+          <h3 className="text-base font-semibold text-text">Total Students</h3>
+          <p className="text-2xl font-bold text-red-500"> {students?.length} </p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Pending Request</h3>
-          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+          <h3 className="text-base font-semibold text-text">Pending Request</h3>
+          <p className="text-2xl font-bold text-red-500"> {pending?.length}</p>
         </div>
       </div>
 
       {/* Courses and Blog */}
-      <h2 className="text-xl my-4 text-text">Courses and Blogs overview</h2>
+      <h2 className="text-sm mt-10 text-text">Courses and Blogs overview</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Total Courses</h3>
-          <p className="text-3xl font-bold text-blue-500">{totalUser}200</p>
+          <p className="text-3xl font-bold text-blue-500">{users?.length}200</p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Pending Courses</h3>
