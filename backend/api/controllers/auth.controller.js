@@ -105,7 +105,7 @@ exports.emailVerify = async (req, res, next) => {
         userPassword: hashedPassword,
         userPhoto:
           "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVlszH7tmKiwhO2EhbnXeR5iQg8ct-k5_MYw&s",
-        userRole: "Student",
+        userRole: "student",
         isVerified: true,
         isGoogle: false,
       };
@@ -408,7 +408,7 @@ exports.googleLogIn = async (req, res, next) => {
         userName: userName,
         userEmail: userEmail,
         userPhoto: userPhoto,
-        userRole: "Student",
+        userRole: "student",
         isVerified: true,
         isGoogle: true,
       };
