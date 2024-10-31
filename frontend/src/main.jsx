@@ -19,7 +19,7 @@ createRoot(document.getElementById("root")).render(
       <PersistGate loading={null} persistor={persistor}>
         <QueryClientProvider client={queryClient}>
           <HelmetProvider>
-              <RouterProvider router={router} />
+            <RouterProvider router={router} />
             <ToastContainer /> {/* Move here for better context */}
           </HelmetProvider>
         </QueryClientProvider>

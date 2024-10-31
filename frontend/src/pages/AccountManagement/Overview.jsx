@@ -13,7 +13,8 @@ export default function () {
   if (user?.userInfo?.userBirth) {
     const dataBaseData = new Date(user.userInfo.userBirth);
     day = dataBaseData.getDate() || "undefined";
-    month = dataBaseData.toLocaleString("default", { month: "long" }) || "undefined";
+    month =
+      dataBaseData.toLocaleString("default", { month: "long" }) || "undefined";
     year = dataBaseData.getFullYear() || "undefined";
   }
 
@@ -46,7 +47,10 @@ export default function () {
           </p>
 
           <InfoField label={"Name"} value={`${user?.userInfo?.userName}`} />
-          <InfoField label={"Date of Birth"} value={`${month} ${day}, ${year}`} />
+          <InfoField
+            label={"Date of Birth"}
+            value={`${month} ${day}, ${year}`}
+          />
           <InfoField label={"Gender"} value={`${user?.userInfo?.userGender}`} />
         </div>
 
@@ -60,7 +64,10 @@ export default function () {
           </p>
           <InfoField label={"Email"} value={`${user?.userInfo?.userEmail}`} />
           <InfoField label={"Phone"} value={`${user?.userInfo?.userPhone}`} />
-          <InfoField label={"Address"} value={`${user?.userInfo?.userAddress}`} />
+          <InfoField
+            label={"Address"}
+            value={`${user?.userInfo?.userAddress}`}
+          />
         </div>
       </div>
     </main>

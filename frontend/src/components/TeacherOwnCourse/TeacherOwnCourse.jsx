@@ -1,4 +1,3 @@
-
 import useAllCourse from "../../api/useAllCourse";
 import Loader from "../../utils/Loader";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,10 +9,10 @@ import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 
 const TeacherOwnCourse = () => {
-  const { courses, isLoading ,refetch} = useAllCourse();
-  const navigate = useNavigate()
+  const { courses, isLoading, refetch } = useAllCourse();
+  const navigate = useNavigate();
   // TODO :- NEED TO POPULAR COURSE BY RATING
-  
+
   const handleDeleteCourse = async (id) => {
     try {
       // Show confirmation alert before deletion
@@ -26,11 +25,11 @@ const TeacherOwnCourse = () => {
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
       });
-  
+
       // If user confirms, proceed with deletion
       if (result.isConfirmed) {
         const res = await axiosInstance.delete(`/delete/courses/${id}`);
-  
+
         // Handle success response from the backend
         if (res.status === 200) {
           // Show success alert
@@ -39,10 +38,10 @@ const TeacherOwnCourse = () => {
             text: res.data.message,
             icon: "success",
           });
-  
+
           // Show toast notification for deletion success
           toast.success(res.data.message || "Course deleted successfully!");
-  
+
           // Refetch or update course list
           refetch();
         }
@@ -58,10 +57,10 @@ const TeacherOwnCourse = () => {
   }
 
   return (
-    <div className="">       
+    <div className="">
       <div className="flex justify-between flex-row items-center my-10">
         <h1 className="text-3xl font-extrabold">Popular Courses</h1>
-      </div> 
+      </div>
 
       <div className="overflow-x-auto text-text">
         <table className="table">
@@ -82,17 +81,12 @@ const TeacherOwnCourse = () => {
                   <div className="flex items-center gap-3">
                     <div className="avatar">
                       <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={c?.coverPicture}
-                          alt={c.title}
-                        />
+                        <img src={c?.coverPicture} alt={c.title} />
                       </div>
                     </div>
                   </div>
                 </td>
-                <td>
-                {c.title}
-                </td>
+                <td>{c.title}</td>
                 <td>Red</td>
                 <th>
                   <button className="btn btn-ghost btn-xs">{c.category}</button>

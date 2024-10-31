@@ -1,14 +1,19 @@
+import { useState } from "react";
 import useAvailableCourse from "../../api/useAvailableCourse";
 import Loader from "../../utils/Loader";
+import EnrollModal from "./EnrollModal";
 import VideoCard from "./VideoCard";
 import PropTypes from "prop-types";
+const FirstSection = ({ singleCourse = {} }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-const FirstSection = ({ singleCourse ={} }) => {
-  const {isLoading} = useAvailableCourse() ;
-  if(isLoading) return <Loader />
-  
-  const { detailsCourse, price, oldPrice, title } = singleCourse;
-  
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+  const { isLoading } = useAvailableCourse();
+  if (isLoading) return <Loader />;
+  const { detailsCourse, price, oldPrice, title, _id } = singleCourse;
+
   return (
     <div className="md:flex md:items-center justify-between gap-7">
       {/* course heading and description here  */}
@@ -34,7 +39,10 @@ const FirstSection = ({ singleCourse ={} }) => {
               ৳{oldPrice}
             </del>
           </div>
-          <button className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 md:hidden">
+          <button
+            className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 md:hidden"
+            onClick={toggleModal}
+          >
             Enroll Now
           </button>
         </div>
@@ -45,10 +53,20 @@ const FirstSection = ({ singleCourse ={} }) => {
         <div className="w-full">
           <VideoCard />
         </div>
-        <button className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 w-full">
+        <button
+          className="bg-secondary font-bai rounded-lg font-semibold text-lg mt-3 py-2 px-3 w-full"
+          onClick={toggleModal}
+        >
           Enroll Now
         </button>
       </div>
+      {isOpen && (
+        <EnrollModal
+          courseTitle={title}
+          courseId={_id}
+          toggleModal={toggleModal}
+        />
+      )}
     </div>
   );
 };

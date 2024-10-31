@@ -18,7 +18,9 @@ import Title from "../../utils/Title";
 export default function DeleteAccount() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user, loading, error, isGoogle } = useSelector((state) => state.authUsers);
+  const { user, loading, error, isGoogle } = useSelector(
+    (state) => state.authUsers
+  );
   const [oldPassValue, setOldPassValue] = useState("");
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
@@ -42,9 +44,12 @@ export default function DeleteAccount() {
   const deleteAccountMutation = useMutation({
     mutationFn: async (formData) => {
       dispatch(requestStart()); // Dispatch request start action before making API call
-      const res = await axiosInstance.delete(`/user/delete-account/${user?.userInfo?._id}`, {
-        data: formData,
-      });
+      const res = await axiosInstance.delete(
+        `/user/delete-account/${user?.userInfo?._id}`,
+        {
+          data: formData,
+        }
+      );
       return res.data;
     },
     onSuccess: (data) => {
@@ -60,7 +65,10 @@ export default function DeleteAccount() {
     },
     onError: (error) => {
       dispatch(
-        requestFailure(error.response?.data?.message || "Some thing went wrong. Please try again")
+        requestFailure(
+          error.response?.data?.message ||
+            "Some thing went wrong. Please try again"
+        )
       ); // Dispatch request failure action on error
     },
   });
@@ -112,7 +120,8 @@ export default function DeleteAccount() {
                   },
                   pattern: {
                     value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-                    message: "Password must contain at least one letter and one number",
+                    message:
+                      "Password must contain at least one letter and one number",
                   },
                   onChange: () => {
                     setOldPassValue(event.target.value);
