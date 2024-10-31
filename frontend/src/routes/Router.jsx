@@ -8,10 +8,10 @@ import BlogPosts from "../pages/BlogPosts/BlogPosts";
 import ContactPage from "../pages/ContactPage/ContactPage";
 import BeInstructor from "../pages/BeInstructor/BeInstructor";
 import TeacherDashboard from "../pages/TeacherDashboard/TeacherDashboard";
-import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile";
-import TeacherHome from "../pages/TeacherDashboard/TeacherHome";
-import CreateCourse from "../pages/TeacherDashboard/CreateCourse";
-import ManageCourse from "../pages/TeacherDashboard/ManageCourse";
+import TeacherHome from "../pages/TeacherDashboard/TeacherHome/TeacherHome";
+import TeacherProfile from "../pages/TeacherDashboard/TeacherProfile/TeacherProfile";
+import ManageCourse from "../pages/TeacherDashboard/Course/ManageCourse";
+import CreateCourse from "../pages/TeacherDashboard/Course/CreateCourse";
 import EmailVerify from "../pages/Authentication/EmailVerify/EmailVerify";
 import DashboardLayoutBasic from "../pages/UserDashboard/Dashboard/DashboardLayoutBasic";
 import ErrorBoundary from "../pages/UserDashboard/ErrorBoundary/ErrorBoundary";
@@ -26,8 +26,8 @@ import Overview from "../pages/AccountManagement/Overview";
 import UpdateProfile from "../pages/AccountManagement/UpdateProfile";
 import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
-import BlogCreation from "../pages/TeacherDashboard/BlogCreation";
-import BlogManagement from "../pages/TeacherDashboard/BlogManagement";
+import BlogCreation from "../pages/TeacherDashboard/TeacherBlog/BlogCreation";
+import BlogManagement from "../pages/TeacherDashboard/TeacherBlog/BlogManagement";
 import AdminBlogManage from "../pages/AdminDashboard/AdminBlogManage";
 
 import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
@@ -46,7 +46,8 @@ const router = createBrowserRouter([
       { path: "/sign-up", element: <SignUp /> },
       { path: "/email-verify", element: <EmailVerify /> },
       {
-        path: "/forget-password", element: <ForgetPassword />,
+        path: "/forget-password",
+        element: <ForgetPassword />,
       },
       {
         path: "/password-recovery",
@@ -79,8 +80,8 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <BlogPosts />,
       },
-    
-      { path: "/blog-details/:id", element: <BlogDetails  /> },
+
+      { path: "/blog-details/:id", element: <BlogDetails /> },
       {
         path: "/contact-us",
         element: <ContactPage />,
@@ -132,11 +133,7 @@ const router = createBrowserRouter([
       },
       {
         path: "create-post",
-        element: (
-          <PrivateRouter>
-            <BlogCreation />
-          </PrivateRouter>
-        ),
+        element: <BlogCreation />,
       },
       { path: "blog-management", element: <BlogManagement /> },
     ],
@@ -170,9 +167,9 @@ const router = createBrowserRouter([
       },
 
       {
-      path: "adminBlog-management", 
-      element: <AdminBlogManage />
-    },
+        path: "adminBlog-management",
+        element: <AdminBlogManage />,
+      },
     ],
   },
 

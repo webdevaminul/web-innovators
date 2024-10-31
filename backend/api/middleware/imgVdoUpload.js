@@ -2,7 +2,9 @@ const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const { cloudinary } = require("../config/cloudinaryConfig");
 
-// Define Cloudinary storage for images
+// (only for blog) ==> start
+
+// Define Cloudinary storage for images (only for blog)
 const imageStorage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
@@ -14,7 +16,7 @@ const imageStorage = new CloudinaryStorage({
         ? `${req.body.fileName}_${Date.now()}`
         : `image_${Date.now()}`; // Fallback to timestamp if no fileName is provided
     },
-    resource_type: "image",
+    resource_type: "auto",
   },
 });
 
@@ -50,6 +52,7 @@ const uploadImage = (req, res, next) => {
     next(err); // Proceed to the next middleware if no error
   });
 };
+// (only for blog) ==> end
 
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
@@ -62,7 +65,7 @@ const storage = new CloudinaryStorage({
         public_id: req?.body.fileName
           ? `${req.body.fileName}_${Date.now()}`
           : `image_${Date.now()}`, // Fallback to timestamp if no fileName is provided
-        resource_type: "image",
+        resource_type: "auto",
       };
     } else if (file?.fieldname === "video") {
       return {
@@ -71,7 +74,7 @@ const storage = new CloudinaryStorage({
         public_id: req?.body.fileName
           ? `${req.body.fileName}_${Date.now()}`
           : `video_${Date.now()}`, // Fallback to timestamp if no fileName is provided
-        resource_type: "video",
+        resource_type: "auto",
       };
     }
   },
@@ -84,7 +87,7 @@ const uploadFiles = (req, res, next) => {
     storage: storage,
     fileFilter: (req, files, cb) => {
       // File type validation
-      console.log('files 86',req.files)
+
       if (files.fieldname === "image") {
         if (
           files.mimetype === "image/jpg" ||
@@ -142,7 +145,6 @@ const uploadFiles = (req, res, next) => {
 
     // File size validation for image (4MB) and video (100MB)
     const files = req?.files;
-
     // // Validate the image size (max 4MB)
     if (files?.image[0]?.size > 4 * 1024 * 1024) {
       return res.status(400).json({ error: "Image file size exceeds 4MB." });
@@ -157,4 +159,16 @@ const uploadFiles = (req, res, next) => {
   });
 };
 
-module.exports = { uploadImage, uploadFiles };
+const deleteMediaFromCloudinary = async (publicId) => {
+  try {
+    await cloudinary.uploader.destroy(publicId);
+  } catch (error) {
+    console.log(error);
+    throw new Error("failed to delete assest from cloudinary");
+  }
+};
+
+// Initialize multer with Cloudinary storage
+const upload = multer({ storage: storage });
+
+module.exports = { uploadImage, uploadFiles, deleteMediaFromCloudinary, upload };

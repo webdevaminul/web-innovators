@@ -11,7 +11,9 @@ const CourseManage = () => {
 
   const updateCourseStatus = async (id, status) => {
     try {
-      const res = await axiosInstance.put(`/approve/courses/${id}`, { updateStatus: status });
+      const res = await axiosInstance.put(`/approve/courses/${id}`, {
+        updateStatus: status,
+      });
 
       // Check if the response is acknowledged
       if (res?.data?.data?.acknowledged) {
@@ -35,7 +37,12 @@ const CourseManage = () => {
   };
 
   if (isLoading) return <Loader />;
-  if (!courses?.length) return <p>No Data available</p>;
+  if (!courses?.length)
+    return (
+      <p className="calc(h-screen-[45px]) flex justify-center items-center">
+        No Data available
+      </p>
+    );
 
   return (
     <div className="overflow-x-auto w-full px-2 py-5">
@@ -43,11 +50,21 @@ const CourseManage = () => {
         <table className="w-full">
           <thead>
             <tr className="bg-backgroundPrimary/10">
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Name</th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Category</th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Price</th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Status</th>
-              <th className="py-4 pr-6 text-left text-text font-bold uppercase">Action</th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
+                Name
+              </th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
+                Category
+              </th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
+                Price
+              </th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
+                Status
+              </th>
+              <th className="py-4 pr-6 text-left text-text font-bold uppercase">
+                Action
+              </th>
             </tr>
           </thead>
           <tbody className="bg-backgroundPrimary overflow-x-auto">

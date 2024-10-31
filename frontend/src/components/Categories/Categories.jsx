@@ -87,9 +87,13 @@ export default function Categories() {
             key={index}
             className="col-span-4 sm:col-span-2 lg:col-span-1 border border-borderDark bg-backgroundShadeOne hover:shadow-md rounded-full overflow-hidden p-2 flex items-center gap-3"
           >
-            <div className={`${category.bgColor} rounded-full p-2 sm:p-3 md:p-4`}>
+            <div
+              className={`${category.bgColor} rounded-full p-2 sm:p-3 md:p-4`}
+            >
               {/* Render the icon dynamically */}
-              <category.icon className={`text-3xl sm:text-4xl md:text-5xl ${category.iconColor}`} />
+              <category.icon
+                className={`text-3xl sm:text-4xl md:text-5xl ${category.iconColor}`}
+              />
             </div>
             <div>
               <h2 className="font-bold mb-2 sm:text-lg">{category.name}</h2>
