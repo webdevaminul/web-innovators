@@ -13,6 +13,7 @@ import {
   resetError,
 } from "../../../redux/authUsersSlice";
 import Heading from "../../../utils/Heading";
+import GoogleLogIn from "../../../components/GoogleLogIn/GoogleLogIn";
 // import GoogleAuth from "../components/GoogleAuth";
 
 export default function SignIn() {
@@ -191,6 +192,9 @@ export default function SignIn() {
           </button>
         </form>
 
+        {/* Google button */}
+        <GoogleLogIn />
+
         <p className="text-sm">
           <span>Don&apos;t have an acoount?</span>
           <span>
@@ -199,9 +203,6 @@ export default function SignIn() {
             </Link>
           </span>
         </p>
-
-        {/* Google button */}
-        {/* <GoogleAuth /> */}
       </section>
     </main>
   );
