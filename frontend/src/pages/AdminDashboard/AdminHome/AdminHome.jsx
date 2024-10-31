@@ -12,6 +12,8 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import UserCharts from "./UserCharts";
+import CourseBlogsCharts from "./CourseBlogsCharts";
 
 
 const AdminHome = () => {
@@ -80,8 +82,10 @@ const data2 = [
       </div>
 
       {/* Main Content */}
+      <UserCharts />
+      <CourseBlogsCharts />
       {/* Graph Section */}
-      <div className="bg-bg rounded-lg shadow hover:shadow-md p-5 mb-5 border-l-4 border-blue-500">
+      <div className="bg-bg rounded-lg shadow hover:shadow-md p-5 mb-5">
           <h2 className="text-2xl font-semibold mb-4 text-text">
             User and Course Statistics
           </h2>
