@@ -7,7 +7,7 @@ import useAllUser from "../../api/useAllUser";
 
 const UserManage = () => {
   const { users } = useAllUser();
-  console.table(users)
+  console.table(users);
   const [activeTab, setActiveTab] = useState(1);
   const [status, setStatus] = useState("Pending");
   const { teachers, isLoading, refetch } = useAllTeacher(status);
@@ -17,21 +17,24 @@ const UserManage = () => {
     const status = "Approved"; // Fixed typo from "Aproved" to "Approved"
     const userNewRole = "Teacher";
     const updateData = { status, userNewRole };
-  
+
     try {
-      const res = await axiosInstance.put(`/approved/teacher/${id}`, updateData);
-      
+      const res = await axiosInstance.put(
+        `/approved/teacher/${id}`,
+        updateData
+      );
+
       // Check if the response is acknowledged
       if (res?.data?.result?.acknowledged) {
-        toast.success(res?.data?.message); 
+        toast.success(res?.data?.message);
         refetch();
       }
     } catch (err) {
       console.log(err);
-      toast.error("Failed to update role"); 
+      toast.error("Failed to update role");
     }
   };
-  
+
   const teacherState = (index) => {
     setActiveTab(index);
     if (index === 1) {

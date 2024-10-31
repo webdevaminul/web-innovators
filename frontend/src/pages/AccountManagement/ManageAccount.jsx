@@ -11,7 +11,8 @@ export default function ManageAccount() {
     `text-textPrimary whitespace-nowrap w-full sm:rounded-r-full p-2 flex items-center justify-center sm:justify-start gap-1 sm:gap-2 ${
       isActive ? "bg-backgroundBlue text-textWhite" : "sm:hover:bg-blue-400"
     }`;
-  const iconClass = (isActive) => (isActive ? "text-textWhite" : "text-textPrimary");
+  const iconClass = (isActive) =>
+    isActive ? "text-textWhite" : "text-textPrimary";
 
   return (
     <main className="flex relative min-h-[calc(100vh-3.8rem)]">

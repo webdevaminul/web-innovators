@@ -57,7 +57,10 @@ export default function SignIn() {
       console.log("data error", error.response?.data);
       console.log("message error", error.response?.data?.message);
       dispatch(
-        loginFailure(error.response?.data?.message || "Something went wrong. Please try again")
+        loginFailure(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again"
+        )
       ); // Dispatch login failure action on error
     },
   });
@@ -137,7 +140,8 @@ export default function SignIn() {
                 },
                 pattern: {
                   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-                  message: "Password must contain at least one letter and one number",
+                  message:
+                    "Password must contain at least one letter and one number",
                 },
                 onChange: (event) => {
                   setPassValue(event.target.value);
@@ -171,7 +175,10 @@ export default function SignIn() {
             </p>
           )}
 
-          <Link to="/forget-password" className="mt-4 text-sm text-blue-500 hover:underline">
+          <Link
+            to="/forget-password"
+            className="mt-4 text-sm text-blue-500 hover:underline"
+          >
             Forget password?
           </Link>
 

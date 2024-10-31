@@ -29,9 +29,9 @@ const AdminHome = () => {
   const { teachers } = useAllTeacher();
   const { courses } = useAllCourse();
   const totalUser = users?.length + teachers?.length;
-  console.log('c',courses)
+  console.log("c", courses);
   const pending = courses?.filter((c) => c.status === status);
-  console.log('c',pending)
+  console.log("c", pending);
   return (
     <div>
       <Heading heading={"Admin Home"} />
@@ -51,11 +51,17 @@ const AdminHome = () => {
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Total Students</h3>
-          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+          <p className="text-3xl font-bold text-red-500">
+            {" "}
+            {pending?.length} s 5
+          </p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Pending Request</h3>
-          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+          <p className="text-3xl font-bold text-red-500">
+            {" "}
+            {pending?.length} s 5
+          </p>
         </div>
       </div>
 
@@ -75,11 +81,17 @@ const AdminHome = () => {
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Total Blogs</h3>
-          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+          <p className="text-3xl font-bold text-red-500">
+            {" "}
+            {pending?.length} s 5
+          </p>
         </div>
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Pending Blogs</h3>
-          <p className="text-3xl font-bold text-red-500"> {pending?.length} s 5</p>
+          <p className="text-3xl font-bold text-red-500">
+            {" "}
+            {pending?.length} s 5
+          </p>
         </div>
       </div>
 

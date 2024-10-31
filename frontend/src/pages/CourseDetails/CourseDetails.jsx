@@ -8,6 +8,7 @@ import useAllCourse from "../../api/useAllCourse";
 
 const CourseDetails = () => {
   const { courses, isLoading } = useAllCourse();
+  console.log(courses);
   const { id } = useParams();
 
   console.log("id", id);
