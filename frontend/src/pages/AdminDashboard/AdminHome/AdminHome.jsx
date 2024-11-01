@@ -37,6 +37,7 @@ const data2 = [
   const pendingBlogs = blogs?.filter((b) => b.status === "pending");
 
   console.log('teachers', pendingCourses)
+
   return (
     <div>
       <Heading heading={"Admin Home"} />

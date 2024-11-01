@@ -14,6 +14,7 @@ exports.beInstructor = async (req, res, next) => {
         institute: instructorData.institute,
         message: instructorData.message,
         category: instructorData.selectedOption,
+        teacherJoinMonth : instructorData.teacherJoinMonth,
       },
     };
     // Update the instructor using native MongoDB methods

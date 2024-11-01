@@ -5,6 +5,7 @@ import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../../utils/CustomModal";
+import { getMonthName } from "../../utils/GetMontName";
 
 const BeInstructor = () => {
   const { user } = useSelector((state) => state.authUsers);
@@ -19,6 +20,8 @@ const BeInstructor = () => {
   const navigate = useNavigate();
 
   const role = user?.userInfo?.userRole;
+  const teacherJoinMonth = getMonthName()
+  console.log('monthName', teacherJoinMonth)
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +37,7 @@ const BeInstructor = () => {
       institute,
       message,
       selectedOption,
+      teacherJoinMonth,
     };
 
     if (user) {
