@@ -19,17 +19,7 @@ const FirstSection = ({ singleCourse = {} }) => {
       {/* course heading and description here  */}
       <div className="lg:w-3/5">
         <h1 className="text-2xl md:text-4xl font-bold mb-3">{title}</h1>
-        <p className="text-sm">
-          {detailsCourse} <br /> The up text is dynamic <br />
-          For those of you participating in the HSC 2026 exams from the Science,
-          Commerce, or Humanities streams, you surely need comprehensive
-          preparation in five subjects outside of your main stream subjects,
-          right? Often, while focusing on the core subjects, we tend to overlook
-          these important subjects. So, keeping your needs in mind, Ten Minute
-          School has brought a complete course for five subjects, including both
-          Bangla and English papers, as well as ICT, in the “HSC 2026 Online
-          Batch (BEI).”
-        </p>
+        <p className="text-sm">{detailsCourse}</p>
         <div className="mt-2">
           <div className="flex items-center gap-3">
             <h1 className="font-bold font-bai text-xl text-secondary">
