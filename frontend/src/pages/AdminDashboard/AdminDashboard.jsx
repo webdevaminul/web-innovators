@@ -15,13 +15,42 @@ import { useSelector } from "react-redux";
 const AdminDashboard = () => {
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state) => state.authUsers);
+  const [profileMenu, setProfileMenu] = useState(false);
   const location = useLocation();
+
+  const role = user?.userInfo?.userRole;
+
+  // Toggle Profile Menu
+  const toggleProfileMenu = () => {
+    setProfileMenu(!profileMenu);
+    // setMobileMenu(false);
+  };
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(requestStart());
+      const res = await axiosInstance.get("/auth/sign-out");
+      if (res.data.success) {
+        dispatch(userClearSuccess());
+        localStorage.removeItem("accessToken");
+        setProfileMenu(false);
+        navigate("/");
+      }
+    } catch (error) {
+      dispatch(
+        requestFailure(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again."
+        )
+      );
+    }
+  };
 
   // define the route is active
   const isActive = (route) => location?.pathname === route;
 
   return (
-    <div className="flex flex-col md:px-10 px-5">
+    <div className="mx-auto flex flex-col md:px-10 px-5">
       {/* Top Navbar */}
       <div className="bg-backgroundPrimary text-text shadow w-full p-2 flex items-center justify-between">
         <div className="flex items-center">
@@ -50,17 +79,87 @@ const AdminDashboard = () => {
           <button>
             <FaBell className="text-primary text-xl" />
           </button>
-          <button>
-            <span className="relative rounded-full">
-              <span className="bg-blue-500 rounded-full m-auto ">
+          <div>
+            <div className="relative rounded-full">
+              {/* profile */}
+              <div
+                onClick={toggleProfileMenu}
+                className="bg-blue-500 rounded-full m-auto h-8 w-8 sm:h-9 sm:w-9 cursor-pointer"
+              >
                 <img
                   src={user?.userInfo?.userPhoto}
-                  className="rounded-full object-center object-cover h-8 w-8 sm:h-9 sm:w-9 cursor-pointer"
+                  className="rounded-full object-center object-cover"
                   loading="lazy"
                 />
-              </span>
-            </span>
-          </button>
+              </div>
+              {/* dropdown */}
+              {profileMenu && (
+                <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderDark rounded-xl flex flex-col gap-4">
+                  <div className="">
+                    <p className="whitespace-nowrap">
+                      Hi, {user?.userInfo?.userName}
+                    </p>
+                    <p className="text-xs ">{user?.userInfo?.userEmail}</p>
+                  </div>
+
+                  {role === "student" ? (
+                    <Link
+                      onClick={() => setProfileMenu(false)}
+                      to="dashboard/home"
+                      className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                    >
+                      <span className="text-2xl">
+                        {/* <BiCreditCardFront /> */}
+                      </span>
+                      <span>Dashboard</span>
+                    </Link>
+                  ) : (
+                    <>
+                      {role === "Teacher" ? (
+                        <Link
+                          onClick={() => setProfileMenu(false)}
+                          to="/teacher-dashboard"
+                          className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                        >
+                          <span className="text-2xl">
+                            {/* <BiCreditCardFront /> */}
+                          </span>
+                          <span>Dashboard</span>
+                        </Link>
+                      ) : (
+                        <Link
+                          onClick={() => setProfileMenu(false)}
+                          to="/admin-dashboard"
+                          className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                        >
+                          <span className="text-2xl">
+                            {/* <BiCreditCardFront /> */}
+                          </span>
+                          <span>Dashboard</span>
+                        </Link>
+                      )}
+                    </>
+                  )}
+
+                  <Link
+                    onClick={() => setProfileMenu(false)}
+                    to="/manage-account/overview"
+                    className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                  >
+                    <span className="text-2xl">{/* <IoOptions /> */}</span>
+                    <span>Manage account</span>
+                  </Link>
+                  <button
+                    onClick={handleSignOut}
+                    className="text-sm bg-red-500 hover:bg-red-600 text-textWhite border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
+                  >
+                    <span className="text-2xl">{/* <IoExitOutline /> */}</span>
+                    <span>Sign out</span>
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 

@@ -29,9 +29,9 @@ const AdminHome = () => {
   const { teachers } = useAllTeacher();
   const { courses } = useAllCourse();
   const totalUser = users?.length + teachers?.length;
-  console.log("c", courses);
+  // console.log("c", courses);
   const pending = courses?.filter((c) => c.status === status);
-  console.log("c", pending);
+  // console.log("c", pending);
   return (
     <div>
       <Heading heading={"Admin Home"} />
