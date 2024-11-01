@@ -365,3 +365,87 @@ exports.refreshAccessToken = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.googleLogIn = async (req, res, next) => {
+  try {
+    // Extract the user's email, name, and profile picture from the request body
+    const { userName, userEmail, userPhoto } = req.body;
+
+    // Check if the user with the provided email exists
+    const validUser = await userCollection.findOne({ userEmail: userEmail });
+
+    if (validUser) {
+      // Generate a JWT access token for login the user
+      const accessToken = jwt.sign({ id: validUser._id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+        expiresIn: "15m",
+      });
+
+      // Generate a JWT refresh token for login the user
+      const refreshToken = jwt.sign(
+        { id: validUser._id },
+        process.env.JWT_REFRESH_TOKEN_SECRET,
+        { expiresIn: "180d" } // Refresh token expires in 6 months
+      );
+
+      // Set the refresh token in a cookie
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Strict",
+        maxAge: 6 * 30 * 24 * 60 * 60 * 1000, // 6 months in milliseconds
+      });
+
+      // Send a success response
+      return res.status(201).json({
+        success: true,
+        message: "Google login successful",
+        token: accessToken,
+        userInfo: validUser,
+      });
+    } else {
+      // Create a new user with the verified email and profile picture
+      const newUser = {
+        userName: userName,
+        userEmail: userEmail,
+        userPhoto: userPhoto,
+        userRole: "student",
+        isVerified: true,
+        isGoogle: true,
+      };
+
+      // Save the new user to the database
+      await userCollection.insertOne(newUser);
+
+      // Generate a JWT access token for login the user
+      const accessToken = jwt.sign({ id: newUser._id }, process.env.JWT_ACCESS_TOKEN_SECRET, {
+        expiresIn: "15m",
+      });
+
+      // Generate a JWT refresh token for login the user
+      const refreshToken = jwt.sign(
+        { id: newUser._id },
+        process.env.JWT_REFRESH_TOKEN_SECRET,
+        { expiresIn: "180d" } // Refresh token expires in 6 months
+      );
+
+      // Set the refresh token in a cookie
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "Strict",
+        maxAge: 6 * 30 * 24 * 60 * 60 * 1000, // 6 months in milliseconds
+      });
+
+      // Send a success response
+      return res.status(201).json({
+        success: true,
+        message: "Google registration successful",
+        token: accessToken,
+        userInfo: newUser,
+      });
+    }
+  } catch (error) {
+    // Pass any other errors to the error-handling middleware
+    next(error);
+  }
+};

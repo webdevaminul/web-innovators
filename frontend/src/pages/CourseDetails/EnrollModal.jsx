@@ -5,8 +5,8 @@ import axiosInstance from "../../api/axiosInstance";
 
 const EnrollModal = ({ toggleModal, courseId, courseTitle }) => {
   const { user } = useSelector((state) => state.authUsers);
-  const email = user.userInfo.userEmail;
-  const studentId = user.userInfo._id;
+  const email = user.userInfo?.userEmail;
+  const studentId = user.userInfo?._id;
 
   const {
     register,
@@ -44,9 +44,7 @@ const EnrollModal = ({ toggleModal, courseId, courseTitle }) => {
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Your Full Name
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Your Full Name</label>
             <input
               type="text"
               className="mt-1 p-2 w-full border rounded-md"
@@ -54,39 +52,29 @@ const EnrollModal = ({ toggleModal, courseId, courseTitle }) => {
               defaultValue={user.userInfo.userName}
               {...register("name", { required: true })}
             />
-            {errors.name && (
-              <span className="text-red-500">Name is required</span>
-            )}
+            {errors.name && <span className="text-red-500">Name is required</span>}
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Your Phone
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Your Phone</label>
             <input
               type="number"
               className="mt-1 p-2 w-full border rounded-md"
               placeholder="Enter your phone"
               {...register("phone", { required: true })}
             />
-            {errors.phone && (
-              <span className="text-red-500">Phone is required</span>
-            )}
+            {errors.phone && <span className="text-red-500">Phone is required</span>}
           </div>
 
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">
-              Address
-            </label>
+            <label className="block text-sm font-medium text-gray-700">Address</label>
             <input
               type="text"
               className="mt-1 p-2 w-full border rounded-md"
               placeholder="Your address"
               {...register("address", { required: true })}
             />
-            {errors.address && (
-              <span className="text-red-500">Address is required</span>
-            )}
+            {errors.address && <span className="text-red-500">Address is required</span>}
           </div>
 
           <button
