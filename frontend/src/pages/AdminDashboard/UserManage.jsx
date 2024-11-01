@@ -7,11 +7,10 @@ import useAllUser from "../../api/useAllUser";
 
 const UserManage = () => {
   const { users } = useAllUser();
-  console.table(users)
+  const allStudents = users.filter(std => std.userRole === "student");
   const [activeTab, setActiveTab] = useState(1);
   const [status, setStatus] = useState("Pending");
   const { teachers, isLoading, refetch } = useAllTeacher(status);
-
   // user role update
   const handleUpdateRole = async (id) => {
     const status = "Approved"; // Fixed typo from "Aproved" to "Approved"
@@ -37,7 +36,7 @@ const UserManage = () => {
     if (index === 1) {
       setStatus("Pending");
     } else if (index === 2) {
-      setStatus("Aproved");
+      setStatus("Approved");
     } else if (index === 3) {
       // all user
     }
@@ -50,7 +49,9 @@ const UserManage = () => {
   if (isLoading) {
     return <Loader />;
   }
-
+if(!teachers.length) {
+  return <p className="flex h-screen justify-center items-center"> No User Yet </p>
+}
   return (
     <>
       <div className="p-8 mb-4 flex items-center gap-5 justify-start ">
@@ -118,7 +119,7 @@ const UserManage = () => {
             </tr>
           </thead>
           <tbody>
-            {users?.map((user) => (
+            {allStudents?.map((user) => (
               <tr key={user._id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="flex items-center">
@@ -240,8 +241,8 @@ const UserManage = () => {
                         Reject{" "}
                       </button>
                     </>
-                  ) : teacher.status === "Aproved" ? (
-                    "Aproved"
+                  ) : teacher.status === "Approved" ? (
+                    "Approved"
                   ) : (
                     "Pending"
                   )}

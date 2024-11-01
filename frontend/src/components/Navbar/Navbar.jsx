@@ -18,7 +18,7 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
 
-  const { isLoading } = useAllUser();
+  const {users, isLoading } = useAllUser();
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Navbar = () => {
 
   // const role = "Admin";
   // const role = "Teacher";
-  const role = user?.userInfo?.userRole;
+  const role = user?.userInfo?.userRole  ;
 
   // Toggle Profile Menu
   const toggleProfileMenu = () => {

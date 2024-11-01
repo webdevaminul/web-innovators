@@ -56,25 +56,23 @@ exports.getAllTeacher = async (req, res, next) => {
     const status = req?.query?.status || { $exists: true };
     const query = { status: status };
     const users = await usersCollection.find(query).toArray();
-
     if (!users.length) {
       return res.status(404).json({
         success: false,
         message: "No users found",
       });
     }
-    // res.status(200).send(users);
     return res.status(200).json({
       success: true,
       data: users,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: "Server error while fetching users",
       error: error.message,
     });
-    next(error);
   }
 };
 
