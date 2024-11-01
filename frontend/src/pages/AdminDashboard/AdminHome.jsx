@@ -5,7 +5,7 @@ import Heading from "../../utils/Heading";
 import { IoMdPerson } from "react-icons/io";
 import { RiTeamFill } from "react-icons/ri";
 import { MdDownloading } from "react-icons/md";
-import { BsGraphDownArrow } from "react-icons/bs";
+import { BsGraphDownArrow, BsGraphUpArrow } from "react-icons/bs";
 import {
   LineChart,
   Line,
@@ -16,6 +16,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import CourseProgress from "../../utils/CourseProgress";
 
 // Sample Data for Graphs
 const data = [
@@ -39,7 +40,7 @@ const AdminHome = () => {
   return (
     <div>
       <Heading heading={"Admin Home"} />
-      {/* All users here */}
+      {/* All users here 1st section of admin-home */}
       {/* <h2 className="text-xl mb-4 text-text">Users overview</h2> */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
         {/* <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
@@ -65,7 +66,7 @@ const AdminHome = () => {
           <div className="flex items-center gap-4 mb-4">
             <RiTeamFill className="text-3xl rounded-md bg-cyan-100" />
             <p className="flex justify-between items-center gap-2 text-black">
-              <BsGraphDownArrow />
+              <BsGraphUpArrow />
               <span>1.3 %</span>
             </p>
           </div>
@@ -110,6 +111,51 @@ const AdminHome = () => {
           </p>
         </div>
       </div> */}
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="md:col-span-2 border-2 border-black">
+          <div>
+            <p>Popular Courses</p>
+            <div className="flex flex-col">
+              <CourseProgress />
+            </div>
+            {/* <table>
+              <thead className="bg-backgroundPrimary">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-text uppercase tracking-wider"
+                  >
+                    <IoMdFlame />
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-text uppercase tracking-wider"
+                  >
+                    Development
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-text uppercase tracking-wider"
+                  >
+                    2332
+                  </th>
+                  <th scope="col" className="">
+                    <progress
+                      className="progress w-56"
+                      value="70"
+                      max="100"
+                    ></progress>
+                  </th>
+                </tr>
+              </thead>
+            </table> */}
+          </div>
+        </div>
+        <div className="">
+          <p>pie chart</p>
+        </div>
+      </div>
 
       {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-bg">
