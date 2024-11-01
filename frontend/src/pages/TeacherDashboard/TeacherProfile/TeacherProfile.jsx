@@ -129,23 +129,23 @@ const TeacherProfile = () => {
           </div>
 
           {/* Social Links */}
-          <div className="fixed right-2 bottom-20 flex flex-col rounded-sm bg-gray-200 text-text dark:bg-gray-200/80 dark:text-gray-700 hover:text-text hover:">
-            <a href="https://www.linkedin.com/in/samuel-abera-6593a2209/">
+          <div className="fixed right-2 bottom-20 flex flex-col rounded-sm bg-backgroundPrimary text-text dark:bg-gray-200/80 dark:text-gray-700 hover:text-text hover:">
+            <a href="https://www.linkedin.com/in/mohibullah-mohim/">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
                 <RiLinkedinFill className="w-6 h-6" />
               </div>
             </a>
-            <a href="https://twitter.com/Samuel7Abera7">
+            <a href="https://twitter.com/Mohib333">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
                 <FaXTwitter className="w-6 h-6 text-text" />
               </div>
             </a>
-            <a>
+            <a href="https://www.facebook.com/mohibullah.jubileean" >
               <div className="p-2 hover:text-blue-500 hover:dark:text-blue-500">
                 <FiFacebook className="w-6 h-6" />
               </div>
             </a>
-            <a href="https://www.youtube.com/@silentcoder7">
+            <a href="https://www.youtube.com/@MohibTheMaziest">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
                 <IoLogoYoutube className="w-6 h-6 text-red-600" />
               </div>
