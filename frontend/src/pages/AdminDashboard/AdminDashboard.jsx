@@ -94,7 +94,7 @@ const AdminDashboard = () => {
               </div>
               {/* dropdown */}
               {profileMenu && (
-                <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderDark rounded-xl flex flex-col gap-4">
+                <div className="absolute top-[3.2rem] right-0 z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderDark rounded-xl flex flex-col gap-4">
                   <div className="">
                     <p className="whitespace-nowrap">
                       Hi, {user?.userInfo?.userName}

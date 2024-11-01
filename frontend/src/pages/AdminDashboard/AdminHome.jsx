@@ -2,6 +2,10 @@ import useAllCourse from "../../api/useAllCourse";
 import useAllTeacher from "../../api/useAllTeacher";
 import useAllUser from "../../api/useAllUser";
 import Heading from "../../utils/Heading";
+import { IoMdPerson } from "react-icons/io";
+import { RiTeamFill } from "react-icons/ri";
+import { MdDownloading } from "react-icons/md";
+import { BsGraphDownArrow } from "react-icons/bs";
 import {
   LineChart,
   Line,
@@ -36,38 +40,50 @@ const AdminHome = () => {
     <div>
       <Heading heading={"Admin Home"} />
       {/* All users here */}
-      <h2 className="text-xl mb-4 text-text">Users overview</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
+      {/* <h2 className="text-xl mb-4 text-text">Users overview</h2> */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+        {/* <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Total Users</h3>
           <p className="text-3xl font-bold text-blue-500">{totalUser}200</p>
+        </div> */}
+
+        {/* total teachers card */}
+        <div className="rounded-lg shadow-md p-5 flex flex-col justify-between bg-gradient-to-r from-cyan-400 to-cyan-200">
+          <div className="flex items-center gap-4 mb-4">
+            <IoMdPerson className="text-3xl rounded-md bg-cyan-100" />
+            <p className="flex justify-between items-center gap-2 text-black">
+              <BsGraphDownArrow />
+              <span>1.3 %</span>
+            </p>
+          </div>
+          <p className="text-3xl font-bold text-black">{courses?.length}</p>
+          <h3 className="text-lg font-semibold text-black">Total Teachers</h3>
         </div>
-        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Total Teachers</h3>
-          <p className="text-3xl font-bold text-green-500">
-            {" "}
-            {courses?.length}0
-          </p>
+
+        {/* total students */}
+        <div className="rounded-lg shadow-md p-5 flex flex-col justify-between bg-gradient-to-r from-cyan-400 to-cyan-200">
+          <div className="flex items-center gap-4 mb-4">
+            <RiTeamFill className="text-3xl rounded-md bg-cyan-100" />
+            <p className="flex justify-between items-center gap-2 text-black">
+              <BsGraphDownArrow />
+              <span>1.3 %</span>
+            </p>
+          </div>
+          <p className="text-3xl font-bold text-black">{pending?.length}</p>
+          <h3 className="text-lg font-semibold text-black">Total Students</h3>
         </div>
-        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Total Students</h3>
-          <p className="text-3xl font-bold text-red-500">
-            {" "}
-            {pending?.length} s 5
-          </p>
-        </div>
-        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
-          <h3 className="text-xl font-semibold text-text">Pending Request</h3>
-          <p className="text-3xl font-bold text-red-500">
-            {" "}
-            {pending?.length} s 5
-          </p>
+
+        {/* pending request */}
+        <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between bg-gradient-to-r from-cyan-400 to-cyan-200">
+          <MdDownloading className="mb-4 text-3xl rounded-md bg-cyan-100" />
+          <p className="text-3xl font-bold text-black">{pending?.length}</p>
+          <h3 className="text-lg font-semibold text-black">Pending Request</h3>
         </div>
       </div>
 
       {/* Courses and Blog */}
-      <h2 className="text-xl my-4 text-text">Courses and Blogs overview</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      {/* <h2 className="text-xl my-4 text-text">Courses and Blogs overview</h2> */}
+      {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         <div className="bg-bg rounded-lg shadow-md p-5 flex flex-col justify-between">
           <h3 className="text-xl font-semibold text-text">Total Courses</h3>
           <p className="text-3xl font-bold text-blue-500">{totalUser}200</p>
@@ -93,10 +109,10 @@ const AdminHome = () => {
             {pending?.length} s 5
           </p>
         </div>
-      </div>
+      </div> */}
 
       {/* Main Content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-bg h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 p-5 bg-bg">
         {/* Recent Activities Section */}
         <div className="bg-bg rounded-lg shadow-md p-5 mb-5 border-l-4 border-green-500">
           <h2 className="text-2xl font-semibold mb-4 text-text">
