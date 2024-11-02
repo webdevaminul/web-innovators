@@ -13,6 +13,7 @@ import {
   resetError,
 } from "../../../redux/authUsersSlice";
 import Heading from "../../../utils/Heading";
+import GoogleLogIn from "../../../components/GoogleLogIn/GoogleLogIn";
 // import GoogleAuth from "../components/GoogleAuth";
 
 export default function SignIn() {
@@ -56,7 +57,10 @@ export default function SignIn() {
       console.log("data error", error.response?.data);
       console.log("message error", error.response?.data?.message);
       dispatch(
-        loginFailure(error.response?.data?.message || "Something went wrong. Please try again")
+        loginFailure(
+          error.response?.data?.message ||
+            "Something went wrong. Please try again"
+        )
       ); // Dispatch login failure action on error
     },
   });
@@ -136,7 +140,8 @@ export default function SignIn() {
                 },
                 pattern: {
                   value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-                  message: "Password must contain at least one letter and one number",
+                  message:
+                    "Password must contain at least one letter and one number",
                 },
                 onChange: (event) => {
                   setPassValue(event.target.value);
@@ -170,7 +175,10 @@ export default function SignIn() {
             </p>
           )}
 
-          <Link to="/forget-password" className="mt-4 text-sm text-blue-500 hover:underline">
+          <Link
+            to="/forget-password"
+            className="mt-4 text-sm text-blue-500 hover:underline"
+          >
             Forget password?
           </Link>
 
@@ -184,6 +192,9 @@ export default function SignIn() {
           </button>
         </form>
 
+        {/* Google button */}
+        <GoogleLogIn />
+
         <p className="text-sm">
           <span>Don&apos;t have an acoount?</span>
           <span>
@@ -192,9 +203,6 @@ export default function SignIn() {
             </Link>
           </span>
         </p>
-
-        {/* Google button */}
-        {/* <GoogleAuth /> */}
       </section>
     </main>
   );

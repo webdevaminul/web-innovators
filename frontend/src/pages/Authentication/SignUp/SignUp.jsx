@@ -7,6 +7,7 @@ import { FiUser } from "react-icons/fi";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import axiosInstance from "../../../api/axiosInstance";
 import Heading from "../../../utils/Heading";
+import GoogleLogIn from "../../../components/GoogleLogIn/GoogleLogIn";
 
 // TODO: Turn off auto complete
 
@@ -211,6 +212,9 @@ export default function SignUp() {
             {signUpMutation.isLoading ? "Loading..." : "Sign up"}
           </button>
         </form>
+
+        {/* Google Button */}
+        <GoogleLogIn />
 
         <p className="text-sm">
           <span>Already have an acoount?</span>

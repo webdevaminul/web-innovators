@@ -59,38 +59,51 @@ const AdminDashboard = () => {
       <div className="flex-1 flex">
         {/* Sidebar - visible on md and lg, drawer on smaller devices */}
         <div
-          className={`p-2 bg-backgroundPrimary md:w-60 lg:w-60 md:flex-col lg:flex-col transform top-0 left-0 fixed md:relative lg:relative h-full md:z-0 z-50 transition-transform duration-300 ease-in-out ${open ? "translate-x-0" : "-translate-x-full"
-            } md:translate-x-0 lg:translate-x-0`}
+          className={`p-2 bg-backgroundPrimary md:w-60 lg:w-60 md:flex-col lg:flex-col transform top-0 left-0 fixed md:relative lg:relative h-full md:z-0 z-50 transition-transform duration-300 ease-in-out ${
+            open ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0 lg:translate-x-0`}
         >
           <nav>
             <Link
               to="admin-home"
-              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${isActive("/admin-dashboard/admin-home") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
-                }`}
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/admin-home")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
+              }`}
             >
               <FaHome className="mr-2 inline" />
               Home
             </Link>
             <Link
               to="user-manage"
-              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${isActive("/admin-dashboard/user-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
-                }`}
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/user-manage")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
+              }`}
             >
               <FaUsers className="mr-2 inline" />
               User Manage
             </Link>
             <Link
               to="course-manage"
-              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${isActive("/admin-dashboard/course-manage") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
-                }`}
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/course-manage")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
+              }`}
             >
               <FaFileAlt className="mr-2 inline" />
               Course Manage
             </Link>
             <Link
               to="adminBlog-management"
-              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${isActive("/admin-dashboard/adminBlog-management") ? "bg-gradient-to-r from-cyan-400 to-cyan-300" : ""
-                }`}
+              className={`block text-text py-2.5 px-4 my-4 rounded transition duration-200 hover:bg-gradient-to-r hover:from-cyan-400 hover:to-cyan-300 hover:text-text ${
+                isActive("/admin-dashboard/adminBlog-management")
+                  ? "bg-gradient-to-r from-cyan-400 to-cyan-300"
+                  : ""
+              }`}
             >
               <FaHome className="mr-2 inline" />
               Blog Management

@@ -66,7 +66,8 @@ const TeacherDashboard = () => {
               <Link to="home" className="active">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/home") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/home") ? "bg-blue-400" : ""
+                  }`}
                   type="button"
                 >
                   <IoHomeOutline className="w-5 h-5" />
@@ -80,7 +81,8 @@ const TeacherDashboard = () => {
               <Link to="profile">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/profile") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/profile") ? "bg-blue-400" : ""
+                  }`}
                   type="button"
                 >
                   <HiOutlineUsers className="w-5 h-5" />
@@ -94,7 +96,10 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/manage-course">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/manage-course") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/manage-course")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <MdManageAccounts className="w-5 h-5" />
@@ -108,7 +113,10 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/create-course">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/create-course") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/create-course")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
@@ -122,7 +130,10 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/blog-Management">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/blog-Management") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/blog-Management")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
@@ -137,7 +148,10 @@ const TeacherDashboard = () => {
               <Link to="/teacher-dashboard/create-post">
                 <button
                   className={`middle none font-bai font-bold center transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 rounded-lg text-text active:bg-white/30 w-full flex items-center gap-4 px-4 capitalize ${
-                    isActive("/teacher-dashboard/create-post") ? "bg-blue-400" : ""}`}
+                    isActive("/teacher-dashboard/create-post")
+                      ? "bg-blue-400"
+                      : ""
+                  }`}
                   type="button"
                 >
                   <FaRegPenToSquare className="w-5 h-5" />
