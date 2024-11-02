@@ -1,21 +1,30 @@
 import PropTypes from 'prop-types';
 import { RxCross1 } from "react-icons/rx";
+import { categories } from '../../utils/category';
+import { useState } from 'react';
 
 const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
-    console.log(courseData, "courdsata");
+    const [selectedOption, setSelectedOption] = useState()
+    console.log('selected', selectedOption || courseData?.category)
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-    //     try {
-    //         await axiosInstance.put(`/update/courses/${course._id}`, formData);
-    //         alert("Course updated successfully!");
-    //         onClose(); // Close modal and refresh
-    //     } catch (error) {
-    //         console.error("Failed to update course:", error);
-    //     }
-    // };
+    const allCategory = categories;
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            // await axiosInstance.put(`/update/courses/${course._id}`, formData);
+            // alert("Course updated successfully!");
+            // onClose(); // Close modal and refresh
 
-    //onSubmit={handleSubmit}
+            const from = e.target;
+            const title = from.title.value;
+            const price = from.newPrice.value;
+            console.log('hello world', title, price);
+
+        } catch (error) {
+            console.error("Failed to update course:", error);
+        }
+    };
+
     return (
         <div className="p-8 mb-4 flex items-center gap-5 justify-center">
             <div
@@ -34,7 +43,7 @@ const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
                         />
                     </div>
 
-                    <form className="w-full mt-4">
+                    <form onSubmit={handleSubmit} className="w-full mt-4">
 
                         {/* Course Name and Category */}
                         <div className="flex flex-col sm:flex-row items-center gap-3">
@@ -44,20 +53,29 @@ const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
                                 </label>
                                 <input
                                     type="text"
+                                    name="title"
                                     placeholder={courseData?.title}
                                     className="peer border-gray-200 border rounded-md outline-none px-4 py-2 w-full focus:border-blue-500 transition-colors duration-300"
                                 />
                             </div>
 
                             <div className="md:w-1/2">
-                                <label className='md:text-xl text-base'>
+                                <label className="md:text-xl text-base">
                                     Course New Category
                                 </label>
-                                <input
-                                    type="text"
-                                    placeholder={courseData?.category}
+                                <select
+                                    value={selectedOption}
+                                    onChange={(e) => setSelectedOption(e.target.value)}
+                                    defaultValue={courseData?.category}
                                     className="peer border-gray-200 border rounded-md outline-none px-4 py-2 w-full focus:border-blue-500 transition-colors duration-300"
-                                />
+                                >
+                                    <option value=""> {courseData?.category} </option>
+                                    {allCategory.map((category, index) => (
+                                        <option key={index} value={category}>
+                                            {category}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
                         </div>
 
@@ -69,6 +87,7 @@ const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
                                 </label>
                                 <input
                                     type="number"
+                                    name="newPrice"
                                     placeholder={courseData?.price}
                                     className="peer border-gray-200 border rounded-md outline-none px-4 py-2 w-full focus:border-blue-500 transition-colors duration-300"
                                 />

@@ -5,7 +5,6 @@ import CourseCard from "../../pages/AllCourses/CourseCard";
 const CoursesDiv = () => {
   const status = "approved"
   const { courses, isLoading } = useAllCourse({status});
-console.log('course ',courses)
   // Limit to showing only the first 6 courses
   const displayedCourses = courses?.slice(0, 4);
 

@@ -55,17 +55,17 @@ const ManageCourse = () => {
     }
   };
 
-  const handleUpdateCourse = async (course) =>{
+  const handleUpdateCourse = async (course) => {
     setSelectedCourse(course);
     setIsModalOpen(true);
   }
-
 
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedCourse(null); // Reset selected course when modal closes
     refetch(); // Refresh courses after an update
   };
+
 
   if (isLoading) return <Loader />;
   if (!courses?.length) return <p className="flex justify-center items-center h-screen">No Data available</p>;
@@ -122,7 +122,7 @@ const ManageCourse = () => {
                   >
                     <FaRegEye className="w-5 h-5 hover:scale-125" />
                   </Link>
-                  <button onClick={()=>handleUpdateCourse(course)}
+                  <button onClick={() => handleUpdateCourse(course)}
                     className="text-text rounded-full text-xs tooltip"
                     data-tip="Update"
                   >
