@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { allCourse, availableCourse, updateCourse, deleteCourse, createCourse } = require("../controllers/course.controller");
+const { allCourse, availableCourse, updateCourse, deleteCourse, createCourse, updateCourseDetails } = require("../controllers/course.controller");
 const { upload } = require("../middleware/imgVdoUpload");
 
 
@@ -13,6 +13,7 @@ router.post("/create", upload.fields([
 router.get("/available", availableCourse); // available course for user, student and teacher
 router.get("/courses", allCourse); // all course for admin
 router.put("/courses/:id", updateCourse); // approved course to admin
+router.put("/update/:id", updateCourseDetails); // update course detailes by teacher
 router.delete('/courses/:id', deleteCourse);; // deleted course by teacher
 
 

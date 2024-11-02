@@ -21,11 +21,18 @@ const CreateCourse = () => {
     // FormData object to handle file and other data
     const form = e.target;
     const title = form.title.value;
-    const price = form.price.value;
-    const oldPrice = form.oldPrice.value;
+    const price = parseFloat(form.price.value);
+    const oldPrice = parseFloat(form.oldPrice.value);
     const detailsCourse = form.textarea.value;
     const status = "pending";
     const file = e.target.image.files[0];
+
+    // Price validation
+  if (price > oldPrice) {
+    toast.warning("Old price should be greater than or equal to the price.");
+    setLoading(false);
+    return;  // Exit the function if the validation fails
+  }
 
     const formData = new FormData();
     formData.append("name", name);
@@ -257,6 +264,16 @@ const CreateCourse = () => {
             className="mb-10 mt-5 w-full rounded-md border border-slate-300 p-5 text-text bg-backgroundPrimary placeholder-placeholder "
             placeholder="Details about this..."
           />
+        </div>
+        
+        <div className="text-center">
+        <button
+            disabled={loading}
+            type="submit"
+            className={`cursor-pointer rounded-lg px-8 py-3 text-sm font-semibold text-white ${loading ? "bg-gray-400 !cursor-not-allowed" : "bg-backgroundBlue"}`}
+          >
+            {loading ? "loading..." : "Submit"}
+          </button>
         </div>
       </form>
       <ToastContainer />

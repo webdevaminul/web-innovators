@@ -62,8 +62,8 @@ const ManageCourse = () => {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setSelectedCourse(null); // Reset selected course when modal closes
-    refetch(); // Refresh courses after an update
+    setSelectedCourse(null);
+    refetch();
   };
 
 

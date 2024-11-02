@@ -2,26 +2,38 @@ import PropTypes from 'prop-types';
 import { RxCross1 } from "react-icons/rx";
 import { categories } from '../../utils/category';
 import { useState } from 'react';
+import axiosInstance from '../../api/axiosInstance';
+import { toast } from 'react-toastify';
 
-const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
-    const [selectedOption, setSelectedOption] = useState()
-    console.log('selected', selectedOption || courseData?.category)
+const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen, onClose }) => {
+    const [selectedOption, setSelectedOption] = useState("");
+    const [loading, setLoading] = useState(false)
 
     const allCategory = categories;
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            // await axiosInstance.put(`/update/courses/${course._id}`, formData);
-            // alert("Course updated successfully!");
-            // onClose(); // Close modal and refresh
-
             const from = e.target;
-            const title = from.title.value;
-            const price = from.newPrice.value;
-            console.log('hello world', title, price);
+            const title = from.title.value || courseData?.title;
+            const price = from.newPrice.value || courseData?.price;
+            const oldPrice = from.oldPrice.value || courseData?.oldPrice;
+            const description = from.description.value || courseData?.detailsCourse;
+            const category = selectedOption || courseData.category
+
+            const formData = { title, price, oldPrice, category, description }
+            console.log('form data', formData)
+
+            setLoading(true)
+            await axiosInstance.put(`/course/update/${courseData._id}`, formData);
+            toast.success("Course updated successfully!");
+            setLoading(false)
+            onClose(); // Close modal and refresh
 
         } catch (error) {
             console.error("Failed to update course:", error);
+            toast.error("Failed to update course.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -99,6 +111,7 @@ const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
                                 </label>
                                 <input
                                     type="number"
+                                    name="oldPrice"
                                     placeholder={courseData?.oldPrice}
                                     className="peer border-gray-200 border rounded-md outline-none px-4 py-2 w-full focus:border-blue-500 transition-colors duration-300"
                                 />
@@ -108,7 +121,7 @@ const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
                         <div className="flex flex-col gap-1 w-full mt-5">
                             <label className="md:text-xl text-base w-full">New Description
                             </label>
-                            <textarea placeholder={courseData?.detailsCourse}
+                            <textarea name="description" placeholder={courseData?.detailsCourse}
                                 className="peer min-h-[200px] border-gray-200 border rounded-md outline-none px-4 py-3 w-full focus:border-blue-500 transition-colors duration-300"
                             ></textarea>
                         </div>
@@ -116,9 +129,10 @@ const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
                         <div className="text-center">
                             <button
                                 type="submit"
-                                className="py-3 px-4 border border-blue-500 rounded-md outline-none mt-2"
+                                className={`py-3 px-4 border border-blue-500 rounded-md outline-none mt-2 ${loading ? "opacity-50 cursor-not-allowed" : ""}`}
+                                disabled={loading}
                             >
-                                Submit
+                                {loading ? "Updating..." : "Submit"}
                             </button>
                         </div>
                     </form>
@@ -133,6 +147,7 @@ UpdateCourse.propTypes = {
     courseData: PropTypes.object,
     isModalOpen: PropTypes.bool,
     setIsModalOpen: PropTypes.func,
+    onClose: PropTypes.func,
 }
 
 export default UpdateCourse;

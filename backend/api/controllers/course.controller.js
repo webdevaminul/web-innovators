@@ -5,7 +5,14 @@ const courseCollection = database.collection("courses");
 // Create a course
 exports.createCourse = async (req, res, next) => {
   try {
-    // here code
+    /* 
+    <------------ Important To Do For organize ------------>
+    1. Have to do user & email explicit and other course details will be one object under the user.
+    2. If same user create another course then save it anoher object under the same user 
+    3. For same user need to find existing user or not, if exiting then update and add new course object
+    4. If user new then create another object and same like the before user
+    5. In this situation find the specific course under the user (tricky part)
+    */
     const {
       name,
       email,
@@ -19,7 +26,7 @@ exports.createCourse = async (req, res, next) => {
 
     const imageUrl = req?.files?.image ? req?.files?.image[0].path : null;
     const videoUrls = req?.files?.video ? req?.files?.video?.map(file => file.path) : [];
-    
+
     const newCourse = {
       name,
       email,
@@ -159,6 +166,35 @@ exports.updateCourse = async (req, res, next) => {
     next(error);
   }
 };
+
+// update course by teacher all details 
+exports.updateCourseDetails = async (req, res, next) => {
+  try {
+    const id = req?.params.id;
+    const query = { _id: new ObjectId(id) };
+    const data = req?.body;
+    const { title, price, oldPrice, category, description } = data;
+
+    const updateDoc = {
+      $set: {
+        title: title,
+        price: price,
+        oldPrice: oldPrice,
+        category: category,
+        description: description
+      },
+    };
+
+    const result = await courseCollection.updateOne(query, updateDoc);
+    return res.status(200).json({
+      message: `This course has been updated successfully!`,
+      result,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+    next(error);
+  }
+}
 
 // Delete a course by teacher
 exports.deleteCourse = async (req, res, next) => {
