@@ -1,12 +1,12 @@
-import { MdBlock } from "react-icons/md";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import { MdBlock } from "react-icons/md";
 import Swal from 'sweetalert2'
-import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
 import { toast } from "react-toastify";
+import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
 import useAllCourse from "../../../api/useAllCourse";
 import axiosInstance from "../../../api/axiosInstance";
 import Loader from "../../../utils/Loader";
-import { useState } from "react";
 import UpdateCourse from "../../../components/CrudOperation/UpdateCourse";
 
 const ManageCourse = () => {

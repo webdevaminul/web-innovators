@@ -1,17 +1,35 @@
+
+import { useState } from "react";
+import { Link} from "react-router-dom";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
+import { FaRegEye } from "react-icons/fa";
+import { MdBlock } from "react-icons/md";
+import { FaRegPenToSquare } from "react-icons/fa6";
+import axiosInstance from "../../api/axiosInstance";
 import useAllCourse from "../../api/useAllCourse";
 import Loader from "../../utils/Loader";
-import { Link, useNavigate } from "react-router-dom";
-import { FaRegEye } from "react-icons/fa";
-import { FaRegPenToSquare } from "react-icons/fa6";
-import { MdBlock } from "react-icons/md";
-import Swal from "sweetalert2";
-import axiosInstance from "../../api/axiosInstance";
-import { toast } from "react-toastify";
+import UpdateCourse from "../../components/CrudOperation/UpdateCourse";
 
 const TeacherOwnCourse = () => {
-  const { courses, isLoading, refetch } = useAllCourse();
-  const navigate = useNavigate();
+  const status = "approved";
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const { courses, isLoading, refetch } = useAllCourse({ status });
+
   // TODO :- NEED TO POPULAR COURSE BY RATING
+
+  const handleUpdateCourse = async (course) => {
+    setSelectedCourse(course);
+    setIsModalOpen(true);
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedCourse(null);
+    refetch();
+  };
+
 
   const handleDeleteCourse = async (id) => {
     try {
@@ -99,7 +117,7 @@ const TeacherOwnCourse = () => {
                   >
                     <FaRegEye className="w-5 h-5 hover:scale-125" />
                   </Link>
-                  <button
+                  <button onClick={()=>handleUpdateCourse(c)}
                     className="text-text rounded-full text-xs tooltip"
                     data-tip="Update"
                   >
@@ -118,6 +136,7 @@ const TeacherOwnCourse = () => {
           </tbody>
         </table>
       </div>
+      <UpdateCourse isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} courseData={selectedCourse} onClose={closeModal} />
     </div>
   );
 };
