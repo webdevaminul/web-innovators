@@ -21,14 +21,15 @@ const AdminHome = () => {
   const { users } = useAllUser();
   const { courses } = useAllCourse({ status });
   const { blogs } = useBlogPost();
-const data2 = [
-  { name: "Jan", Users: users?.length, Courses: courses?.length, Blogs : blogs?.length },
-  { name: "Feb", Users: users?.length, Courses: courses?.length, Blogs : blogs?.length },
-  { name: "Mar", Users: users?.length, Courses: courses?.length, Blogs : blogs?.length },
-  { name: "Apr", Users: users?.length, Courses: courses?.length, Blogs : blogs?.length },
-  { name: "May", Users: users?.length, Courses: courses?.length, Blogs : blogs?.length },
-  { name: "Jun", Users: users?.length, Courses: courses?.length, Blogs : blogs?.length },
-]
+
+const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun","july","Aug","Sept","Oct","Nov", "Dec"];
+const data2 = monthNames.map((month) => ({
+  name: month,
+  Courses: courses?.length || 0,
+  Blogs: blogs?.length || 0
+}));
+
+console.log ( 'here data', data2);
 
   const students = users?.filter(std => std.userRole === "student");
   const teachers = users?.filter(teacher => teacher.userRole === "Teacher")
@@ -97,7 +98,6 @@ const data2 = [
               <YAxis />
               <Tooltip />
               <Legend />
-              <Line type="monotone" dataKey="Users" stroke="#8884d8" />
               <Line type="monotone" dataKey="Courses" stroke="#82ca9d" />
               <Line type="monotone" dataKey="Blogs" stroke="#8884d8" />
             </LineChart>

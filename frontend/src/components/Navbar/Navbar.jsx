@@ -18,7 +18,7 @@ const Navbar = () => {
   const [openMenu, setOpenMenu] = useState(false);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
 
-  const {users, isLoading } = useAllUser();
+  const { isLoading } = useAllUser();
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
