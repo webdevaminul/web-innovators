@@ -1,18 +1,9 @@
-import { useState } from "react";
 import PropTypes from 'prop-types';
 import { RxCross1 } from "react-icons/rx";
 import axiosInstance from "../../api/axiosInstance";
 
 const UpdateCourse = ({ courseData, isModalOpen, setIsModalOpen }) => {
-    const [title, setTitle] = useState(courseData?.title || "");
-    const [category, setCategory] = useState(courseData?.category || "");
-
-
-
     console.log(courseData, "courdsata");
-
-    const handleTitleChange = (e) => setTitle(e.target.value);
-    const handleCategoryChange = (e) => setCategory(e.target.value);
 
     // const handleSubmit = async (e) => {
     //     e.preventDefault();
