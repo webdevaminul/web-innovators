@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 const { connectDB, client, ObjectId } = require("./api/config/mongoDB");
 const authRoutes = require("./api/routes/auth.route");
 const coursesRoutes = require("./api/routes/course.route");
+const enrolledRoutes = require("./api/routes/enrolled.route")
+
 const userRoutes = require("./api/routes/user.route");
 const allUser = require("./api/routes/instructor.route");
 const allTeacher = require("./api/routes/instructor.route");
@@ -83,10 +85,11 @@ app.use("/approved", instructorRoutes);
 
 app.use("/all", coursesRoutes); // all courses get for admin
 app.use("/courses", coursesRoutes); // all courses get for user, teacher and student
-app.use("/delete", coursesRoutes); // delete course by teacher
 app.use("/approve", coursesRoutes); // approve courses from admin
-
 app.use("/course", coursesRoutes);
+
+// enrolled courses
+app.use("/enrolled", enrolledRoutes)
 
 app.use("/blog", blogRoutes);
 app.use("/get", allTeacher); // all teaacher get

@@ -1,59 +1,27 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdBlock } from "react-icons/md";
-import Swal from 'sweetalert2'
-import { toast } from "react-toastify";
 import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
 import useAllCourse from "../../../api/useAllCourse";
-import axiosInstance from "../../../api/axiosInstance";
 import Loader from "../../../utils/Loader";
 import UpdateCourse from "../../../components/CrudOperation/UpdateCourse";
+import { handleDeleteItem } from "../../../utils/handleDeleteItem";
+import useEnrolledCourse from "../../../api/useEnrolledCourse";
 
 const ManageCourse = () => {
   const status = "approved";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const { courses, isLoading, refetch } = useAllCourse({ status });
+  const { enrolledCourses, isLoading: enrollLoading } = useEnrolledCourse();
 
+const matchId1 = courses?.filter(course => course._id )
+console.log('match id',matchId1)
 
-  const handleDeleteCourse = async (id) => {
-    try {
-      // Show confirmation alert before deletion
-      const result = await Swal.fire({
-        title: "Are you sure?",
-        text: "Do you want to delete this course !",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      });
+  console.log(enrolledCourses, 'enrolledCourses');
+  console.log(courses, 'Courses');
 
-      // If user confirms, proceed with deletion
-      if (result.isConfirmed) {
-        const res = await axiosInstance.delete(`/delete/courses/${id}`);
-
-        // Handle success response from the backend
-        if (res.status === 200) {
-          // Show success alert
-          Swal.fire({
-            title: "Deleted!",
-            text: res.data.message,
-            icon: "success",
-          });
-
-          // Show toast notification for deletion success
-          toast.success(res.data.message || "Course deleted successfully!");
-
-          // Refetch or update course list
-          refetch();
-        }
-      }
-    } catch (error) {
-      // Show error toast if deletion fails
-      toast.error("Failed to delete course: " + error.message);
-    }
-  };
+  const handleDeleteCourse = (id) => handleDeleteItem("/course/delete", id, refetch);
 
   const handleUpdateCourse = async (course) => {
     setSelectedCourse(course);
@@ -67,7 +35,7 @@ const ManageCourse = () => {
   };
 
 
-  if (isLoading) return <Loader />;
+  if (isLoading || enrollLoading) return <Loader />;
   if (!courses?.length) return <p className="flex justify-center items-center h-screen">No Data available</p>;
 
   return (
@@ -112,7 +80,7 @@ const ManageCourse = () => {
                 </td>
                 <td className=" text-text truncate">{course.category}</td>
                 <td className=" text-text"> {course.price} </td>
-                <td className=" text-text"> studens </td>
+                <td className=" text-text"> students </td>
                 <td className=" text-text">{course.status}</td>
                 <td className="py-4 px-6  text-text border-gray-200 flex gap-5">
                   <Link
