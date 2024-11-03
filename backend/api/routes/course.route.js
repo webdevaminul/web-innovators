@@ -14,7 +14,7 @@ router.get("/available", availableCourse); // available course for user, student
 router.get("/courses", allCourse); // all course for admin
 router.put("/courses/:id", updateCourse); // approved course to admin
 router.put("/update/:id", updateCourseDetails); // update course detailes by teacher
-router.delete('/courses/:id', deleteCourse);; // deleted course by teacher
+router.delete('/delete/:id', deleteCourse);; // deleted course by teacher
 
 
 module.exports = router;

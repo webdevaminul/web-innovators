@@ -11,8 +11,25 @@ const CreateCourse = () => {
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState(0);
   const [videoCount, setVideoCount] = useState(1);
-  const name = user.userInfo.userName;
-  const email = user.userInfo.userEmail;
+  const name = user?.userInfo?.userName;
+  const email = user?.userInfo?.userEmail;
+
+  // Handle image file selection and generate preview URL
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const previewURL = URL.createObjectURL(file);
+    setPreviewUrl(previewURL);
+  };
+
+  // Handler to set free preview
+  const handleFreePreviewChange = (index) => {
+    setFreePreviewIndex(index); // Allow only one video as free preview
+  };
+
+  // Function to add more video input fields
+  const addMoreVideos = () => {
+    setVideoCount((prevCount) => prevCount + 1);
+  };
 
   const handleCreateCourse = async (e) => {
     e.preventDefault();
@@ -28,11 +45,11 @@ const CreateCourse = () => {
     const file = e.target.image.files[0];
 
     // Price validation
-  if (price > oldPrice) {
-    toast.warning("Old price should be greater than or equal to the price.");
-    setLoading(false);
-    return;  // Exit the function if the validation fails
-  }
+    if (price > oldPrice) {
+      toast.warning("Old price should be greater than or equal to the price.");
+      setLoading(false);
+      return;  // Exit the function if the validation fails
+    }
 
     const formData = new FormData();
     formData.append("name", name);
@@ -79,7 +96,10 @@ const CreateCourse = () => {
         setProgress(100);
         setTimeout(() => setProgress(0), 500);
         setVideoCount(1);
+        setPreviewUrl("")
         e.target.reset();
+      }else{
+        toast.error(response?.message)
       }
     } catch (error) {
       console.log(error);
@@ -89,22 +109,7 @@ const CreateCourse = () => {
     }
   };
 
-  // Handle image file selection and generate preview URL
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    const previewURL = URL.createObjectURL(file);
-    setPreviewUrl(previewURL);
-  };
 
-  // Handler to set free preview
-  const handleFreePreviewChange = (index) => {
-    setFreePreviewIndex(index); // Allow only one video as free preview
-  };
-
-  // Function to add more video input fields
-  const addMoreVideos = () => {
-    setVideoCount((prevCount) => prevCount + 1);
-  };
 
   return (
     <div className="mt-10 border-2 border-blue-400 rounded-lg">
@@ -112,12 +117,15 @@ const CreateCourse = () => {
 
         {/* Progress bar */}
         {loading && (
-          <div className="relative h-2 bg-gray-300 rounded-full overflow-hidden mt-2">
-            <div
-              style={{ width: `${progress}%` }}
-              className="h-full bg-blue-600 transition-all duration-150"
-            ></div>
-          </div>
+          <>
+            <h1>Depend on your network</h1>
+            <div className="relative h-2 bg-gray-300 rounded-full overflow-hidden mt-2">
+              <div
+                style={{ width: `${progress}%` }}
+                className="h-full bg-blue-600 transition-all duration-150"
+              ></div>
+            </div>
+          </>
         )}
 
 
@@ -265,9 +273,9 @@ const CreateCourse = () => {
             placeholder="Details about this..."
           />
         </div>
-        
+
         <div className="text-center">
-        <button
+          <button
             disabled={loading}
             type="submit"
             className={`cursor-pointer rounded-lg px-8 py-3 text-sm font-semibold text-white ${loading ? "bg-gray-400 !cursor-not-allowed" : "bg-backgroundBlue"}`}

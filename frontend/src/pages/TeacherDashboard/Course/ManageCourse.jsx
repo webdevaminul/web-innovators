@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MdBlock } from "react-icons/md";
-import Swal from 'sweetalert2'
-import { toast } from "react-toastify";
 import { FaRegEye, FaRegPenToSquare } from "react-icons/fa6";
 import useAllCourse from "../../../api/useAllCourse";
-import axiosInstance from "../../../api/axiosInstance";
 import Loader from "../../../utils/Loader";
 import UpdateCourse from "../../../components/CrudOperation/UpdateCourse";
+import { handleDeleteItem } from "../../../utils/handleDeleteItem";
 
 const ManageCourse = () => {
   const status = "approved";
@@ -15,45 +13,7 @@ const ManageCourse = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const { courses, isLoading, refetch } = useAllCourse({ status });
 
-
-  const handleDeleteCourse = async (id) => {
-    try {
-      // Show confirmation alert before deletion
-      const result = await Swal.fire({
-        title: "Are you sure?",
-        text: "Do you want to delete this course !",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      });
-
-      // If user confirms, proceed with deletion
-      if (result.isConfirmed) {
-        const res = await axiosInstance.delete(`/delete/courses/${id}`);
-
-        // Handle success response from the backend
-        if (res.status === 200) {
-          // Show success alert
-          Swal.fire({
-            title: "Deleted!",
-            text: res.data.message,
-            icon: "success",
-          });
-
-          // Show toast notification for deletion success
-          toast.success(res.data.message || "Course deleted successfully!");
-
-          // Refetch or update course list
-          refetch();
-        }
-      }
-    } catch (error) {
-      // Show error toast if deletion fails
-      toast.error("Failed to delete course: " + error.message);
-    }
-  };
+  const handleDeleteCourse = (id) => handleDeleteItem("/course/delete", id, refetch);
 
   const handleUpdateCourse = async (course) => {
     setSelectedCourse(course);

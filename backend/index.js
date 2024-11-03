@@ -83,7 +83,7 @@ app.use("/approved", instructorRoutes);
 
 app.use("/all", coursesRoutes); // all courses get for admin
 app.use("/courses", coursesRoutes); // all courses get for user, teacher and student
-app.use("/delete", coursesRoutes); // delete course by teacher
+// app.use("/delete", coursesRoutes); // delete course by teacher
 app.use("/approve", coursesRoutes); // approve courses from admin
 
 app.use("/course", coursesRoutes);
