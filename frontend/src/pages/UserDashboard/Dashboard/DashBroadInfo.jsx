@@ -1,6 +1,8 @@
 import { Typography, Grid, Card, CardContent, CardMedia } from "@mui/material";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'; // For charts
 import PropTypes from "prop-types";
+import useEnrolledCourse from "../../../api/useEnrolledCourse";
+import Loader from "../../../utils/Loader";
 
 // Sample data for courses and charts (replace with actual data)
 const popularCourses = [
@@ -8,7 +10,7 @@ const popularCourses = [
   { title: "Advanced JavaScript", instructor: "Jane Smith", image: "/card02.jpg", price: "$75", oldPrice: "$150" },
 ];
 
-const enrolledCourses = [
+const enrolledCourse = [
   { title: "HTML & CSS Basics", instructor: "Emily Johnson", image: "/card03.jpg", price: "$30", oldPrice: "$60" },
   { title: "HTML & CSS Basics", instructor: "Emily Johnson", image: "/card04.jpg", price: "$30", oldPrice: "$60" },
 ];
@@ -75,15 +77,22 @@ CourseCard.propTypes = {
 };
 
 const DashBroadInfo = () => {
+
+  const { enrolledCourses, isLoading } = useEnrolledCourse();
+  const cost = enrolledCourses[0]?.data?.total_amount
+  console.log(amount);
+  const enrolledCoursesLength = enrolledCourses ? enrolledCourses?.length : 0;
+  const amount = cost ? cost : 0;
+  if (isLoading) return <Loader />
   return (
     <div className="p-4">
       {/* Section 1: Dashboard Cards */}
       <Grid container spacing={2}>
         <Grid item xs={12} sm={6}>
-          <DashboardCard title="Total Enrolled Courses" value={enrolledCourses.length} />
+          <DashboardCard title="Total Enrolled Courses" value={enrolledCoursesLength} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <DashboardCard title="Total Course Cost" value="$60" />
+          <DashboardCard title="Total Course Cost" value={amount} />
         </Grid>
       </Grid>
 
@@ -106,8 +115,8 @@ const DashBroadInfo = () => {
             Your Enrolled Courses
           </Typography>
           <Grid container spacing={2}>
-            {enrolledCourses.length > 0 ? (
-              enrolledCourses.map((course, index) => (
+            {enrolledCourse.length > 0 ? (
+              enrolledCourse.map((course, index) => (
                 <Grid item xs={12} sm={6} key={index}>
                   <CourseCard course={course} />
                 </Grid>

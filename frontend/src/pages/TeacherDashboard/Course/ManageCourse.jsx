@@ -6,12 +6,20 @@ import useAllCourse from "../../../api/useAllCourse";
 import Loader from "../../../utils/Loader";
 import UpdateCourse from "../../../components/CrudOperation/UpdateCourse";
 import { handleDeleteItem } from "../../../utils/handleDeleteItem";
+import useEnrolledCourse from "../../../api/useEnrolledCourse";
 
 const ManageCourse = () => {
   const status = "approved";
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCourse, setSelectedCourse] = useState(null);
   const { courses, isLoading, refetch } = useAllCourse({ status });
+  const { enrolledCourses, isLoading: enrollLoading } = useEnrolledCourse();
+
+const matchId1 = courses?.filter(course => course._id )
+console.log('match id',matchId1)
+
+  console.log(enrolledCourses, 'enrolledCourses');
+  console.log(courses, 'Courses');
 
   const handleDeleteCourse = (id) => handleDeleteItem("/course/delete", id, refetch);
 
@@ -27,7 +35,7 @@ const ManageCourse = () => {
   };
 
 
-  if (isLoading) return <Loader />;
+  if (isLoading || enrollLoading) return <Loader />;
   if (!courses?.length) return <p className="flex justify-center items-center h-screen">No Data available</p>;
 
   return (
@@ -72,7 +80,7 @@ const ManageCourse = () => {
                 </td>
                 <td className=" text-text truncate">{course.category}</td>
                 <td className=" text-text"> {course.price} </td>
-                <td className=" text-text"> studens </td>
+                <td className=" text-text"> students </td>
                 <td className=" text-text">{course.status}</td>
                 <td className="py-4 px-6  text-text border-gray-200 flex gap-5">
                   <Link
