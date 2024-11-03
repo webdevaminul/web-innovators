@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import axiosInstance from "../../api/axiosInstance";
-import Loader from "../../utils/Loader";
-import useAllTeacher from "../../api/useAllTeacher";
-import useAllUser from "../../api/useAllUser";
+import Loader from "../../../utils/Loader";
+import axiosInstance from "../../../api/axiosInstance";
+import useAllUser from "../../../api/useAllUser";
+import useAllTeacher from "../../../api/useAllTeacher";
 
 const UserManage = () => {
   const { users } = useAllUser();
