@@ -80,7 +80,6 @@ const DashBroadInfo = () => {
 
   const { enrolledCourses, isLoading } = useEnrolledCourse();
   const cost = enrolledCourses[0]?.data?.total_amount
-  console.log(amount);
   const enrolledCoursesLength = enrolledCourses ? enrolledCourses?.length : 0;
   const amount = cost ? cost : 0;
   if (isLoading) return <Loader />
