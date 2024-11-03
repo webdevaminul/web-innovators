@@ -1,9 +1,9 @@
 import { MdBlock } from "react-icons/md";
 import { toast, ToastContainer } from "react-toastify";
 import { FaCheckCircle } from "react-icons/fa";
-import axiosInstance from "../../api/axiosInstance";
-import useAllCourse from "../../api/useAllCourse";
-import Loader from "../../utils/Loader";
+import useAllCourse from "../../../api/useAllCourse";
+import axiosInstance from "../../../api/axiosInstance";
+import Loader from "../../../utils/Loader";
 
 const CourseManage = () => {
   const status = "pending";

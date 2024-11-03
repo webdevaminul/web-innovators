@@ -2,9 +2,9 @@ import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import { AiOutlineEye, AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
-import axiosInstance from "../../api/axiosInstance";
-import useBlogPost from "../../api/useBlogPost";
-import Loader from "../../utils/Loader";
+import useBlogPost from "../../../api/useBlogPost";
+import axiosInstance from "../../../api/axiosInstance";
+import Loader from "../../../utils/Loader";
 
 const AdminBlogManage = () => {
   const status = "approved";

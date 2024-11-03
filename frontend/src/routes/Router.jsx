@@ -20,7 +20,6 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import PrivateRouter from "./PrivateRouter";
 import AdminDashboard from "../pages/AdminDashboard/AdminDashboard";
 import AdminHome from "../pages/AdminDashboard/AdminHome/AdminHome";
-import UserManage from "../pages/AdminDashboard/UserManage";
 import ManageAccount from "../pages/AccountManagement/ManageAccount";
 import Overview from "../pages/AccountManagement/Overview";
 import UpdateProfile from "../pages/AccountManagement/UpdateProfile";
@@ -28,12 +27,13 @@ import ChangePassword from "../pages/AccountManagement/ChangePassword";
 import DeleteAccount from "../pages/AccountManagement/DeleteAccount";
 import BlogCreation from "../pages/TeacherDashboard/TeacherBlog/BlogCreation";
 import BlogManagement from "../pages/TeacherDashboard/TeacherBlog/BlogManagement";
-import AdminBlogManage from "../pages/AdminDashboard/AdminBlogManage";
 
 import ForgetPassword from "../pages/Authentication/ForgetPassword/ForgetPassword";
 import PasswordRecovery from "../pages/Authentication/PasswordRecovery/PasswordRecovery";
-import CourseManage from "../pages/AdminDashboard/CourseManage";
 import BlogDetails from "../components/BlogDetails/BlogDetails";
+import AdminBlogManage from "../pages/AdminDashboard/BlogManage/AdminBlogManage";
+import UserManage from "../pages/AdminDashboard/UserManage/UserManage";
+import CourseManage from "../pages/AdminDashboard/CourseMange/CourseManage";
 
 const router = createBrowserRouter([
   {
