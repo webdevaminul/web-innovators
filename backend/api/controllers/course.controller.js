@@ -1,3 +1,4 @@
+const { options } = require("../..");
 const { client, ObjectId } = require("../config/mongoDB");
 const database = client.db("LearnUp");
 const courseCollection = database.collection("courses");
@@ -13,19 +14,10 @@ exports.createCourse = async (req, res, next) => {
     4. If user new then create another object and same like the before user
     5. In this situation find the specific course under the user (tricky part)
     */
-    const {
-      name,
-      email,
-      title,
-      price,
-      oldPrice,
-      status,
-      category,
-      detailsCourse,
-    } = req.body;
+    const { name, email, title, price, oldPrice, status, category, detailsCourse } = req.body;
 
     const imageUrl = req?.files?.image ? req?.files?.image[0].path : null;
-    const videoUrls = req?.files?.video ? req?.files?.video?.map(file => file.path) : [];
+    const videoUrls = req?.files?.video ? req?.files?.video?.map((file) => file.path) : [];
 
     const newCourse = {
       name,
@@ -59,12 +51,7 @@ exports.createCourse = async (req, res, next) => {
 // available course for user, student and teacher
 exports.availableCourse = async (req, res, next) => {
   try {
-    const {
-      sortOrder = "asc",
-      page = 1,
-      limit = 6,
-      selectedCategory,
-    } = req.query;
+    const { sortOrder = "asc", page = 1, limit = 6, selectedCategory } = req.query;
 
     const currentPage = parseInt(page, 10) || 1; // 10 for decimal
     const itemsPerPage = parseInt(limit, 10) || 6; // 10 for decimal
@@ -93,9 +80,7 @@ exports.availableCourse = async (req, res, next) => {
       .toArray();
 
     if (!courses.length) {
-      return res
-        .status(404)
-        .json({ success: false, message: "No courses found", data: [] });
+      return res.status(404).json({ success: false, message: "No courses found", data: [] });
     }
 
     // Send response if courses are found
@@ -109,8 +94,7 @@ exports.availableCourse = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message:
-        "An error occurred while fetching courses. Please try again later.",
+      message: "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }
@@ -125,9 +109,7 @@ exports.allCourse = async (req, res, next) => {
     if (status === "pending") {
       courses = await courseCollection.find({ status: "pending" }).toArray();
     } else {
-      courses = await courseCollection
-        .find({ status: { $ne: "pending" } })
-        .toArray();
+      courses = await courseCollection.find({ status: { $ne: "pending" } }).toArray();
     }
 
     // Always return a valid response with an array
@@ -138,8 +120,7 @@ exports.allCourse = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message:
-        "An error occurred while fetching courses. Please try again later.",
+      message: "An error occurred while fetching courses. Please try again later.",
     });
     next(error);
   }
@@ -167,7 +148,7 @@ exports.updateCourse = async (req, res, next) => {
   }
 };
 
-// update course by teacher all details 
+// update course by teacher all details
 exports.updateCourseDetails = async (req, res, next) => {
   try {
     const id = req?.params.id;
@@ -181,7 +162,7 @@ exports.updateCourseDetails = async (req, res, next) => {
         price: price,
         oldPrice: oldPrice,
         category: category,
-        description: description
+        description: description,
       },
     };
 
@@ -194,7 +175,7 @@ exports.updateCourseDetails = async (req, res, next) => {
     return res.status(500).json({ message: error.message });
     next(error);
   }
-}
+};
 
 // Delete a course by teacher
 exports.deleteCourse = async (req, res, next) => {
@@ -220,4 +201,9 @@ exports.deleteCourse = async (req, res, next) => {
     });
     next(error);
   }
+};
+
+exports.searchCourse = async (req, res, next) => {
+  // const searchTerm = { $regex: req.query, $options: "i" };
+  console.log(searchTerm);
 };

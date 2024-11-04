@@ -6,11 +6,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import Darkmode from "../Darkmode/Darkmode";
-import {
-  requestFailure,
-  requestStart,
-  userClearSuccess,
-} from "../../redux/authUsersSlice";
+import { requestFailure, requestStart, userClearSuccess } from "../../redux/authUsersSlice";
 import axiosInstance from "../../api/axiosInstance";
 import useAllUser from "../../api/useAllUser";
 import logo from "../../assets/logo.png";
@@ -21,17 +17,20 @@ const Navbar = () => {
   const [profileMenu, setProfileMenu] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const [searchBarOpen, setSearchBarOpen] = useState(false);
-
   const { isLoading } = useAllUser();
   const profileMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResult, setSearchResult] = useState([]);
+  const [isSearching, setIsSearching] = useState(false);
+  const debounceRef = useRef(null);
+  console.log(searchQuery);
+
   const linkClass = ({ isActive }) =>
     `text-nowrap p-1 lg:p-2 hover:text-textBlue ${isActive ? "text-textBlue" : ""}`;
 
-  // const role = "Admin";
-  // const role = "Teacher";
-  const role = user?.userInfo?.userRole  ;
+  const role = user?.userInfo?.userRole;
 
   // Toggle Profile Menu
   const toggleProfileMenu = () => {
@@ -42,10 +41,7 @@ const Navbar = () => {
   // Handle Click Outside Mobile Menu
   useEffect(() => {
     const handleClickOutside = (e) => {
-      if (
-        profileMenuRef.current &&
-        !profileMenuRef.current.contains(e.target)
-      ) {
+      if (profileMenuRef.current && !profileMenuRef.current.contains(e.target)) {
         setProfileMenu(false);
       }
     };
@@ -67,11 +63,36 @@ const Navbar = () => {
       }
     } catch (error) {
       dispatch(
-        requestFailure(
-          error.response?.data?.message ||
-            "Something went wrong. Please try again."
-        )
+        requestFailure(error.response?.data?.message || "Something went wrong. Please try again.")
       );
+    }
+  };
+
+  const handleInputChange = (event) => {
+    setSearchQuery(event.target.value);
+
+    // Clear the previous debounce timer
+    clearTimeout(debounceRef.current);
+
+    // Set a new debounce timer
+    debounceRef.current = setTimeout(() => {
+      if (event.target.value) {
+        fetchSearchResults(event.target.value);
+      } else {
+        setSearchResult([]);
+      }
+    }, 300); // 300ms debounce delay
+  };
+
+  const fetchSearchResults = async (query) => {
+    try {
+      setIsSearching(true);
+      const response = await axiosInstance.get(`/courses/search?query=${query}`);
+      setSearchResult(response.data);
+      setIsSearching(false);
+    } catch (error) {
+      console.error("Error fetching search results:", error);
+      setIsSearching(false);
     }
   };
 
@@ -138,11 +159,19 @@ const Navbar = () => {
               className="outline-none w-full placeholder:text-text/70 text-text py-2 bg-transparent"
               type="text"
               placeholder="Search program..."
+              onChange={handleInputChange}
             />
             <button className="text-xl">
               <IoSearchOutline />
             </button>
           </div>
+          {/* Search Result */}
+          {isSearching && <p>Loading...</p>}
+          {searchResult.length > 0 && (
+            <div className="absolute bg-red-400 top-[3.8rem] left-0 right-0 h-32">
+              <p>This is search result</p>
+            </div>
+          )}
         </div>
 
         {/* search bar for small device */}
@@ -208,9 +237,7 @@ const Navbar = () => {
                 {profileMenu && (
                   <div className="absolute top-[3.2rem] sm:right-0 right-[-4.5rem] z-40 bg-backgroundShadeOne p-4 shadow-sm border border-borderDark rounded-xl flex flex-col gap-4">
                     <div className="">
-                      <p className="whitespace-nowrap">
-                        Hi, {user?.userInfo?.userName}
-                      </p>
+                      <p className="whitespace-nowrap">Hi, {user?.userInfo?.userName}</p>
                       <p className="text-xs ">{user?.userInfo?.userEmail}</p>
                     </div>
 
@@ -220,9 +247,7 @@ const Navbar = () => {
                         to="dashboard/home"
                         className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                       >
-                        <span className="text-2xl">
-                          {/* <BiCreditCardFront /> */}
-                        </span>
+                        <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                         <span>Dashboard</span>
                       </Link>
                     ) : (
@@ -233,9 +258,7 @@ const Navbar = () => {
                             to="/teacher-dashboard"
                             className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                           >
-                            <span className="text-2xl">
-                              {/* <BiCreditCardFront /> */}
-                            </span>
+                            <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                             <span>Dashboard</span>
                           </Link>
                         ) : (
@@ -244,9 +267,7 @@ const Navbar = () => {
                             to="/admin-dashboard"
                             className="text-nowrap text-textWhite text-sm bg-backgroundBlue hover:bg-backgroundBlueHover border border-borderLight whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                           >
-                            <span className="text-2xl">
-                              {/* <BiCreditCardFront /> */}
-                            </span>
+                            <span className="text-2xl">{/* <BiCreditCardFront /> */}</span>
                             <span>Dashboard</span>
                           </Link>
                         )}
@@ -265,9 +286,7 @@ const Navbar = () => {
                       onClick={handleSignOut}
                       className="text-sm bg-red-500 hover:bg-red-600 text-textWhite border border-border whitespace-nowrap w-full rounded-xl p-2 flex items-center  gap-2"
                     >
-                      <span className="text-2xl">
-                        {/* <IoExitOutline /> */}
-                      </span>
+                      <span className="text-2xl">{/* <IoExitOutline /> */}</span>
                       <span>Sign out</span>
                     </button>
                   </div>
