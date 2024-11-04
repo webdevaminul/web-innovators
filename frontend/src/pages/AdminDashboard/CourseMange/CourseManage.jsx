@@ -46,8 +46,7 @@ const CourseManage = () => {
 
   return (
     <div className="overflow-x-auto w-full px-2 py-5">
-      <div className="overflow-x-auto">
-        <table className="w-full">
+      <table className="w-full">
           <thead>
             <tr className="bg-backgroundPrimary/10">
               <th className="py-4 pr-6 text-left text-text font-bold uppercase">
@@ -101,7 +100,6 @@ const CourseManage = () => {
             ))}
           </tbody>
         </table>
-      </div>
       <ToastContainer />
     </div>
   );

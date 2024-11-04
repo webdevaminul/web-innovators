@@ -1,15 +1,16 @@
 
-import instructorImg from "../../assets/sumitSaha.jpg";
+// import instructorImg from "../../assets/sumitSaha.jpg";
 import PropTypes from "prop-types";
 
 const Instructor = ({singleCourse={}}) => {
-console.table(singleCourse)
+  const { coverPicture} = singleCourse ;
+console.log(singleCourse.coverPicture , 'heee')
   return (
     <div className="mt-10 flex flex-col md:flex-row justify-center items-center">
       <div className="w-full md:w-1/2 md:border-r-4 md:border-secondary md:pl-10">
         <img
-          className="rounded-[29%_71%_75%_25%_/_47%_41%_59%_53%] mx-auto"
-          src={instructorImg}
+          className="rounded-[29%_71%_75%_25%_/_47%_41%_59%_53%] mx-auto h-96 "
+          src={coverPicture}
           alt=""
         />
       </div>
