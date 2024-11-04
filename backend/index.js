@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const { connectDB, client, ObjectId } = require("./api/config/mongoDB");
 const authRoutes = require("./api/routes/auth.route");
 const coursesRoutes = require("./api/routes/course.route");
-const enrolledRoutes = require("./api/routes/enrolled.route")
+const enrolledRoutes = require("./api/routes/enrolled.route");
 
 const userRoutes = require("./api/routes/user.route");
 const allUser = require("./api/routes/instructor.route");
@@ -47,24 +47,24 @@ app.use(
 );
 
 // Handle preflight `OPTIONS` requests
-app.options(
-  "*",
-  cors({
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+// app.options(
+//   "*",
+//   cors({
+//     origin: allowedOrigins,
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 
 // Custom middleware to manually set CORS headers
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", allowedOrigins);
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", allowedOrigins);
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.header("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
 
 // Connect to MongoDB and start the server
 connectDB()
@@ -89,7 +89,7 @@ app.use("/approve", coursesRoutes); // approve courses from admin
 app.use("/course", coursesRoutes);
 
 // enrolled courses
-app.use("/enrolled", enrolledRoutes)
+app.use("/enrolled", enrolledRoutes);
 
 app.use("/blog", blogRoutes);
 app.use("/get", allTeacher); // all teaacher get
@@ -159,7 +159,6 @@ app.post("/enroll", async (req, res) => {
 
   const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
   sslcz.init(data).then((apiResponse) => {
-
     // Redirect the user to payment gateway
     let GatewayPageURL = apiResponse.GatewayPageURL;
 
@@ -175,10 +174,10 @@ app.post("/enroll", async (req, res) => {
     // inserting data on database
     const result = enrollCollection.insertOne(finalEnroll);
     res.status(200).json({
-      success : true,
-      message : "You enrolled successfully",
-      result
-    })
+      success: true,
+      message: "You enrolled successfully",
+      result,
+    });
   });
 
   // hitting on a route for ensuring that the payment success routes
