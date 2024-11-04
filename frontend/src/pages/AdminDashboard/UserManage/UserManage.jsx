@@ -8,7 +8,7 @@ import useAllTeacher from "../../../api/useAllTeacher";
 const UserManage = () => {
   const { users } = useAllUser();
   const allStudents = users.filter(std => std.userRole === "student");
-  console.table(users);
+  // console.table(users);
   const [activeTab, setActiveTab] = useState(1);
   const [status, setStatus] = useState("Pending");
   const { teachers, isLoading, refetch } = useAllTeacher(status);

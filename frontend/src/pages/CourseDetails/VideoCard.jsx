@@ -1,5 +1,8 @@
 
-const VideoCard = () => {
+const VideoCard = ({video}) => {
+  console.log(video, 'vdeo');
+  const previewVdo = video
+  console.log("pre", previewVdo);
   return (
     <div className="video-container w-full aspect-video">
       <iframe

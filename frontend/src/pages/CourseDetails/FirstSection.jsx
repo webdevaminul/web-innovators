@@ -12,7 +12,8 @@ const FirstSection = ({ singleCourse = {} }) => {
   };
   const { isLoading } = useAvailableCourse();
   if (isLoading) return <Loader />;
-  const { detailsCourse, price, oldPrice, title, _id } = singleCourse;
+  const { detailsCourse, price, oldPrice, title, _id,videoUrl } = singleCourse;
+  console.log( "signle course", videoUrl,);
 
   return (
     <div className="md:flex md:items-center justify-between gap-7">
