@@ -1,14 +1,12 @@
 import { useParams } from "react-router-dom";
 import useBlogPost from "../../api/useBlogPost";
 import Loader from "../../utils/Loader";
-import axiosInstance from "../../api/axiosInstance";
 
 const BlogDetails = () => {
   const { id } = useParams(); // Get the blog post ID from the URL
   const { blogs, isLoading } = useBlogPost();
   const foundBlog = blogs?.find((post) => post._id === id);
 
-  const baseUrl = axiosInstance.defaults.baseURL;
 
   if (isLoading) return <Loader />;
 
@@ -23,7 +21,7 @@ const BlogDetails = () => {
           className="block max-w-sm gap-3 mx-auto sm:max-w-full group hover:no-underline focus:no-underline lg:grid lg:grid-cols-12 "
         >
           <img
-            src={`${baseUrl}${foundBlog.image}`}
+            src="https://res.cloudinary.com/dzixtpptv/image/upload/v1730613842/LearnUp/course-images/image_1730613839112.png"
             alt={foundBlog.title}
             className="object-cover w-full h-64 rounded sm:h-96 lg:col-span-7 bg-gray-500"
           />
