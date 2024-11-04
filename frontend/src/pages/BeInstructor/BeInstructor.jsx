@@ -5,6 +5,8 @@ import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../../utils/CustomModal";
+import { getMonthName } from "../../utils/GetMontName";
+import { categories } from "../../utils/category";
 
 const BeInstructor = () => {
   const { user } = useSelector((state) => state.authUsers);
@@ -12,13 +14,16 @@ const BeInstructor = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
   const [text, setText] = useState("");
-
+  const allCategory = categories;
+  
   const email = user?.userInfo.userEmail || "";
   const name = user?.userInfo.userName || "";
   const id = user?.userInfo._id || "";
   const navigate = useNavigate();
 
   const role = user?.userInfo?.userRole;
+  const teacherJoinMonth = getMonthName()
+  
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -34,6 +39,7 @@ const BeInstructor = () => {
       institute,
       message,
       selectedOption,
+      teacherJoinMonth,
     };
 
     if (user) {
@@ -300,7 +306,6 @@ const BeInstructor = () => {
                   name="name"
                   readOnly={user ? true : false}
                   placeholder={name === "" ? "Your name" : name}
-                  // placeholder="Your Name"
                 />
               </div>
               <div className="md:w-1/2">
@@ -347,11 +352,12 @@ const BeInstructor = () => {
                   value={selectedOption}
                   onChange={(e) => setSelectedOption(e.target.value)}
                 >
-                  <option defaultValue>select one</option>
-                  <option>Freelancing</option>
-                  <option>Language</option>
-                  <option>Programing</option>
-                  <option>Design</option>
+                  <option value="" disabled> Select Category </option>
+                  {allCategory.map((category, index) => (
+                    <option key={index} value={category}>
+                      {category}
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>

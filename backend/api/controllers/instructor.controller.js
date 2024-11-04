@@ -14,6 +14,7 @@ exports.beInstructor = async (req, res, next) => {
         institute: instructorData.institute,
         message: instructorData.message,
         category: instructorData.selectedOption,
+        teacherJoinMonth : instructorData.teacherJoinMonth,
       },
     };
     // Update the instructor using native MongoDB methods
@@ -55,32 +56,31 @@ exports.getAllTeacher = async (req, res, next) => {
     const status = req?.query?.status || { $exists: true };
     const query = { status: status };
     const users = await usersCollection.find(query).toArray();
-
     if (!users.length) {
       return res.status(404).json({
         success: false,
         message: "No users found",
       });
     }
-    // res.status(200).send(users);
     return res.status(200).json({
       success: true,
       data: users,
     });
+
   } catch (error) {
     return res.status(500).json({
       success: false,
       message: "Server error while fetching users",
       error: error.message,
     });
-    next(error);
   }
 };
 
 exports.getAllUser = async (req, res, next) => {
   try {
-    const query = { status: { $exists: false }, userRole: { $ne: "Admin" } }; // ne means not equal, it's mongodb operator
-    const users = await usersCollection.find().toArray();
+    //status: { $exists: false },
+    const query = {  userRole: { $ne: "Admin" } }; // ne means not equal, it's mongodb operator
+    const users = await usersCollection.find(query).toArray();
     if (!users.length) {
       return res.status(404).json({
         success: false,

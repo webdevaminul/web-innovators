@@ -6,7 +6,7 @@ const useAllTeacher = (params = "") => {
         queryKey: ["teacher", params],
         queryFn: async () => {
           const res = await axiosInstance.get(`/get/teacher?status=${params}`);
-          return res?.data.data ;
+          return res?.data?.data || [ ] ;
         },
       });
     

@@ -4,10 +4,10 @@ import { Navigate, useLocation } from "react-router-dom";
 import useAllUser from "../api/useAllUser";
 
 const PrivateRouter = ({ children }) => {
-  const { loading } = useAllUser();
+  const { isLoading } = useAllUser();
   const { user } = useSelector((state) => state.authUsers);
   const location = useLocation();
-  if (loading) {
+  if (isLoading) {
     return <p> Loading.. </p>;
   }
   if (user) {

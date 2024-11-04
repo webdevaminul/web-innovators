@@ -1,57 +1,38 @@
+
+import { useState } from "react";
+import { Link} from "react-router-dom";
+import { FaRegEye } from "react-icons/fa";
+import { MdBlock } from "react-icons/md";
+import { FaRegPenToSquare } from "react-icons/fa6";
 import useAllCourse from "../../api/useAllCourse";
 import Loader from "../../utils/Loader";
-import { Link, useNavigate } from "react-router-dom";
-import { FaRegEye } from "react-icons/fa";
-import { FaRegPenToSquare } from "react-icons/fa6";
-import { MdBlock } from "react-icons/md";
-import Swal from "sweetalert2";
-import axiosInstance from "../../api/axiosInstance";
-import { toast } from "react-toastify";
+import UpdateCourse from "../../components/CrudOperation/UpdateCourse";
+import { handleDeleteItem } from "../../utils/handleDeleteItem";
 
 const TeacherOwnCourse = () => {
-  const { courses, isLoading, refetch } = useAllCourse();
-  const navigate = useNavigate();
+  const status = "approved";
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const { courses, isLoading, refetch } = useAllCourse({ status });
+
   // TODO :- NEED TO POPULAR COURSE BY RATING
 
-  const handleDeleteCourse = async (id) => {
-    try {
-      // Show confirmation alert before deletion
-      const result = await Swal.fire({
-        title: "Are you sure?",
-        text: "Do you want to delete this course !",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, delete it!",
-      });
+  // update course details
+  const handleUpdateCourse = async (course) => {
+    setSelectedCourse(course);
+    setIsModalOpen(true);
+  }
 
-      // If user confirms, proceed with deletion
-      if (result.isConfirmed) {
-        const res = await axiosInstance.delete(`/delete/courses/${id}`);
-
-        // Handle success response from the backend
-        if (res.status === 200) {
-          // Show success alert
-          Swal.fire({
-            title: "Deleted!",
-            text: res.data.message,
-            icon: "success",
-          });
-
-          // Show toast notification for deletion success
-          toast.success(res.data.message || "Course deleted successfully!");
-
-          // Refetch or update course list
-          refetch();
-        }
-      }
-    } catch (error) {
-      // Show error toast if deletion fails
-      toast.error("Failed to delete course: " + error.message);
-    }
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedCourse(null);
+    refetch();
   };
 
+  // Delete course handler, passing refetch to handleDeleteItem
+  const handleDeleteCourse = (id) => handleDeleteItem("/course/delete", id, refetch);
+
+  
   if (isLoading) {
     return <Loader />;
   }
@@ -99,7 +80,7 @@ const TeacherOwnCourse = () => {
                   >
                     <FaRegEye className="w-5 h-5 hover:scale-125" />
                   </Link>
-                  <button
+                  <button onClick={()=>handleUpdateCourse(c)}
                     className="text-text rounded-full text-xs tooltip"
                     data-tip="Update"
                   >
@@ -118,6 +99,7 @@ const TeacherOwnCourse = () => {
           </tbody>
         </table>
       </div>
+      <UpdateCourse isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} courseData={selectedCourse} onClose={closeModal} />
     </div>
   );
 };

@@ -3,40 +3,17 @@ import { FaXTwitter } from "react-icons/fa6";
 import { FiFacebook } from "react-icons/fi";
 import { IoLogoYoutube } from "react-icons/io";
 import { useSelector } from "react-redux";
-
-const data = [
-  {
-    id: 1,
-    category: "CATEGORY-1",
-    title: "The Catalyzer",
-    description:
-      "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
-    image:
-      "https://images.unsplash.com/photo-1618172193622-ae2d025f4032?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1064&q=80",
-  },
-  {
-    id: 2,
-    category: "CATEGORY-2",
-    title: "The Catalyzer",
-    description:
-      "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
-    image:
-      "https://images.unsplash.com/photo-1624628639856-100bf817fd35?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8M2QlMjBpbWFnZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=600&q=60",
-  },
-  {
-    id: 3,
-    category: "CATEGORY-3",
-    title: "The Catalyzer",
-    description:
-      "Photo booth fam kinfolk cold-pressed sriracha leggings jianbing microdosing tousled waistcoat.",
-    image:
-      "https://images.unsplash.com/photo-1631700611307-37dbcb89ef7e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDIwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=600&q=60",
-  },
-];
+import useAllCourse from "../../../api/useAllCourse";
+import Loader from "../../../utils/Loader";
+import { Link } from "react-router-dom";
 
 const TeacherProfile = () => {
+  const status = "approved";
   const { user } = useSelector((state) => state.authUsers);
-  console.log("user", user.userInfo);
+  const { courses, isLoading } = useAllCourse({ status });
+
+  if(isLoading) return <Loader />
+
   return (
     <section className="w-full overflow-hidden">
       <div className="flex flex-col ">
@@ -99,13 +76,13 @@ const TeacherProfile = () => {
           </div>
 
           <div className="md:grid grid-cols-3 gap-3">
-            {data?.map((card) => (
+            {courses?.map((card) => (
               <div key={card.id} className="text-text body-font">
                 <div className="container px-5 py-4 mx-auto">
                   <div className="h-full rounded-xl shadow-cla-blue bg-backgroundPrimary overflow-hidden">
                     <img
                       className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100"
-                      src={card.image}
+                      src={card.coverPicture}
                       alt="blog"
                     />
                     <div className="py-6">
@@ -117,9 +94,9 @@ const TeacherProfile = () => {
                       </h1>
                       <p className="leading-relaxed mb-3">{card.description}</p>
                       <div className="flex items-center flex-wrap ">
-                        <button className="bg-backgroundPrimary shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
+                        <Link to={`/course-details/${card._id}`} className="bg-backgroundPrimary shadow-lg hover:scale-105 drop-shadow-md  shadow-cla-blue px-4 py-1 rounded-lg">
                           Learn more
-                        </button>
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -129,23 +106,23 @@ const TeacherProfile = () => {
           </div>
 
           {/* Social Links */}
-          <div className="fixed right-2 bottom-20 flex flex-col rounded-sm bg-gray-200 text-text dark:bg-gray-200/80 dark:text-gray-700 hover:text-text hover:">
-            <a href="https://www.linkedin.com/in/samuel-abera-6593a2209/">
+          <div className="fixed right-2 bottom-20 flex flex-col rounded-sm bg-backgroundPrimary text-text dark:bg-gray-200/80 dark:text-gray-700 hover:text-text hover:">
+            <a href="https://www.linkedin.com/in/mohibullah-mohim/">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
                 <RiLinkedinFill className="w-6 h-6" />
               </div>
             </a>
-            <a href="https://twitter.com/Samuel7Abera7">
+            <a href="https://twitter.com/Mohib333">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
                 <FaXTwitter className="w-6 h-6 text-text" />
               </div>
             </a>
-            <a>
+            <a href="https://www.facebook.com/mohibullah.jubileean" >
               <div className="p-2 hover:text-blue-500 hover:dark:text-blue-500">
                 <FiFacebook className="w-6 h-6" />
               </div>
             </a>
-            <a href="https://www.youtube.com/@silentcoder7">
+            <a href="https://www.youtube.com/@MohibTheMaziest">
               <div className="p-2 hover:text-primary hover:dark:text-primary">
                 <IoLogoYoutube className="w-6 h-6 text-red-600" />
               </div>

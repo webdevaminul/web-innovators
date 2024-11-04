@@ -51,15 +51,7 @@ const AdminDashboard = () => {
             <FaBell className="text-primary text-xl" />
           </button>
           <button>
-            <span className="relative rounded-full">
-              <span className="bg-blue-500 rounded-full m-auto ">
-                <img
-                  src={user?.userInfo?.userPhoto}
-                  className="rounded-full object-center object-cover h-8 w-8 sm:h-9 sm:w-9 cursor-pointer"
-                  loading="lazy"
-                />
-              </span>
-            </span>
+          <img src={user?.userInfo?.userPhoto} className="rounded-full object-center object-cover h-8 w-8 sm:h-9 sm:w-9 cursor-pointer" loading="lazy" />
           </button>
         </div>
       </div>

@@ -31,7 +31,7 @@ const Navbar = () => {
 
   // const role = "Admin";
   // const role = "Teacher";
-  const role = user?.userInfo?.userRole;
+  const role = user?.userInfo?.userRole  ;
 
   // Toggle Profile Menu
   const toggleProfileMenu = () => {

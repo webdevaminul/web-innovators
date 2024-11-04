@@ -6,6 +6,8 @@ const cookieParser = require("cookie-parser");
 const { connectDB, client, ObjectId } = require("./api/config/mongoDB");
 const authRoutes = require("./api/routes/auth.route");
 const coursesRoutes = require("./api/routes/course.route");
+const enrolledRoutes = require("./api/routes/enrolled.route")
+
 const userRoutes = require("./api/routes/user.route");
 const allUser = require("./api/routes/instructor.route");
 const allTeacher = require("./api/routes/instructor.route");
@@ -83,9 +85,11 @@ app.use("/approved", instructorRoutes);
 
 app.use("/all", coursesRoutes); // all courses get for admin
 app.use("/courses", coursesRoutes); // all courses get for user, teacher and student
-app.use("/delete", coursesRoutes); // delete course by teacher
 app.use("/approve", coursesRoutes); // approve courses from admin
 app.use("/course", coursesRoutes);
+
+// enrolled courses
+app.use("/enrolled", enrolledRoutes)
 
 app.use("/blog", blogRoutes);
 app.use("/get", allTeacher); // all teaacher get
@@ -99,8 +103,8 @@ const enrollCollection = database.collection("enrollCollection");
 const tran_id = new ObjectId().toString();
 
 app.post("/enroll", async (req, res) => {
-  const enroll = req.body;
-  const courseId = req.body.courseId;
+  const enroll = req?.body;
+  const courseId = req?.body?.courseId;
   // specific course getting here
   const course = await courseCollection.findOne({
     _id: new ObjectId(courseId),
@@ -149,13 +153,16 @@ app.post("/enroll", async (req, res) => {
     student_add1: enroll.address,
     cus_country: "Bangladesh",
     student_phone: enroll.phone,
+    // custom info u can add
   };
   // console.log(data);
 
   const sslcz = new SSLCommerzPayment(store_id, store_passwd, is_live);
   sslcz.init(data).then((apiResponse) => {
+
     // Redirect the user to payment gateway
     let GatewayPageURL = apiResponse.GatewayPageURL;
+
     // sending url to redirect in frontend
     res.send({ url: GatewayPageURL });
 
@@ -167,11 +174,16 @@ app.post("/enroll", async (req, res) => {
     };
     // inserting data on database
     const result = enrollCollection.insertOne(finalEnroll);
+    res.status(200).json({
+      success : true,
+      message : "You enrolled successfully",
+      result
+    })
   });
 
   // hitting on a route for ensuring that the payment success routes
   app.post("/enroll/success/:tranId", async (req, res) => {
-    const tranId = req.params.tranId;
+    const tranId = req?.params?.tranId;
     console.log(tranId);
     const result = await enrollCollection.updateOne(
       { transaction: tranId },
