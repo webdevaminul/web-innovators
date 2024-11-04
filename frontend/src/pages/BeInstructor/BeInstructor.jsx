@@ -5,7 +5,7 @@ import axiosInstance from "../../api/axiosInstance";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CustomModal from "../../utils/CustomModal";
-import { getMonthName } from "../../utils/GetMontName";
+// import { getMonthName } from "../../utils/GetMontName";
 import { categories } from "../../utils/category";
 
 const BeInstructor = () => {
@@ -22,7 +22,7 @@ const BeInstructor = () => {
   const navigate = useNavigate();
 
   const role = user?.userInfo?.userRole;
-  const teacherJoinMonth = getMonthName()
+  const teacherJoinMonth = "November";
   
 
   const handleFormSubmit = (e) => {
